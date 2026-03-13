@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ChevronRight, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ctaProps, type CtaData } from "@/lib/cta";
 
 export interface HeroStat {
   value: string;
@@ -19,8 +20,8 @@ export interface HeroProps {
   headline?: string;
   headlineHighlight?: string;
   sub?: string;
-  primaryCta?: { label: string; href: string };
-  secondaryCta?: { label: string; href: string };
+  primaryCta?: CtaData;
+  secondaryCta?: CtaData;
   stats?: HeroStat[];
 }
 
@@ -73,13 +74,13 @@ export function Hero({
           )}
           <div className="flex animate-[fadeUp_0.8s_0.9s_forwards] items-center gap-8 opacity-0">
             <Button variant="brand" size="cta" asChild>
-              <a href={primaryCta.href}>
+              <a {...ctaProps(primaryCta)}>
                 {primaryCta.label}
                 <ChevronRight className="size-4" />
               </a>
             </Button>
             <a
-              href={secondaryCta.href}
+              {...ctaProps(secondaryCta)}
               className="btn-secondary flex items-center gap-2 text-white/60 no-underline hover:text-white"
             >
               {secondaryCta.label}

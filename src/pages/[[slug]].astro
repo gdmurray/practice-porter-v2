@@ -3,7 +3,6 @@ import "../styles/global.css";
 import Layout from "../layouts/Layout.astro";
 import { loadQuery } from "../sanity/lib/load-query";
 import {
-  ALL_PAGE_SLUGS_QUERY,
   PAGE_QUERY,
   SITE_SETTINGS_QUERY,
   type PAGE_QUERY_RESULT,
@@ -12,15 +11,6 @@ import {
 import { Navigation } from "../components/layout/Navigation";
 import { Footer } from "../components/layout/Footer";
 import { PageModules } from "../components/PageModules";
-
-export async function getStaticPaths() {
-  const { data: pages } = await loadQuery<{ slug: string }[]>({
-    query: ALL_PAGE_SLUGS_QUERY,
-  });
-  return (pages ?? [])
-    .filter((p) => p?.slug)
-    .map((p) => ({ params: { slug: p.slug } }));
-}
 
 const slug = Astro.params.slug ?? "home";
 const resolvedSlug = typeof slug === "string" ? slug : "home";
@@ -31,6 +21,10 @@ const { data: page } = await loadQuery<PAGE_QUERY_RESULT>({
 const { data: siteSettings } = await loadQuery<SITE_SETTINGS_QUERY_RESULT>({
   query: SITE_SETTINGS_QUERY,
 });
+
+if (!page) {
+  return Astro.redirect("/404", 302);
+}
 
 const nav = siteSettings?.navigation;
 const footer = siteSettings?.footer;
@@ -53,19 +47,7 @@ const modules = page?.modules ?? [];
     ctaHref={nav?.ctaHref}
   />
   <main>
-    {page && modules.length > 0 ? (
-      <PageModules modules={modules} client:load />
-    ) : (
-      <div class="pp-container pp-section text-center">
-        <h1 class="section-title mb-4">Welcome to Practice Porter</h1>
-        <p class="section-subtitle max-w-xl mx-auto">
-          No page content found. Create a page in Sanity Studio with slug "home" and add modules.
-        </p>
-        <a href="/studio" class="btn-primary mt-8 inline-block">
-          Open Sanity Studio
-        </a>
-      </div>
-    )}
+    <PageModules modules={modules} client:load />
   </main>
   <Footer
     brandDescription={footer?.brandDescription}

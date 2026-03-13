@@ -2054,6 +2054,27 @@
             "type": "string"
           },
           "optional": true
+        },
+        "ctaType": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "internal"
+              },
+              {
+                "type": "string",
+                "value": "external"
+              },
+              {
+                "type": "string",
+                "value": "calendly"
+              }
+            ]
+          },
+          "optional": true
         }
       }
     }

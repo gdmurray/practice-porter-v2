@@ -63,11 +63,11 @@ export function Pricing({
                     : "border-warm-gray bg-off-white text-charcoal"
                 )}
               >
-                <CardContent className="p-0">
+                <CardContent className="p-0 flex flex-col h-full">
                   {card.tag && (
                     <Badge
                       variant={isDark ? "gold" : "teal"}
-                      className="mb-7"
+                      className="mb-7 w-fit"
                     >
                       {card.tag}
                     </Badge>
@@ -112,7 +112,7 @@ export function Pricing({
                   </ul>
                   <Button
                     variant={isDark ? "brand" : "outline"}
-                    className="w-full"
+                    className="w-full mt-auto"
                     asChild
                   >
                     <a href={card.ctaHref || "#cta"}>{card.ctaLabel || "Book Consultation"}</a>

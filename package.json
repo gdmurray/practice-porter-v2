@@ -14,6 +14,7 @@
 		"deploy": "astro build && wrangler pages deploy",
 		"cf-typegen": "wrangler types",
 		"sanity": "sanity",
+		"sanity:deploy": "sanity schema deploy",
 		"sanity:schema": "sanity schema extract",
 		"sanity:typegen": "sanity typegen generate",
 		"typegen": "sanity schema extract && sanity typegen generate"

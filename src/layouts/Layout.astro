@@ -33,10 +33,12 @@ const visualEditingEnabled =
     {description && <meta property="og:description" content={description} />}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
   </head>
   <body>
     <slot />
     <VisualEditing enabled={visualEditingEnabled} />
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
     <script>
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener("click", (e) => {
@@ -45,6 +47,17 @@ const visualEditingEnabled =
           const target = href ? document.querySelector(href) : null;
           if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
         });
+      });
+
+      // Open any Calendly link as a popup widget instead of navigating away
+      document.addEventListener("click", (e) => {
+        const link = (e.target as Element)?.closest("a");
+        if (!link) return;
+        const href = link.getAttribute("href");
+        if (href?.includes("calendly.com")) {
+          e.preventDefault();
+          (window as any).Calendly?.initPopupWidget({ url: href });
+        }
       });
     </script>
   </body>

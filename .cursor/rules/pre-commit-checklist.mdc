@@ -12,7 +12,7 @@ Before committing, verify the following:
 - [ ] No TypeScript errors in changed files (check linter output)
 
 ## Schema sync
-- [ ] If Sanity schemas changed, deploy to cloud: `pnpm dlx sanity@latest schema deploy`
+- [ ] If Sanity schemas changed, deploy to cloud: `pnpm sanity:deploy`
 - [ ] Schema barrel exports updated (`schemas/index.ts`, `schemas/modules/index.ts`, etc.)
 
 ## Pages and modules

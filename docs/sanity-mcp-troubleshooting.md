@@ -28,7 +28,7 @@
 ```bash
 source ~/.nvm/nvm.sh
 nvm use
-PUBLIC_SANITY_PROJECT_ID=u06m8vwg PUBLIC_SANITY_DATASET=production pnpm dlx sanity@latest schema deploy
+PUBLIC_SANITY_PROJECT_ID=u06m8vwg PUBLIC_SANITY_DATASET=production pnpm sanity:deploy
 ```
 
 ## Verification steps

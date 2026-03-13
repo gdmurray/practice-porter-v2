@@ -1,0 +1,57 @@
+---
+import "../styles/global.css";
+import Layout from "../layouts/Layout.astro";
+import { loadQuery } from "../sanity/lib/load-query";
+import {
+  SITE_SETTINGS_QUERY,
+  type SITE_SETTINGS_QUERY_RESULT,
+} from "../sanity/queries";
+import { Navigation } from "../components/layout/Navigation";
+import { Footer } from "../components/layout/Footer";
+
+export const prerender = true;
+
+const { data: siteSettings } = await loadQuery<SITE_SETTINGS_QUERY_RESULT>({
+  query: SITE_SETTINGS_QUERY,
+});
+
+const nav = siteSettings?.navigation;
+const footer = siteSettings?.footer;
+---
+
+<Layout title="Page Not Found — Practice Porter" description="The page you're looking for doesn't exist.">
+  <Navigation
+    client:load
+    links={nav?.links}
+    ctaLabel={nav?.ctaLabel}
+    ctaHref={nav?.ctaHref}
+  />
+  <main>
+    <section data-theme="dark" class="pp-section" style="background: var(--section-bg); min-height: 60vh; display: flex; align-items: center;">
+      <div class="pp-container text-center">
+          <p class="eyebrow mb-6">Error 404</p>
+          <h1 class="section-title mb-6" style="color: var(--section-text);">
+            Page Not Found
+          </h1>
+          <p class="section-subtitle mx-auto mb-10" style="max-width: 520px; color: var(--section-muted);">
+            The page you're looking for may have moved, been renamed, or no longer exists. Let's get you back on track.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/" class="btn-primary">
+              Back to Home
+            </a>
+            <a href="/#contact" class="btn-secondary">
+              Contact Us
+            </a>
+          </div>
+      </div>
+    </section>
+  </main>
+  <Footer
+    brandDescription={footer?.brandDescription}
+    socialLinks={footer?.socialLinks}
+    columns={footer?.columns}
+    legalLinks={footer?.legalLinks}
+    copyright={footer?.copyright}
+  />
+</Layout>

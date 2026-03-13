@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ChevronRight, ArrowUpRight } from "lucide-react";
+import { ctaProps, type CtaData } from "@/lib/cta";
 
 export interface FinalCtaProps {
   theme?: string;
@@ -9,8 +10,8 @@ export interface FinalCtaProps {
   title?: string;
   titleHighlight?: string;
   sub?: string;
-  primaryCta?: { label: string; href: string };
-  secondaryCta?: { label: string; href: string };
+  primaryCta?: CtaData;
+  secondaryCta?: CtaData;
   note?: string;
 }
 
@@ -55,13 +56,13 @@ export function FinalCta({
         )}
         <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
           <Button variant="brand" size="cta" asChild>
-            <a href={primaryCta.href} className="px-11 py-5 text-sm">
+            <a {...ctaProps(primaryCta)} className="px-11 py-5 text-sm">
               {primaryCta.label}
               <ChevronRight className="ml-2 size-[18px]" />
             </a>
           </Button>
           <a
-            href={secondaryCta.href}
+            {...ctaProps(secondaryCta)}
             className="btn-secondary flex items-center gap-2 text-white/40 no-underline hover:text-white"
           >
             {secondaryCta.label}

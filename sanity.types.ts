@@ -332,6 +332,7 @@ export type Cta = {
   _type: "cta";
   label?: string;
   href?: string;
+  ctaType?: "internal" | "external" | "calendly";
 };
 
 export type SanityImageCrop = {
@@ -652,6 +653,13 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: src/sanity/queries.ts
+// Variable: ALL_PAGE_SLUGS_QUERY
+// Query: *[_type == "page" && defined(slug.current) && slug.current != "home"] {    "slug": slug.current  }
+export type ALL_PAGE_SLUGS_QUERY_RESULT = Array<{
+  slug: string | null;
+}>;
+
+// Source: src/sanity/queries.ts
 // Variable: PAGE_QUERY
 // Query: *[_type == "page" && slug.current == $slug][0] {    _id,    title,    slug,    seo {      metaTitle,      metaDescription,      ogImage {        asset-> {          url,        },      },      canonicalUrl,      siteName,    },    modules[] {      _type,      _key,      ...,      stats[] {        ...,      },      statCards[] {        ...,      },      cards[] {        ...,      },      steps[] {        ...,      },      metrics[] {        ...,      },      extraMetrics[] {        ...,      },      testimonials[] {        ...,      },      previewMetrics[] {        ...,      },      features[] {        ...,      },      values[] {        ...,      },      image {        ...,        asset->,      },      primaryCta {        ...,      },      secondaryCta {        ...,      },    }  }
 export type PAGE_QUERY_RESULT = {
@@ -741,11 +749,13 @@ export type PAGE_QUERY_RESULT = {
           _type: "cta";
           label?: string;
           href?: string;
+          ctaType?: "calendly" | "external" | "internal";
         } | null;
         secondaryCta: {
           _type: "cta";
           label?: string;
           href?: string;
+          ctaType?: "calendly" | "external" | "internal";
         } | null;
         note?: string;
         stats: null;
@@ -772,11 +782,13 @@ export type PAGE_QUERY_RESULT = {
           _type: "cta";
           label?: string;
           href?: string;
+          ctaType?: "calendly" | "external" | "internal";
         } | null;
         secondaryCta: {
           _type: "cta";
           label?: string;
           href?: string;
+          ctaType?: "calendly" | "external" | "internal";
         } | null;
         stats: Array<{
           _key: string;
@@ -1142,6 +1154,7 @@ export type SITE_SETTINGS_QUERY_RESULT =
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
+    '\n  *[_type == "page" && defined(slug.current) && slug.current != "home"] {\n    "slug": slug.current\n  }\n': ALL_PAGE_SLUGS_QUERY_RESULT;
     '\n  *[_type == "page" && slug.current == $slug][0] {\n    _id,\n    title,\n    slug,\n    seo {\n      metaTitle,\n      metaDescription,\n      ogImage {\n        asset-> {\n          url,\n        },\n      },\n      canonicalUrl,\n      siteName,\n    },\n    modules[] {\n      _type,\n      _key,\n      ...,\n      stats[] {\n        ...,\n      },\n      statCards[] {\n        ...,\n      },\n      cards[] {\n        ...,\n      },\n      steps[] {\n        ...,\n      },\n      metrics[] {\n        ...,\n      },\n      extraMetrics[] {\n        ...,\n      },\n      testimonials[] {\n        ...,\n      },\n      previewMetrics[] {\n        ...,\n      },\n      features[] {\n        ...,\n      },\n      values[] {\n        ...,\n      },\n      image {\n        ...,\n        asset->,\n      },\n      primaryCta {\n        ...,\n      },\n      secondaryCta {\n        ...,\n      },\n    }\n  }\n': PAGE_QUERY_RESULT;
     '\n  *[_id == "siteSettings"][0] {\n    navigation {\n      links[] {\n        label,\n        href,\n      },\n      ctaLabel,\n      ctaHref,\n    },\n    footer {\n      brandDescription,\n      socialLinks[] {\n        platform,\n        url,\n      },\n      columns[] {\n        title,\n        links[] {\n          label,\n          href,\n        },\n      },\n      legalLinks[] {\n        label,\n        href,\n      },\n      copyright,\n    },\n    seo {\n      metaTitle,\n      metaDescription,\n      ogImage {\n        asset-> {\n          url,\n        },\n      },\n      siteName,\n    },\n  }\n': SITE_SETTINGS_QUERY_RESULT;
   }

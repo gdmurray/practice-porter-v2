@@ -54,7 +54,7 @@ After schema changes, deploy to Sanity cloud so MCP and Studio work correctly:
 
 ```bash
 nvm use
-pnpm dlx sanity@latest schema deploy
+pnpm sanity:deploy
 ```
 
 See `docs/sanity-mcp-troubleshooting.md` for known issues.

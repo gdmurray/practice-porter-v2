@@ -20,7 +20,7 @@ alwaysApply: true
 - Queries use `defineQuery` from `groq` for TypeGen compatibility
 - TypeGen generates `sanity.types.ts` — never edit manually; run `pnpm typegen`
 - `sanity.config.ts` must support both `import.meta.env` (Vite) and `process.env` (CLI); see fallback pattern: `import.meta.env?.PUBLIC_SANITY_PROJECT_ID ?? "u06m8vwg"`
-- Schema must be deployed to Sanity cloud before MCP mutations work: `pnpm dlx sanity@latest schema deploy`
+- Schema must be deployed to Sanity cloud before MCP mutations work: `pnpm sanity:deploy`
 
 ## Data fetching
 

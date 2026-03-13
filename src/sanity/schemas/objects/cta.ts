@@ -17,6 +17,20 @@ export const cta = defineType({
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: "ctaType",
+      title: "CTA Type",
+      type: "string",
+      options: {
+        list: [
+          { title: "Internal Link (url or anchor)", value: "internal"},
+          { title: "External Link", value: "external"},
+          { title: "Calendly Popup", value: "calendly"},
+        ],
+        layout: "radio"
+      },
+      initialValue: "internal",
+    })
   ],
   preview: {
     select: { label: "label" },

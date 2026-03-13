@@ -1,0 +1,68 @@
+---
+description: Known quirks and workarounds when using the Sanity MCP server to mutate content
+globs:
+alwaysApply: false
+---
+
+# Sanity MCP Quirks & Workarounds
+
+## Schema must be deployed before patching new fields
+
+If you add a field to a schema and then immediately try to patch documents with that field via MCP, you'll get:
+> `Bad Request - No schema exists for segment "fieldName" in path "..."`
+
+**Fix:** Deploy the schema first, then patch.
+```bash
+pnpm sanity:deploy
+```
+Only after that will `patch_document_from_json` accept the new field.
+
+---
+
+## Patching nested fields inside array items by `_key`
+
+Setting a deeply nested field path like:
+```
+modules[_key=="abc"].primaryCta.ctaType
+```
+...fails with `Invalid target paths` when targeting the **published** document ID directly.
+
+**Workaround:** Target the **draft** document instead (`drafts.<id>`), and set the leaf-level path directly — not the whole object:
+
+```json
+{
+  "documentId": "drafts.e5244255-...",
+  "set": [
+    { "path": "modules[_key==\"abc\"].primaryCta.ctaType", "value": "internal" }
+  ]
+}
+```
+
+This works once the schema is deployed. Targeting the published ID triggers a 500 for these paths.
+
+---
+
+## Always patch the draft, then publish
+
+- Patching a published document ID creates/updates a draft (the published version is untouched)
+- But nested array-key paths only work reliably via the `drafts.<id>` form
+- After patching the draft, use `publish_documents` with the **published** ID (no `drafts.` prefix):
+
+```json
+{ "ids": ["e5244255-1f1f-44cf-bda4-dd6a94fe7f0e"] }
+```
+
+---
+
+## Setting whole CTA objects vs. leaf fields
+
+Setting an entire object at an array-item path (`modules[_key=="abc"].primaryCta`) returns a 500 when the schema was not yet deployed. After deploy, setting individual leaf fields works. Prefer leaf-level paths when only adding one field — it's safer and avoids overwriting siblings.
+
+---
+
+## Project / dataset for this workspace
+
+- **projectId:** `u06m8vwg`
+- **dataset:** `production`
+- **Home page doc ID:** `e5244255-1f1f-44cf-bda4-dd6a94fe7f0e`
+- **siteSettings doc ID:** `siteSettings`
