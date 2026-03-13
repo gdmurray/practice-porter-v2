@@ -1,0 +1,65 @@
+---
+description: How to create new pages — static vs dynamic routes, SSR rules
+globs: "src/pages/**/*.astro"
+alwaysApply: false
+---
+
+# Creating New Pages
+
+## Route architecture
+
+| Route file            | URL pattern          | Behavior                                    |
+|-----------------------|----------------------|---------------------------------------------|
+| `index.astro`         | `/`                  | Fetches Sanity page with slug `"home"`      |
+| `[[slug]].astro`      | `/<anything>`        | Optional catch-all; fetches page by slug    |
+
+Both use `loadQuery` from `src/sanity/lib/load-query.ts` to fetch data.
+
+## Adding a Sanity-driven page
+
+Most pages are created in Sanity Studio, not as new `.astro` files. The `[[slug]].astro` route handles any slug automatically.
+
+1. In Sanity Studio, create a new Page document
+2. Set a slug (e.g., `about`, `contact`)
+3. Add modules to the page
+4. Publish — the page is immediately available at `/<slug>`
+
+## Adding a static route
+
+For pages that don't come from Sanity (e.g., a blog index, legal page):
+
+1. Create `src/pages/<name>.astro`
+2. Import `Layout` from `../layouts/Layout.astro`
+3. Import `loadQuery` if you need Sanity data (e.g., site settings for nav/footer)
+4. Wrap content in `<Layout>` with `title` and `description` props
+
+## Page template pattern
+
+```astro
+---
+import "../styles/global.css";
+import Layout from "../layouts/Layout.astro";
+import { loadQuery } from "../sanity/lib/load-query";
+import { SITE_SETTINGS_QUERY, type SITE_SETTINGS_QUERY_RESULT } from "../sanity/queries";
+import { Navigation } from "../components/layout/Navigation";
+import { Footer } from "../components/layout/Footer";
+
+const { data: siteSettings } = await loadQuery<SITE_SETTINGS_QUERY_RESULT>({
+  query: SITE_SETTINGS_QUERY,
+});
+---
+
+<Layout title="Page Title">
+  <Navigation client:load links={siteSettings?.navigation?.links} />
+  <main>
+    <!-- page content -->
+  </main>
+  <Footer {...siteSettings?.footer} />
+</Layout>
+```
+
+## SSR rules
+
+- The site runs SSR via Cloudflare adapter — pages are rendered on every request
+- No `getStaticPaths()` needed; dynamic params resolve at request time
+- `[[slug]].astro` double brackets make the slug **optional** (undefined at `/`)

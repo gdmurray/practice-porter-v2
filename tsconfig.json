@@ -3,7 +3,8 @@
   "include": [
     ".astro/types.d.ts",
     "**/*",
-    "./worker-configuration.d.ts"
+    "./worker-configuration.d.ts",
+    "./sanity.types.ts"
   ],
   "exclude": [
     "dist"
@@ -14,6 +15,8 @@
     "@/*": ["src/*"]
   },
   "types": [
+    "astro/client",
+    "@sanity/astro/module",
     "./worker-configuration.d.ts",
     "node"
   ]

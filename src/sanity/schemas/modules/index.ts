@@ -1,0 +1,10 @@
+export { hero } from "./hero";
+export { trustBar } from "./trustBar";
+export { problem } from "./problem";
+export { solution } from "./solution";
+export { process } from "./process";
+export { results } from "./results";
+export { scorecard } from "./scorecard";
+export { pricing } from "./pricing";
+export { about } from "./about";
+export { finalCta } from "./finalCta";

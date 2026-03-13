@@ -1,0 +1,68 @@
+---
+description: Practice Porter design system — colors, fonts, spacing, component patterns
+globs: "**/*.{css,tsx,astro}"
+alwaysApply: false
+---
+
+# Design System
+
+## Brand palette
+
+| Token          | Hex       | Usage                              |
+|----------------|-----------|------------------------------------|
+| `midnight`     | `#0b1d3a` | Dark backgrounds, primary dark     |
+| `deep-navy`    | `#132d5e` | Gradient endpoints                 |
+| `gold`         | `#c9a96e` | Primary accent, CTAs, eyebrows     |
+| `gold-light`   | `#d4bc8a` | Hover states                       |
+| `teal`         | `#1a5c5e` | Secondary accent                   |
+| `off-white`    | `#f8f6f2` | Cream backgrounds                  |
+| `charcoal`     | `#2a2a2a` | Body text on light backgrounds     |
+
+Use Tailwind classes: `bg-midnight`, `text-gold`, `bg-off-white`, etc. (mapped via `@theme inline` in `global.css`).
+
+## Typography
+
+- **Headings**: `font-serif` (Playfair Display) — all `<h1>`–`<h4>` inherit this
+- **Body**: `font-sans` (Inter Variable)
+- **Eyebrow**: 11px, 700 weight, `0.24em` letter-spacing, uppercase, gold color — use `.eyebrow` class
+- **Section titles**: use `.section-title` (responsive clamp 32px–52px)
+- **Subtitles**: use `.section-subtitle` (18px, light weight, mid-gray)
+
+## Spacing tokens
+
+Use `var(--space-*)` or Tailwind `spacing-*` (xs=8, sm=16, md=24, lg=48, xl=80, 2xl=120, 3xl=160).
+
+Layout containers: `.pp-container` (max 1280px) and `.pp-container-narrow` (max 720px).
+Section padding: `.pp-section` or `.pp-section-tight`.
+
+## Module theme system
+
+Every module section has a `theme` field in Sanity: `"dark"`, `"white"`, or `"cream"`.
+
+Apply via `data-theme` attribute on the section wrapper:
+
+```tsx
+<section data-theme={theme} style={{ background: "var(--section-bg)" }}>
+```
+
+CSS variables set per theme: `--section-bg`, `--section-text`, `--section-muted`, `--section-accent`.
+Dark theme overrides `.section-title` to white and `em` to gold.
+
+## Button hierarchy
+
+1. **Primary CTA**: `.btn-primary` — gold bg, midnight text, shimmer hover, pill shape
+2. **Secondary**: `.btn-secondary` — text-only, white/60 opacity, uppercase
+3. **Nav CTA**: `.nav-cta` or shadcn `Button variant="nav"` — gold border pill
+
+## shadcn usage
+
+- Install: `npx shadcn@latest add <component>`
+- Config: `components.json` (style: `radix-vega`, aliases under `@/`)
+- Installed: `button`, `card`, `badge`, `avatar`, `sheet`, `navigation-menu`
+- Button has custom variants: `brand`, `nav`, and size `cta`
+
+## Animation
+
+- `.reveal` / `.reveal-left` / `.reveal-right` + `.visible` for scroll-triggered entrance
+- `.reveal-delay-{1..4}` for staggered children
+- `RevealObserver` component handles intersection detection

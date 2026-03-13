@@ -1,0 +1,78 @@
+---
+description: React component patterns — islands, props, Astro interop, JSX conventions
+globs: "src/components/**/*.tsx"
+alwaysApply: false
+---
+
+# Component Patterns
+
+## Islands architecture
+
+React components run as Astro islands. They must be hydrated with a `client:*` directive in `.astro` files:
+
+```astro
+<Navigation client:load />        <!-- Needs immediate interactivity (nav, mobile menu) -->
+<PageModules client:load />        <!-- Module renderer needs React state -->
+<SomeWidget client:visible />      <!-- Below fold — hydrate when scrolled into view -->
+```
+
+Never import React components directly without a `client:` directive in Astro — they won't hydrate.
+
+## Module component pattern
+
+Every page module follows this structure:
+
+```tsx
+"use client";
+
+export interface <Name>Props {
+  theme?: string;
+  // ... fields matching the Sanity schema
+}
+
+export function <Name>({ theme = "cream", ...props }: <Name>Props) {
+  return (
+    <section data-theme={theme} style={{ background: "var(--section-bg)" }}>
+      <div className="pp-container pp-section">
+        {/* content */}
+      </div>
+    </section>
+  );
+}
+```
+
+Key rules:
+- `"use client"` directive at top of file
+- `data-theme` on the outermost `<section>` — drives CSS variables
+- `pp-container` for max-width centering
+- `pp-section` for vertical padding
+- Props interface mirrors the Sanity module schema fields
+- Provide sensible defaults for all props (content editors may leave fields empty)
+
+## ModuleRenderer
+
+`ModuleRenderer.tsx` maps `_type` to components via a switch. When adding a new module:
+
+1. Import the component
+2. Add a `case "<type>":` returning the component with spread props
+
+## Layout components
+
+- `Navigation`: fixed top, transparent -> solid on scroll, mobile Sheet at `lg:` breakpoint
+- `Footer`: multi-column layout from siteSettings
+
+Both accept props shaped to match `SITE_SETTINGS_QUERY_RESULT`.
+
+## Styling conventions
+
+- Use Tailwind utility classes as the primary styling method
+- Use `cn()` from `@/lib/utils` for conditional class merging
+- Use design system CSS classes (`.eyebrow`, `.section-title`, `.btn-primary`) for brand consistency
+- Avoid inline `style` except for `background: var(--section-bg)` on themed sections
+- Icons: use `lucide-react` — already installed
+
+## Type safety
+
+- Component props should align with Sanity types from `sanity.types.ts`
+- Handle `null | undefined` from Sanity — use `??` defaults and optional chaining
+- Filter arrays with null items before rendering (see `filterLinks()` in Navigation)

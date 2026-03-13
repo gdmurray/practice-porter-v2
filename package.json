@@ -12,11 +12,16 @@
 		"astro": "astro",
 		"generate-types": "wrangler types",
 		"deploy": "astro build && wrangler pages deploy",
-		"cf-typegen": "wrangler types"
+		"cf-typegen": "wrangler types",
+		"sanity": "sanity",
+		"sanity:schema": "sanity schema extract",
+		"sanity:typegen": "sanity typegen generate",
+		"typegen": "sanity schema extract && sanity typegen generate"
 	},
 	"dependencies": {
 		"@astrojs/cloudflare": "^12.6.13",
 		"@astrojs/react": "^5.0.0",
+		"@astrojs/sitemap": "^3.7.1",
 		"@fontsource-variable/inter": "^5.2.8",
 		"@sanity/astro": "^3.2.11",
 		"@sanity/client": "^7.17.0",
@@ -24,8 +29,10 @@
 		"@types/react": "^19.2.14",
 		"@types/react-dom": "^19.2.3",
 		"astro": "^5.18.0",
+		"astro-seo": "^1.1.0",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
+		"groq": "^5.14.0",
 		"lucide-react": "^0.577.0",
 		"radix-ui": "^1.4.3",
 		"react": "^19.2.4",

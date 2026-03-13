@@ -1,0 +1,43 @@
+---
+description: SEO and performance requirements for the marketing site
+alwaysApply: true
+---
+
+# SEO & Performance
+
+## SEO in Sanity
+
+Every page has an `seo` object field with: `metaTitle`, `metaDescription`, `ogImage`, `canonicalUrl`, `siteName`.
+Site-wide defaults live in `siteSettings.seo`; page-level SEO overrides them.
+
+Fallback chain in pages:
+```
+pageSeo?.metaTitle ?? page?.title ?? siteSeo?.metaTitle ?? "Practice Porter"
+```
+
+## Required meta tags
+
+`Layout.astro` renders these in `<head>`:
+- `<title>` from the SEO chain above
+- `<meta name="description">` if present
+- `<meta property="og:title">` and `og:description`
+- `<meta property="og:image">` and `twitter:image` from ogImage asset URL
+- `<meta name="generator">` (Astro built-in)
+- `<link rel="icon">` (SVG + ICO)
+
+When adding new pages or content types, always ensure SEO fields are included.
+
+## Performance rules
+
+- Images from Sanity CDN — use asset URL with transformations, not base64
+- No `client:load` on components that don't need interactivity — prefer `client:visible` or `client:idle` for below-the-fold content
+- Fonts: Inter via `@fontsource-variable/inter` (self-hosted), Playfair via Google Fonts `@import`
+- Film grain overlay (`body::after`) is `pointer-events: none` with fixed positioning
+- `useCdn: false` in Sanity config because SSR fetches fresh content per request
+
+## Lighthouse targets
+
+- Performance: 90+
+- Accessibility: 95+
+- SEO: 100
+- Best Practices: 95+

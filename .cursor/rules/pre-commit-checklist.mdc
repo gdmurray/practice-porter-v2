@@ -1,0 +1,36 @@
+---
+description: Pre-commit checklist — verify before committing changes
+alwaysApply: true
+---
+
+# Pre-Commit Checklist
+
+Before committing, verify the following:
+
+## Types
+- [ ] Run `pnpm typegen` if any Sanity schema or GROQ query changed
+- [ ] No TypeScript errors in changed files (check linter output)
+
+## Schema sync
+- [ ] If Sanity schemas changed, deploy to cloud: `pnpm dlx sanity@latest schema deploy`
+- [ ] Schema barrel exports updated (`schemas/index.ts`, `schemas/modules/index.ts`, etc.)
+
+## Pages and modules
+- [ ] New modules registered in `ModuleRenderer.tsx` switch
+- [ ] New modules added to `page.ts` modules array
+- [ ] `loadQuery` used instead of direct `sanityClient.fetch` in pages
+- [ ] Visual Editing props (`data-theme`, CSS variables) applied on themed sections
+
+## Design system
+- [ ] Brand colors used via tokens (not hardcoded hex)
+- [ ] Layout uses `pp-container` / `pp-section` classes
+- [ ] Typography uses `.eyebrow`, `.section-title`, `.section-subtitle` where appropriate
+
+## Environment
+- [ ] No secrets committed (`.env` is gitignored)
+- [ ] `astro.config.mjs` uses `process.env`, not `import.meta.env`
+- [ ] `sanity.config.ts` has dual-env fallback pattern
+
+## Build
+- [ ] `nvm use` to ensure correct Node version
+- [ ] `pnpm build` succeeds without errors

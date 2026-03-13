@@ -1,0 +1,60 @@
+---
+description: Sanity schema conventions for documents, modules, and objects
+globs: "src/sanity/**/*.ts"
+alwaysApply: false
+---
+
+# Sanity Schema Conventions
+
+## Schema categories
+
+| Directory                    | Purpose                           | Examples                      |
+|------------------------------|-----------------------------------|-------------------------------|
+| `schemas/documents/`         | Top-level document types          | `page`, `siteSettings`        |
+| `schemas/modules/`           | Page section types (in modules[]) | `hero`, `pricing`, `finalCta` |
+| `schemas/objects/`           | Reusable field groups             | `cta`, `seo`, `theme`        |
+
+## Creating a new module
+
+1. Create `src/sanity/schemas/modules/<name>.ts` using `defineType` + `defineField`
+2. Add `themeField()` from `objects/theme.ts` as the first field (default: `"cream"`, `"dark"`, or `"white"`)
+3. Export from `schemas/modules/index.ts`
+4. Register in `schemas/index.ts` under the Modules section
+5. Add `{ type: "<name>" }` to the `modules` array in `schemas/documents/page.ts`
+6. Create matching React component in `src/components/modules/<Name>.tsx`
+7. Add case to `ModuleRenderer.tsx` switch statement
+8. Run `pnpm typegen` to regenerate types
+
+## Theme field
+
+Use the `themeField()` helper for consistent theme options:
+
+```ts
+import { themeField } from "../objects/theme";
+// themeField("dark") — sets default; options are "dark", "white", "cream"
+```
+
+## Singleton documents
+
+`siteSettings` is a singleton with `_id: "siteSettings"`. The Studio structure forces a single document view for it. Query with `*[_id == "siteSettings"][0]`.
+
+## TypeGen workflow
+
+```bash
+pnpm typegen          # extract schema + generate sanity.types.ts
+```
+
+- Queries in `src/sanity/queries.ts` use `defineQuery()` from `groq`
+- Types are re-exported: `export type { PAGE_QUERY_RESULT } from "../../sanity.types"`
+- After any schema change, re-run typegen and deploy schema
+
+## Schema deployment
+
+After schema changes, deploy to Sanity cloud so MCP and Studio work correctly:
+
+```bash
+nvm use
+pnpm dlx sanity@latest schema deploy
+```
+
+See `docs/sanity-mcp-troubleshooting.md` for known issues.

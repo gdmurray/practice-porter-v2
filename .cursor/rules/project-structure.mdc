@@ -1,0 +1,55 @@
+---
+description: Project directory structure and file naming conventions
+alwaysApply: true
+---
+
+# Project Structure
+
+```
+.
+├── public/                        # Static assets (favicon, robots.txt)
+├── src/
+│   ├── components/
+│   │   ├── layout/                # Navigation.tsx, Footer.tsx (site-wide)
+│   │   ├── modules/               # Page section components (Hero, Pricing, etc.)
+│   │   │   └── ModuleRenderer.tsx  # Switch that maps _type -> component
+│   │   ├── ui/                    # shadcn primitives (button, card, sheet, etc.)
+│   │   ├── PageModules.tsx        # Renders modules[] array
+│   │   └── RevealObserver.tsx     # Intersection observer for scroll animations
+│   ├── layouts/
+│   │   └── Layout.astro           # Base HTML shell (head, VisualEditing, scripts)
+│   ├── lib/
+│   │   ├── utils.ts               # cn() helper for Tailwind class merging
+│   │   └── icons.tsx              # Shared icon components
+│   ├── pages/
+│   │   ├── index.astro            # Root route, fetches page slug "home"
+│   │   └── [[slug]].astro         # Optional catch-all for all other pages
+│   ├── sanity/
+│   │   ├── lib/
+│   │   │   ├── load-query.ts      # Fetch wrapper (Visual Editing aware)
+│   │   │   └── resolve.ts         # Presentation Tool location resolver
+│   │   ├── queries.ts             # GROQ queries (defineQuery)
+│   │   └── schemas/
+│   │       ├── documents/         # page.ts, siteSettings.ts
+│   │       ├── modules/           # hero.ts, pricing.ts, etc.
+│   │       ├── objects/           # Reusable field groups (cta, seo, theme, etc.)
+│   │       └── index.ts           # Barrel export of all schema types
+│   ├── styles/
+│   │   └── global.css             # Design tokens, Tailwind config, component classes
+│   └── types/                     # Additional TS declarations
+├── sanity.config.ts               # Studio config (structure, plugins, schema)
+├── sanity.cli.ts                  # CLI config (TypeGen, schema extraction)
+├── sanity.types.ts                # Generated types (do not edit)
+├── schema.json                    # Extracted schema (do not edit)
+├── astro.config.mjs               # Astro + Sanity + Cloudflare config
+├── components.json                # shadcn config
+└── wrangler.jsonc                 # Cloudflare Pages config
+```
+
+## Naming conventions
+
+- Sanity schemas: `camelCase` filenames, one type per file (`hero.ts`, `pricingCard.ts`)
+- React components: `PascalCase` filenames (`Hero.tsx`, `ModuleRenderer.tsx`)
+- Astro pages: lowercase with brackets for params (`[[slug]].astro`)
+- CSS: single `global.css` — no per-component CSS files
+- Barrel exports: every schema subdirectory has an `index.ts`

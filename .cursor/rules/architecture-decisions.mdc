@@ -1,0 +1,41 @@
+---
+description: Critical architecture decisions that must not be changed without explicit approval
+alwaysApply: true
+---
+
+# Architecture Decisions
+
+## Stack (do not swap without discussion)
+
+- **Framework**: Astro 5 with SSR via Cloudflare adapter
+- **CMS**: Sanity v5 (embedded Studio at `/studio`)
+- **Styling**: Tailwind CSS v4 + shadcn (radix-vega style)
+- **React**: Islands architecture via `client:load` — React components hydrate inside Astro pages
+- **Package manager**: pnpm (never use npm or npx; use `pnpm dlx` for one-off commands)
+- **Node**: v22+ (see `.nvmrc`); always run `nvm use` before CLI commands
+
+## Sanity integration
+
+- `@sanity/astro` provides the `sanity:client` virtual module — import `sanityClient` from it
+- Queries use `defineQuery` from `groq` for TypeGen compatibility
+- TypeGen generates `sanity.types.ts` — never edit manually; run `pnpm typegen`
+- `sanity.config.ts` must support both `import.meta.env` (Vite) and `process.env` (CLI); see fallback pattern: `import.meta.env?.PUBLIC_SANITY_PROJECT_ID ?? "u06m8vwg"`
+- Schema must be deployed to Sanity cloud before MCP mutations work: `pnpm dlx sanity@latest schema deploy`
+
+## Data fetching
+
+- Use `loadQuery` from `src/sanity/lib/load-query.ts` — never use `sanityClient.fetch` directly in pages
+- `loadQuery` handles Visual Editing (perspective, stega, token, source maps) automatically
+- Environment toggles: `PUBLIC_SANITY_VISUAL_EDITING_ENABLED` and `SANITY_API_READ_TOKEN`
+
+## Environment variables
+
+- `astro.config.mjs` runs as Node — use `process.env.*` there, never `import.meta.env`
+- Pages/components/server code — use `import.meta.env.*`
+- Secrets (tokens) are NOT prefixed with `PUBLIC_`
+
+## Deployment
+
+- Target: Cloudflare Pages (`wrangler pages deploy`)
+- Build: `astro build` outputs to `dist/`
+- Visual Editing disabled in production; use a separate preview deployment with it enabled

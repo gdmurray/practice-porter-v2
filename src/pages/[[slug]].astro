@@ -3,6 +3,7 @@ import "../styles/global.css";
 import Layout from "../layouts/Layout.astro";
 import { loadQuery } from "../sanity/lib/load-query";
 import {
+  ALL_PAGE_SLUGS_QUERY,
   PAGE_QUERY,
   SITE_SETTINGS_QUERY,
   type PAGE_QUERY_RESULT,
@@ -12,9 +13,20 @@ import { Navigation } from "../components/layout/Navigation";
 import { Footer } from "../components/layout/Footer";
 import { PageModules } from "../components/PageModules";
 
+export async function getStaticPaths() {
+  const { data: pages } = await loadQuery<{ slug: string }[]>({
+    query: ALL_PAGE_SLUGS_QUERY,
+  });
+  return (pages ?? [])
+    .filter((p) => p?.slug)
+    .map((p) => ({ params: { slug: p.slug } }));
+}
+
+const slug = Astro.params.slug ?? "home";
+const resolvedSlug = typeof slug === "string" ? slug : "home";
 const { data: page } = await loadQuery<PAGE_QUERY_RESULT>({
   query: PAGE_QUERY,
-  params: { slug: "home" },
+  params: { slug: resolvedSlug },
 });
 const { data: siteSettings } = await loadQuery<SITE_SETTINGS_QUERY_RESULT>({
   query: SITE_SETTINGS_QUERY,
