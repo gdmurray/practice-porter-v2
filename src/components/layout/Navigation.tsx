@@ -23,6 +23,12 @@ function filterLinks(links: NavigationProps["links"]) {
   );
 }
 
+/** Ensures anchor-only hrefs (e.g. "#pricing") always point to the home page
+ *  so global nav links work correctly regardless of the current route. */
+function resolveGlobalHref(href: string) {
+  return href.startsWith("#") ? `/${href}` : href;
+}
+
 type Props = NavigationProps & {
   firstModuleTheme?: string | null;
   navTheme?: string | null;
@@ -90,7 +96,7 @@ export function Navigation({
           {validLinks.map((link) => (
             <li key={link.href}>
               <a
-                href={link.href}
+                href={resolveGlobalHref(link.href)}
                 className={cn(
                   "relative text-[13px] font-medium tracking-[0.5px] no-underline transition-colors after:absolute after:bottom-[-4px] after:left-0 after:h-px after:w-0 after:bg-gold after:transition-[width] hover:after:w-full",
                   filled && isCream
@@ -104,7 +110,7 @@ export function Navigation({
           ))}
           <li>
             <Button variant="nav" asChild>
-              <a href={ctaHref ?? "#cta"}>{ctaLabel ?? "Book a Consultation"}</a>
+              <a href={resolveGlobalHref(ctaHref ?? "#cta")}>{ctaLabel ?? "Book a Consultation"}</a>
             </Button>
           </li>
         </ul>
@@ -147,7 +153,7 @@ export function Navigation({
             {validLinks.map((link) => (
               <a
                 key={link.href}
-                href={link.href}
+                href={resolveGlobalHref(link.href)}
                 onClick={() => setMobileOpen(false)}
                 className={cn(
                   "font-serif text-[28px] font-medium no-underline transition-colors duration-200 hover:text-gold",
@@ -158,7 +164,7 @@ export function Navigation({
               </a>
             ))}
             <a
-              href={ctaHref ?? "#cta"}
+              href={resolveGlobalHref(ctaHref ?? "#cta")}
               onClick={() => setMobileOpen(false)}
               className={cn(
                 "font-serif text-[28px] font-medium text-gold no-underline transition-colors duration-200",

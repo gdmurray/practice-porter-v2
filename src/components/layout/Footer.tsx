@@ -27,6 +27,12 @@ function isValidLink(
   return Boolean(l && typeof l.label === "string" && typeof l.href === "string");
 }
 
+/** Ensures anchor-only hrefs (e.g. "#pricing") always point to the home page
+ *  so global footer links work correctly regardless of the current route. */
+function resolveGlobalHref(href: string) {
+  return href.startsWith("#") ? `/${href}` : href;
+}
+
 export function Footer({
   brandDescription = "Intelligence behind every call. Boutique new-patient call answering and performance analytics for dental practices across North America.",
   socialLinks,
@@ -89,7 +95,7 @@ export function Footer({
                 {(col.links ?? []).filter(isValidLink).map((link) => (
                   <li key={link.href}>
                     <a
-                      href={link.href}
+                      href={resolveGlobalHref(link.href)}
                       className="text-sm text-white/40 no-underline transition-colors hover:text-gold"
                     >
                       {link.label}
@@ -106,7 +112,7 @@ export function Footer({
             {legal.map((link) => (
               <a
                 key={link.href}
-                href={link.href}
+                href={resolveGlobalHref(link.href)}
                 className="text-white/25 no-underline transition-colors hover:text-white/50"
               >
                 {link.label}
