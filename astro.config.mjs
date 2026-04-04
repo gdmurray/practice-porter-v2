@@ -9,7 +9,7 @@ import sanity from '@sanity/astro';
 import react from '@astrojs/react';
 import tailwindcss from "@tailwindcss/vite";
 
-import sitemap from "@astrojs/sitemap";
+
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -34,7 +34,7 @@ export default defineConfig({
     stega: {
       studioUrl: "/studio",
     },
-  }), react(), sitemap()],
+  }), react()],
   vite: {
     plugins: [tailwindcss()],
     resolve: {

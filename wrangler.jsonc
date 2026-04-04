@@ -7,7 +7,8 @@
 	"name": "practice-porter-v2",
 	"compatibility_date": "2025-09-27",
 	"compatibility_flags": [
-		"nodejs_compat"
+		"nodejs_compat",
+		"disable_nodejs_process_v2"
 	],
 	"pages_build_output_dir": "./dist",
 	"observability": {
