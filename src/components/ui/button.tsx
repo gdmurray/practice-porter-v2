@@ -10,13 +10,13 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow-xs hover:bg-gold-light hover:text-primary-foreground",
+          "bg-primary text-white shadow-xs hover:bg-gold-light",
         brand:
-          "rounded-full bg-primary px-9 py-5 text-xs font-semibold tracking-[0.16em] text-primary-foreground uppercase hover:-translate-y-0.5 hover:bg-gold-light hover:shadow-[0_30px_50px_color-mix(in_srgb,var(--gold)_32%,transparent)]",
+          "rounded bg-gold text-white font-semibold uppercase tracking-[1px] hover:-translate-y-0.5 hover:bg-gold-light hover:shadow-[0_6px_24px_rgba(201,169,110,0.3)]",
         nav:
-          "rounded-full border border-gold/60 bg-transparent px-7 py-3 text-xs font-semibold tracking-[0.14em] text-gold uppercase hover:bg-gold hover:text-midnight",
+          "rounded bg-gold px-6 py-2.5 text-[11px] font-medium tracking-[1.5px] text-white uppercase hover:-translate-y-px hover:bg-gold-light hover:shadow-[0_4px_16px_rgba(201,169,110,0.3)]",
         outline:
-          "border-border bg-background shadow-xs hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
+          "rounded border border-warm-gray bg-transparent text-midnight font-semibold uppercase tracking-[1px] hover:border-midnight",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
         ghost:
@@ -31,7 +31,7 @@ const buttonVariants = cva(
         xs: "h-6 gap-1 rounded-[min(var(--radius-md),8px)] px-2 text-xs in-data-[slot=button-group]:rounded-md has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
         sm: "h-8 gap-1 rounded-[min(var(--radius-md),10px)] px-2.5 in-data-[slot=button-group]:rounded-md has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5",
         lg: "h-10 gap-1.5 px-3 has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3",
-        cta: "h-auto px-9 py-[18px] text-[13px] tracking-[0.16em]",
+        cta: "h-auto px-8 py-4 text-[13px] gap-2.5",
         icon: "size-9",
         "icon-xs":
           "size-6 rounded-[min(var(--radius-md),8px)] in-data-[slot=button-group]:rounded-md [&_svg:not([class*='size-'])]:size-3",

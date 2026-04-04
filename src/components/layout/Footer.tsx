@@ -42,7 +42,7 @@ export function Footer({
   const legal = (legalLinks ?? []).filter(isValidLink);
 
   return (
-    <footer className="bg-[#070F1E] px-[var(--space-lg)] pb-10 pt-20 text-white/50">
+    <footer className="bg-[#070F1E] pb-10 pt-20 text-white/50">
       <div className="pp-container">
         <div className="mb-[60px] grid grid-cols-1 gap-10 border-b border-white/10 pb-[60px] md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr]">
           <div>

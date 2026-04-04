@@ -1,26 +1,32 @@
 import type { QueryParams } from "sanity";
 import { sanityClient } from "sanity:client";
 
-const visualEditingEnabled =
-  import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED === "true";
-const token = import.meta.env.SANITY_API_READ_TOKEN;
 
 export async function loadQuery<QueryResponse>({
   query,
   params = {},
+  preview = false,
 }: {
   query: string;
   params?: QueryParams;
+  preview?: boolean;
 }) {
-  if (visualEditingEnabled && !token) {
+  const visualEditingEnabled =
+    import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED === "true";
+
+  // Stega + drafts only when Presentation/preview URLs are active — not on every request.
+  const usePreviewData = visualEditingEnabled && preview;
+  const token = import.meta.env.SANITY_API_READ_TOKEN;
+
+  if (usePreviewData && !token) {
     throw new Error(
-      "The `SANITY_API_READ_TOKEN` environment variable is required during Visual Editing.",
+      "The `SANITY_API_READ_TOKEN` environment variable is required when using ?preview or sanity-preview-perspective (Visual Editing).",
     );
   }
 
-  const perspective = visualEditingEnabled ? "previewDrafts" : "published";
+  const perspective = usePreviewData ? "drafts" : "published";
 
-  if (visualEditingEnabled) {
+  if (usePreviewData) {
     const { result, resultSourceMap } = await sanityClient.fetch<QueryResponse>(
       query,
       params,

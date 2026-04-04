@@ -32,6 +32,6 @@ function toPascalCase(str: string) {
 
 export function getIcon(name: string): React.ComponentType<{ className?: string; size?: number }> {
   const pascal = toPascalCase(name);
-  const Icon = (LucideIcons as Record<string, React.ComponentType<{ className?: string; size?: number }>>)[pascal];
+  const Icon = (LucideIcons as unknown as Record<string, React.ComponentType<{ className?: string; size?: number }>>)[pascal];
   return Icon || LucideIcons.Shield;
 }

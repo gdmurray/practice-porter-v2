@@ -23,6 +23,7 @@
   --off-white: #f8f6f2;
   --warm-gray: #e8e6e2;
   --mid-gray: #9b9b9b;
+  --light-gray: #c4c4c4;
   --charcoal: #2a2a2a;
   --black: #1a1a1a;
 
@@ -116,6 +117,7 @@
   --color-off-white: var(--off-white);
   --color-warm-gray: var(--warm-gray);
   --color-mid-gray: var(--mid-gray);
+  --color-light-gray: var(--light-gray);
   --color-charcoal: var(--charcoal);
 
   --color-sidebar-ring: var(--sidebar-ring);
@@ -223,21 +225,25 @@
   }
 
   .eyebrow {
+    font-family: var(--font-sans);
     font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.24em;
+    letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--gold);
   }
 
   .section-title {
-    font-size: clamp(32px, 4vw, 52px);
+    font-family: var(--font-serif);
+    font-size: clamp(28px, 3.5vw, 44px);
     font-weight: 700;
+    color: var(--midnight);
+    line-height: 1.15;
   }
 
   .section-subtitle {
-    font-size: 18px;
-    font-weight: 300;
+    font-size: 17px;
+    font-weight: 400;
     line-height: 1.7;
     color: var(--mid-gray);
   }
@@ -273,7 +279,7 @@
   .btn-primary:hover {
     transform: translateY(-2px);
     background: var(--gold-light);
-    box-shadow: 0 30px 50px color-mix(in srgb, var(--gold) 32%, transparent);
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--gold) 18%, transparent);
   }
 
   .btn-primary:hover::before {
@@ -439,6 +445,11 @@
 
   [data-theme="dark"] .section-title em {
     color: var(--gold);
+  }
+
+  [data-theme="white"] .section-title em,
+  [data-theme="cream"] .section-title em {
+    color: var(--teal);
   }
 
   [data-theme="dark"] .section-subtitle {

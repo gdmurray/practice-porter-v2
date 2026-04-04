@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Practice Porter — Intelligence Behind Every Call</title>
+<meta name="description" content="Practice Porter gives dental practice owners complete visibility into front desk performance with the Practice Performance Report and boutique new-patient call answering.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   PRACTICE PORTER — Website V2 (Cream Theme)
+   Brand: Cream / Navy / Gold / Teal
+   Typography: Playfair Display + Inter
+   ============================================ */
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --cream: #FAF8F5;
+  --cream-dark: #F0EDE8;
+  --white: #FFFFFF;
+  --midnight: #0B1D3A;
+  --deep-navy: #132D5E;
+  --navy: #1B3A6B;
+  --gold: #C9A96E;
+  --gold-light: #D4BC8A;
+  --gold-pale: #E8DBC4;
+  --teal: #1A5C5E;
+  --teal-light: #2A7D7F;
+  --teal-pale: #E4F0F0;
+  --charcoal: #2A2A2A;
+  --mid-gray: #7A7A7A;
+  --light-gray: #C4C4C4;
+  --border: #E8E6E2;
+  --black: #1A1A1A;
+
+  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --max-width: 1200px;
+  --gutter: 24px;
+}
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+body {
+  font-family: var(--font-sans);
+  color: var(--charcoal);
+  background: var(--cream);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ===== SCROLL ANIMATIONS ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.3s; }
+
+/* ===== NAVIGATION ===== */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 0 48px; height: 76px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(250, 248, 245, 0.9);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+.nav.scrolled { border-bottom-color: var(--border); }
+
+.nav-logo { display: flex; align-items: baseline; gap: 2px; text-decoration: none; }
+.nav-logo-practice { font-family: var(--font-serif); font-size: 21px; font-weight: 600; letter-spacing: -0.5px; color: var(--midnight); }
+.nav-logo-porter { font-family: var(--font-sans); font-size: 21px; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-left: 6px; }
+.nav-logo-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; display: inline-block; margin-left: 3px; vertical-align: middle; margin-bottom: 2px; }
+
+.nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+.nav-links a {
+  font-size: 13px; font-weight: 500; letter-spacing: 0.5px;
+  color: var(--mid-gray); text-decoration: none; transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--midnight); }
+
+.nav-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 24px; background: var(--gold); color: var(--white) !important;
+  font-size: 12px !important; font-weight: 600 !important; letter-spacing: 1.5px !important;
+  text-transform: uppercase; text-decoration: none !important;
+  border-radius: 4px; transition: all 0.3s;
+}
+.nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(201,169,110,0.3); }
+
+.nav-toggle { display: none; cursor: pointer; }
+.nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--midnight); margin: 5px 0; transition: all 0.3s; }
+
+/* ===== HERO ===== */
+.hero {
+  padding: 140px 48px 100px;
+  background: var(--cream);
+}
+.hero-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 11px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 24px;
+}
+.hero-eyebrow-line { width: 32px; height: 1px; background: var(--gold); }
+
+.hero-headline {
+  font-family: var(--font-serif); font-size: clamp(36px, 4.5vw, 56px);
+  font-weight: 700; line-height: 1.12; color: var(--midnight); margin-bottom: 24px;
+}
+.hero-headline em { font-style: italic; color: var(--teal); }
+
+.hero-sub {
+  font-size: 17px; font-weight: 400; line-height: 1.7;
+  color: var(--mid-gray); max-width: 480px; margin-bottom: 40px;
+}
+
+.hero-actions { display: flex; align-items: center; gap: 24px; }
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 32px; background: var(--gold); color: var(--white);
+  font-family: var(--font-sans); font-size: 13px; font-weight: 600;
+  letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+  border: none; border-radius: 4px; cursor: pointer; transition: all 0.3s;
+}
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(201,169,110,0.3); }
+.btn-primary svg { width: 16px; height: 16px; }
+
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 32px; background: transparent; color: var(--midnight);
+  font-family: var(--font-sans); font-size: 13px; font-weight: 600;
+  letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+  border: 1.5px solid var(--border); border-radius: 4px; cursor: pointer; transition: all 0.3s;
+}
+.btn-outline:hover { border-color: var(--midnight); }
+.btn-outline svg { width: 16px; height: 16px; }
+
+/* Hero image placeholder */
+.hero-image-placeholder {
+  background: var(--white);
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  aspect-ratio: 4 / 3;
+  display: flex; align-items: center; justify-content: center;
+  padding: 32px; text-align: center;
+  color: var(--light-gray); font-size: 14px; font-weight: 500;
+}
+
+/* ===== TRUST BAR ===== */
+.trust-bar {
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 48px;
+}
+.trust-bar-inner {
+  max-width: var(--max-width); margin: 0 auto;
+  display: flex; align-items: center; justify-content: center; gap: 56px;
+}
+.trust-item {
+  display: flex; align-items: center; gap: 10px;
+  color: var(--mid-gray); font-size: 13px; font-weight: 500;
+}
+.trust-item svg { width: 18px; height: 18px; color: var(--teal); flex-shrink: 0; }
+
+/* ===== SECTIONS ===== */
+.section { padding: 100px 48px; }
+.section-inner { max-width: var(--max-width); margin: 0 auto; }
+
+.section-eyebrow {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 11px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+}
+.section-eyebrow-line { width: 28px; height: 1px; background: var(--gold); }
+
+.section-title {
+  font-family: var(--font-serif); font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 700; color: var(--midnight); line-height: 1.15; margin-bottom: 16px;
+}
+.section-title em { font-style: italic; color: var(--teal); }
+
+.section-subtitle {
+  font-size: 17px; font-weight: 400; line-height: 1.7;
+  color: var(--mid-gray); max-width: 560px;
+}
+
+/* ===== PROBLEM SECTION ===== */
+.problem { background: var(--white); }
+
+.problem-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 64px; align-items: center; margin-top: 56px;
+}
+
+.problem-text p {
+  font-size: 16px; line-height: 1.75; color: var(--charcoal); margin-bottom: 16px;
+}
+.problem-text p:last-child { margin-bottom: 0; }
+
+.problem-stats-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+}
+
+.problem-stat {
+  background: var(--cream); border-radius: 10px; padding: 28px;
+}
+.problem-stat-number {
+  font-family: var(--font-serif); font-size: 36px; font-weight: 700;
+  color: var(--midnight); line-height: 1; margin-bottom: 8px;
+}
+.problem-stat-number.red { color: #C0392B; }
+.problem-stat-desc { font-size: 13px; color: var(--mid-gray); line-height: 1.5; }
+
+/* ===== PRODUCTS SECTION ===== */
+.products { background: var(--cream); }
+
+.products-grid {
+  display: grid; grid-template-columns: 1.15fr 0.85fr;
+  gap: 32px; margin-top: 56px;
+}
+
+.product-card {
+  background: var(--white); border-radius: 12px;
+  border: 1px solid var(--border); padding: 48px;
+  transition: box-shadow 0.3s;
+  display: flex; flex-direction: column;
+}
+.product-card:hover { box-shadow: 0 8px 40px rgba(0,0,0,0.06); }
+
+.product-card-featured {
+  border-color: var(--gold);
+  box-shadow: 0 4px 24px rgba(201,169,110,0.1);
+}
+
+.product-tag {
+  display: inline-block;
+  font-size: 10px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; padding: 6px 14px;
+  border-radius: 20px; margin-bottom: 24px; width: fit-content;
+}
+.product-tag-gold { background: rgba(201,169,110,0.12); color: var(--gold); }
+.product-tag-teal { background: var(--teal-pale); color: var(--teal); }
+
+.product-card h3 {
+  font-family: var(--font-serif); font-size: 26px; font-weight: 700;
+  color: var(--midnight); margin-bottom: 8px;
+}
+.product-price {
+  font-size: 15px; color: var(--gold); font-weight: 600; margin-bottom: 20px;
+}
+
+.product-card p {
+  font-size: 15px; line-height: 1.7; color: var(--mid-gray); margin-bottom: 28px;
+}
+
+.product-features {
+  list-style: none; margin-bottom: 32px; flex-grow: 1;
+}
+.product-features li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 14px; color: var(--charcoal); padding: 8px 0;
+  border-bottom: 1px solid var(--cream-dark);
+}
+.product-features li:last-child { border-bottom: none; }
+.product-features li svg { width: 16px; height: 16px; color: var(--teal); flex-shrink: 0; margin-top: 2px; }
+
+.product-card .btn-primary, .product-card .btn-outline { width: 100%; justify-content: center; }
+
+/* ===== PPR HIGHLIGHT ===== */
+.ppr-highlight { background: var(--white); }
+
+.ppr-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 64px; align-items: center; margin-top: 56px;
+}
+
+.ppr-outcomes { list-style: none; }
+.ppr-outcome {
+  display: flex; gap: 20px; padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+}
+.ppr-outcome:last-child { border-bottom: none; }
+
+.ppr-outcome-number {
+  font-family: var(--font-serif); font-size: 28px; font-weight: 700;
+  color: var(--gold); line-height: 1; min-width: 36px;
+}
+.ppr-outcome-title {
+  font-size: 16px; font-weight: 600; color: var(--midnight); margin-bottom: 6px;
+}
+.ppr-outcome-desc {
+  font-size: 14px; color: var(--mid-gray); line-height: 1.6;
+}
+
+.image-placeholder {
+  background: var(--cream);
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px; text-align: center;
+  color: var(--light-gray); font-size: 14px; font-weight: 500;
+  min-height: 320px;
+}
+
+/* ===== FOLLOW UP CENTER ===== */
+.fuc { background: var(--cream); }
+
+.fuc-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 64px; align-items: center; margin-top: 56px;
+}
+
+.fuc-features { list-style: none; margin-top: 28px; }
+.fuc-feature {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 16px 0;
+}
+.fuc-feature-icon {
+  width: 40px; height: 40px; border-radius: 8px;
+  background: var(--teal-pale); display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.fuc-feature-icon svg { width: 20px; height: 20px; color: var(--teal); }
+.fuc-feature-title { font-size: 15px; font-weight: 600; color: var(--midnight); margin-bottom: 4px; }
+.fuc-feature-desc { font-size: 14px; color: var(--mid-gray); line-height: 1.5; }
+
+/* ===== RESULTS ===== */
+.results { background: var(--white); }
+
+.results-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 24px; margin-top: 56px;
+}
+
+.result-card {
+  background: var(--cream); border-radius: 10px; padding: 32px; text-align: center;
+}
+.result-value {
+  font-family: var(--font-serif); font-size: 42px; font-weight: 700;
+  color: var(--midnight); line-height: 1; margin-bottom: 4px;
+}
+.result-value span { color: var(--gold); }
+.result-label { font-size: 13px; color: var(--mid-gray); margin-bottom: 12px; }
+.result-compare { font-size: 12px; color: var(--light-gray); }
+
+.testimonial-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px;
+}
+.testimonial {
+  background: var(--cream); border-radius: 10px; padding: 36px;
+}
+.testimonial-quote {
+  font-family: var(--font-serif); font-size: 17px; font-style: italic;
+  color: var(--midnight); line-height: 1.6; margin-bottom: 24px;
+}
+.testimonial-author { display: flex; align-items: center; gap: 14px; }
+.testimonial-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--gold-pale); display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif); font-size: 16px; font-weight: 700; color: var(--gold);
+}
+.testimonial-name { font-size: 14px; font-weight: 600; color: var(--midnight); }
+.testimonial-role { font-size: 13px; color: var(--mid-gray); }
+
+/* ===== PRICING ===== */
+.pricing { background: var(--cream); }
+
+.pricing-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 32px; margin-top: 56px; max-width: 880px; margin-left: auto; margin-right: auto;
+  margin-top: 56px;
+}
+
+.pricing-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 12px; padding: 44px; text-align: center;
+}
+.pricing-card-featured { border-color: var(--gold); box-shadow: 0 4px 24px rgba(201,169,110,0.1); }
+
+.pricing-card-tag {
+  font-size: 10px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 20px;
+}
+
+.pricing-amount {
+  font-family: var(--font-serif); font-size: 48px; font-weight: 700;
+  color: var(--midnight); line-height: 1;
+}
+.pricing-period { font-size: 15px; color: var(--mid-gray); margin-bottom: 20px; }
+
+.pricing-desc {
+  font-size: 14px; color: var(--mid-gray); line-height: 1.6;
+  margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--border);
+}
+
+.pricing-features { list-style: none; text-align: left; margin-bottom: 32px; }
+.pricing-features li {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; color: var(--charcoal); padding: 7px 0;
+}
+.pricing-features li svg { width: 16px; height: 16px; color: var(--teal); flex-shrink: 0; }
+
+.pricing-card .btn-primary, .pricing-card .btn-outline { width: 100%; justify-content: center; }
+
+.pricing-note {
+  text-align: center; margin-top: 36px;
+  font-size: 14px; color: var(--mid-gray);
+}
+
+/* ===== FAQ ===== */
+.faq-section { background: var(--white); }
+
+.faq-list { max-width: 800px; margin: 48px auto 0; }
+
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+.faq-item:first-child { border-top: 1px solid var(--border); }
+
+.faq-question {
+  width: 100%; background: none; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 0; text-align: left;
+  font-family: var(--font-sans); font-size: 16px; font-weight: 600;
+  color: var(--midnight); transition: color 0.3s;
+}
+.faq-question:hover { color: var(--teal); }
+.faq-question svg {
+  width: 20px; height: 20px; color: var(--gold); flex-shrink: 0;
+  transition: transform 0.3s;
+}
+.faq-item.open .faq-question svg { transform: rotate(45deg); }
+
+.faq-answer {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+}
+.faq-item.open .faq-answer { max-height: 400px; }
+
+.faq-answer p {
+  font-size: 15px; line-height: 1.7; color: var(--mid-gray);
+  padding-bottom: 24px;
+}
+
+/* ===== FINAL CTA ===== */
+.final-cta {
+  padding: 100px 48px;
+  background: var(--midnight);
+  text-align: center;
+}
+.final-cta-inner { max-width: 640px; margin: 0 auto; }
+
+.final-cta .section-eyebrow { justify-content: center; }
+.final-cta .section-title { color: var(--white); }
+.final-cta .section-title em { color: var(--gold); }
+
+.final-cta-sub {
+  font-size: 17px; color: rgba(255,255,255,0.5); line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+.final-cta-actions { display: flex; justify-content: center; gap: 20px; }
+
+.final-cta-note {
+  font-size: 13px; color: rgba(255,255,255,0.3);
+  margin-top: 24px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background: var(--midnight);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 64px 48px 40px;
+}
+.footer-inner { max-width: var(--max-width); margin: 0 auto; }
+
+.footer-top {
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 48px; margin-bottom: 48px;
+}
+
+.footer-brand-desc {
+  font-size: 14px; color: rgba(255,255,255,0.35); line-height: 1.6; margin-top: 16px;
+}
+
+.footer-col-title {
+  font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 20px;
+}
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 12px; }
+.footer-links a {
+  font-size: 14px; color: rgba(255,255,255,0.35);
+  text-decoration: none; transition: color 0.3s;
+}
+.footer-links a:hover { color: rgba(255,255,255,0.7); }
+
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.06);
+  font-size: 13px; color: rgba(255,255,255,0.2);
+}
+.footer-legal { display: flex; gap: 24px; }
+.footer-legal a { color: rgba(255,255,255,0.2); text-decoration: none; transition: color 0.3s; }
+.footer-legal a:hover { color: rgba(255,255,255,0.4); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .problem-grid { grid-template-columns: 1fr; gap: 40px; }
+  .products-grid { grid-template-columns: 1fr; }
+  .ppr-grid { grid-template-columns: 1fr; gap: 40px; }
+  .fuc-grid { grid-template-columns: 1fr; gap: 40px; }
+  .results-grid { grid-template-columns: 1fr 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+
+@media (max-width: 768px) {
+  .nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .nav-toggle { display: block; }
+  .hero { padding: 120px 24px 80px; }
+  .section { padding: 72px 24px; }
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+  .results-grid { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .testimonial-row { grid-template-columns: 1fr; }
+  .trust-bar-inner { flex-wrap: wrap; gap: 20px; justify-content: center; }
+  .problem-stats-grid { grid-template-columns: 1fr; }
+  .final-cta-actions { flex-direction: column; }
+  .footer-top { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-practice">Practice</span>
+    <span class="nav-logo-porter">Porter</span>
+    <span class="nav-logo-dot"></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="practice-performance-report.html">Performance Report</a></li>
+    <li><a href="#call-answering">Call Answering</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#cta" class="nav-cta">Book Consultation</a></li>
+  </ul>
+  <div class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('show')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-line"></span>
+        Boutique Dental Call Intelligence
+      </div>
+      <h1 class="hero-headline">
+        You're Treating Patients. Who's Watching Your <em>Front Desk?</em>
+      </h1>
+      <p class="hero-sub">
+        The Practice Performance Report gives dental practice owners complete visibility into every call, every conversion, and every missed opportunity, so you can reward your best people, retrain the rest, and never wonder where your marketing dollars went.
+      </p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn-primary">
+          Book Free Consultation
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="practice-performance-report.html" class="btn-outline">
+          Explore the Report
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="hero-image-placeholder">
+      [ Image: Practice Performance Report cover page or dashboard preview ]
+    </div>
+  </div>
+</section>
+
+
+<!-- TRUST BAR -->
+<div class="trust-bar reveal">
+  <div class="trust-bar-inner">
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      US &amp; Canada Coverage
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      Data-Driven Results
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      Boutique, Not Commodity
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      AI + Human Call Analysis
+    </div>
+  </div>
+</div>
+
+
+<!-- THE PROBLEM -->
+<section class="section problem" id="problem">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">
+      <span class="section-eyebrow-line"></span>
+      The Problem
+    </div>
+    <h2 class="section-title reveal reveal-d1">
+      Your Marketing Is Working.<br>You Just Can't <em>See It.</em>
+    </h2>
+    <p class="section-subtitle reveal reveal-d2">
+      You invest thousands per month driving new patient calls. But while you're in the chair, you have zero visibility into how those calls are being handled.
+    </p>
+
+    <div class="problem-grid">
+      <div class="problem-text reveal">
+        <p>
+          Most practice owners believe their front desk is doing a good job. The data tells a different story. Without call tracking and performance monitoring, you're making staffing, training, and marketing decisions based on gut feel.
+        </p>
+        <p>
+          The truth? Your phones are ringing. But patients are being put on hold, spoken to dismissively, or simply never called back. Every missed or mishandled call is revenue that never arrives. And you have no way to know it's happening until you look at the numbers.
+        </p>
+      </div>
+
+      <div class="problem-stats-grid reveal reveal-d1">
+        <div class="problem-stat">
+          <div class="problem-stat-number red">45%</div>
+          <div class="problem-stat-desc">of calls to dental practices go unanswered, including new patient inquiries worth hundreds each</div>
+        </div>
+        <div class="problem-stat">
+          <div class="problem-stat-number">$150K+</div>
+          <div class="problem-stat-desc">in potential annual revenue lost from missed and mishandled new patient calls</div>
+        </div>
+        <div class="problem-stat">
+          <div class="problem-stat-number">33%</div>
+          <div class="problem-stat-desc">average new patient booking rate at typical dental practices. 7 of 10 never get scheduled.</div>
+        </div>
+        <div class="problem-stat">
+          <div class="problem-stat-number">24hrs</div>
+          <div class="problem-stat-desc">is the window before a new patient finds another practice. Most follow-ups happen too late.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PPR HIGHLIGHT — Reward / Retrain / Replace -->
+<section class="section ppr-highlight" id="ppr">
+  <div class="section-inner">
+    <div class="ppr-grid">
+      <div>
+        <div class="section-eyebrow reveal">
+          <span class="section-eyebrow-line"></span>
+          Practice Performance Report
+        </div>
+        <h2 class="section-title reveal reveal-d1">
+          Finally Know What's Happening<br><em>Behind Your Front Desk</em>
+        </h2>
+        <p class="section-subtitle reveal reveal-d2" style="margin-bottom: 36px;">
+          Every call to your practice is recorded, transcribed, and analyzed using a combination of AI and human review. The result is a monthly report that shows you exactly where your front desk is winning and where revenue is falling through the cracks.
+        </p>
+        <ul class="ppr-outcomes reveal reveal-d3">
+          <li class="ppr-outcome">
+            <div class="ppr-outcome-number">1</div>
+            <div>
+              <div class="ppr-outcome-title">Reward Your Top Performers</div>
+              <div class="ppr-outcome-desc">See exactly who is converting patients at the highest rate, with the call data to prove it. Give your best people the recognition they've earned.</div>
+            </div>
+          </li>
+          <li class="ppr-outcome">
+            <div class="ppr-outcome-number">2</div>
+            <div>
+              <div class="ppr-outcome-title">Retrain Good People With Bad Habits</div>
+              <div class="ppr-outcome-desc">Identify specific coaching opportunities with real call examples. A team member who's great with patients in person might be losing new callers with one fixable habit.</div>
+            </div>
+          </li>
+          <li class="ppr-outcome">
+            <div class="ppr-outcome-number">3</div>
+            <div>
+              <div class="ppr-outcome-title">Replace the Ones Who Can't Be Trusted</div>
+              <div class="ppr-outcome-desc">When the data makes it clear someone isn't the right fit for your phones, you'll have the evidence to act with confidence. And Practice Porter's call answering service is standing by if you need a proven replacement.</div>
+            </div>
+          </li>
+        </ul>
+        <div style="margin-top: 32px;" class="reveal">
+          <a href="practice-performance-report.html" class="btn-primary">
+            See Full Report Details
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="reveal reveal-d2">
+        <div class="image-placeholder" style="aspect-ratio: 3/4;">
+          [ Image: Screenshot from Practice Performance Report showing Practice Metrics dashboard with booking rates, missed calls, and conversion data ]
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOLLOW UP CENTER -->
+<section class="section fuc" id="follow-up-center">
+  <div class="section-inner">
+    <div class="fuc-grid">
+      <div class="reveal">
+        <div class="image-placeholder" style="aspect-ratio: 16/10;">
+          [ Image: Screenshot of Follow Up Center CRM showing patient queue with status indicators, contact attempts, and action buttons ]
+        </div>
+      </div>
+      <div>
+        <div class="section-eyebrow reveal">
+          <span class="section-eyebrow-line"></span>
+          Follow Up Center
+        </div>
+        <h2 class="section-title reveal reveal-d1">
+          Your Front Desk's<br><em>Command Center</em>
+        </h2>
+        <p class="section-subtitle reveal reveal-d2">
+          Every receptionist gets their own login to a live CRM that turns missed calls, voicemails, and online form requests into a prioritized task queue. Nothing falls through the cracks.
+        </p>
+        <ul class="fuc-features reveal reveal-d3">
+          <li class="fuc-feature">
+            <div class="fuc-feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <div class="fuc-feature-title">Missed Calls &amp; Voicemails</div>
+              <div class="fuc-feature-desc">Every missed call and voicemail automatically appears in the queue with patient details, service requested, and a due date for follow-up.</div>
+            </div>
+          </li>
+          <li class="fuc-feature">
+            <div class="fuc-feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div>
+              <div class="fuc-feature-title">Online Form Requests</div>
+              <div class="fuc-feature-desc">Website appointment forms flow directly into the same queue, so your team manages all patient requests from one place.</div>
+            </div>
+          </li>
+          <li class="fuc-feature">
+            <div class="fuc-feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="fuc-feature-title">Overdue Alerts &amp; Tracking</div>
+              <div class="fuc-feature-desc">Color-coded statuses flag overdue follow-ups in real time. Track contact attempts so you know exactly where every patient stands.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CALL ANSWERING SERVICE -->
+<section class="section products" id="call-answering">
+  <div class="section-inner">
+    <div style="text-align: center;">
+      <div class="section-eyebrow reveal" style="justify-content: center;">
+        <span class="section-eyebrow-line"></span>
+        Call Answering Service
+      </div>
+      <h2 class="section-title reveal reveal-d1" style="margin-left: auto; margin-right: auto;">
+        When the Report Shows the Problem,<br>We Become the <em>Solution</em>
+      </h2>
+      <p class="section-subtitle reveal reveal-d2" style="margin-left: auto; margin-right: auto;">
+        For practices where the Performance Report reveals new patient calls aren't being converted, Practice Porter's call answering team steps in. We answer your new patient calls with precision and warmth, booking directly into your practice management system at three times the industry rate.
+      </p>
+    </div>
+
+    <div class="products-grid" style="grid-template-columns: 1fr 1fr; max-width: 900px; margin: 48px auto 0;">
+      <div class="reveal">
+        <div class="image-placeholder" style="min-height: 280px;">
+          [ Image: Visual representing live call answering, e.g. a friendly agent on a headset or a phone with booking confirmation ]
+        </div>
+      </div>
+      <div class="reveal reveal-d1">
+        <h3 style="font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: var(--midnight); margin-bottom: 16px;">How It Works</h3>
+        <p style="font-size: 15px; color: var(--mid-gray); line-height: 1.7; margin-bottom: 24px;">
+          New patient calls route to our dedicated team through a tracking number. We learn your scheduling software, appointment types, and brand voice so every interaction feels like your office. We answer, handle objections, and book the appointment directly.
+        </p>
+        <ul class="product-features">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Live new patient call answering
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Direct appointment scheduling into your PMS
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Missed call recovery &amp; follow-up
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            90%+ new patient booking rate
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            $150 per patient booked. No booking, no charge.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- RESULTS -->
+<section class="section results" id="results">
+  <div class="section-inner">
+    <div style="text-align: center;">
+      <div class="section-eyebrow reveal" style="justify-content: center;">
+        <span class="section-eyebrow-line"></span>
+        Proven Results
+      </div>
+      <h2 class="section-title reveal reveal-d1" style="margin-left: auto; margin-right: auto;">
+        The Numbers Don't Lie
+      </h2>
+      <p class="section-subtitle reveal reveal-d2" style="margin-left: auto; margin-right: auto;">
+        Real performance data from real practices. This is what happens when every call gets the attention it deserves.
+      </p>
+    </div>
+
+    <div class="results-grid reveal">
+      <div class="result-card">
+        <div class="result-value">94<span>%</span></div>
+        <div class="result-label">New Patient Booking Rate</div>
+        <div class="result-compare">Industry avg: 33%</div>
+      </div>
+      <div class="result-card">
+        <div class="result-value">95<span>%</span></div>
+        <div class="result-label">Cancellation Rebooking Rate</div>
+        <div class="result-compare">Industry avg: 64%</div>
+      </div>
+      <div class="result-card">
+        <div class="result-value">3-5<span>x</span></div>
+        <div class="result-label">Return on Investment</div>
+        <div class="result-compare">Per office, per month</div>
+      </div>
+      <div class="result-card">
+        <div class="result-value">94<span>%</span></div>
+        <div class="result-label">Follow-Up Booking Rate</div>
+        <div class="result-compare">Industry avg: 14%</div>
+      </div>
+    </div>
+
+    <div class="testimonial-row reveal">
+      <div class="testimonial">
+        <div class="testimonial-quote">
+          We had no idea how many new patients we were losing until we saw the data. Practice Porter didn't just show us the problem — they became the solution.
+        </div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">DK</div>
+          <div>
+            <div class="testimonial-name">Dr. K.</div>
+            <div class="testimonial-role">General Dentistry, Nova Scotia</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-quote">
+          The Performance Report alone is worth it. For the first time, I can see exactly what's happening with every patient call and hold my team accountable.
+        </div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">SM</div>
+          <div>
+            <div class="testimonial-name">Dr. S.M.</div>
+            <div class="testimonial-role">Family Dentistry, Colorado</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PRICING -->
+<section class="section pricing" id="pricing">
+  <div class="section-inner">
+    <div style="text-align: center;">
+      <div class="section-eyebrow reveal" style="justify-content: center;">
+        <span class="section-eyebrow-line"></span>
+        Simple Pricing
+      </div>
+      <h2 class="section-title reveal reveal-d1" style="margin-left: auto; margin-right: auto;">
+        Pay for <em>Results</em>, Not Promises
+      </h2>
+      <p class="section-subtitle reveal reveal-d2" style="margin-left: auto; margin-right: auto;">
+        Two standalone products. No setup fees. No long-term contracts.
+      </p>
+    </div>
+
+    <div class="pricing-grid reveal">
+      <div class="pricing-card pricing-card-featured">
+        <div class="pricing-card-tag">Practice Performance Report</div>
+        <div class="pricing-amount">$495</div>
+        <div class="pricing-period">per month</div>
+        <div class="pricing-desc">
+          Complete front desk intelligence. See every metric, hear every call, and know exactly where your practice stands.
+        </div>
+        <ul class="pricing-features">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Monthly performance report</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Call recording &amp; AI transcription</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Staff-level conversion tracking</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Follow Up Center CRM access</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> New &amp; existing patient tracking</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Cancellation recovery monitoring</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Industry benchmarking</li>
+        </ul>
+        <a href="#cta" class="btn-primary">Book Consultation</a>
+      </div>
+
+      <div class="pricing-card">
+        <div class="pricing-card-tag">Call Answering</div>
+        <div class="pricing-amount">$150</div>
+        <div class="pricing-period">per patient booked</div>
+        <div class="pricing-desc">
+          Live new patient call answering. You only pay when we deliver a booked appointment.
+        </div>
+        <ul class="pricing-features">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Live new patient call answering</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Direct appointment scheduling</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Missed call recovery &amp; follow-up</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Practice-aligned patient experience</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> US &amp; Canada coverage</li>
+        </ul>
+        <a href="#cta" class="btn-outline">Book Consultation</a>
+      </div>
+    </div>
+
+    <div class="pricing-note reveal">
+      Both services work independently or together. Most practices start with the Performance Report.
+    </div>
+  </div>
+</section>
+
+
+<!-- FAQ -->
+<section class="section faq-section" id="faq">
+  <div class="section-inner">
+    <div style="text-align: center;">
+      <div class="section-eyebrow reveal" style="justify-content: center;">
+        <span class="section-eyebrow-line"></span>
+        FAQ
+      </div>
+      <h2 class="section-title reveal reveal-d1" style="margin-left: auto; margin-right: auto;">
+        Common Questions
+      </h2>
+    </div>
+
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-question">
+          How does Practice Porter answer calls for my dental practice?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer"><p>When a new patient calls your practice, the call routes to our dedicated team through a tracking number. From the patient's perspective, they're speaking with someone at your office. We learn your scheduling software, appointment types, office protocols, and brand voice so that every interaction feels seamless and in-house. We answer, we handle objections, and we book the appointment directly into your system.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          How is Practice Porter different from a regular dental answering service?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer"><p>Most answering services are high-volume call centers that take messages and pass them along. We don't take messages. We book patients. We schedule directly into your practice management system, follow up on missed calls, and provide you with a monthly Performance Report that shows exactly how many patients were booked, your cost per acquisition, and how your team's phone performance compares to ours. We're a boutique conversion team, not a voicemail replacement.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          What kind of results can I expect?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer"><p>Our clients see a new patient booking rate above 90%, compared to the industry average of about 33%. That means for every 10 new patient calls, we're booking 9 or more, while the typical front desk books 3. For most practices, that translates to a 3 to 5x return on investment within the first few months. We prove it with data every month through our Performance Report.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          How much does Practice Porter cost?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer"><p>Our Practice Performance Report is $495 per month and gives you full visibility into call volumes, conversion rates, staff performance, and more. Our call answering service is $150 per patient booked, so you only pay when we actually schedule an appointment. Both services work independently or together, and there are no setup fees or long-term contracts.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          How long does it take to get started?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer"><p>Most practices are fully live within a week. Days one and two, we learn your practice: your scheduling system, protocols, appointment types, and brand voice. Days three and four, we set up call routing through a dedicated tracking number. Your team and your patients won't notice any disruption. From there, we're answering and booking.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Do you work with my practice management software?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer"><p>Yes. We schedule appointments directly into your existing system. During onboarding, we learn your software, your scheduling preferences, and your appointment types so that every booking lands exactly where it should, with no extra steps or manual entry on your end.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          How many new patients am I losing from missed calls?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer"><p>Industry data shows that 45% of calls to dental practices go unanswered, and the average practice loses over $150,000 in potential annual revenue from missed and mishandled new patient calls. Most practice owners assume their phones are being handled well, but without call tracking and conversion data, there's no way to know for sure. Our Performance Report shows you exactly what's happening with every call so you can see the real picture.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          What happens if a new patient calls after hours or when my staff is busy?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer"><p>That's exactly when we're most valuable. Whether your team is with a patient, at lunch, or the office is closed, we make sure the call gets answered. We also run missed call recovery workflows, so if a call does slip through, we follow up to make sure that patient still gets booked. New patients don't leave voicemails and wait around. Research shows you have about 24 hours before they call someone else.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          What does the Practice Performance Report include?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer"><p>The Report is a monthly analytics package that covers call volume, new patient conversion rates, cost per booked appointment, staff-level performance comparisons, missed call tracking, existing patient booking rates, cancellation recovery, and marketing source attribution. It shows you not just how our team is performing, but how your in-house staff handles calls as well. Think of it as a complete diagnostic of your front desk's ability to convert marketing spend into patients in chairs.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FINAL CTA -->
+<section class="final-cta" id="cta">
+  <div class="final-cta-inner">
+    <div class="section-eyebrow reveal" style="justify-content: center;">
+      <span class="section-eyebrow-line"></span>
+      Get Started
+    </div>
+    <h2 class="section-title reveal reveal-d1">
+      Stop Guessing. Start <em>Knowing.</em>
+    </h2>
+    <p class="final-cta-sub reveal reveal-d2">
+      Book a free consultation to see how the Practice Performance Report can give you complete visibility into your front desk, and how our call answering service can turn that insight into revenue.
+    </p>
+    <div class="final-cta-actions reveal reveal-d3">
+      <a href="#" class="btn-primary" style="font-size: 14px; padding: 18px 40px;">
+        Book Free Consultation
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <p class="final-cta-note reveal">No contracts. No setup fees. Just results.</p>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <a href="index.html" class="nav-logo" style="margin-bottom: 16px; display: inline-flex;">
+          <span class="nav-logo-practice" style="color: var(--white);">Practice</span>
+          <span class="nav-logo-porter">Porter</span>
+          <span class="nav-logo-dot"></span>
+        </a>
+        <p class="footer-brand-desc">
+          Intelligence behind every call. Boutique performance reporting and new-patient call answering for dental practices across North America.
+        </p>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="practice-performance-report.html">Performance Report</a></li>
+          <li><a href="#call-answering">Call Answering</a></li>
+          <li><a href="#follow-up-center">Follow Up Center</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#results">Results</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#cta">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
+          <li><a href="mailto:info@practiceporter.ca">info@practiceporter.ca</a></li>
+          <li><a href="#">Toronto, ON</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 Practice Porter Inc. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- FAQ SCHEMA MARKUP -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does Practice Porter answer calls for my dental practice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "When a new patient calls your practice, the call routes to our dedicated team through a tracking number. From the patient's perspective, they're speaking with someone at your office. We learn your scheduling software, appointment types, office protocols, and brand voice so that every interaction feels seamless and in-house. We answer, we handle objections, and we book the appointment directly into your system."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is Practice Porter different from a regular dental answering service?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most answering services are high-volume call centers that take messages and pass them along. We don't take messages. We book patients. We schedule directly into your practice management system, follow up on missed calls, and provide you with a monthly Performance Report that shows exactly how many patients were booked, your cost per acquisition, and how your team's phone performance compares to ours. We're a boutique conversion team, not a voicemail replacement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What kind of results can I expect?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our clients see a new patient booking rate above 90%, compared to the industry average of about 33%. That means for every 10 new patient calls, we're booking 9 or more, while the typical front desk books 3. For most practices, that translates to a 3 to 5x return on investment within the first few months."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does Practice Porter cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our Practice Performance Report is $495 per month and gives you full visibility into call volumes, conversion rates, staff performance, and more. Our call answering service is $150 per patient booked, so you only pay when we actually schedule an appointment. Both services work independently or together, and there are no setup fees or long-term contracts."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does it take to get started?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most practices are fully live within a week. Days one and two, we learn your practice: your scheduling system, protocols, appointment types, and brand voice. Days three and four, we set up call routing through a dedicated tracking number."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you work with my practice management software?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We schedule appointments directly into your existing system. During onboarding, we learn your software, your scheduling preferences, and your appointment types so that every booking lands exactly where it should."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many new patients am I losing from missed calls?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Industry data shows that 45% of calls to dental practices go unanswered, and the average practice loses over $150,000 in potential annual revenue from missed and mishandled new patient calls."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if a new patient calls after hours or when my staff is busy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Whether your team is with a patient, at lunch, or the office is closed, we make sure the call gets answered. We also run missed call recovery workflows, so if a call does slip through, we follow up to make sure that patient still gets booked."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does the Practice Performance Report include?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Report is a monthly analytics package that covers call volume, new patient conversion rates, cost per booked appointment, staff-level performance comparisons, missed call tracking, existing patient booking rates, cancellation recovery, and marketing source attribution."
+      }
+    }
+  ]
+}
+</script>
+
+
+<!-- SCRIPTS -->
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { rootMargin: '0px 0px -60px 0px', threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// FAQ accordion
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const wasOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    // Toggle clicked
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>

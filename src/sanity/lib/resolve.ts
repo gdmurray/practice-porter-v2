@@ -1,6 +1,17 @@
-import { defineLocations } from "sanity/presentation";
+import { defineDocuments, defineLocations } from "sanity/presentation";
 
 export const resolve = {
+  mainDocuments: defineDocuments([
+    {
+      route: "/",
+      filter: `_type == "page" && slug.current == "home"`,
+    },
+    {
+      route: "/:slug",
+      filter: `_type == "page" && slug.current == $slug`,
+      params: ({ params }) => ({ slug: params.slug }),
+    },
+  ]),
   locations: {
     page: defineLocations({
       select: { title: "title", slug: "slug.current" },

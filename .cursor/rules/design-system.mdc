@@ -50,16 +50,23 @@ Dark theme overrides `.section-title` to white and `em` to gold.
 
 ## Button hierarchy
 
-1. **Primary CTA**: `.btn-primary` — gold bg, midnight text, shimmer hover, pill shape
-2. **Secondary**: `.btn-secondary` — text-only, white/60 opacity, uppercase
-3. **Nav CTA**: `.nav-cta` or shadcn `Button variant="nav"` — gold border pill
+1. **Primary CTA**: `Button variant="brand" size="cta"` — gold bg (`bg-gold`), **white** text, **rectangular** (`rounded`, 4px radius), 13px/600/uppercase/1px tracking, hover: lift + gold shadow
+2. **Secondary CTA**: `Button variant="outline" size="cta"` — transparent bg, midnight text, `border-warm-gray`, same font treatment, hover: border darkens to midnight
+3. **In-page secondary**: `.btn-secondary` — text-only, white/60 opacity, uppercase (used inline in hero, not a Button component)
+4. **Nav CTA**: `Button variant="nav"` — gold border pill, transparent bg, gold text (pill shape is intentional for nav only)
+
+### Key button rules
+- **Never** use `variant="brand"` with `rounded-full` — the brand CTA is rectangular per the design spec
+- **Never** use `text-midnight` or `text-primary-foreground` on `variant="brand"` — it must be `text-white`
+- Always pair `variant="brand"` or `variant="outline"` with `size="cta"` for page-level CTAs
+- The `nav` variant is the only pill-shaped button; all others are rectangular
 
 ## shadcn usage
 
 - Install: `npx shadcn@latest add <component>`
 - Config: `components.json` (style: `radix-vega`, aliases under `@/`)
 - Installed: `button`, `card`, `badge`, `avatar`, `sheet`, `navigation-menu`
-- Button has custom variants: `brand`, `nav`, and size `cta`
+- Button has custom variants: `brand`, `nav`, `outline` (CTA-style) and size `cta`
 
 ## Animation
 

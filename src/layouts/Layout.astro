@@ -5,12 +5,31 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  siteName?: string;
+  canonicalUrl?: string;
+  preview?: boolean;
+  jsonLd?: object | object[] | null;
 }
 
-const { title = "Practice Porter — Intelligence Behind Every Call", description, image } = Astro.props;
+const {
+  title = "Practice Porter — Intelligence Behind Every Call",
+  description,
+  image,
+  siteName,
+  canonicalUrl,
+  preview = false,
+  jsonLd,
+} = Astro.props;
 
 const visualEditingEnabled =
   import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED === "true";
+
+const resolvedCanonical = canonicalUrl ?? Astro.url.href;
+const jsonLdItems = jsonLd
+  ? Array.isArray(jsonLd)
+    ? jsonLd
+    : [jsonLd]
+  : [];
 ---
 
 <!doctype html>
@@ -21,23 +40,43 @@ const visualEditingEnabled =
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={resolvedCanonical} />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
-    {image && (
-      <>
-        <meta property="og:image" content={image} />
-        <meta name="twitter:image" content={image} />
-      </>
-    )}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={resolvedCanonical} />
     <meta property="og:title" content={title} />
     {description && <meta property="og:description" content={description} />}
+    {siteName && <meta property="og:site_name" content={siteName} />}
+    {image && <meta property="og:image" content={image} />}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
+    {image && <meta name="twitter:image" content={image} />}
+
+    {jsonLdItems.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
   </head>
   <body>
     <slot />
-    <VisualEditing enabled={visualEditingEnabled} />
+    {
+      visualEditingEnabled && preview && (
+        <a
+          class="exit-preview"
+          href={Astro.url.pathname}
+          data-astro-reload
+        >
+          Exit preview
+        </a>
+      )
+    }
+    <VisualEditing enabled={visualEditingEnabled && preview} zIndex={1000} />
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
     <script>
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -69,5 +108,26 @@ const visualEditingEnabled =
     margin: 0;
     width: 100%;
     min-height: 100%;
+  }
+
+  .exit-preview {
+    position: fixed;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    z-index: 1001;
+    padding: 0.5rem 1rem;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--midnight, #0f172a);
+    background: var(--gold, #c9a96e);
+    border-radius: 9999px;
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--midnight, #0f172a) 12%, transparent);
+  }
+
+  .exit-preview:hover {
+    filter: brightness(1.05);
   }
 </style>

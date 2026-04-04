@@ -18,6 +18,19 @@ export const cta = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "variant",
+      title: "Style",
+      type: "string",
+      options: {
+        list: [
+          { title: "Primary (gold filled)", value: "primary" },
+          { title: "Secondary (transparent / outline)", value: "secondary" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "primary",
+    }),
+    defineField({
       name: "ctaType",
       title: "CTA Type",
       type: "string",

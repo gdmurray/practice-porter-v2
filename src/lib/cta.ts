@@ -2,6 +2,7 @@ export interface CtaData {
   label: string;
   href: string;
   ctaType?: "internal" | "external" | "calendly";
+  variant?: "primary" | "secondary";
 }
 
 /**

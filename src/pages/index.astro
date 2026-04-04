@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+
 import "../styles/global.css";
 import Layout from "../layouts/Layout.astro";
 import { loadQuery } from "../sanity/lib/load-query";
@@ -11,13 +13,24 @@ import {
 import { Navigation } from "../components/layout/Navigation";
 import { Footer } from "../components/layout/Footer";
 import { PageModules } from "../components/PageModules";
+import {
+  buildFaqJsonLd,
+  buildWebSiteJsonLd,
+  buildOrganizationJsonLd,
+} from "../lib/jsonld";
+
+const preview =
+  Astro.url.searchParams.has("preview") ||
+  Astro.url.searchParams.has("sanity-preview-perspective");
 
 const { data: page } = await loadQuery<PAGE_QUERY_RESULT>({
   query: PAGE_QUERY,
   params: { slug: "home" },
+  preview,
 });
 const { data: siteSettings } = await loadQuery<SITE_SETTINGS_QUERY_RESULT>({
   query: SITE_SETTINGS_QUERY,
+  preview,
 });
 
 const nav = siteSettings?.navigation;
@@ -27,18 +40,43 @@ const siteSeo = siteSettings?.seo;
 const seo = pageSeo ?? siteSeo;
 const ogImageUrl = seo?.ogImage?.asset?.url ?? siteSeo?.ogImage?.asset?.url;
 const modules = page?.modules ?? [];
+const firstModuleTheme = (modules[0] as { theme?: string } | undefined)?.theme ?? null;
+
+const siteUrl = "https://practiceporter.com";
+const siteName = siteSeo?.siteName ?? "Practice Porter";
+const description = seo?.metaDescription ?? undefined;
+const canonicalUrl = pageSeo?.canonicalUrl ?? Astro.url.href;
+
+const jsonLdSchemas = [
+  buildWebSiteJsonLd({ siteName, siteUrl, description }),
+  buildOrganizationJsonLd({
+    siteName,
+    siteUrl,
+    logoUrl: siteSeo?.ogImage?.asset?.url ?? null,
+    socialLinks: footer?.socialLinks,
+  }),
+  buildFaqJsonLd(page?.modules ?? null),
+].filter((s): s is object => s !== null);
+
+Astro.response.headers.set('Cache-Control', 'public, max-age=0, s-maxage=300');
 ---
 
 <Layout
   title={seo?.metaTitle ?? page?.title ?? "Practice Porter"}
-  description={seo?.metaDescription ?? undefined}
+  description={description}
   image={ogImageUrl ?? undefined}
+  siteName={siteName}
+  canonicalUrl={canonicalUrl}
+  preview={preview}
+  jsonLd={jsonLdSchemas}
 >
   <Navigation
     client:load
-    links={nav?.links}
-    ctaLabel={nav?.ctaLabel}
-    ctaHref={nav?.ctaHref}
+    links={nav?.links ?? null}
+    ctaLabel={nav?.ctaLabel ?? null}
+    ctaHref={nav?.ctaHref ?? null}
+    firstModuleTheme={firstModuleTheme}
+    theme={nav?.theme ?? "cream"}
   />
   <main>
     {page && modules.length > 0 ? (

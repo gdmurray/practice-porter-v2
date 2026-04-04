@@ -17,7 +17,7 @@ export function TrustBar({ theme = "white", items = [] }: TrustBarProps) {
   return (
     <div
       data-theme={theme}
-      className="reveal border-b border-warm-gray bg-white px-[var(--space-lg)] py-8"
+      className="reveal border-y border-warm-gray bg-white py-8"
     >
       <div className="pp-container flex flex-wrap items-center justify-center gap-12">
         {items.map((item, i) => {

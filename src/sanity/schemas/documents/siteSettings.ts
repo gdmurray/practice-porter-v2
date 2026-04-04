@@ -34,6 +34,20 @@ export const siteSettings = defineType({
           type: "string",
           initialValue: "#cta",
         }),
+        defineField({
+          name: "theme",
+          title: "Nav Theme",
+          type: "string",
+          initialValue: "cream",
+          options: {
+            list: [
+              { title: "Cream (light)", value: "cream" },
+              { title: "Dark (navy)", value: "dark" },
+            ],
+            layout: "radio",
+          },
+          description: "Background color of the navigation bar when filled.",
+        }),
       ],
     }),
     defineField({

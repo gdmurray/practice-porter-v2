@@ -1,5 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import { fileURLToPath } from 'url';
+import path from 'path';
 
 import cloudflare from '@astrojs/cloudflare';
 
@@ -7,8 +9,9 @@ import sanity from '@sanity/astro';
 import react from '@astrojs/react';
 import tailwindcss from "@tailwindcss/vite";
 
-
 import sitemap from "@astrojs/sitemap";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 
 // https://astro.build/config
@@ -33,6 +36,17 @@ export default defineConfig({
     },
   }), react(), sitemap()],
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    resolve: {
+      alias: {
+        "react-compiler-runtime": path.resolve(
+          __dirname,
+          "src/shims/react-compiler-runtime.js"
+        ),
+      },
+    },
+    optimizeDeps: {
+      include: ["@sanity/visual-editing", "@sanity/visual-editing/react"],
+    },
   }
 });

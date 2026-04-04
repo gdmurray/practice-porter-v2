@@ -1,0 +1,63 @@
+---
+description: Prefer Sanity TypeGen query result types over raw schema document types
+globs: **/*.ts,**/*.tsx,**/*.astro
+alwaysApply: false
+---
+
+# Sanity TypeGen: Query Result Types First
+
+TypeGen generates two categories of types in `sanity.types.ts`. Always prefer category 2.
+
+## Category 1 — Schema document types (avoid as props/utilities)
+`FaqItem`, `Faq`, `SiteSettings`, `NavLink`, `Hero`, etc.
+These represent the raw Sanity document shape *before* any GROQ projection. They drift from real data:
+- Arrays include `_key` that projections often omit
+- Strings are `string | undefined` (optional), but GROQ returns `string | null`
+- Referenced assets are unresolved (no `url` field until you use `asset->`)
+
+## Category 2 — Query result types (use these)
+`PAGE_QUERY_RESULT`, `SITE_SETTINGS_QUERY_RESULT`, etc.
+These reflect the exact shape of what your query actually returns.
+
+## Rules
+
+**❌ BAD — deriving props from schema document types:**
+```typescript
+import type { SiteSettings } from "sanity.types";
+type NavigationProps = NonNullable<SiteSettings["navigation"]>;
+// links items have _key and label?: string — but the query omits _key and returns label: string | null
+```
+
+**✅ GOOD — deriving props from query result types:**
+```typescript
+import type { SITE_SETTINGS_QUERY_RESULT } from "sanity.types";
+type NavigationProps = NonNullable<NonNullable<SITE_SETTINGS_QUERY_RESULT>["navigation"]>;
+// links items match exactly what the query projects
+```
+
+**❌ BAD — hardcoding types that mirror Sanity shapes:**
+```typescript
+type FaqBlock = { _type: string; children?: { text: string }[] };
+type FaqItem  = { question?: string; answer?: FaqBlock[] };
+type FaqMod   = { _type: "faq"; items?: FaqItem[] };
+```
+
+**✅ GOOD — extracting from the query result union:**
+```typescript
+import type { PAGE_QUERY_RESULT } from "sanity.types";
+type PageModule  = NonNullable<NonNullable<PAGE_QUERY_RESULT>["modules"]>[number];
+type FaqModule   = Extract<PageModule, { _type: "faq" }>;
+type FaqItem     = NonNullable<FaqModule["items"]>[number];
+```
+
+## Corollary: no `as unknown[]` casts
+
+If you need `as unknown[]` or similar escape hatches to pass Sanity data into a function, the function's parameter type is wrong. Fix it to accept the query result type instead.
+
+## When to run typegen
+
+Run `pnpm typegen` after any change to:
+- Sanity schema files (`src/sanity/schemas/**`)
+- GROQ queries (`src/sanity/queries.ts`)
+
+Never edit `sanity.types.ts` manually.

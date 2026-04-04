@@ -6,6 +6,9 @@ import { resolve } from "./src/sanity/lib/resolve";
 
 const projectId = import.meta.env?.PUBLIC_SANITY_PROJECT_ID ?? "u06m8vwg";
 const dataset = import.meta.env?.PUBLIC_SANITY_DATASET ?? "production";
+const previewUrl =
+  import.meta.env?.PUBLIC_SANITY_PREVIEW_URL ??
+  (typeof location !== "undefined" ? location.origin : "http://localhost:4321");
 
 export default defineConfig({
   projectId,
@@ -24,10 +27,13 @@ export default defineConfig({
           ]),
     }),
     presentationTool({
-      previewUrl: typeof location !== "undefined" ? location.origin : "http://localhost:4321",
+      previewUrl: `${previewUrl}?preview=true`,
       resolve,
     }),
   ],
+  tasks: {
+    enabled: true
+  },
   schema: {
     types: schemaTypes,
   },

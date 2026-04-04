@@ -69,6 +69,16 @@ export const PAGE_QUERY = defineQuery(`
       secondaryCta {
         ...,
       },
+      rows[] {
+        ...,
+        columns[] {
+          ...,
+          content[] {
+            ...,
+            _type == "image" => { ..., asset-> }
+          }
+        }
+      },
     }
   }
 `);
@@ -82,6 +92,7 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
       },
       ctaLabel,
       ctaHref,
+      theme,
     },
     footer {
       brandDescription,

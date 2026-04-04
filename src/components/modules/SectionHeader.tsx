@@ -8,6 +8,7 @@ export interface SectionHeaderProps {
   alignment?: "left" | "center";
   theme?: "dark" | "white" | "cream";
   className?: string;
+  headingId?: string;
 }
 
 export function SectionHeader({
@@ -18,6 +19,7 @@ export function SectionHeader({
   alignment = "left",
   theme = "cream",
   className,
+  headingId,
 }: SectionHeaderProps) {
   const displayTitle = titleHighlight
     ? title.replace(titleHighlight, `__HIGHLIGHT__`)
@@ -37,7 +39,7 @@ export function SectionHeader({
           {eyebrow}
         </div>
       )}
-      <h2 className="section-title mb-5">
+      <h2 id={headingId} className="section-title mb-5">
         {displayTitle.split("__HIGHLIGHT__").map((part, i) => (
           <span key={i}>
             {part}
