@@ -1,14 +1,16 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..800;1,400..800&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/inter";
+@import "@fontsource-variable/playfair-display";
+@import "@fontsource-variable/playfair-display/wght-italic.css";
+
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
-  --font-sans: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "Playfair Display Variable", "Playfair fallback", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter Variable", "Inter fallback", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   --midnight: #0b1d3a;
   --deep-navy: #132d5e;

@@ -125,6 +125,21 @@ export const gridColumn = defineType({
         {
           type: "image",
           options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "alt",
+              title: "Alt text",
+              type: "string",
+              description: "Describe the image for screen readers and SEO",
+            }),
+            defineField({
+              name: "priority",
+              title: "Priority load (above the fold)",
+              type: "boolean",
+              description: "Enable for images visible on initial page load to improve LCP",
+              initialValue: false,
+            }),
+          ],
         },
         { type: "pricingCardsBlock" },
         { type: "statCardsBlock" },

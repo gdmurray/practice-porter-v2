@@ -8,6 +8,7 @@ import cloudflare from '@astrojs/cloudflare';
 import sanity from '@sanity/astro';
 import react from '@astrojs/react';
 import tailwindcss from "@tailwindcss/vite";
+import { FontaineTransform } from "fontaine";
 
 
 
@@ -31,12 +32,22 @@ export default defineConfig({
     useCdn: false,
     apiVersion: "2026-03-10",
     studioBasePath: "/studio",
-    stega: {
-      studioUrl: "/studio",
-    },
+    // Only enable stega source-map encoding in preview deployments — it
+    // pulls in the visual-editing client bundle which is ~180 KB on every page.
+    stega: process.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED === "true"
+      ? { studioUrl: "/studio" }
+      : false,
   }), react()],
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+      FontaineTransform.vite({
+        // Only the first fallback is used for metric calculations.
+        // Arial covers sans-serif (Inter); Georgia covers serif (Playfair Display).
+        fallbacks: ["Arial", "Georgia"],
+        resolvePath: (id) => new URL("." + id, import.meta.url),
+      }),
+    ],
     resolve: {
       alias: {
         "react-compiler-runtime": path.resolve(
@@ -44,9 +55,6 @@ export default defineConfig({
           "src/shims/react-compiler-runtime.js"
         ),
       },
-    },
-    optimizeDeps: {
-      include: ["@sanity/visual-editing", "@sanity/visual-editing/react"],
     },
   }
 });

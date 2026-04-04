@@ -1,18 +1,27 @@
 export const prerender = false;
 
 import type { APIRoute } from "astro";
+import { defineQuery } from "groq";
 import { sanityClient } from "sanity:client";
 
 const SITE = "https://practiceporter.com";
 
-export const GET: APIRoute = async () => {
-  const slugs: { slug: string }[] = await sanityClient.fetch(
-    `*[_type == "page" && defined(slug.current)]{ "slug": slug.current }`
-  );
+const slugsQuery = defineQuery(
+  `*[_type == "page" && defined(slug.current)] | order(_updatedAt desc) {
+    "slug": slug.current,
+    title,
+    "lastmod": _updatedAt
+  }`
+);
 
-  const urls = slugs.map(({ slug }) => {
+export const GET: APIRoute = async () => {
+  const slugs = await sanityClient.fetch(slugsQuery);
+
+  const urls = slugs.map(({ slug, title, lastmod }) => {
     const loc = slug === "home" ? SITE : `${SITE}/${slug}`;
-    return `  <url><loc>${loc}</loc></url>`;
+    const lastmodDate = lastmod ? `\n    <lastmod>${lastmod.slice(0, 10)}</lastmod>` : "";
+    const titleTag = title ? `\n    <title>${title}</title>` : "";
+    return `  <url>\n    <loc>${loc}</loc>${lastmodDate}${titleTag}\n  </url>`;
   });
 
   const xml = [

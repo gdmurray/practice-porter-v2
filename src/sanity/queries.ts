@@ -75,7 +75,18 @@ export const PAGE_QUERY = defineQuery(`
           ...,
           content[] {
             ...,
-            _type == "image" => { ..., asset-> }
+            _type == "image" => {
+              ...,
+              asset-> {
+                url,
+                metadata {
+                  dimensions {
+                    width,
+                    height
+                  }
+                }
+              }
+            }
           }
         }
       },
