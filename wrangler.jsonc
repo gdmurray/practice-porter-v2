@@ -33,7 +33,8 @@
 	 */
 	"vars": {  
 		"PUBLIC_SANITY_PROJECT_ID": "u06m8vwg", 
-		"PUBLIC_SANITY_DATASET": "production" 
+		"PUBLIC_SANITY_DATASET": "production",
+		"PUBLIC_SANITY_VISUAL_EDITING_ENABLED": "true"
 	}
 	/**
 	 * Static Assets

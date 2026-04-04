@@ -1,5 +1,6 @@
 import type { QueryParams } from "sanity";
 import { sanityClient } from "sanity:client";
+import { stegaFilter } from "../../lib/stegaFilter";
 
 
 export async function loadQuery<QueryResponse>({
@@ -34,7 +35,11 @@ export async function loadQuery<QueryResponse>({
         filterResponse: false,
         perspective,
         resultSourceMap: "withKeyArraySelector",
-        stega: true,
+        stega: {
+          enabled: true,
+          studioUrl: "/studio",
+          filter: stegaFilter,
+        },
         token: token!,
       },
     );

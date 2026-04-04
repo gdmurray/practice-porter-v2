@@ -26,6 +26,69 @@ const SerifMark = ({ children }: { children: React.ReactNode }) => (
   </span>
 );
 
+const EyebrowStyle = ({ children }: { children: React.ReactNode }) => (
+  <div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      gap: "10px",
+      fontSize: "11px",
+      fontWeight: 600,
+      letterSpacing: "0.1em",
+      textTransform: "uppercase",
+      color: "#c9a96e",
+    }}
+  >
+    <span
+      style={{
+        display: "inline-block",
+        width: "28px",
+        height: "1px",
+        background: "#c9a96e",
+        flexShrink: 0,
+      }}
+    />
+    {children}
+  </div>
+);
+
+const SubtitleStyle = ({ children }: { children: React.ReactNode }) => (
+  <p
+    style={{
+      fontSize: "17px",
+      lineHeight: 1.65,
+      color: "#6b7280",
+      fontWeight: 400,
+    }}
+  >
+    {children}
+  </p>
+);
+
+const LeadStyle = ({ children }: { children: React.ReactNode }) => (
+  <p
+    style={{
+      fontSize: "16px",
+      lineHeight: 1.7,
+      color: "#9ca3af",
+    }}
+  >
+    {children}
+  </p>
+);
+
+const CaptionStyle = ({ children }: { children: React.ReactNode }) => (
+  <p
+    style={{
+      fontSize: "12px",
+      lineHeight: 1.5,
+      color: "#9ca3af",
+    }}
+  >
+    {children}
+  </p>
+);
+
 export const gridColumn = defineType({
   name: "gridColumn",
   title: "Column",
@@ -71,10 +134,10 @@ export const gridColumn = defineType({
             { title: "Heading 1", value: "h1" },
             { title: "Heading 2", value: "h2" },
             { title: "Heading 3", value: "h3" },
-            { title: "Eyebrow", value: "eyebrow" },
-            { title: "Subtitle", value: "subtitle" },
-            { title: "Lead", value: "lead" },
-            { title: "Caption (light gray)", value: "caption" },
+            { title: "Eyebrow", value: "eyebrow", component: EyebrowStyle },
+            { title: "Subtitle", value: "subtitle", component: SubtitleStyle },
+            { title: "Lead", value: "lead", component: LeadStyle },
+            { title: "Caption (light gray)", value: "caption", component: CaptionStyle },
           ],
           marks: {
             decorators: [

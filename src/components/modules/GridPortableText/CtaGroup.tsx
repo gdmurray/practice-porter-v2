@@ -11,8 +11,6 @@ export function makeCtaGroup(centered: boolean) {
   }: {
     value: { items?: CtaData[]; alignment?: string };
   }) {
-    console.log(value);
-    console.log(centered);
     const isCentered =
       value.alignment === "center" || (value.alignment == null && centered);
     return (

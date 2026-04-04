@@ -32,11 +32,11 @@ export default defineConfig({
     useCdn: false,
     apiVersion: "2026-03-10",
     studioBasePath: "/studio",
-    // Only enable stega source-map encoding in preview deployments — it
-    // pulls in the visual-editing client bundle which is ~180 KB on every page.
-    stega: process.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED === "true"
-      ? { studioUrl: "/studio" }
-      : false,
+    // Always register the studioUrl so per-request stega: true calls in
+    // load-query.ts don't throw "config.studioUrl must be defined".
+    // load-query.ts is the actual gatekeeper — it only enables stega when
+    // both PUBLIC_SANITY_VISUAL_EDITING_ENABLED and the preview flag are true.
+    stega: { studioUrl: "/studio" },
   }), react()],
   vite: {
     plugins: [
@@ -55,6 +55,9 @@ export default defineConfig({
           "src/shims/react-compiler-runtime.js"
         ),
       },
+    },
+    optimizeDeps: {
+      include: ["@sanity/visual-editing", "@sanity/visual-editing/react"],
     },
   }
 });
