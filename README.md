@@ -82,27 +82,48 @@ The site runs at `http://localhost:4321`. The embedded Sanity Studio is at `http
 ├── src/
 │   ├── components/
 │   │   ├── layout/                # Navigation.tsx, Footer.tsx (site-wide)
-│   │   ├── modules/               # Page section components (Hero, Pricing, etc.)
+│   │   ├── modules/               # Page section components
+│   │   │   ├── GridPortableText/  # Portable Text serializer + submodule renderers
+│   │   │   │   ├── index.tsx      # Main PT serializer component
+│   │   │   │   ├── makeComponents.tsx  # Block component factory
+│   │   │   │   ├── SanityImage.tsx
+│   │   │   │   ├── StatCardsGroup.tsx
+│   │   │   │   ├── CtaGroup.tsx
+│   │   │   │   ├── TestimonialGroup.tsx
+│   │   │   │   ├── NumberedStepGroup.tsx
+│   │   │   │   ├── IconFeatureGroup.tsx
+│   │   │   │   ├── CheckListGroup.tsx
+│   │   │   │   └── PricingCardsGroup.tsx
+│   │   │   ├── GridSection.tsx    # Composable grid layout shell
+│   │   │   ├── TrustBar.tsx       # Logo / trust badge strip
+│   │   │   ├── Faq.tsx            # FAQ accordion
+│   │   │   ├── BookMeeting.tsx    # Calendly / meeting embed
+│   │   │   ├── SectionHeader.tsx  # Standalone eyebrow + title + subtitle block
 │   │   │   └── ModuleRenderer.tsx # Maps Sanity _type -> React component
 │   │   ├── ui/                    # shadcn primitives (button, card, sheet, etc.)
-│   │   └── PageModules.tsx        # Renders a page's modules[] array
+│   │   ├── PageModules.tsx        # Renders a page's modules[] array
+│   │   └── RevealObserver.tsx     # Intersection observer for scroll-reveal animations
 │   ├── layouts/
 │   │   └── Layout.astro           # Base HTML shell (head, scripts, Visual Editing)
 │   ├── lib/
 │   │   ├── utils.ts               # cn() Tailwind class helper
 │   │   ├── cta.ts                 # ctaProps() helper for CTA link rendering
+│   │   ├── jsonld.ts              # JSON-LD structured data helpers
 │   │   └── icons.tsx              # Shared icon components
 │   ├── pages/
 │   │   ├── index.astro            # Root route — fetches page with slug "home"
-│   │   └── [[slug]].astro         # Catch-all for all other pages
+│   │   ├── [...slug].astro        # Catch-all for all Sanity-driven pages
+│   │   ├── 404.astro              # Custom 404 page
+│   │   └── sitemap.xml.ts         # Dynamic sitemap endpoint
 │   ├── sanity/
 │   │   ├── lib/
-│   │   │   └── load-query.ts      # Visual Editing-aware fetch wrapper (use this, not sanityClient.fetch)
+│   │   │   ├── load-query.ts      # Visual Editing-aware fetch wrapper (use this, not sanityClient.fetch)
+│   │   │   └── resolve.ts         # Presentation Tool location resolver
 │   │   ├── queries.ts             # All GROQ queries (defineQuery)
 │   │   └── schemas/
 │   │       ├── documents/         # page.ts, siteSettings.ts
-│   │       ├── modules/           # hero.ts, pricing.ts, finalCta.ts, etc.
-│   │       ├── objects/           # cta.ts, seo.ts, theme.ts, etc.
+│   │       ├── modules/           # gridSection.ts, trustBar.ts, faq.ts, bookMeeting.ts
+│   │       ├── objects/           # Reusable field groups and PT block objects
 │   │       └── index.ts           # Barrel export of all schema types
 │   └── styles/
 │       └── global.css             # Design tokens, Tailwind config, component classes
@@ -123,9 +144,35 @@ See `.cursor/rules/project-structure.mdc` for naming conventions.
 
 ### Content model
 
-Pages are built from a `modules[]` array of typed section documents. Each module has a matching React component in `src/components/modules/`. The `ModuleRenderer.tsx` switch maps `_type` to component.
+Pages are built from a `modules[]` array of typed section documents. Each module has a matching React component in `src/components/modules/`. `ModuleRenderer.tsx` maps `_type` to component.
+
+| Module type | Component | Description |
+|---|---|---|
+| `gridSection` | `GridSection.tsx` | Composable row/column grid with Portable Text content |
+| `trustBar` | `TrustBar.tsx` | Logo strip / trust badges |
+| `faq` | `Faq.tsx` | Accordion FAQ section |
+| `bookMeeting` | `BookMeeting.tsx` | Meeting scheduler embed |
 
 To add a new module, see `.cursor/rules/sanity-schemas.mdc` for the full checklist.
+
+### The gridSection system
+
+Most page content lives inside `gridSection` modules rather than one-off module types. A `gridSection` is a composable layout: an editor builds any section by configuring **rows → columns → Portable Text content**, with insertable submodule blocks for rich UI components — no code changes required.
+
+Portable Text block objects that can be inserted into any column:
+
+| Block type | Renders as |
+|---|---|
+| `statCardsBlock` | Grid of stat cards (value / label / comparison) |
+| `ctaBlock` | CTA button group |
+| `testimonialBlock` | Testimonial quote row |
+| `numberedStepBlock` | Numbered step list |
+| `iconFeatureBlock` | Icon + title + description list |
+| `checkListBlock` | Checkmark feature list |
+| `pricingCardsBlock` | Pricing card grid |
+| `image` | Full-width image from Sanity CDN |
+
+See `docs/grid-section-architecture.md` for the full data model, column width system, and instructions for adding new block types.
 
 ### Updating content via Sanity Studio
 
@@ -142,6 +189,25 @@ pnpm sanity:deploy   # push schema to Sanity cloud
 ```
 
 Schema must be deployed before MCP mutations or Studio validation will recognize new fields. See `docs/sanity-mcp-troubleshooting.md` for common issues.
+
+---
+
+## Design system
+
+The brand palette, typography scale, spacing tokens, and component patterns are defined in `src/styles/global.css` as Tailwind v4 `@theme` variables and CSS utility classes.
+
+| Token | Value | Usage |
+|---|---|---|
+| `midnight` | `#0b1d3a` | Dark backgrounds |
+| `gold` | `#c9a96e` | Primary accent, CTAs, eyebrows |
+| `teal` | `#1a5c5e` | Secondary accent |
+| `off-white` | `#f8f6f2` | Cream backgrounds |
+
+Key classes: `.eyebrow`, `.section-title`, `.section-subtitle`, `.pp-container`, `.pp-section`.
+
+Every module section has a `theme` field (`"dark"` / `"white"` / `"cream"`) applied via `data-theme` on the section wrapper — CSS variables handle the rest.
+
+See `.cursor/rules/design-system.mdc` for the full reference including button variants and animation classes.
 
 ---
 
