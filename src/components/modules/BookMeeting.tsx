@@ -13,6 +13,10 @@ declare global {
         prefill?: Record<string, unknown>;
         utm?: Record<string, unknown>;
       }) => void;
+      /** Opens popup without creating a badge button. Use this for programmatic triggers. */
+      showPopupWidget: (url: string) => void;
+      /** Creates a persistent floating badge button + opens popup. Call once only. */
+      initPopupWidget: (options: { url: string }) => void;
     };
   }
 }
@@ -55,33 +59,13 @@ export function BookMeeting({
       }
     };
 
-    // Inject Calendly CSS once
-    const cssId = "calendly-widget-css";
-    if (!document.getElementById(cssId)) {
-      const link = document.createElement("link");
-      link.id = cssId;
-      link.rel = "stylesheet";
-      link.href = "https://assets.calendly.com/assets/external/widget.css";
-      document.head.appendChild(link);
-    }
-
-    const scriptId = "calendly-widget-script";
-    const existingScript = document.getElementById(scriptId);
-
-    if (existingScript) {
-      // Script already present — init immediately (it may already be loaded)
-      if (window.Calendly) {
-        initWidget();
-      } else {
-        existingScript.addEventListener("load", initWidget, { once: true });
-      }
-    } else {
-      const script = document.createElement("script");
-      script.id = scriptId;
-      script.src = "https://assets.calendly.com/assets/external/widget.js";
-      script.async = true;
-      script.addEventListener("load", initWidget, { once: true });
-      document.body.appendChild(script);
+    // Layout.astro owns Calendly script/CSS injection — never create it here.
+    // By the time this island hydrates, Layout has already started loading it.
+    const scriptEl = document.getElementById("calendly-widget-script");
+    if (window.Calendly) {
+      initWidget();
+    } else if (scriptEl) {
+      scriptEl.addEventListener("load", initWidget, { once: true });
     }
   }, [calendlyUrl]);
 

@@ -89,15 +89,91 @@ const jsonLdItems = jsonLd
         });
       });
 
-      // Open any Calendly link as a popup widget instead of navigating away
+      // Calendly loader — Layout owns script/CSS injection so it happens exactly once.
+      // BookMeeting.tsx only calls initInlineWidget; it never creates the script tag.
+      const CALENDLY_SCRIPT = "calendly-widget-script";
+      const CALENDLY_CSS    = "calendly-widget-css";
+
+      // Cache the popup overlay so we can hide/show it instead of recreating
+      // the iframe (and its loading state) on every click.
+      let _calendlyOverlay: HTMLElement | null = null;
+
+      function loadCalendly(onReady?: () => void) {
+        if (!document.getElementById(CALENDLY_CSS)) {
+          const css = document.createElement("link");
+          css.id = CALENDLY_CSS;
+          css.rel = "stylesheet";
+          css.href = "https://assets.calendly.com/assets/external/widget.css";
+          document.head.appendChild(css);
+        }
+        const existing = document.getElementById(CALENDLY_SCRIPT);
+        if ((window as any).Calendly) {
+          onReady?.();
+        } else if (existing) {
+          if (onReady) existing.addEventListener("load", onReady, { once: true });
+        } else {
+          const script = document.createElement("script");
+          script.id = CALENDLY_SCRIPT;
+          script.src = "https://assets.calendly.com/assets/external/widget.js";
+          script.async = true;
+          if (onReady) script.addEventListener("load", onReady, { once: true });
+          document.body.appendChild(script);
+        }
+      }
+
+      function hideCalendlyPopup() {
+        if (_calendlyOverlay) _calendlyOverlay.style.display = "none";
+        document.body.style.overflow = "";
+      }
+
+      function openCalendlyPopup(url: string) {
+        // Reuse the cached overlay — no reload, no loading spinner on subsequent opens.
+        if (_calendlyOverlay) {
+          _calendlyOverlay.style.display = "";
+          document.body.style.overflow = "hidden";
+          return;
+        }
+
+        (window as any).Calendly.showPopupWidget(url);
+        document.body.style.overflow = "hidden";
+
+        // Calendly creates the overlay synchronously; grab it next frame.
+        requestAnimationFrame(() => {
+          const overlay = document.querySelector<HTMLElement>(".calendly-overlay");
+          if (!overlay) return;
+          _calendlyOverlay = overlay;
+
+          // Replace Calendly's close elements with clones that just hide the
+          // overlay instead of destroying it (cloneNode strips existing listeners).
+          const replaceWithHide = (selector: string) => {
+            const el = overlay.querySelector<HTMLElement>(selector);
+            if (!el) return;
+            const clone = el.cloneNode(true) as HTMLElement;
+            clone.addEventListener("click", hideCalendlyPopup);
+            el.parentNode?.replaceChild(clone, el);
+          };
+
+          replaceWithHide(".calendly-close-overlay");
+          replaceWithHide(".calendly-popup-close");
+        });
+      }
+
+      // Preload if page has Calendly links or the BookMeeting section.
+      if (
+        document.querySelector('a[href*="calendly.com"]') ||
+        document.getElementById("book-meeting")
+      ) {
+        loadCalendly();
+      }
+
+      // Intercept any Calendly anchor click and open as a popup.
       document.addEventListener("click", (e) => {
         const link = (e.target as Element)?.closest("a");
         if (!link) return;
         const href = link.getAttribute("href");
-        if (href?.includes("calendly.com")) {
-          e.preventDefault();
-          (window as any).Calendly?.initPopupWidget({ url: href });
-        }
+        if (!href?.includes("calendly.com")) return;
+        e.preventDefault();
+        loadCalendly(() => openCalendlyPopup(href));
       });
     </script>
   </body>
