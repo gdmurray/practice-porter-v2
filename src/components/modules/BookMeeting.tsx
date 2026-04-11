@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { SectionHeader } from "./SectionHeader";
+import { getModuleLayoutAttrs, type ModuleLayoutValue } from "@/lib/moduleLayout";
 
 declare global {
   interface Window {
@@ -22,6 +23,7 @@ export interface BookMeetingProps {
   title?: string;
   subtitle?: string;
   calendlyUrl?: string;
+  moduleLayout?: ModuleLayoutValue | null;
 }
 
 export function BookMeeting({
@@ -30,7 +32,9 @@ export function BookMeeting({
   title,
   subtitle,
   calendlyUrl,
+  moduleLayout,
 }: BookMeetingProps) {
+  const animated = moduleLayout?.animated ?? false;
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -75,10 +79,12 @@ export function BookMeeting({
     <section
       id="book-meeting"
       data-theme={theme}
+      className="pp-section"
       style={{ background: "var(--section-bg)" }}
       aria-labelledby={title ? "book-meeting-heading" : undefined}
+      {...getModuleLayoutAttrs(moduleLayout)}
     >
-      <div className="pp-container pp-section">
+      <div className="pp-container">
         {(eyebrow || title || subtitle) && (
           <SectionHeader
             eyebrow={eyebrow}
@@ -88,6 +94,7 @@ export function BookMeeting({
             theme={theme as "dark" | "white" | "cream"}
             className="mb-12"
             headingId="book-meeting-heading"
+            animated={animated}
           />
         )}
         {calendlyUrl && (

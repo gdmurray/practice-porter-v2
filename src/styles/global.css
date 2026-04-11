@@ -518,10 +518,76 @@
   }
 }
 
+/* ===== MODULE LAYOUT: padding overrides ===== */
+/* Applied via data-module-pt / data-module-pb on <section>.
+   These override the padding-block shorthand from .pp-section
+   on a per-axis basis, so both can coexist. */
+
+[data-module-pt="lrg"] { padding-top: 160px; }
+[data-module-pt="med"] { padding-top: 120px; }
+[data-module-pt="sml"] { padding-top: 80px; }
+
+[data-module-pb="lrg"] { padding-bottom: 160px; }
+[data-module-pb="med"] { padding-bottom: 120px; }
+[data-module-pb="sml"] { padding-bottom: 80px; }
+
+/* ===== MODULE ANIMATION ===== */
+/* Each [data-anim-header] element and [data-anim-list] container is
+   observed independently by RevealObserver. .visible is added per-element
+   as it scrolls into view — long sections animate progressively, not all at once.
+   
+   [data-anim-header] — individual header elements (eyebrow, title, subtitle)
+   [data-anim-list]   — list container; its direct children stagger via nth-child */
+
+[data-anim-header] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-anim-header].visible {
+  opacity: 1;
+  transform: none;
+}
+
+[data-anim-list] > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-anim-list].visible > *:nth-child(1)   { opacity: 1; transform: none; transition-delay: 0.05s; }
+[data-anim-list].visible > *:nth-child(2)   { opacity: 1; transform: none; transition-delay: 0.15s; }
+[data-anim-list].visible > *:nth-child(3)   { opacity: 1; transform: none; transition-delay: 0.25s; }
+[data-anim-list].visible > *:nth-child(4)   { opacity: 1; transform: none; transition-delay: 0.35s; }
+[data-anim-list].visible > *:nth-child(5)   { opacity: 1; transform: none; transition-delay: 0.42s; }
+[data-anim-list].visible > *:nth-child(6)   { opacity: 1; transform: none; transition-delay: 0.49s; }
+[data-anim-list].visible > *:nth-child(7)   { opacity: 1; transform: none; transition-delay: 0.55s; }
+[data-anim-list].visible > *:nth-child(n+8) { opacity: 1; transform: none; transition-delay: 0.6s; }
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  [data-anim-header],
+  [data-anim-list] > * {
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+  }
+}
+
 @media (max-width: 1024px) {
   :root {
     --space-3xl: 120px;
   }
+
+  [data-module-pt="lrg"] { padding-top: 120px; }
+  [data-module-pt="med"] { padding-top: 90px; }
+  [data-module-pt="sml"] { padding-top: 56px; }
+
+  [data-module-pb="lrg"] { padding-bottom: 120px; }
+  [data-module-pb="med"] { padding-bottom: 90px; }
+  [data-module-pb="sml"] { padding-bottom: 56px; }
 }
 
 @media (max-width: 768px) {
@@ -542,4 +608,12 @@
   .problem-stat-card {
     transform: none !important;
   }
+
+  [data-module-pt="lrg"] { padding-top: 100px; }
+  [data-module-pt="med"] { padding-top: 64px; }
+  [data-module-pt="sml"] { padding-top: 40px; }
+
+  [data-module-pb="lrg"] { padding-bottom: 100px; }
+  [data-module-pb="med"] { padding-bottom: 64px; }
+  [data-module-pb="sml"] { padding-bottom: 40px; }
 }

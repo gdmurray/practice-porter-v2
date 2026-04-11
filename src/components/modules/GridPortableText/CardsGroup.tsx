@@ -201,8 +201,10 @@ function makeCardComponents(centered: boolean): PortableTextComponents {
 
 export function CardsGroup({
   value,
+  animated = false,
 }: {
   value: { columns?: number; cardTheme?: CardTheme; items?: CardItem[] };
+  animated?: boolean;
 }) {
   const cols = value.columns ?? 3;
   const theme = value.cardTheme ?? {};
@@ -223,7 +225,10 @@ export function CardsGroup({
   const components = makeCardComponents(centered);
 
   return (
-    <div className={cn("grid gap-6", gridCols)}>
+    <div
+      className={cn("grid gap-6", gridCols)}
+      {...(animated ? { "data-anim-list": true } : {})}
+    >
       {value.items?.map((card, i) => (
         <div
           key={card._key ?? i}

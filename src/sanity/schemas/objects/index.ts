@@ -29,3 +29,4 @@ export { iconFeatureBlock } from "./iconFeatureBlock";
 export { checkListBlock } from "./checkListBlock";
 export { gridRow } from "./gridRow";
 export { gridColumn } from "./gridColumn";
+export { moduleLayout, moduleLayoutField } from "./moduleLayout";

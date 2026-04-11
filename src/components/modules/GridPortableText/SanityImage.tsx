@@ -1,5 +1,6 @@
 export function SanityImage({
   value,
+  animated = false,
 }: {
   value: {
     asset?: {
@@ -10,6 +11,7 @@ export function SanityImage({
     alt?: string;
     priority?: boolean;
   };
+  animated?: boolean;
 }) {
   const url = value.asset?.url;
   if (!url) return null;
@@ -32,6 +34,7 @@ export function SanityImage({
       decoding={isPriority ? "sync" : "async"}
       className="w-full rounded-xl"
       style={width && height ? { aspectRatio: `${width}/${height}` } : undefined}
+      {...(animated ? { "data-anim-header": true } : {})}
     />
   );
 }

@@ -1,5 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { themeField } from "../objects/theme";
+import { moduleLayoutField } from "../objects/moduleLayout";
 
 export const trustBar = defineType({
   name: "trustBar",
@@ -7,6 +8,7 @@ export const trustBar = defineType({
   type: "object",
   fields: [
     themeField("white"),
+    moduleLayoutField(),
     defineField({
       name: "items",
       title: "Trust Items",

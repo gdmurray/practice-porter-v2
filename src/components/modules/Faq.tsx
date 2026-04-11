@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { SectionHeader } from "./SectionHeader";
+import { getModuleLayoutAttrs, type ModuleLayoutValue } from "@/lib/moduleLayout";
 
 export interface FaqItem {
   _key?: string;
@@ -20,6 +21,7 @@ export interface FaqProps {
   title?: string;
   subtitle?: string;
   items?: FaqItem[];
+  moduleLayout?: ModuleLayoutValue | null;
 }
 
 function renderAnswer(blocks?: FaqItem["answer"]) {
@@ -40,15 +42,20 @@ export function Faq({
   title,
   subtitle,
   items = [],
+  moduleLayout,
 }: FaqProps) {
+  const animated = moduleLayout?.animated ?? false;
+
   return (
     <section
       id="faq"
       data-theme={theme}
+      className="pp-section"
       style={{ background: "var(--section-bg)" }}
       aria-labelledby={title ? "faq-heading" : undefined}
+      {...getModuleLayoutAttrs(moduleLayout)}
     >
-      <div className="pp-container pp-section">
+      <div className="pp-container">
         {(eyebrow || title || subtitle) && (
           <SectionHeader
             eyebrow={eyebrow}
@@ -58,6 +65,7 @@ export function Faq({
             theme={theme as "dark" | "white" | "cream"}
             className="mb-12"
             headingId="faq-heading"
+            animated={animated}
           />
         )}
         {items.length > 0 && (
@@ -66,6 +74,7 @@ export function Faq({
             collapsible
             className="mx-auto w-full max-w-[800px] border-t border-warm-gray"
             aria-label="Frequently asked questions"
+            {...(animated ? { "data-anim-list": true } : {})}
           >
             {items.map((item, i) => (
               <AccordionItem

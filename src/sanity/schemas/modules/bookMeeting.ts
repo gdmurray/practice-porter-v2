@@ -1,5 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { themeField } from "../objects/theme";
+import { moduleLayoutField } from "../objects/moduleLayout";
 
 export const bookMeeting = defineType({
   name: "bookMeeting",
@@ -7,6 +8,7 @@ export const bookMeeting = defineType({
   type: "object",
   fields: [
     themeField("white"),
+    moduleLayoutField(),
     defineField({
       name: "eyebrow",
       title: "Eyebrow",

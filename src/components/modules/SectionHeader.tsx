@@ -9,6 +9,9 @@ export interface SectionHeaderProps {
   theme?: "dark" | "white" | "cream";
   className?: string;
   headingId?: string;
+  /** When true, adds data-anim-header to each child so the parent
+   *  module's CSS animation cascade can stagger them in. */
+  animated?: boolean;
 }
 
 export function SectionHeader({
@@ -20,16 +23,19 @@ export function SectionHeader({
   theme = "cream",
   className,
   headingId,
+  animated = false,
 }: SectionHeaderProps) {
   const displayTitle = titleHighlight
     ? title.replace(titleHighlight, `__HIGHLIGHT__`)
     : title;
   const highlightClass = theme === "dark" ? "text-gold" : "text-teal";
+  const animAttr = animated ? { "data-anim-header": true } : {};
 
   return (
     <div className={cn(alignment === "center" && "text-center", className)}>
       {eyebrow && (
         <div
+          {...animAttr}
           className={cn(
             "eyebrow mb-5 flex items-center gap-3",
             alignment === "center" && "justify-center"
@@ -39,7 +45,7 @@ export function SectionHeader({
           {eyebrow}
         </div>
       )}
-      <h2 id={headingId} className="section-title mb-5">
+      <h2 {...animAttr} id={headingId} className="section-title mb-5">
         {displayTitle.split("__HIGHLIGHT__").map((part, i) => (
           <span key={i}>
             {part}
@@ -49,6 +55,7 @@ export function SectionHeader({
       </h2>
       {subtitle && (
         <p
+          {...animAttr}
           className={cn(
             "section-subtitle max-w-[560px]",
             alignment === "center" && "mx-auto"

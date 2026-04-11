@@ -8,11 +8,13 @@ export interface NumberedStepItem {
 
 export function NumberedStepGroup({
   value,
+  animated = false,
 }: {
   value: { items?: NumberedStepItem[] };
+  animated?: boolean;
 }) {
   return (
-    <ol className="list-none">
+    <ol className="list-none" {...(animated ? { "data-anim-list": true } : {})}>
       {value.items?.map((step, i) => (
         <li
           key={step._key ?? i}

@@ -11,11 +11,13 @@ export interface IconFeatureItem {
 
 export function IconFeatureGroup({
   value,
+  animated = false,
 }: {
   value: { items?: IconFeatureItem[] };
+  animated?: boolean;
 }) {
   return (
-    <ul className="mt-7 list-none space-y-0">
+    <ul className="mt-7 list-none space-y-0" {...(animated ? { "data-anim-list": true } : {})}>
       {value.items?.map((feat, i) => {
         const Icon = getIcon(feat.iconName);
         return (

@@ -27,6 +27,7 @@ import {
   cardsBlock,
   gridRow,
   gridColumn,
+  moduleLayout,
 } from "./objects";
 import { page, siteSettings } from "./documents/index";
 import {
@@ -67,6 +68,7 @@ export const schemaTypes = [
   cardsBlock,
   gridRow,
   gridColumn,
+  moduleLayout,
   // Documents
   page,
   siteSettings,

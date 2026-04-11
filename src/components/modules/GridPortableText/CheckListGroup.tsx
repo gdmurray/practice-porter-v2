@@ -5,12 +5,14 @@ import { cn } from "@/lib/utils";
 
 export function CheckListGroup({
   value,
+  animated = false,
 }: {
   value: { items?: { _key?: string; label?: string }[]; lineSeparated?: boolean };
+  animated?: boolean;
 }) {
   const separated = value.lineSeparated ?? false;
   return (
-    <ul className="list-none">
+    <ul className="list-none" {...(animated ? { "data-anim-list": true } : {})}>
       {value.items?.map((item, i) => (
         <li
           key={item._key ?? i}

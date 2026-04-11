@@ -28,8 +28,10 @@ const iconBgMap: Record<string, string> = {
 
 export function StatCardsGroup({
   value,
+  animated = false,
 }: {
   value: { theme?: string; columns?: number; items?: StatCardItem[] };
+  animated?: boolean;
 }) {
   const cols = value.columns ?? 2;
   const gridCols =
@@ -42,7 +44,10 @@ export function StatCardsGroup({
   const cardBg = value.theme === "white" ? "bg-white" : "bg-off-white";
 
   return (
-    <div className={cn("grid gap-5", gridCols)}>
+    <div
+      className={cn("grid gap-5", gridCols)}
+      {...(animated ? { "data-anim-list": true } : {})}
+    >
       {value.items?.map((card, i) => {
         const Icon = card.icon ? getIcon(card.icon) : null;
         const color = card.valueColor ?? "navy";

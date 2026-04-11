@@ -12,11 +12,16 @@ export interface TestimonialItem {
 
 export function TestimonialGroup({
   value,
+  animated = false,
 }: {
   value: { items?: TestimonialItem[] };
+  animated?: boolean;
 }) {
   return (
-    <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+    <div
+      className="grid grid-cols-1 gap-8 md:grid-cols-2"
+      {...(animated ? { "data-anim-list": true } : {})}
+    >
       {value.items?.map((t, i) => (
         <div key={t._key ?? i} className="rounded-xl bg-off-white p-9">
           <blockquote className="text-left mb-6 font-serif text-[17px] italic leading-relaxed text-midnight">

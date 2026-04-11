@@ -20,11 +20,16 @@ export interface PricingCardItem {
 
 export function PricingCardsGroup({
   value,
+  animated = false,
 }: {
   value: { items?: PricingCardItem[] };
+  animated?: boolean;
 }) {
   return (
-    <div className="mx-auto mt-8 grid w-full max-w-[900px] grid-cols-1 gap-8 md:grid-cols-2">
+    <div
+      className="mx-auto mt-8 grid w-full max-w-[900px] grid-cols-1 gap-8 md:grid-cols-2"
+      {...(animated ? { "data-anim-list": true } : {})}
+    >
       {value.items?.map((card, i) => {
         const isDark = card.variant === "dark";
         return (

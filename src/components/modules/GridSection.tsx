@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { getModuleLayoutAttrs, type ModuleLayoutValue } from "@/lib/moduleLayout";
 import { GridPortableText } from "./GridPortableText";
 import type { PortableTextBlock } from "@portabletext/react";
 
@@ -22,6 +23,7 @@ export interface GridSectionProps {
   sectionId?: string;
   theme?: string;
   rows?: GridRowData[];
+  moduleLayout?: ModuleLayoutValue | null;
 }
 
 const themeBgMap: Record<string, string> = {
@@ -58,14 +60,17 @@ export function GridSection({
   sectionId,
   theme = "cream",
   rows = [],
+  moduleLayout,
 }: GridSectionProps) {
   const bg = themeBgMap[theme] ?? themeBgMap.cream;
+  const animated = moduleLayout?.animated ?? false;
 
   return (
     <section
       id={sectionId ?? undefined}
       data-theme={theme}
       className={cn("pp-section", bg)}
+      {...getModuleLayoutAttrs(moduleLayout)}
     >
       <div className="pp-container space-y-14">
         {rows.map((row, ri) => {
@@ -118,7 +123,11 @@ export function GridSection({
                     )}
                   >
                     {col.content && (
-                      <GridPortableText value={col.content} centered={isCentered && colCount === 1} />
+                      <GridPortableText
+                        value={col.content}
+                        centered={isCentered && colCount === 1}
+                        animated={animated}
+                      />
                     )}
                   </div>
                 );

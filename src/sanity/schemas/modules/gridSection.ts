@@ -1,5 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { themeField } from "../objects/theme";
+import { moduleLayoutField } from "../objects/moduleLayout";
 import { getGridIcon } from "../../lib/gridIconRenderer";
 
 export const gridSection = defineType({
@@ -21,6 +22,7 @@ export const gridSection = defineType({
       description: "HTML anchor id for navigation (e.g. 'problem')",
     }),
     themeField("cream"),
+    moduleLayoutField(),
     defineField({
       name: "rows",
       title: "Rows",

@@ -26,6 +26,7 @@ export type GridSection = {
   name?: string;
   sectionId?: string;
   theme?: "dark" | "white" | "cream";
+  moduleLayout?: ModuleLayout;
   rows?: Array<
     {
       _key: string;
@@ -36,6 +37,7 @@ export type GridSection = {
 export type BookMeeting = {
   _type: "bookMeeting";
   theme?: "dark" | "white" | "cream";
+  moduleLayout?: ModuleLayout;
   eyebrow?: string;
   title?: string;
   subtitle?: string;
@@ -45,6 +47,7 @@ export type BookMeeting = {
 export type Faq = {
   _type: "faq";
   theme?: "dark" | "white" | "cream";
+  moduleLayout?: ModuleLayout;
   eyebrow?: string;
   title?: string;
   subtitle?: string;
@@ -58,6 +61,7 @@ export type Faq = {
 export type TrustBar = {
   _type: "trustBar";
   theme?: "dark" | "white" | "cream";
+  moduleLayout?: ModuleLayout;
   items?: Array<
     {
       _key: string;
@@ -155,6 +159,13 @@ export type Page = {
         _key: string;
       } & BookMeeting)
   >;
+};
+
+export type ModuleLayout = {
+  _type: "moduleLayout";
+  topPadding?: "lrg" | "med" | "sml";
+  bottomPadding?: "lrg" | "med" | "sml";
+  animated?: boolean;
 };
 
 export type Slug = {
@@ -286,6 +297,8 @@ export type Card = {
           | "cardLead"
           | "cardTitle"
           | "cardNumber"
+          | "stepNumber"
+          | "stepTag"
           | "metricValue"
           | "metricLabel"
           | "cardCaption";
@@ -324,32 +337,14 @@ export type InlineStat = {
   _type: "inlineStat";
   value?: string;
   suffix?: string;
-  suffixColor?: "gold" | "teal" | "navy" | "coral";
+  suffixColor?: "gold" | "teal" | "navy";
   label?: string;
 };
 
 export type CardIcon = {
   _type: "cardIcon";
-  icon?:
-    | "activity"
-    | "alert-circle"
-    | "bar-chart"
-    | "book-open"
-    | "calendar"
-    | "check-circle"
-    | "clock"
-    | "dollar-sign"
-    | "phone"
-    | "phone-off"
-    | "pie-chart"
-    | "star"
-    | "trending-down"
-    | "trending-up"
-    | "user"
-    | "user-x"
-    | "users"
-    | "zap";
-  iconColor?: "navy" | "teal" | "gold" | "coral";
+  icon?: string;
+  iconColor?: string;
   iconShape?: "square" | "circle";
 };
 
@@ -698,6 +693,7 @@ export type AllSanitySchemaTypes =
   | Seo
   | Cta
   | Page
+  | ModuleLayout
   | Slug
   | GridColumn
   | GridRow
@@ -777,6 +773,7 @@ export type PAGE_QUERY_RESULT = {
         _type: "bookMeeting";
         _key: string;
         theme?: "cream" | "dark" | "white";
+        moduleLayout?: ModuleLayout;
         eyebrow?: string;
         title?: string;
         subtitle?: string;
@@ -800,6 +797,7 @@ export type PAGE_QUERY_RESULT = {
         _type: "faq";
         _key: string;
         theme?: "cream" | "dark" | "white";
+        moduleLayout?: ModuleLayout;
         eyebrow?: string;
         title?: string;
         subtitle?: string;
@@ -829,6 +827,7 @@ export type PAGE_QUERY_RESULT = {
         name?: string;
         sectionId?: string;
         theme?: "cream" | "dark" | "white";
+        moduleLayout?: ModuleLayout;
         rows: Array<{
           _key: string;
           _type: "gridRow";
@@ -987,6 +986,7 @@ export type PAGE_QUERY_RESULT = {
         _type: "trustBar";
         _key: string;
         theme?: "cream" | "dark" | "white";
+        moduleLayout?: ModuleLayout;
         items?: Array<
           {
             _key: string;

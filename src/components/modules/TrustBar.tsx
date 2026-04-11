@@ -2,6 +2,7 @@
 
 import { getIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
+import { getModuleLayoutAttrs, type ModuleLayoutValue } from "@/lib/moduleLayout";
 
 export interface TrustItem {
   icon?: string;
@@ -11,13 +12,15 @@ export interface TrustItem {
 export interface TrustBarProps {
   theme?: string;
   items?: TrustItem[];
+  moduleLayout?: ModuleLayoutValue | null;
 }
 
-export function TrustBar({ theme = "white", items = [] }: TrustBarProps) {
+export function TrustBar({ theme = "white", items = [], moduleLayout }: TrustBarProps) {
   return (
     <div
       data-theme={theme}
       className="reveal border-y border-warm-gray bg-white py-8"
+      {...getModuleLayoutAttrs(moduleLayout)}
     >
       <div className="pp-container flex flex-wrap items-center justify-center gap-12">
         {items.map((item, i) => {

@@ -129,6 +129,14 @@
           },
           "optional": true
         },
+        "moduleLayout": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "moduleLayout"
+          },
+          "optional": true
+        },
         "rows": {
           "type": "objectAttribute",
           "value": {
@@ -185,6 +193,14 @@
                 "value": "cream"
               }
             ]
+          },
+          "optional": true
+        },
+        "moduleLayout": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "moduleLayout"
           },
           "optional": true
         },
@@ -250,6 +266,14 @@
                 "value": "cream"
               }
             ]
+          },
+          "optional": true
+        },
+        "moduleLayout": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "moduleLayout"
           },
           "optional": true
         },
@@ -330,6 +354,14 @@
                 "value": "cream"
               }
             ]
+          },
+          "optional": true
+        },
+        "moduleLayout": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "moduleLayout"
           },
           "optional": true
         },
@@ -866,6 +898,71 @@
           }
         },
         "optional": true
+      }
+    }
+  },
+  {
+    "name": "moduleLayout",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "moduleLayout"
+          }
+        },
+        "topPadding": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "lrg"
+              },
+              {
+                "type": "string",
+                "value": "med"
+              },
+              {
+                "type": "string",
+                "value": "sml"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "bottomPadding": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "lrg"
+              },
+              {
+                "type": "string",
+                "value": "med"
+              },
+              {
+                "type": "string",
+                "value": "sml"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "animated": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        }
       }
     }
   },
@@ -1655,6 +1752,14 @@
                           },
                           {
                             "type": "string",
+                            "value": "stepNumber"
+                          },
+                          {
+                            "type": "string",
+                            "value": "stepTag"
+                          },
+                          {
+                            "type": "string",
                             "value": "metricValue"
                           },
                           {
@@ -1884,10 +1989,6 @@
               {
                 "type": "string",
                 "value": "navy"
-              },
-              {
-                "type": "string",
-                "value": "coral"
               }
             ]
           },
@@ -1919,106 +2020,14 @@
         "icon": {
           "type": "objectAttribute",
           "value": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "activity"
-              },
-              {
-                "type": "string",
-                "value": "alert-circle"
-              },
-              {
-                "type": "string",
-                "value": "bar-chart"
-              },
-              {
-                "type": "string",
-                "value": "book-open"
-              },
-              {
-                "type": "string",
-                "value": "calendar"
-              },
-              {
-                "type": "string",
-                "value": "check-circle"
-              },
-              {
-                "type": "string",
-                "value": "clock"
-              },
-              {
-                "type": "string",
-                "value": "dollar-sign"
-              },
-              {
-                "type": "string",
-                "value": "phone"
-              },
-              {
-                "type": "string",
-                "value": "phone-off"
-              },
-              {
-                "type": "string",
-                "value": "pie-chart"
-              },
-              {
-                "type": "string",
-                "value": "star"
-              },
-              {
-                "type": "string",
-                "value": "trending-down"
-              },
-              {
-                "type": "string",
-                "value": "trending-up"
-              },
-              {
-                "type": "string",
-                "value": "user"
-              },
-              {
-                "type": "string",
-                "value": "user-x"
-              },
-              {
-                "type": "string",
-                "value": "users"
-              },
-              {
-                "type": "string",
-                "value": "zap"
-              }
-            ]
+            "type": "string"
           },
           "optional": true
         },
         "iconColor": {
           "type": "objectAttribute",
           "value": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "navy"
-              },
-              {
-                "type": "string",
-                "value": "teal"
-              },
-              {
-                "type": "string",
-                "value": "gold"
-              },
-              {
-                "type": "string",
-                "value": "coral"
-              }
-            ]
+            "type": "string"
           },
           "optional": true
         },

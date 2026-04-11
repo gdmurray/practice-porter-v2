@@ -5,7 +5,7 @@ import { ChevronRight } from "lucide-react";
 import { ctaProps, type CtaData } from "@/lib/cta";
 import { cn } from "@/lib/utils";
 
-export function makeCtaGroup(centered: boolean) {
+export function makeCtaGroup(centered: boolean, animated = false) {
   return function CtaGroup({
     value,
   }: {
@@ -19,6 +19,7 @@ export function makeCtaGroup(centered: boolean) {
           "mt-8 flex flex-wrap items-center gap-5",
           isCentered && "justify-center"
         )}
+        {...(animated ? { "data-anim-header": true } : {})}
       >
         {value.items?.map((cta, i) => (
           <Button

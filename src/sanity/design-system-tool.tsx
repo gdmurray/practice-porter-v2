@@ -3,9 +3,10 @@ import { ComponentIcon } from "@sanity/icons";
 // In dev, the Storybook server runs separately on :6006.
 // In production, `pnpm build-storybook` outputs to public/design-system/ which
 // Astro copies to dist/ and Cloudflare Pages serves at /design-system/.
-const STORYBOOK_URL = import.meta.env.DEV
-  ? "http://localhost:6006"
-  : "/design-system/";
+const STORYBOOK_URL =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:6006"
+    : "/design-system/";
 
 function DesignSystemTool() {
   return (

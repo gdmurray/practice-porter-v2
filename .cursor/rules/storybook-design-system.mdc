@@ -1,0 +1,57 @@
+---
+description: Storybook setup and maintenance rules for GridPortableText blocks and rich-text custom objects
+globs: src/components/modules/GridPortableText/**,src/sanity/schemas/objects/**,src/stories/**
+alwaysApply: false
+---
+
+# Storybook Design System
+
+Storybook (v8, `@storybook/react-vite`) is embedded in Sanity Studio under the "Design System" tab.
+
+## Architecture
+
+- **Dev**: `pnpm storybook` runs on `:6006`. The Studio iframe points there automatically.
+- **Production**: `pnpm build:all` builds Storybook into `public/design-system/`, which Astro copies to `dist/` and Cloudflare Pages serves at `/design-system/`.
+- **Config**: `.storybook/main.cjs` (CJS required — root package uses `"type": "module"`), `.storybook/preview.ts`
+
+## Story locations
+
+```
+src/stories/
+  rich-text/
+    GridPortableText.stories.tsx   ← all portableTextEditor block styles + embedded blocks
+    CardsGroup.stories.tsx         ← cardsPortableTextEditor styles + cardIcon/columnDivider/statRow
+  blocks/
+    StatCardsGroup.stories.tsx
+    PricingCardsGroup.stories.tsx
+    CtaGroup.stories.tsx
+    TestimonialGroup.stories.tsx
+    NumberedStepGroup.stories.tsx
+    IconFeatureGroup.stories.tsx
+    CheckListGroup.stories.tsx
+    SanityImage.stories.tsx
+```
+
+## Rules
+
+**When a block component's props change** (e.g. new field added to `StatCardsGroup`):
+- Update the corresponding story's mock data to reflect the new prop.
+- Add a new story variant that exercises the new option if it's a visual option.
+
+**When a new custom block type is added** to `gridColumn` content or card content:
+1. Create a new renderer component in `src/components/modules/GridPortableText/`.
+2. Register it in `makeComponents.tsx` (`types` map).
+3. Add a story file in `src/stories/blocks/NewBlockName.stories.tsx` with 2–3 realistic stories.
+4. If it embeds in GridPortableText, add a story variant in `GridPortableText.stories.tsx`.
+
+**When a new block style is added** to `portableTextEditor.tsx` or `cardsPortableTextEditor.tsx`:
+- Add the style to the appropriate `makeComponents.tsx` / `makeCardComponents()` block map.
+- Exercise it in the relevant rich-text story (`GridPortableText.stories.tsx` or `CardsGroup.stories.tsx`).
+
+## Mock data conventions
+
+- PortableText blocks: `{ _type: "block", _key, style, children: [{ _type: "span", _key, text, marks: [] }], markDefs: [] }`
+- Custom type blocks passed to `GridPortableText` must be cast: `as unknown as PortableTextBlock[]`
+- Card icons: `{ _type: "cardIcon", _key, icon: "activity", iconColor: "teal", iconShape: "circle" }`
+- Column dividers: `{ _type: "columnDivider", _key, style: "line" }`
+- Stat rows: `{ _type: "statRow", _key, stats: [{ _key, value, suffix, suffixColor, label }] }`

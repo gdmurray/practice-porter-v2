@@ -58,6 +58,7 @@ export default defineConfig({
     },
     optimizeDeps: {
       include: ["@sanity/visual-editing", "@sanity/visual-editing/react"],
+      exclude: ["@sanity/astro"],
     },
   }
 });
