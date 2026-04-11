@@ -40,6 +40,11 @@ export default defineConfig({
     stega: { studioUrl: "/studio" },
   }), react()],
   vite: {
+    build: {
+      // Studio chunks are intentionally large (Sanity Studio at /studio only).
+      // Raise the limit to suppress warnings for those; user-facing chunks are small.
+      chunkSizeWarningLimit: 6000,
+    },
     plugins: [
       process.env.VISUALIZE && visualizer({
         emitFile: true,
@@ -64,6 +69,11 @@ export default defineConfig({
     optimizeDeps: {
       include: ["@sanity/visual-editing", "@sanity/visual-editing/react"],
       exclude: ["@sanity/astro"],
+    },
+    ssr: {
+      // nodejs_compat in wrangler.jsonc handles these at runtime;
+      // marking them external here silences Vite's automatic-externalization warnings.
+      external: ["node:fs/promises", "node:path", "node:url", "node:crypto"],
     },
   }
 });
