@@ -13,6 +13,14 @@
  */
 
 // Source: schema.json
+export type CardTheme = {
+  cardBg?: "cream" | "white" | "transparent";
+  bordered?: boolean;
+  layout?: "left" | "center";
+  padding?: "compact" | "default" | "spacious";
+  hoverEffect?: boolean;
+};
+
 export type GridSection = {
   _type: "gridSection";
   name?: string;
@@ -69,8 +77,7 @@ export type SiteSettings = {
         _key: string;
       } & NavLink
     >;
-    ctaLabel?: string;
-    ctaHref?: string;
+    cta?: Cta;
     theme?: "cream" | "dark";
   };
   footer?: {
@@ -115,6 +122,14 @@ export type Seo = {
   };
   canonicalUrl?: string;
   siteName?: string;
+};
+
+export type Cta = {
+  _type: "cta";
+  label?: string;
+  href?: string;
+  variant?: "primary" | "secondary";
+  ctaType?: "internal" | "external" | "calendly";
 };
 
 export type Page = {
@@ -191,6 +206,12 @@ export type GridColumn = {
       }
     | ({
         _key: string;
+      } & ColumnDivider)
+    | ({
+        _key: string;
+      } & CardsBlock)
+    | ({
+        _key: string;
       } & PricingCardsBlock)
     | ({
         _key: string;
@@ -237,6 +258,104 @@ export type SanityImageHotspot = {
   y?: number;
   height?: number;
   width?: number;
+};
+
+export type CardsBlock = {
+  _type: "cardsBlock";
+  columns?: 2 | 3 | 4;
+  cardTheme?: CardTheme;
+  items?: Array<
+    {
+      _key: string;
+    } & Card
+  >;
+};
+
+export type Card = {
+  _type: "card";
+  content?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?:
+          | "normal"
+          | "cardLead"
+          | "cardTitle"
+          | "cardNumber"
+          | "metricValue"
+          | "metricLabel"
+          | "cardCaption";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | ({
+        _key: string;
+      } & CardIcon)
+    | ({
+        _key: string;
+      } & ColumnDivider)
+    | ({
+        _key: string;
+      } & StatRow)
+  >;
+};
+
+export type StatRow = {
+  _type: "statRow";
+  stats?: Array<
+    {
+      _key: string;
+    } & InlineStat
+  >;
+};
+
+export type InlineStat = {
+  _type: "inlineStat";
+  value?: string;
+  suffix?: string;
+  suffixColor?: "gold" | "teal" | "navy" | "coral";
+  label?: string;
+};
+
+export type CardIcon = {
+  _type: "cardIcon";
+  icon?:
+    | "activity"
+    | "alert-circle"
+    | "bar-chart"
+    | "book-open"
+    | "calendar"
+    | "check-circle"
+    | "clock"
+    | "dollar-sign"
+    | "phone"
+    | "phone-off"
+    | "pie-chart"
+    | "star"
+    | "trending-down"
+    | "trending-up"
+    | "user"
+    | "user-x"
+    | "users"
+    | "zap";
+  iconColor?: "navy" | "teal" | "gold" | "coral";
+  iconShape?: "square" | "circle";
+};
+
+export type ColumnDivider = {
+  _type: "columnDivider";
+  style?: "line" | "spacer";
 };
 
 export type CheckListBlock = {
@@ -337,16 +456,24 @@ export type NumberedStep = {
 export type StatCard = {
   _type: "statCard";
   icon?:
-    | "phone-off"
-    | "dollar-sign"
-    | "users"
-    | "clock"
+    | "activity"
     | "alert-circle"
+    | "bar-chart"
+    | "book-open"
+    | "calendar"
+    | "check-circle"
+    | "clock"
+    | "dollar-sign"
+    | "phone"
+    | "phone-off"
+    | "pie-chart"
+    | "star"
     | "trending-down"
     | "trending-up"
-    | "bar-chart"
-    | "check-circle"
-    | "star";
+    | "user"
+    | "user-x"
+    | "users"
+    | "zap";
   value?: string;
   label?: string;
   compareText?: string;
@@ -457,14 +584,6 @@ export type FooterLink = {
   href?: string;
 };
 
-export type Cta = {
-  _type: "cta";
-  label?: string;
-  href?: string;
-  variant?: "primary" | "secondary";
-  ctaType?: "internal" | "external" | "calendly";
-};
-
 export type NavLink = {
   _type: "navLink";
   label?: string;
@@ -569,6 +688,7 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
+  | CardTheme
   | GridSection
   | BookMeeting
   | Faq
@@ -576,12 +696,19 @@ export type AllSanitySchemaTypes =
   | SiteSettings
   | SanityImageAssetReference
   | Seo
+  | Cta
   | Page
   | Slug
   | GridColumn
   | GridRow
   | SanityImageCrop
   | SanityImageHotspot
+  | CardsBlock
+  | Card
+  | StatRow
+  | InlineStat
+  | CardIcon
+  | ColumnDivider
   | CheckListBlock
   | IconFeatureBlock
   | NumberedStepBlock
@@ -599,7 +726,6 @@ export type AllSanitySchemaTypes =
   | FooterColumn
   | SocialLink
   | FooterLink
-  | Cta
   | NavLink
   | SanityImagePaletteSwatch
   | SanityImagePalette
@@ -741,6 +867,17 @@ export type PAGE_QUERY_RESULT = {
                 }
               | {
                   _key: string;
+                  _type: "cardsBlock";
+                  columns?: 2 | 3 | 4;
+                  cardTheme?: CardTheme;
+                  items?: Array<
+                    {
+                      _key: string;
+                    } & Card
+                  >;
+                }
+              | {
+                  _key: string;
                   _type: "checkListBlock";
                   lineSeparated?: boolean;
                   items?: Array<{
@@ -748,6 +885,11 @@ export type PAGE_QUERY_RESULT = {
                     _type: "checkListItem";
                     _key: string;
                   }>;
+                }
+              | {
+                  _key: string;
+                  _type: "columnDivider";
+                  style?: "line" | "spacer";
                 }
               | {
                   _key: string;
@@ -870,7 +1012,7 @@ export type PAGE_QUERY_RESULT = {
 
 // Source: src/sanity/queries.ts
 // Variable: SITE_SETTINGS_QUERY
-// Query: *[_id == "siteSettings"][0] {    navigation {      links[] {        label,        href,      },      ctaLabel,      ctaHref,      theme,    },    footer {      brandDescription,      socialLinks[] {        platform,        url,      },      columns[] {        title,        links[] {          label,          href,        },      },      legalLinks[] {        label,        href,      },      copyright,    },    seo {      metaTitle,      metaDescription,      ogImage {        asset-> {          url,        },      },      siteName,    },  }
+// Query: *[_id == "siteSettings"][0] {    navigation {      links[] {        label,        href,      },      cta {        label,        href,        variant,        ctaType,      },      theme,    },    footer {      brandDescription,      socialLinks[] {        platform,        url,      },      columns[] {        title,        links[] {          label,          href,        },      },      legalLinks[] {        label,        href,      },      copyright,    },    seo {      metaTitle,      metaDescription,      ogImage {        asset-> {          url,        },      },      siteName,    },  }
 export type SITE_SETTINGS_QUERY_RESULT =
   | {
       navigation: null;
@@ -897,8 +1039,12 @@ export type SITE_SETTINGS_QUERY_RESULT =
           label: string | null;
           href: string | null;
         }> | null;
-        ctaLabel: string | null;
-        ctaHref: string | null;
+        cta: {
+          label: string | null;
+          href: string | null;
+          variant: "primary" | "secondary" | null;
+          ctaType: "calendly" | "external" | "internal" | null;
+        } | null;
         theme: "cream" | "dark" | null;
       } | null;
       footer: {
@@ -947,6 +1093,6 @@ declare module "@sanity/client" {
     '*[_type == "page" && defined(slug.current)] | order(_updatedAt desc) {\n    "slug": slug.current,\n    title,\n    "lastmod": _updatedAt\n  }': SlugsQueryResult;
     '\n  *[_type == "page" && defined(slug.current) && slug.current != "home"] {\n    "slug": slug.current\n  }\n': ALL_PAGE_SLUGS_QUERY_RESULT;
     '\n  *[_type == "page" && slug.current == $slug][0] {\n    _id,\n    title,\n    slug,\n    seo {\n      metaTitle,\n      metaDescription,\n      ogImage {\n        asset-> {\n          url,\n        },\n      },\n      canonicalUrl,\n      siteName,\n    },\n    modules[] {\n      _type,\n      _key,\n      ...,\n      stats[] {\n        ...,\n      },\n      statCards[] {\n        ...,\n      },\n      cards[] {\n        ...,\n      },\n      steps[] {\n        ...,\n      },\n      metrics[] {\n        ...,\n      },\n      extraMetrics[] {\n        ...,\n      },\n      testimonials[] {\n        ...,\n      },\n      previewMetrics[] {\n        ...,\n      },\n      features[] {\n        ...,\n      },\n      values[] {\n        ...,\n      },\n      image {\n        ...,\n        asset->,\n      },\n      primaryCta {\n        ...,\n      },\n      secondaryCta {\n        ...,\n      },\n      rows[] {\n        ...,\n        columns[] {\n          ...,\n          content[] {\n            ...,\n            _type == "image" => {\n              ...,\n              asset-> {\n                url,\n                metadata {\n                  dimensions {\n                    width,\n                    height\n                  }\n                }\n              }\n            }\n          }\n        }\n      },\n    }\n  }\n': PAGE_QUERY_RESULT;
-    '\n  *[_id == "siteSettings"][0] {\n    navigation {\n      links[] {\n        label,\n        href,\n      },\n      ctaLabel,\n      ctaHref,\n      theme,\n    },\n    footer {\n      brandDescription,\n      socialLinks[] {\n        platform,\n        url,\n      },\n      columns[] {\n        title,\n        links[] {\n          label,\n          href,\n        },\n      },\n      legalLinks[] {\n        label,\n        href,\n      },\n      copyright,\n    },\n    seo {\n      metaTitle,\n      metaDescription,\n      ogImage {\n        asset-> {\n          url,\n        },\n      },\n      siteName,\n    },\n  }\n': SITE_SETTINGS_QUERY_RESULT;
+    '\n  *[_id == "siteSettings"][0] {\n    navigation {\n      links[] {\n        label,\n        href,\n      },\n      cta {\n        label,\n        href,\n        variant,\n        ctaType,\n      },\n      theme,\n    },\n    footer {\n      brandDescription,\n      socialLinks[] {\n        platform,\n        url,\n      },\n      columns[] {\n        title,\n        links[] {\n          label,\n          href,\n        },\n      },\n      legalLinks[] {\n        label,\n        href,\n      },\n      copyright,\n    },\n    seo {\n      metaTitle,\n      metaDescription,\n      ogImage {\n        asset-> {\n          url,\n        },\n      },\n      siteName,\n    },\n  }\n': SITE_SETTINGS_QUERY_RESULT;
   }
 }

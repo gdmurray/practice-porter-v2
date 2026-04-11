@@ -1,17 +1,5 @@
 import { defineField, defineType } from "sanity";
-
-const ICONS = [
-  "phone-off",
-  "dollar-sign",
-  "users",
-  "clock",
-  "alert-circle",
-  "trending-down",
-  "trending-up",
-  "bar-chart",
-  "check-circle",
-  "star",
-];
+import { ICON_LIST } from "@/lib/iconNames";
 
 export const statCard = defineType({
   name: "statCard",
@@ -23,7 +11,7 @@ export const statCard = defineType({
       title: "Icon",
       type: "string",
       options: {
-        list: ICONS.map((i) => ({ value: i, title: i })),
+        list: ICON_LIST,
       },
     }),
     defineField({

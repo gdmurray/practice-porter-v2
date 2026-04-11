@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
+Disallow: /design-system/
 Sitemap: https://practiceporter.com/sitemap-index.xml

@@ -11,6 +11,12 @@ export { pricingCard } from "./pricingCard";
 export { faqItem } from "./faqItem";
 
 // Grid section building blocks
+export { columnDivider } from "./columnDivider";
+export { cardIcon } from "./cardIcon";
+export { inlineStat } from "./inlineStat";
+export { statRow } from "./statRow";
+export { card } from "./card";
+export { cardsBlock } from "./cardsBlock";
 export { pricingCardsBlock } from "./pricingCardsBlock";
 export { statCard } from "./statCard";
 export { numberedStep } from "./numberedStep";

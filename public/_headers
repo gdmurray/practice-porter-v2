@@ -1,0 +1,3 @@
+# Prevent the Storybook design system from being indexed or appearing in search
+/design-system/*
+  X-Robots-Tag: noindex, nofollow

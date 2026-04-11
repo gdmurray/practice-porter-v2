@@ -101,8 +101,12 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
         label,
         href,
       },
-      ctaLabel,
-      ctaHref,
+      cta {
+        label,
+        href,
+        variant,
+        ctaType,
+      },
       theme,
     },
     footer {

@@ -1,6 +1,7 @@
 import { type PortableTextComponents } from "@portabletext/react";
 import { cn } from "@/lib/utils";
 import { StatCardsGroup } from "./StatCardsGroup";
+import { CardsGroup } from "./CardsGroup";
 import { PricingCardsGroup } from "./PricingCardsGroup";
 import { makeCtaGroup } from "./CtaGroup";
 import { TestimonialGroup } from "./TestimonialGroup";
@@ -52,16 +53,21 @@ export function makeComponents(centered: boolean): PortableTextComponents {
       ),
     },
     marks: {
+      price: ({ children }) => (
+        <span className="font-serif text-[2.25rem] font-bold leading-none tracking-tight text-teal">
+          {children}
+        </span>
+      ),
       serifText: ({ children }) => (
         <span className="font-serif">{children}</span>
       ),
       highlight: ({ children }) => (
-        <span className="font-medium" style={{ color: "var(--section-accent)" }}>
+        <span style={{ color: "var(--section-accent)" }}>
           {children}
         </span>
       ),
       highlightGold: ({ children }) => (
-        <span className="text-gold font-medium">{children}</span>
+        <span className="text-gold">{children}</span>
       ),
       highlightTeal: ({ children }) => (
         <span className="text-teal">{children}</span>
@@ -85,6 +91,7 @@ export function makeComponents(centered: boolean): PortableTextComponents {
     },
     types: {
       statCardsBlock: StatCardsGroup,
+      cardsBlock: CardsGroup,
       ctaBlock: makeCtaGroup(centered),
       testimonialBlock: TestimonialGroup,
       numberedStepBlock: NumberedStepGroup,

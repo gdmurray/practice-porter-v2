@@ -3,6 +3,7 @@ import { presentationTool } from "sanity/presentation";
 import { structureTool } from "sanity/structure";
 import { schemaTypes } from "./src/sanity/schemas";
 import { resolve } from "./src/sanity/lib/resolve";
+import { designSystemTool } from "@/sanity/design-system-tool";
 
 const projectId = import.meta.env?.PUBLIC_SANITY_PROJECT_ID ?? "u06m8vwg";
 const dataset = import.meta.env?.PUBLIC_SANITY_DATASET ?? "production";
@@ -31,6 +32,7 @@ export default defineConfig({
       resolve,
     }),
   ],
+  tools: [designSystemTool()],
   tasks: {
     enabled: true
   },

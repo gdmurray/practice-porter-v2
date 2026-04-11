@@ -23,16 +23,9 @@ export const siteSettings = defineType({
           of: [{ type: "navLink" }],
         }),
         defineField({
-          name: "ctaLabel",
-          title: "CTA Button Label",
-          type: "string",
-          initialValue: "Book a Consultation",
-        }),
-        defineField({
-          name: "ctaHref",
-          title: "CTA Button URL",
-          type: "string",
-          initialValue: "#cta",
+          name: "cta",
+          title: "CTA Button",
+          type: "cta",
         }),
         defineField({
           name: "theme",

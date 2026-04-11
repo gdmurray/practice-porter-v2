@@ -29,18 +29,38 @@ function resolveGlobalHref(href: string) {
   return href.startsWith("#") ? `/${href}` : href;
 }
 
+type NavCta = { label?: string | null; href?: string | null; ctaType?: string | null; variant?: string | null };
+
+/** Returns anchor props for the nav CTA based on ctaType.
+ *  - external → new tab with rel
+ *  - calendly → href as-is (Layout.astro event delegation opens the popup)
+ *  - internal / undefined → resolveGlobalHref to keep anchor links working from any route
+ */
+function navCtaAnchorProps(cta: NavCta): { href: string; target?: string; rel?: string } {
+  const href = cta.href ?? "#cta";
+  if (cta.ctaType === "external") {
+    return { href, target: "_blank", rel: "noopener noreferrer" };
+  }
+  if (cta.ctaType === "calendly") {
+    return { href };
+  }
+  return { href: resolveGlobalHref(href) };
+}
+
 type Props = NavigationProps & {
   firstModuleTheme?: string | null;
   navTheme?: string | null;
 };
 
+const DEFAULT_CTA = { label: "Book a Consultation", href: "#cta", variant: "primary", ctaType: "internal" } as const;
+
 export function Navigation({
   links,
-  ctaLabel = "Book a Consultation",
-  ctaHref = "#cta",
+  cta,
   firstModuleTheme,
   navTheme,
 }: Props) {
+  const resolvedCta = cta ?? DEFAULT_CTA;
   const validLinks = useMemo(() => filterLinks(links), [links]);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -110,7 +130,9 @@ export function Navigation({
           ))}
           <li>
             <Button variant="nav" asChild>
-              <a href={resolveGlobalHref(ctaHref ?? "#cta")}>{ctaLabel ?? "Book a Consultation"}</a>
+              <a {...navCtaAnchorProps(resolvedCta)}>
+                {resolvedCta.label ?? "Book a Consultation"}
+              </a>
             </Button>
           </li>
         </ul>
@@ -164,14 +186,14 @@ export function Navigation({
               </a>
             ))}
             <a
-              href={resolveGlobalHref(ctaHref ?? "#cta")}
+              {...navCtaAnchorProps(resolvedCta)}
               onClick={() => setMobileOpen(false)}
               className={cn(
                 "font-serif text-[28px] font-medium text-gold no-underline transition-colors duration-200",
                 isCream ? "hover:text-[var(--midnight)]" : "hover:text-white"
               )}
             >
-              {ctaLabel ?? "Book a Consultation"}
+              {resolvedCta.label ?? "Book a Consultation"}
             </a>
           </SheetContent>
         </Sheet>
