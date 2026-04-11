@@ -11,6 +11,7 @@
 		"build:all": "pnpm build-storybook && pnpm build",
 		"dev": "astro dev",
 		"build": "astro build",
+		"build:analyze": "VISUALIZE=true astro build",
 		"preview": "astro build && wrangler pages dev",
 		"astro": "astro",
 		"generate-types": "wrangler types",
@@ -32,7 +33,6 @@
 		"@sanity/astro": "^3.2.11",
 		"@sanity/client": "^7.17.0",
 		"@sanity/icons": "^3.7.4",
-		"@sanity/ui": "^3.1.14",
 		"@sanity/visual-editing": "^2.15.4",
 		"@tailwindcss/vite": "^4.2.1",
 		"@types/react": "^19.2.14",
@@ -46,7 +46,6 @@
 		"radix-ui": "^1.4.3",
 		"react": "^19.2.4",
 		"react-dom": "^19.2.4",
-		"react-icons": "^5.6.0",
 		"react-is": "^19.2.4",
 		"sanity": "^5.14.0",
 		"shadcn": "^4.0.3",
@@ -62,6 +61,7 @@
 		"@storybook/react-vite": "^8.6.18",
 		"@types/node": "^25.4.0",
 		"fontaine": "^0.8.0",
+		"rollup-plugin-visualizer": "^7.0.1",
 		"storybook": "^8.6.18",
 		"wrangler": "^4.71.0"
 	}

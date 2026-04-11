@@ -78,13 +78,12 @@ Astro.response.headers.set('Cache-Control', 'public, max-age=0, s-maxage=300');
   <Navigation
     client:load
     links={nav?.links ?? null}
-    ctaLabel={nav?.ctaLabel ?? null}
-    ctaHref={nav?.ctaHref ?? null}
+    cta={nav?.cta ?? null}
     firstModuleTheme={firstModuleTheme}
-    theme={nav?.theme ?? "cream"}
+    navTheme={nav?.theme ?? "cream"}
   />
   <main>
-    <PageModules modules={modules} client:load />
+    <PageModules modules={modules} client:visible />
   </main>
   <Footer
     brandDescription={footer?.brandDescription}

@@ -73,14 +73,13 @@ Astro.response.headers.set('Cache-Control', 'public, max-age=0, s-maxage=300');
   <Navigation
     client:load
     links={nav?.links ?? null}
-    ctaLabel={nav?.ctaLabel ?? null}
-    ctaHref={nav?.ctaHref ?? null}
+    cta={nav?.cta ?? null}
     firstModuleTheme={firstModuleTheme}
-    theme={nav?.theme ?? "cream"}
+    navTheme={nav?.theme ?? "cream"}
   />
   <main>
     {page && modules.length > 0 ? (
-      <PageModules modules={modules} client:load />
+      <PageModules modules={modules} client:visible />
     ) : (
       <div class="pp-container pp-section text-center">
         <h1 class="section-title mb-4">Welcome to Practice Porter</h1>

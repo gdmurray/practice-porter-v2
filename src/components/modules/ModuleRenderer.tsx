@@ -1,7 +1,17 @@
-import { TrustBar } from "./TrustBar";
-import { Faq } from "./Faq";
-import { BookMeeting } from "./BookMeeting";
-import { GridSection } from "./GridSection";
+import { lazy, Suspense } from "react";
+
+const TrustBar = lazy(() =>
+  import("./TrustBar").then((m) => ({ default: m.TrustBar }))
+);
+const Faq = lazy(() =>
+  import("./Faq").then((m) => ({ default: m.Faq }))
+);
+const BookMeeting = lazy(() =>
+  import("./BookMeeting").then((m) => ({ default: m.BookMeeting }))
+);
+const GridSection = lazy(() =>
+  import("./GridSection").then((m) => ({ default: m.GridSection }))
+);
 
 export interface ModuleRendererProps {
   module: {
@@ -12,18 +22,26 @@ export interface ModuleRendererProps {
 }
 
 export function ModuleRenderer({ module }: ModuleRendererProps) {
-  const { _type, _key, ...props } = module;
+  const { _type, _key: _unusedKey, ...props } = module;
+
+  let content: React.ReactNode = null;
 
   switch (_type) {
     case "trustBar":
-      return <TrustBar {...(props as React.ComponentProps<typeof TrustBar>)} />;
+      content = <TrustBar {...(props as Parameters<typeof TrustBar>[0])} />;
+      break;
     case "faq":
-      return <Faq {...(props as React.ComponentProps<typeof Faq>)} />;
+      content = <Faq {...(props as Parameters<typeof Faq>[0])} />;
+      break;
     case "bookMeeting":
-      return <BookMeeting {...(props as React.ComponentProps<typeof BookMeeting>)} />;
+      content = <BookMeeting {...(props as Parameters<typeof BookMeeting>[0])} />;
+      break;
     case "gridSection":
-      return <GridSection {...(props as React.ComponentProps<typeof GridSection>)} />;
+      content = <GridSection {...(props as Parameters<typeof GridSection>[0])} />;
+      break;
     default:
       return null;
   }
+
+  return <Suspense fallback={null}>{content}</Suspense>;
 }

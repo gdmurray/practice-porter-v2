@@ -8,6 +8,7 @@ import cloudflare from '@astrojs/cloudflare';
 import sanity from '@sanity/astro';
 import react from '@astrojs/react';
 import tailwindcss from "@tailwindcss/vite";
+import { visualizer } from "rollup-plugin-visualizer";
 import { FontaineTransform } from "fontaine";
 
 
@@ -40,6 +41,10 @@ export default defineConfig({
   }), react()],
   vite: {
     plugins: [
+      process.env.VISUALIZE && visualizer({
+        emitFile: true,
+        filename: "stats.html",
+      }),
       tailwindcss(),
       FontaineTransform.vite({
         // Only the first fallback is used for metric calculations.

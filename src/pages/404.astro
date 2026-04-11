@@ -23,8 +23,8 @@ const footer = siteSettings?.footer;
   <Navigation
     client:load
     links={nav?.links}
-    ctaLabel={nav?.ctaLabel}
-    ctaHref={nav?.ctaHref}
+    cta={nav?.cta}
+    navTheme={nav?.theme ?? "cream"}
   />
   <main>
     <section data-theme="dark" class="pp-section" style="background: var(--section-bg); min-height: 60vh; display: flex; align-items: center;">
