@@ -55,6 +55,16 @@ export function BookMeeting({
       }
     };
 
+    // Inject Calendly CSS once
+    const cssId = "calendly-widget-css";
+    if (!document.getElementById(cssId)) {
+      const link = document.createElement("link");
+      link.id = cssId;
+      link.rel = "stylesheet";
+      link.href = "https://assets.calendly.com/assets/external/widget.css";
+      document.head.appendChild(link);
+    }
+
     const scriptId = "calendly-widget-script";
     const existingScript = document.getElementById(scriptId);
 
