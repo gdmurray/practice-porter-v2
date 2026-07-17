@@ -6,27 +6,47 @@ alwaysApply: false
 
 # Design System
 
+Source of truth: [reference/Brand Guidelines.html](../../reference/Brand%20Guidelines.html). When in doubt about a color, gradient, or button spec, check that file (or its living Storybook recreation, `src/stories/foundations/BrandGuidelines.stories.tsx`) before guessing.
+
 ## Brand palette
 
-| Token          | Hex       | Usage                              |
-|----------------|-----------|------------------------------------|
-| `midnight`     | `#0b1d3a` | Dark backgrounds, primary dark     |
-| `deep-navy`    | `#132d5e` | Gradient endpoints                 |
-| `gold`         | `#c9a96e` | Primary accent, CTAs, eyebrows     |
-| `gold-light`   | `#d4bc8a` | Hover states                       |
-| `teal`         | `#1a5c5e` | Secondary accent                   |
-| `off-white`    | `#f8f6f2` | Cream backgrounds                  |
-| `charcoal`     | `#2a2a2a` | Body text on light backgrounds     |
+| Token          | Hex       | Usage                                          |
+|----------------|-----------|-------------------------------------------------|
+| `red`          | `#A32705` | Primary brand accent — CTAs, links, eyebrows   |
+| `red-deep`     | `#7E1D02` | Primary button hover fill, gradient dark stop  |
+| `red-terra`    | `#C0532C` | Secondary/soft accent, gradient light stop     |
+| `red-bright`   | `#B23A18` | Sheen-sweep gradient second stop (Key Moment CTA) |
+| `vanilla`      | `#FFEEE4` | Secondary brand color — pale badges/icon bg, accent card bg |
+| `cream`        | `#FFF3EC` | Warm off-white section background (deeper than lotion), plus hero/overlay tint |
+| `lotion`       | `#FFFCFA` | Default light section background               |
+| `ink`          | `#2B1A14` | Headline/heading text color                     |
+| `charcoal`     | `#3D2D25` | Body copy text color                            |
+| `muted-text`   | `#5C4A42` | Secondary/muted text (aka `ink-soft` on production pages) |
+| `border-color` | `#EADFD8` | Borders, dividers                               |
+| `white`        | `#FFFFFF` | Kept as-is                                      |
 
-Use Tailwind classes: `bg-midnight`, `text-gold`, `bg-off-white`, etc. (mapped via `@theme inline` in `global.css`).
+There is a single accent hue (burnt red) — the brand has no secondary color family. Use `red-terra` for softer/secondary emphasis instead of introducing a new hue.
+
+Use Tailwind classes: `bg-red`, `text-red`, `bg-lotion`, `bg-vanilla`, `text-ink`, `text-muted-text`, `border-border-color`, etc. (mapped via `@theme inline` in `global.css`).
+
+Gradients (CSS vars, max 2 per page per brand doc — reserve for hero/CTA moments):
+- `--hero-gradient: linear-gradient(135deg, var(--red-deep) 0%, var(--red) 54%, var(--red-terra) 100%)` — hero/CTA/divider sections
+- `--sheen-gradient: linear-gradient(100deg, var(--red), var(--red-bright))` — primary "Key Moment" CTA button fill
+
+**Never** use `ink` or brand-`red` text on a gradient or `red` section background — use the warm near-white (`#FFF7F2`) / `vanilla` text pairing instead (see `[data-theme="red"|"gradient"]` in `global.css`).
 
 ## Typography
 
-- **Headings**: `font-serif` (Playfair Display) — all `<h1>`–`<h4>` inherit this
-- **Body**: `font-sans` (Inter Variable)
-- **Eyebrow**: 11px, 700 weight, `0.24em` letter-spacing, uppercase, gold color — use `.eyebrow` class
-- **Section titles**: use `.section-title` (responsive clamp 32px–52px)
-- **Subtitles**: use `.section-subtitle` (18px, light weight, mid-gray)
+For heading weight/size specifics, `reference/pp-shared.css` and the reference page HTMLs (the live website mockups) are the source of truth — not `Brand Guidelines.html` (a separate print/PDF deliverable with its own heavier 500-weight scale for guideline-doc chrome).
+
+- **Headings**: `font-serif` (Playfair Display Variable) — all `<h1>`–`<h4>` default to weight **400** (never bold/700), no letter-spacing by default. Heavier weights (500/600) are opt-in per component for smaller card/sub-headings (e.g. card titles), not the sitewide default.
+- **Body**: `font-sans` (Plus Jakarta Sans Variable) — sitewide default weight is **300 (Light)**; headings/labels/buttons opt into heavier weights explicitly
+- **Eyebrow**: 11px, 700 weight, `0.16em` letter-spacing, uppercase, `red` color — use `.eyebrow` class
+- **Section titles**: use `.section-title` (Playfair 400, responsive clamp 30px–40px, matches reference `.h-section`)
+- **Sub-section headings (h3)**: default rich-text "Heading 3" style is 26px mobile / 33px desktop, weight 500 — matches reference `.cms-step h3` / `.sol-copy-pane h3` / `.cas-copy-pane h3` (the large two-column feature-panel headers). Card-level titles (e.g. `cardTitle`, `SolutionCardGroup`) use their own smaller/larger sizes matched to their specific reference component — don't force them onto the generic h3 scale.
+- **Subtitles**: use `.section-subtitle` (17px, 300 weight, `muted-text` color)
+
+Inter is no longer loaded — Plus Jakarta Sans is the only sans in active use (self-hosted via `@fontsource-variable/plus-jakarta-sans`).
 
 ## Spacing tokens
 
@@ -37,7 +57,11 @@ Section padding: `.pp-section` or `.pp-section-tight`.
 
 ## Module theme system
 
-Every module section has a `theme` field in Sanity: `"dark"`, `"white"`, or `"cream"`.
+Every module section has a `theme` field in Sanity, driven by `themeField()` in `src/sanity/schemas/objects/theme.ts`: `"white"`, `"lotion"`, `"cream"`, `"vanilla"`, `"red"`, or `"gradient"`.
+
+- `white` / `lotion` / `cream` / `vanilla` — light section rhythm (alternate these for visual variety); `cream` matches the pricing/step-band sections in `reference/Practice Performance Report.html` and `reference/Call Answering Solutions.html`
+- `red` — bold solid-color accent section (use sparingly)
+- `gradient` — reserved for hero/CTA moments only, max 2 per page
 
 Apply via `data-theme` attribute on the section wrapper:
 
@@ -46,30 +70,53 @@ Apply via `data-theme` attribute on the section wrapper:
 ```
 
 CSS variables set per theme: `--section-bg`, `--section-text`, `--section-muted`, `--section-accent`.
-Dark theme overrides `.section-title` to white and `em` to gold.
+`red` and `gradient` themes flip `.section-title`/`.eyebrow`/`.section-subtitle` to warm near-white + `vanilla` accent text (never `ink`/`red` on those backgrounds).
+
+## Color enum fields (Sanity)
+
+Several schema objects expose a color choice that maps to the single-accent system. Current enum values:
+
+| Field | Options |
+|---|---|
+| `statCard.valueColor` | `ink` / `red` / `terra` / `muted` |
+| `inlineStat.suffixColor` (cards/statRow, light bg only) | `red` / `terra` / `ink` |
+| `statBandItem.suffixColor` (Stat Band, themed bands) | `accent` / `text` (theme-aware) / `red` / `terra` / `ink` (fixed) |
+| `cardIcon.iconColor` | (custom `IconColorInput`) — `terra` default |
+| `pricingCard.variant` | `light` (Lotion) / `dark` (Burnt Red) |
+| `cardsBlock.cardTheme.cardBg` | `lotion` / `vanilla` / `white` / `transparent` |
+| `statCardsBlock.theme` | `lotion` / `vanilla` / `white` |
+
+`Navigation` has no `theme` field of its own — it's stateless and infers light/dark styling (logo variant, text color, scrolled bg) from whichever section's `theme` it's currently overlapping (the page's first module theme is passed in as `theme` prop; `red`/`gradient` → dark, everything else → light). See `Navigation.tsx`.
 
 ## Button hierarchy
 
-1. **Primary CTA**: `Button variant="brand" size="cta"` — gold bg (`bg-gold`), **white** text, **rectangular** (`rounded`, 4px radius), 13px/600/uppercase/1px tracking, hover: lift + gold shadow
-2. **Secondary CTA**: `Button variant="outline" size="cta"` — transparent bg, midnight text, `border-warm-gray`, same font treatment, hover: border darkens to midnight
-3. **In-page secondary**: `.btn-secondary` — text-only, white/60 opacity, uppercase (used inline in hero, not a Button component)
-4. **Nav CTA**: `Button variant="nav"` — gold border pill, transparent bg, gold text (pill shape is intentional for nav only)
+1. **Primary/Key-Moment CTA**: `Button` (default variant, i.e. `variant="brand"` or omitted) — sheen-sweep gradient fill (`linear-gradient(100deg,var(--red),var(--red-bright))`), **white** text, 10–11px radius (rectangular, not pill), 600 weight, hover: lift + shadow (`0 6px 16px rgba(163,39,5,0.22)`) + white sheen sweep animation
+2. **Secondary CTA**: `Button variant="outline"` — white bg, `red` text, `1.5px` border `rgba(163,39,5,0.28)`, hover fills to `vanilla` + border darkens to `0.40` opacity
+3. **In-page secondary**: `.btn-secondary` — text-only variant used inline in raw-CSS contexts (not a `Button` component)
+4. **Nav CTA**: `Button variant="nav"` — solid `red` fill, white text, `10px` radius rectangular pill-adjacent shape (not a full pill)
+
+Use `size="cta"` for marketing/page-level CTA buttons (14px/28px padding, 14px type).
 
 ### Key button rules
-- **Never** use `variant="brand"` with `rounded-full` — the brand CTA is rectangular per the design spec
-- **Never** use `text-midnight` or `text-primary-foreground` on `variant="brand"` — it must be `text-white`
-- Always pair `variant="brand"` or `variant="outline"` with `size="cta"` for page-level CTAs
-- The `nav` variant is the only pill-shaped button; all others are rectangular
+- **Never** use `text-midnight`, `text-ink`, or navy/gold/teal-era classes on the primary button — it must be `text-white` on a `red`/gradient fill
+- The primary button fill is a **gradient** (`sheen-sweep`), not a flat `red` — this is intentional per the brand doc's "Key Moment CTA" spec
+- Secondary/outline buttons are white-filled with a translucent red border, not `border-warm-gray` (that token no longer exists)
 
 ## shadcn usage
 
 - Install: `npx shadcn@latest add <component>`
 - Config: `components.json` (style: `radix-vega`, aliases under `@/`)
 - Installed: `button`, `card`, `badge`, `avatar`, `sheet`, `navigation-menu`
-- Button has custom variants: `brand`, `nav`, `outline` (CTA-style) and size `cta`
+- Button has custom variants: `brand`/`default` (primary gradient), `nav`, `outline` (CTA-style) and size `cta`
+- shadcn semantic tokens (`--primary`, `--secondary`, `--accent`, `--muted`, `--border`, etc.) are remapped to the brand palette in `global.css` — most `ui/*` primitives inherit brand colors automatically without a direct edit
 
 ## Animation
 
 - `.reveal` / `.reveal-left` / `.reveal-right` + `.visible` for scroll-triggered entrance
 - `.reveal-delay-{1..4}` for staggered children
 - `RevealObserver` component handles intersection detection
+- `[data-anim-header]` / `[data-anim-list]` — per-element progressive reveal for long sections (see `global.css` for stagger timing)
+
+## Validating brand fidelity
+
+`src/stories/foundations/BrandGuidelines.stories.tsx` is a living recreation of the web-relevant pages of `reference/Brand Guidelines.html` (colors, CTA buttons, ring motif, section backgrounds, CTA banner, stat callout), built from real components/tokens. Use it to visually diff any future brand/token change against the guideline doc. `src/stories/foundations/Button.stories.tsx` exercises the full `button.tsx` variant/size matrix — update it whenever a button variant changes.

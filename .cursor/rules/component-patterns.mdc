@@ -30,7 +30,7 @@ export interface <Name>Props {
   // ... fields matching the Sanity schema
 }
 
-export function <Name>({ theme = "cream", ...props }: <Name>Props) {
+export function <Name>({ theme = "lotion", ...props }: <Name>Props) {
   return (
     <section data-theme={theme} style={{ background: "var(--section-bg)" }}>
       <div className="pp-container pp-section">

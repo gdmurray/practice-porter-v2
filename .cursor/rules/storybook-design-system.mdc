@@ -23,6 +23,7 @@ src/stories/
     CardsGroup.stories.tsx         ← cardsPortableTextEditor styles + cardIcon/columnDivider/statRow
   blocks/
     StatCardsGroup.stories.tsx
+    StatBandGroup.stories.tsx
     PricingCardsGroup.stories.tsx
     CtaGroup.stories.tsx
     TestimonialGroup.stories.tsx
@@ -30,6 +31,13 @@ src/stories/
     IconFeatureGroup.stories.tsx
     CheckListGroup.stories.tsx
     SanityImage.stories.tsx
+  foundations/
+    Button.stories.tsx           ← src/components/ui/button.tsx variant/size matrix
+    BrandGuidelines.stories.tsx  ← living recreation of reference/Brand Guidelines.html's
+                                    web-relevant pages (colors, CTA buttons, ring motif,
+                                    section backgrounds, CTA banner, stat callout), built
+                                    from real components/tokens — use to validate any
+                                    brand/design-token migration against the guideline PDF
 ```
 
 ## Rules
@@ -48,10 +56,19 @@ src/stories/
 - Add the style to the appropriate `makeComponents.tsx` / `makeCardComponents()` block map.
 - Exercise it in the relevant rich-text story (`GridPortableText.stories.tsx` or `CardsGroup.stories.tsx`).
 
+**When brand tokens or `src/components/ui/button.tsx` variants change**:
+- Update `foundations/Button.stories.tsx` so every variant/size stays exercised.
+- Update `foundations/BrandGuidelines.stories.tsx` if the change affects colors, gradients,
+  CTA treatments, or typography (headings, body copy, eyebrows) so it keeps matching
+  `reference/Brand Guidelines.html`'s 3.0 Color / 4.0 Typography / 5.0 Brand Application
+  sections.
+
 ## Mock data conventions
 
 - PortableText blocks: `{ _type: "block", _key, style, children: [{ _type: "span", _key, text, marks: [] }], markDefs: [] }`
 - Custom type blocks passed to `GridPortableText` must be cast: `as unknown as PortableTextBlock[]`
 - Card icons: `{ _type: "cardIcon", _key, icon: "activity", iconColor: "teal", iconShape: "circle" }`
 - Column dividers: `{ _type: "columnDivider", _key, style: "line" }`
-- Stat rows: `{ _type: "statRow", _key, stats: [{ _key, value, suffix, suffixColor, label }] }`
+- Stat rows: `{ _type: "statRow", _key, stats: [{ _key, value, suffix, suffixColor, label }] }` — `suffixColor` here is `red`/`terra`/`ink` only (cards sit on light backgrounds)
+- Stat band items: `{ _type: "statBandBlock", _key, countUp, stats: [{ _key, value, suffix, suffixColor, label }] }` — `suffixColor` here is `accent`/`text` (theme-aware) or `red`/`terra`/`ink` (fixed), since Stat Band is meant for full-bleed red/gradient sections too
+- Stat eyebrow (centered, muted label above a Stat Band): `block("stat-eyebrow", "Our client practices see on average")`

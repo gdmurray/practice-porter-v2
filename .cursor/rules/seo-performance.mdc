@@ -31,7 +31,7 @@ When adding new pages or content types, always ensure SEO fields are included.
 
 - Images from Sanity CDN — use asset URL with transformations, not base64
 - No `client:load` on components that don't need interactivity — prefer `client:visible` or `client:idle` for below-the-fold content
-- Fonts: Inter via `@fontsource-variable/inter` (self-hosted), Playfair via Google Fonts `@import`
+- Fonts: Plus Jakarta Sans via `@fontsource-variable/plus-jakarta-sans` (self-hosted, primary sans), Playfair Display via `@fontsource-variable/playfair-display` (self-hosted, serif)
 - Film grain overlay (`body::after`) is `pointer-events: none` with fixed positioning
 - `useCdn: false` in Sanity config because SSR fetches fresh content per request
 

@@ -21,7 +21,7 @@ export const cardIcon = defineType({
       title: "Icon Color",
       type: "string",
       components: { input: IconColorInput },
-      initialValue: "teal",
+      initialValue: "terra",
     }),
     defineField({
       name: "iconShape",

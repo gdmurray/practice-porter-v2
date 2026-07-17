@@ -1,8 +1,10 @@
+import { croppedDimensions, sanityImageUrl, type SanityImageValue } from "@/lib/sanityImage";
+
 export function SanityImage({
   value,
   animated = false,
 }: {
-  value: {
+  value: SanityImageValue & {
     asset?: {
       url?: string;
       _id?: string;
@@ -13,13 +15,16 @@ export function SanityImage({
   };
   animated?: boolean;
 }) {
-  const url = value.asset?.url;
-  if (!url) return null;
+  if (!value.asset?.url) return null;
 
+  // No fixed render size here (this block has no `object-fit`), so pass the
+  // original dimensions through and let the CDN return the Studio crop rect
+  // at its own natural size — then derive matching width/height hints below
+  // so the `aspect-ratio` CSS doesn't stretch the (now differently-shaped)
+  // cropped result.
+  const url = sanityImageUrl(value);
   const isPriority = value.priority === true;
-  const dims = value.asset?.metadata?.dimensions;
-  const width = dims?.width;
-  const height = dims?.height;
+  const { width, height } = croppedDimensions(value.asset?.metadata?.dimensions, value.crop);
 
   return (
     <img

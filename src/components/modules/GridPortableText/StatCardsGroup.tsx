@@ -9,21 +9,21 @@ export interface StatCardItem {
   value: string;
   label: string;
   compareText?: string;
-  valueColor?: "navy" | "red" | "gold" | "teal";
+  valueColor?: "ink" | "red" | "terra" | "muted";
 }
 
 const valueColorMap: Record<string, string> = {
-  navy: "text-midnight",
-  red: "text-[#C0392B]",
-  gold: "text-gold",
-  teal: "text-teal",
+  ink: "text-ink",
+  red: "text-red",
+  terra: "text-red-terra",
+  muted: "text-muted-text",
 };
 
 const iconBgMap: Record<string, string> = {
-  red: "bg-[#FDF0F0] text-[#D35050]",
-  amber: "bg-[#FDF5E6] text-[#C9A96E]",
-  navy: "bg-[#E8ECF2] text-midnight",
-  teal: "bg-teal-pale text-teal",
+  ink: "bg-[rgba(43,26,20,0.08)] text-ink",
+  red: "bg-[rgba(163,39,5,0.10)] text-red",
+  terra: "bg-vanilla text-red-terra",
+  muted: "bg-border-color text-muted-text",
 };
 
 export function StatCardsGroup({
@@ -41,7 +41,12 @@ export function StatCardsGroup({
         ? "grid-cols-1 sm:grid-cols-3"
         : "grid-cols-1 sm:grid-cols-2";
 
-  const cardBg = value.theme === "white" ? "bg-white" : "bg-off-white";
+  const cardBg =
+    value.theme === "white"
+      ? "bg-white"
+      : value.theme === "vanilla"
+        ? "bg-vanilla"
+        : "bg-lotion";
 
   return (
     <div
@@ -50,14 +55,14 @@ export function StatCardsGroup({
     >
       {value.items?.map((card, i) => {
         const Icon = card.icon ? getIcon(card.icon) : null;
-        const color = card.valueColor ?? "navy";
+        const color = card.valueColor ?? "ink";
         return (
           <div key={card._key ?? i} className={cn("rounded-xl p-7", cardBg)}>
             {Icon && (
               <div
                 className={cn(
                   "mb-5 flex size-12 shrink-0 items-center justify-center rounded-xl",
-                  iconBgMap[color] ?? iconBgMap.teal
+                  iconBgMap[color] ?? iconBgMap.terra
                 )}
               >
                 <Icon className="size-[22px]" />
@@ -65,13 +70,13 @@ export function StatCardsGroup({
             )}
             <div
               className={cn(
-                "mb-1.5 font-serif text-4xl font-bold leading-none",
-                valueColorMap[color] ?? "text-midnight"
+                "mb-1.5 font-serif text-4xl font-medium leading-none",
+                valueColorMap[color] ?? "text-ink"
               )}
             >
               {card.value}
             </div>
-            <div className="text-sm leading-normal text-mid-gray">
+            <div className="text-sm leading-normal text-muted-text">
               {card.label}
             </div>
             {card.compareText && (

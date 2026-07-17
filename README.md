@@ -95,9 +95,8 @@ The site runs at `http://localhost:4321`. The embedded Sanity Studio is at `http
 │   │   │   │   ├── CheckListGroup.tsx
 │   │   │   │   └── PricingCardsGroup.tsx
 │   │   │   ├── GridSection.tsx    # Composable grid layout shell
-│   │   │   ├── TrustBar.tsx       # Logo / trust badge strip
 │   │   │   ├── Faq.tsx            # FAQ accordion
-│   │   │   ├── BookMeeting.tsx    # Calendly / meeting embed
+│   │   │   ├── BookMeeting.tsx    # Google Calendar inline booking embed
 │   │   │   ├── SectionHeader.tsx  # Standalone eyebrow + title + subtitle block
 │   │   │   └── ModuleRenderer.tsx # Maps Sanity _type -> React component
 │   │   ├── ui/                    # shadcn primitives (button, card, sheet, etc.)
@@ -122,7 +121,7 @@ The site runs at `http://localhost:4321`. The embedded Sanity Studio is at `http
 │   │   ├── queries.ts             # All GROQ queries (defineQuery)
 │   │   └── schemas/
 │   │       ├── documents/         # page.ts, siteSettings.ts
-│   │       ├── modules/           # gridSection.ts, trustBar.ts, faq.ts, bookMeeting.ts
+│   │       ├── modules/           # gridSection.ts, faq.ts, bookMeeting.ts
 │   │       ├── objects/           # Reusable field groups and PT block objects
 │   │       └── index.ts           # Barrel export of all schema types
 │   └── styles/
@@ -149,9 +148,9 @@ Pages are built from a `modules[]` array of typed section documents. Each module
 | Module type | Component | Description |
 |---|---|---|
 | `gridSection` | `GridSection.tsx` | Composable row/column grid with Portable Text content |
-| `trustBar` | `TrustBar.tsx` | Logo strip / trust badges |
 | `faq` | `Faq.tsx` | Accordion FAQ section |
-| `bookMeeting` | `BookMeeting.tsx` | Meeting scheduler embed |
+| `bookMeeting` | `BookMeeting.tsx` | Meeting scheduler embed, centered |
+| `splitBooking` | `SplitBooking.tsx` | Two-column booking card — red rich-text panel (heading, copy, checklist, founder credit) beside the meeting scheduler embed |
 
 To add a new module, see `.cursor/rules/sanity-schemas.mdc` for the full checklist.
 
@@ -198,14 +197,16 @@ The brand palette, typography scale, spacing tokens, and component patterns are 
 
 | Token | Value | Usage |
 |---|---|---|
-| `midnight` | `#0b1d3a` | Dark backgrounds |
-| `gold` | `#c9a96e` | Primary accent, CTAs, eyebrows |
-| `teal` | `#1a5c5e` | Secondary accent |
-| `off-white` | `#f8f6f2` | Cream backgrounds |
+| `red` | `#A32705` | Primary brand accent — CTAs, links, eyebrows |
+| `red-deep` | `#7E1D02` | Primary button hover fill, gradient dark stop |
+| `red-terra` | `#C0532C` | Secondary/soft accent, gradient light stop |
+| `vanilla` | `#FFEEE4` | Secondary brand color — pale badges/accents |
+| `lotion` | `#FFFCFA` | Default light section background |
+| `ink` | `#2B1A14` | Headline/heading text |
 
 Key classes: `.eyebrow`, `.section-title`, `.section-subtitle`, `.pp-container`, `.pp-section`.
 
-Every module section has a `theme` field (`"dark"` / `"white"` / `"cream"`) applied via `data-theme` on the section wrapper — CSS variables handle the rest.
+Every module section has a `theme` field (`"white"` / `"lotion"` / `"vanilla"` / `"red"` / `"gradient"`) applied via `data-theme` on the section wrapper — CSS variables handle the rest.
 
 See `.cursor/rules/design-system.mdc` for the full reference including button variants and animation classes.
 

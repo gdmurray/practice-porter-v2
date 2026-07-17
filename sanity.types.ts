@@ -14,19 +14,127 @@
 
 // Source: schema.json
 export type CardTheme = {
-  cardBg?: "cream" | "white" | "transparent";
+  cardBg?: "lotion" | "vanilla" | "white" | "transparent";
   bordered?: boolean;
   layout?: "left" | "center";
   padding?: "compact" | "default" | "spacious";
   hoverEffect?: boolean;
 };
 
+export type Banner = {
+  headline?: string;
+  headlineEmphasis?: string;
+  subtext?: string;
+  cta?: Cta;
+};
+
+export type SplitBooking = {
+  _type: "splitBooking";
+  theme?: "white" | "lotion" | "cream" | "vanilla" | "red" | "gradient";
+  moduleLayout?: ModuleLayout;
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+  content?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "normal" | "h2";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | ({
+        _key: string;
+      } & CheckListBlock)
+    | ({
+        _key: string;
+      } & AvatarBlock)
+  >;
+};
+
+export type StepBand = {
+  _type: "stepBand";
+  moduleLayout?: ModuleLayout;
+  stepOne?: StepBandItem;
+  stepTwo?: StepBandItem;
+};
+
+export type Legal = {
+  _type: "legal";
+  theme?: "white" | "lotion" | "cream" | "vanilla" | "red" | "gradient";
+  moduleLayout?: ModuleLayout;
+  title?: string;
+  dateSource?: "updated" | "effective";
+  effectiveDate?: string;
+  content?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h2" | "h3" | "h4";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+};
+
+export type LogoCarousel = {
+  _type: "logoCarousel";
+  theme?: "white" | "lotion" | "cream" | "vanilla" | "red" | "gradient";
+  moduleLayout?: ModuleLayout;
+  label?: string;
+  logos?: Array<
+    {
+      _key: string;
+    } & LogoCarouselItem
+  >;
+  speed?: number;
+};
+
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
+
 export type GridSection = {
   _type: "gridSection";
   name?: string;
   sectionId?: string;
-  theme?: "dark" | "white" | "cream";
+  theme?: "white" | "lotion" | "cream" | "vanilla" | "red" | "gradient";
   moduleLayout?: ModuleLayout;
+  backgroundImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  gradientDirection?: "none" | "left" | "right";
+  isHero?: boolean;
+  circlePattern?: boolean;
+  circlePosition?: "topRight" | "topLeft" | "bottomRight" | "bottomLeft";
   rows?: Array<
     {
       _key: string;
@@ -36,17 +144,16 @@ export type GridSection = {
 
 export type BookMeeting = {
   _type: "bookMeeting";
-  theme?: "dark" | "white" | "cream";
+  theme?: "white" | "lotion" | "cream" | "vanilla" | "red" | "gradient";
   moduleLayout?: ModuleLayout;
   eyebrow?: string;
   title?: string;
   subtitle?: string;
-  calendlyUrl?: string;
 };
 
 export type Faq = {
   _type: "faq";
-  theme?: "dark" | "white" | "cream";
+  theme?: "white" | "lotion" | "cream" | "vanilla" | "red" | "gradient";
   moduleLayout?: ModuleLayout;
   eyebrow?: string;
   title?: string;
@@ -58,59 +165,15 @@ export type Faq = {
   >;
 };
 
-export type TrustBar = {
-  _type: "trustBar";
-  theme?: "dark" | "white" | "cream";
-  moduleLayout?: ModuleLayout;
-  items?: Array<
-    {
-      _key: string;
-    } & TrustItem
-  >;
-};
-
 export type SiteSettings = {
   _id: string;
   _type: "siteSettings";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  navigation?: {
-    links?: Array<
-      {
-        _key: string;
-      } & NavLink
-    >;
-    cta?: Cta;
-    theme?: "cream" | "dark";
-  };
-  footer?: {
-    brandDescription?: string;
-    socialLinks?: Array<
-      {
-        _key: string;
-      } & SocialLink
-    >;
-    columns?: Array<
-      {
-        _key: string;
-      } & FooterColumn
-    >;
-    legalLinks?: Array<
-      {
-        _key: string;
-      } & FooterLink
-    >;
-    copyright?: string;
-  };
+  navigation?: NavigationSettings;
+  footer?: FooterSettings;
   seo?: Seo;
-};
-
-export type SanityImageAssetReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
 };
 
 export type Seo = {
@@ -128,12 +191,35 @@ export type Seo = {
   siteName?: string;
 };
 
-export type Cta = {
-  _type: "cta";
-  label?: string;
-  href?: string;
-  variant?: "primary" | "secondary";
-  ctaType?: "internal" | "external" | "calendly";
+export type FooterSettings = {
+  _type: "footerSettings";
+  brandDescription?: string;
+  socialLinks?: Array<
+    {
+      _key: string;
+    } & SocialLink
+  >;
+  columns?: Array<
+    {
+      _key: string;
+    } & FooterColumn
+  >;
+  legalLinks?: Array<
+    {
+      _key: string;
+    } & FooterLink
+  >;
+  copyright?: string;
+};
+
+export type NavigationSettings = {
+  _type: "navigationSettings";
+  links?: Array<
+    {
+      _key: string;
+    } & NavLink
+  >;
+  cta?: Cta;
 };
 
 export type Page = {
@@ -151,27 +237,232 @@ export type Page = {
       } & GridSection)
     | ({
         _key: string;
-      } & TrustBar)
-    | ({
-        _key: string;
       } & Faq)
     | ({
         _key: string;
       } & BookMeeting)
+    | ({
+        _key: string;
+      } & LogoCarousel)
+    | ({
+        _key: string;
+      } & Legal)
+    | ({
+        _key: string;
+      } & StepBand)
+    | ({
+        _key: string;
+      } & SplitBooking)
   >;
 };
 
 export type ModuleLayout = {
   _type: "moduleLayout";
-  topPadding?: "lrg" | "med" | "sml";
-  bottomPadding?: "lrg" | "med" | "sml";
+  topPadding?: "lrg" | "med" | "sml" | "xs" | "xxs" | "none";
+  bottomPadding?: "lrg" | "med" | "sml" | "xs" | "xxs" | "none";
   animated?: boolean;
+};
+
+export type StepBandItem = {
+  _type: "stepBandItem";
+  label?: string;
+  description?: string;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
 };
 
 export type Slug = {
   _type: "slug";
   current?: string;
   source?: string;
+};
+
+export type AvatarBlock = {
+  _type: "avatarBlock";
+  name?: string;
+  role?: string;
+  initials?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+};
+
+export type RotatingText = {
+  _type: "rotatingText";
+  words?: Array<string>;
+};
+
+export type ApproachTabsBlock = {
+  _type: "approachTabsBlock";
+  items?: Array<
+    {
+      _key: string;
+    } & ApproachTab
+  >;
+  autoRotateSeconds?: number;
+};
+
+export type ApproachTab = {
+  _type: "approachTab";
+  label?: string;
+  body?: string;
+  link?: Cta;
+  kicker?: string;
+  panelTitle?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  cta?: Cta;
+};
+
+export type TailoredStepsBlock = {
+  _type: "tailoredStepsBlock";
+  stepOne?: TailoredStep;
+  stepTwo?: TailoredStep;
+};
+
+export type TailoredStep = {
+  _type: "tailoredStep";
+  badge?: string;
+  eyebrow?: string;
+  title?: string;
+  body?: string;
+  cta?: Cta;
+  links?: Array<
+    {
+      _key: string;
+    } & TailoredSolutionLink
+  >;
+};
+
+export type TailoredSolutionLink = {
+  _type: "tailoredSolutionLink";
+  icon?: string;
+  cta?: Cta;
+};
+
+export type ComparisonBlock = {
+  _type: "comparisonBlock";
+  leftCard?: ComparisonCard;
+  rightCard?: ComparisonCard;
+  banner?: Banner;
+};
+
+export type ComparisonCard = {
+  _type: "comparisonCard";
+  label?: string;
+  overLabel?: string;
+  value?: string;
+  caption?: string;
+  filledCount?: number;
+};
+
+export type StickyScrollBlock = {
+  _type: "stickyScrollBlock";
+  items?: Array<
+    {
+      _key: string;
+    } & StickyScrollStep
+  >;
+};
+
+export type StickyScrollStep = {
+  _type: "stickyScrollStep";
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  content?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "stepTitle";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+};
+
+export type TabsBlock = {
+  _type: "tabsBlock";
+  items?: Array<
+    {
+      _key: string;
+    } & TabItem
+  >;
+  autoRotateSeconds?: number;
+};
+
+export type TabItem = {
+  _type: "tabItem";
+  title?: string;
+  icon?: string;
+  content?: SolutionCard;
+};
+
+export type SolutionCard = {
+  _type: "solutionCard";
+  title?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  details?: Array<string>;
+  expandableTitle?: string;
+  checks?: Array<string>;
+};
+
+export type LogoCarouselItem = {
+  _type: "logoCarouselItem";
+  logo?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  name?: string;
 };
 
 export type GridColumn = {
@@ -194,13 +485,18 @@ export type GridColumn = {
           | "eyebrow"
           | "subtitle"
           | "lead"
-          | "caption";
+          | "stat-eyebrow";
         listItem?: "bullet" | "number";
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
-          _key: string;
-        }>;
+        markDefs?: Array<
+          | {
+              href?: string;
+              _type: "link";
+              _key: string;
+            }
+          | ({
+              _key: string;
+            } & RotatingText)
+        >;
         level?: number;
         _type: "block";
         _key: string;
@@ -229,6 +525,9 @@ export type GridColumn = {
       } & StatCardsBlock)
     | ({
         _key: string;
+      } & StatBandBlock)
+    | ({
+        _key: string;
       } & CtaBlock)
     | ({
         _key: string;
@@ -242,6 +541,27 @@ export type GridColumn = {
     | ({
         _key: string;
       } & CheckListBlock)
+    | ({
+        _key: string;
+      } & FeatureCardsBlock)
+    | ({
+        _key: string;
+      } & SolutionCard)
+    | ({
+        _key: string;
+      } & TabsBlock)
+    | ({
+        _key: string;
+      } & StickyScrollBlock)
+    | ({
+        _key: string;
+      } & ComparisonBlock)
+    | ({
+        _key: string;
+      } & TailoredStepsBlock)
+    | ({
+        _key: string;
+      } & ApproachTabsBlock)
   >;
 };
 
@@ -255,20 +575,12 @@ export type GridRow = {
   >;
 };
 
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
+export type Cta = {
+  _type: "cta";
+  label?: string;
+  href?: string;
+  variant?: "primary" | "secondary";
+  ctaType?: "internal" | "external" | "book_meeting";
 };
 
 export type CardsBlock = {
@@ -333,11 +645,19 @@ export type StatRow = {
   >;
 };
 
+export type StatBandItem = {
+  _type: "statBandItem";
+  value?: string;
+  suffix?: string;
+  suffixColor?: "accent" | "text" | "red" | "terra" | "ink";
+  label?: string;
+};
+
 export type InlineStat = {
   _type: "inlineStat";
   value?: string;
   suffix?: string;
-  suffixColor?: "gold" | "teal" | "navy";
+  suffixColor?: "red" | "terra" | "ink";
   label?: string;
 };
 
@@ -351,6 +671,26 @@ export type CardIcon = {
 export type ColumnDivider = {
   _type: "columnDivider";
   style?: "line" | "spacer";
+};
+
+export type FeatureCardsBlock = {
+  _type: "featureCardsBlock";
+  columns?: 2 | 3 | 4;
+  items?: Array<
+    {
+      _key: string;
+    } & FeatureCard
+  >;
+};
+
+export type FeatureCard = {
+  _type: "featureCard";
+  type?: "default" | "link";
+  iconLocation?: "left" | "top";
+  icon?: string;
+  title?: string;
+  description?: string;
+  cta?: Cta;
 };
 
 export type CheckListBlock = {
@@ -388,6 +728,8 @@ export type TestimonialBlock = {
       _key: string;
     } & Testimonial
   >;
+  variant?: "grid" | "carousel";
+  autoRotateSeconds?: number;
 };
 
 export type CtaBlock = {
@@ -400,9 +742,19 @@ export type CtaBlock = {
   alignment?: "left" | "center";
 };
 
+export type StatBandBlock = {
+  _type: "statBandBlock";
+  stats?: Array<
+    {
+      _key: string;
+    } & StatBandItem
+  >;
+  countUp?: boolean;
+};
+
 export type StatCardsBlock = {
   _type: "statCardsBlock";
-  theme?: "cream" | "white";
+  theme?: "lotion" | "vanilla" | "white";
   columns?: 2 | 3 | 4;
   items?: Array<
     {
@@ -456,9 +808,15 @@ export type StatCard = {
     | "bar-chart"
     | "book-open"
     | "calendar"
+    | "check"
     | "check-circle"
     | "clock"
     | "dollar-sign"
+    | "graduation-cap"
+    | "heart"
+    | "home"
+    | "mic"
+    | "package"
     | "phone"
     | "phone-off"
     | "pie-chart"
@@ -472,7 +830,7 @@ export type StatCard = {
   value?: string;
   label?: string;
   compareText?: string;
-  valueColor?: "navy" | "red" | "gold" | "teal";
+  valueColor?: "ink" | "red" | "terra" | "muted";
 };
 
 export type PricingCardsBlock = {
@@ -527,30 +885,6 @@ export type Testimonial = {
   avatar?: string;
 };
 
-export type TrustItem = {
-  _type: "trustItem";
-  icon?:
-    | "activity"
-    | "alert-circle"
-    | "bar-chart-3"
-    | "calendar"
-    | "check-circle"
-    | "clock"
-    | "dollar-sign"
-    | "globe"
-    | "message-circle"
-    | "monitor"
-    | "phone"
-    | "phone-off"
-    | "pie-chart"
-    | "shield"
-    | "shield-check"
-    | "star"
-    | "trending-down"
-    | "users";
-  label?: string;
-};
-
 export type FooterColumn = {
   _type: "footerColumn";
   title?: string;
@@ -579,10 +913,23 @@ export type FooterLink = {
   href?: string;
 };
 
+export type NavSubLink = {
+  _type: "navSubLink";
+  label?: string;
+  href?: string;
+  icon?: string;
+};
+
 export type NavLink = {
   _type: "navLink";
   label?: string;
+  type?: "link" | "menu";
   href?: string;
+  links?: Array<
+    {
+      _key: string;
+    } & NavSubLink
+  >;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -684,32 +1031,58 @@ export type Geopoint = {
 
 export type AllSanitySchemaTypes =
   | CardTheme
+  | Banner
+  | SplitBooking
+  | StepBand
+  | Legal
+  | LogoCarousel
+  | SanityImageAssetReference
   | GridSection
   | BookMeeting
   | Faq
-  | TrustBar
   | SiteSettings
-  | SanityImageAssetReference
   | Seo
-  | Cta
+  | FooterSettings
+  | NavigationSettings
   | Page
   | ModuleLayout
-  | Slug
-  | GridColumn
-  | GridRow
+  | StepBandItem
   | SanityImageCrop
   | SanityImageHotspot
+  | Slug
+  | AvatarBlock
+  | RotatingText
+  | ApproachTabsBlock
+  | ApproachTab
+  | TailoredStepsBlock
+  | TailoredStep
+  | TailoredSolutionLink
+  | ComparisonBlock
+  | ComparisonCard
+  | StickyScrollBlock
+  | StickyScrollStep
+  | TabsBlock
+  | TabItem
+  | SolutionCard
+  | LogoCarouselItem
+  | GridColumn
+  | GridRow
+  | Cta
   | CardsBlock
   | Card
   | StatRow
+  | StatBandItem
   | InlineStat
   | CardIcon
   | ColumnDivider
+  | FeatureCardsBlock
+  | FeatureCard
   | CheckListBlock
   | IconFeatureBlock
   | NumberedStepBlock
   | TestimonialBlock
   | CtaBlock
+  | StatBandBlock
   | StatCardsBlock
   | IconFeature
   | NumberedStep
@@ -718,10 +1091,10 @@ export type AllSanitySchemaTypes =
   | FaqItem
   | PricingCard
   | Testimonial
-  | TrustItem
   | FooterColumn
   | SocialLink
   | FooterLink
+  | NavSubLink
   | NavLink
   | SanityImagePaletteSwatch
   | SanityImagePalette
@@ -752,7 +1125,7 @@ export type ALL_PAGE_SLUGS_QUERY_RESULT = Array<{
 
 // Source: src/sanity/queries.ts
 // Variable: PAGE_QUERY
-// Query: *[_type == "page" && slug.current == $slug][0] {    _id,    title,    slug,    seo {      metaTitle,      metaDescription,      ogImage {        asset-> {          url,        },      },      canonicalUrl,      siteName,    },    modules[] {      _type,      _key,      ...,      stats[] {        ...,      },      statCards[] {        ...,      },      cards[] {        ...,      },      steps[] {        ...,      },      metrics[] {        ...,      },      extraMetrics[] {        ...,      },      testimonials[] {        ...,      },      previewMetrics[] {        ...,      },      features[] {        ...,      },      values[] {        ...,      },      image {        ...,        asset->,      },      primaryCta {        ...,      },      secondaryCta {        ...,      },      rows[] {        ...,        columns[] {          ...,          content[] {            ...,            _type == "image" => {              ...,              asset-> {                url,                metadata {                  dimensions {                    width,                    height                  }                }              }            }          }        }      },    }  }
+// Query: *[_type == "page" && slug.current == $slug][0] {    _id,    title,    slug,    seo {      metaTitle,      metaDescription,      ogImage {        asset-> {          url,        },      },      canonicalUrl,      siteName,    },    modules[] {      _type,      _key,      ...,      stats[] {        ...,      },      statCards[] {        ...,      },      cards[] {        ...,      },      steps[] {        ...,      },      metrics[] {        ...,      },      extraMetrics[] {        ...,      },      testimonials[] {        ...,      },      previewMetrics[] {        ...,      },      features[] {        ...,      },      values[] {        ...,      },      image {        ...,        asset->,      },      backgroundImage {        ...,        asset-> {          url,        },      },      logos[] {        ...,        logo {          ...,          asset-> {            url,          },        },      },      primaryCta {        ...,      },      secondaryCta {        ...,      },      content[] {        ...,        _type == "avatarBlock" => {          ...,          image {            ...,            asset-> {              url,              metadata {                dimensions {                  width,                  height                }              }            }          }        }      },      rows[] {        ...,        columns[] {          ...,          content[] {            ...,            _type == "image" => {              ...,              asset-> {                url,                metadata {                  dimensions {                    width,                    height                  }                }              }            },            _type == "solutionCard" => {              ...,              image {                ...,                asset-> {                  url,                  metadata {                    dimensions {                      width,                      height                    }                  }                }              }            },            _type == "tabsBlock" => {              ...,              items[] {                ...,                content {                  ...,                  image {                    ...,                    asset-> {                      url,                      metadata {                        dimensions {                          width,                          height                        }                      }                    }                  }                }              }            },            _type == "stickyScrollBlock" => {              ...,              items[] {                ...,                image {                  ...,                  asset-> {                    url,                    metadata {                      dimensions {                        width,                        height                      }                    }                  }                }              }            },            _type == "approachTabsBlock" => {              ...,              items[] {                ...,                image {                  ...,                  asset-> {                    url,                    metadata {                      dimensions {                        width,                        height                      }                    }                  }                }              }            }          }        }      },    }  }
 export type PAGE_QUERY_RESULT = {
   _id: string;
   title: string | null;
@@ -772,12 +1145,11 @@ export type PAGE_QUERY_RESULT = {
     | {
         _type: "bookMeeting";
         _key: string;
-        theme?: "cream" | "dark" | "white";
+        theme?: "cream" | "gradient" | "lotion" | "red" | "vanilla" | "white";
         moduleLayout?: ModuleLayout;
         eyebrow?: string;
         title?: string;
         subtitle?: string;
-        calendlyUrl?: string;
         stats: null;
         statCards: null;
         cards: null;
@@ -789,14 +1161,17 @@ export type PAGE_QUERY_RESULT = {
         features: null;
         values: null;
         image: null;
+        backgroundImage: null;
+        logos: null;
         primaryCta: null;
         secondaryCta: null;
+        content: null;
         rows: null;
       }
     | {
         _type: "faq";
         _key: string;
-        theme?: "cream" | "dark" | "white";
+        theme?: "cream" | "gradient" | "lotion" | "red" | "vanilla" | "white";
         moduleLayout?: ModuleLayout;
         eyebrow?: string;
         title?: string;
@@ -817,8 +1192,11 @@ export type PAGE_QUERY_RESULT = {
         features: null;
         values: null;
         image: null;
+        backgroundImage: null;
+        logos: null;
         primaryCta: null;
         secondaryCta: null;
+        content: null;
         rows: null;
       }
     | {
@@ -826,8 +1204,22 @@ export type PAGE_QUERY_RESULT = {
         _key: string;
         name?: string;
         sectionId?: string;
-        theme?: "cream" | "dark" | "white";
+        theme?: "cream" | "gradient" | "lotion" | "red" | "vanilla" | "white";
         moduleLayout?: ModuleLayout;
+        backgroundImage: {
+          asset: {
+            url: string | null;
+          } | null;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          alt?: string;
+          _type: "image";
+        } | null;
+        gradientDirection?: "left" | "none" | "right";
+        isHero?: boolean;
+        circlePattern?: boolean;
+        circlePosition?: "bottomLeft" | "bottomRight" | "topLeft" | "topRight";
         rows: Array<{
           _key: string;
           _type: "gridRow";
@@ -839,6 +1231,37 @@ export type PAGE_QUERY_RESULT = {
             verticalAlign?: "bottom" | "center" | "top";
             content: Array<
               | {
+                  _key: string;
+                  _type: "approachTabsBlock";
+                  items: Array<{
+                    _key: string;
+                    _type: "approachTab";
+                    label?: string;
+                    body?: string;
+                    link?: Cta;
+                    kicker?: string;
+                    panelTitle?: string;
+                    image: {
+                      asset: {
+                        url: string | null;
+                        metadata: {
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      media?: unknown;
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      alt?: string;
+                      _type: "image";
+                    } | null;
+                    cta?: Cta;
+                  }> | null;
+                  autoRotateSeconds?: number;
+                }
+              | {
                   children?: Array<{
                     marks?: Array<string>;
                     text?: string;
@@ -846,20 +1269,25 @@ export type PAGE_QUERY_RESULT = {
                     _key: string;
                   }>;
                   style?:
-                    | "caption"
                     | "eyebrow"
                     | "h1"
                     | "h2"
                     | "h3"
                     | "lead"
                     | "normal"
+                    | "stat-eyebrow"
                     | "subtitle";
                   listItem?: "bullet" | "number";
-                  markDefs?: Array<{
-                    href?: string;
-                    _type: "link";
-                    _key: string;
-                  }>;
+                  markDefs?: Array<
+                    | ({
+                        _key: string;
+                      } & RotatingText)
+                    | {
+                        href?: string;
+                        _type: "link";
+                        _key: string;
+                      }
+                  >;
                   level?: number;
                   _type: "block";
                   _key: string;
@@ -892,6 +1320,13 @@ export type PAGE_QUERY_RESULT = {
                 }
               | {
                   _key: string;
+                  _type: "comparisonBlock";
+                  leftCard?: ComparisonCard;
+                  rightCard?: ComparisonCard;
+                  banner?: Banner;
+                }
+              | {
+                  _key: string;
                   _type: "ctaBlock";
                   items?: Array<
                     {
@@ -899,6 +1334,16 @@ export type PAGE_QUERY_RESULT = {
                     } & Cta
                   >;
                   alignment?: "center" | "left";
+                }
+              | {
+                  _key: string;
+                  _type: "featureCardsBlock";
+                  columns?: 2 | 3 | 4;
+                  items?: Array<
+                    {
+                      _key: string;
+                    } & FeatureCard
+                  >;
                 }
               | {
                   _key: string;
@@ -947,8 +1392,42 @@ export type PAGE_QUERY_RESULT = {
                 }
               | {
                   _key: string;
+                  _type: "solutionCard";
+                  title?: string;
+                  image: {
+                    asset: {
+                      url: string | null;
+                      metadata: {
+                        dimensions: {
+                          width: number | null;
+                          height: number | null;
+                        } | null;
+                      } | null;
+                    } | null;
+                    media?: unknown;
+                    hotspot?: SanityImageHotspot;
+                    crop?: SanityImageCrop;
+                    alt?: string;
+                    _type: "image";
+                  } | null;
+                  details?: Array<string>;
+                  expandableTitle?: string;
+                  checks?: Array<string>;
+                }
+              | {
+                  _key: string;
+                  _type: "statBandBlock";
+                  stats?: Array<
+                    {
+                      _key: string;
+                    } & StatBandItem
+                  >;
+                  countUp?: boolean;
+                }
+              | {
+                  _key: string;
                   _type: "statCardsBlock";
-                  theme?: "cream" | "white";
+                  theme?: "lotion" | "vanilla" | "white";
                   columns?: 2 | 3 | 4;
                   items?: Array<
                     {
@@ -958,12 +1437,96 @@ export type PAGE_QUERY_RESULT = {
                 }
               | {
                   _key: string;
+                  _type: "stickyScrollBlock";
+                  items: Array<{
+                    _key: string;
+                    _type: "stickyScrollStep";
+                    image: {
+                      asset: {
+                        url: string | null;
+                        metadata: {
+                          dimensions: {
+                            width: number | null;
+                            height: number | null;
+                          } | null;
+                        } | null;
+                      } | null;
+                      media?: unknown;
+                      hotspot?: SanityImageHotspot;
+                      crop?: SanityImageCrop;
+                      alt?: string;
+                      _type: "image";
+                    } | null;
+                    content?: Array<{
+                      children?: Array<{
+                        marks?: Array<string>;
+                        text?: string;
+                        _type: "span";
+                        _key: string;
+                      }>;
+                      style?: "normal" | "stepTitle";
+                      listItem?: "bullet" | "number";
+                      markDefs?: Array<{
+                        href?: string;
+                        _type: "link";
+                        _key: string;
+                      }>;
+                      level?: number;
+                      _type: "block";
+                      _key: string;
+                    }>;
+                  }> | null;
+                }
+              | {
+                  _key: string;
+                  _type: "tabsBlock";
+                  items: Array<{
+                    _key: string;
+                    _type: "tabItem";
+                    title?: string;
+                    icon?: string;
+                    content: {
+                      _type: "solutionCard";
+                      title?: string;
+                      image: {
+                        asset: {
+                          url: string | null;
+                          metadata: {
+                            dimensions: {
+                              width: number | null;
+                              height: number | null;
+                            } | null;
+                          } | null;
+                        } | null;
+                        media?: unknown;
+                        hotspot?: SanityImageHotspot;
+                        crop?: SanityImageCrop;
+                        alt?: string;
+                        _type: "image";
+                      } | null;
+                      details?: Array<string>;
+                      expandableTitle?: string;
+                      checks?: Array<string>;
+                    } | null;
+                  }> | null;
+                  autoRotateSeconds?: number;
+                }
+              | {
+                  _key: string;
+                  _type: "tailoredStepsBlock";
+                  stepOne?: TailoredStep;
+                  stepTwo?: TailoredStep;
+                }
+              | {
+                  _key: string;
                   _type: "testimonialBlock";
                   items?: Array<
                     {
                       _key: string;
                     } & Testimonial
                   >;
+                  variant?: "carousel" | "grid";
+                  autoRotateSeconds?: number;
                 }
             > | null;
           }> | null;
@@ -979,19 +1542,37 @@ export type PAGE_QUERY_RESULT = {
         features: null;
         values: null;
         image: null;
+        logos: null;
         primaryCta: null;
         secondaryCta: null;
+        content: null;
       }
     | {
-        _type: "trustBar";
+        _type: "legal";
         _key: string;
-        theme?: "cream" | "dark" | "white";
+        theme?: "cream" | "gradient" | "lotion" | "red" | "vanilla" | "white";
         moduleLayout?: ModuleLayout;
-        items?: Array<
-          {
+        title?: string;
+        dateSource?: "effective" | "updated";
+        effectiveDate?: string;
+        content: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
             _key: string;
-          } & TrustItem
-        >;
+          }>;
+          style?: "h2" | "h3" | "h4" | "normal";
+          listItem?: "bullet" | "number";
+          markDefs?: Array<{
+            href?: string;
+            _type: "link";
+            _key: string;
+          }>;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }> | null;
         stats: null;
         statCards: null;
         cards: null;
@@ -1003,8 +1584,150 @@ export type PAGE_QUERY_RESULT = {
         features: null;
         values: null;
         image: null;
+        backgroundImage: null;
+        logos: null;
         primaryCta: null;
         secondaryCta: null;
+        rows: null;
+      }
+    | {
+        _type: "logoCarousel";
+        _key: string;
+        theme?: "cream" | "gradient" | "lotion" | "red" | "vanilla" | "white";
+        moduleLayout?: ModuleLayout;
+        label?: string;
+        logos: Array<{
+          _key: string;
+          _type: "logoCarouselItem";
+          logo: {
+            asset: {
+              url: string | null;
+            } | null;
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: "image";
+          } | null;
+          name?: string;
+        }> | null;
+        speed?: number;
+        stats: null;
+        statCards: null;
+        cards: null;
+        steps: null;
+        metrics: null;
+        extraMetrics: null;
+        testimonials: null;
+        previewMetrics: null;
+        features: null;
+        values: null;
+        image: null;
+        backgroundImage: null;
+        primaryCta: null;
+        secondaryCta: null;
+        content: null;
+        rows: null;
+      }
+    | {
+        _type: "splitBooking";
+        _key: string;
+        theme?: "cream" | "gradient" | "lotion" | "red" | "vanilla" | "white";
+        moduleLayout?: ModuleLayout;
+        eyebrow?: string;
+        title?: string;
+        subtitle?: string;
+        content: Array<
+          | {
+              _key: string;
+              _type: "avatarBlock";
+              name?: string;
+              role?: string;
+              initials?: string;
+              image: {
+                asset: {
+                  url: string | null;
+                  metadata: {
+                    dimensions: {
+                      width: number | null;
+                      height: number | null;
+                    } | null;
+                  } | null;
+                } | null;
+                media?: unknown;
+                hotspot?: SanityImageHotspot;
+                crop?: SanityImageCrop;
+                alt?: string;
+                _type: "image";
+              } | null;
+            }
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h2" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<{
+                href?: string;
+                _type: "link";
+                _key: string;
+              }>;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }
+          | {
+              _key: string;
+              _type: "checkListBlock";
+              lineSeparated?: boolean;
+              items?: Array<{
+                label?: string;
+                _type: "checkListItem";
+                _key: string;
+              }>;
+            }
+        > | null;
+        stats: null;
+        statCards: null;
+        cards: null;
+        steps: null;
+        metrics: null;
+        extraMetrics: null;
+        testimonials: null;
+        previewMetrics: null;
+        features: null;
+        values: null;
+        image: null;
+        backgroundImage: null;
+        logos: null;
+        primaryCta: null;
+        secondaryCta: null;
+        rows: null;
+      }
+    | {
+        _type: "stepBand";
+        _key: string;
+        moduleLayout?: ModuleLayout;
+        stepOne?: StepBandItem;
+        stepTwo?: StepBandItem;
+        stats: null;
+        statCards: null;
+        cards: null;
+        steps: null;
+        metrics: null;
+        extraMetrics: null;
+        testimonials: null;
+        previewMetrics: null;
+        features: null;
+        values: null;
+        image: null;
+        backgroundImage: null;
+        logos: null;
+        primaryCta: null;
+        secondaryCta: null;
+        content: null;
         rows: null;
       }
   > | null;
@@ -1012,7 +1735,7 @@ export type PAGE_QUERY_RESULT = {
 
 // Source: src/sanity/queries.ts
 // Variable: SITE_SETTINGS_QUERY
-// Query: *[_id == "siteSettings"][0] {    navigation {      links[] {        label,        href,      },      cta {        label,        href,        variant,        ctaType,      },      theme,    },    footer {      brandDescription,      socialLinks[] {        platform,        url,      },      columns[] {        title,        links[] {          label,          href,        },      },      legalLinks[] {        label,        href,      },      copyright,    },    seo {      metaTitle,      metaDescription,      ogImage {        asset-> {          url,        },      },      siteName,    },  }
+// Query: *[_id == "siteSettings"][0] {    navigation {      links[] {        label,        type,        href,        links[] {          label,          href,          icon,        },      },      cta {        label,        href,        variant,        ctaType,      },    },    footer {      brandDescription,      socialLinks[] {        platform,        url,      },      columns[] {        title,        links[] {          label,          href,        },      },      legalLinks[] {        label,        href,      },      copyright,    },    seo {      metaTitle,      metaDescription,      ogImage {        asset-> {          url,        },      },      siteName,    },  }
 export type SITE_SETTINGS_QUERY_RESULT =
   | {
       navigation: null;
@@ -1037,15 +1760,20 @@ export type SITE_SETTINGS_QUERY_RESULT =
       navigation: {
         links: Array<{
           label: string | null;
+          type: "link" | "menu" | null;
           href: string | null;
+          links: Array<{
+            label: string | null;
+            href: string | null;
+            icon: string | null;
+          }> | null;
         }> | null;
         cta: {
           label: string | null;
           href: string | null;
           variant: "primary" | "secondary" | null;
-          ctaType: "calendly" | "external" | "internal" | null;
+          ctaType: "book_meeting" | "external" | "internal" | null;
         } | null;
-        theme: "cream" | "dark" | null;
       } | null;
       footer: {
         brandDescription: string | null;
@@ -1092,7 +1820,7 @@ declare module "@sanity/client" {
   interface SanityQueries {
     '*[_type == "page" && defined(slug.current)] | order(_updatedAt desc) {\n    "slug": slug.current,\n    title,\n    "lastmod": _updatedAt\n  }': SlugsQueryResult;
     '\n  *[_type == "page" && defined(slug.current) && slug.current != "home"] {\n    "slug": slug.current\n  }\n': ALL_PAGE_SLUGS_QUERY_RESULT;
-    '\n  *[_type == "page" && slug.current == $slug][0] {\n    _id,\n    title,\n    slug,\n    seo {\n      metaTitle,\n      metaDescription,\n      ogImage {\n        asset-> {\n          url,\n        },\n      },\n      canonicalUrl,\n      siteName,\n    },\n    modules[] {\n      _type,\n      _key,\n      ...,\n      stats[] {\n        ...,\n      },\n      statCards[] {\n        ...,\n      },\n      cards[] {\n        ...,\n      },\n      steps[] {\n        ...,\n      },\n      metrics[] {\n        ...,\n      },\n      extraMetrics[] {\n        ...,\n      },\n      testimonials[] {\n        ...,\n      },\n      previewMetrics[] {\n        ...,\n      },\n      features[] {\n        ...,\n      },\n      values[] {\n        ...,\n      },\n      image {\n        ...,\n        asset->,\n      },\n      primaryCta {\n        ...,\n      },\n      secondaryCta {\n        ...,\n      },\n      rows[] {\n        ...,\n        columns[] {\n          ...,\n          content[] {\n            ...,\n            _type == "image" => {\n              ...,\n              asset-> {\n                url,\n                metadata {\n                  dimensions {\n                    width,\n                    height\n                  }\n                }\n              }\n            }\n          }\n        }\n      },\n    }\n  }\n': PAGE_QUERY_RESULT;
-    '\n  *[_id == "siteSettings"][0] {\n    navigation {\n      links[] {\n        label,\n        href,\n      },\n      cta {\n        label,\n        href,\n        variant,\n        ctaType,\n      },\n      theme,\n    },\n    footer {\n      brandDescription,\n      socialLinks[] {\n        platform,\n        url,\n      },\n      columns[] {\n        title,\n        links[] {\n          label,\n          href,\n        },\n      },\n      legalLinks[] {\n        label,\n        href,\n      },\n      copyright,\n    },\n    seo {\n      metaTitle,\n      metaDescription,\n      ogImage {\n        asset-> {\n          url,\n        },\n      },\n      siteName,\n    },\n  }\n': SITE_SETTINGS_QUERY_RESULT;
+    '\n  *[_type == "page" && slug.current == $slug][0] {\n    _id,\n    title,\n    slug,\n    seo {\n      metaTitle,\n      metaDescription,\n      ogImage {\n        asset-> {\n          url,\n        },\n      },\n      canonicalUrl,\n      siteName,\n    },\n    modules[] {\n      _type,\n      _key,\n      ...,\n      stats[] {\n        ...,\n      },\n      statCards[] {\n        ...,\n      },\n      cards[] {\n        ...,\n      },\n      steps[] {\n        ...,\n      },\n      metrics[] {\n        ...,\n      },\n      extraMetrics[] {\n        ...,\n      },\n      testimonials[] {\n        ...,\n      },\n      previewMetrics[] {\n        ...,\n      },\n      features[] {\n        ...,\n      },\n      values[] {\n        ...,\n      },\n      image {\n        ...,\n        asset->,\n      },\n      backgroundImage {\n        ...,\n        asset-> {\n          url,\n        },\n      },\n      logos[] {\n        ...,\n        logo {\n          ...,\n          asset-> {\n            url,\n          },\n        },\n      },\n      primaryCta {\n        ...,\n      },\n      secondaryCta {\n        ...,\n      },\n      content[] {\n        ...,\n        _type == "avatarBlock" => {\n          ...,\n          image {\n            ...,\n            asset-> {\n              url,\n              metadata {\n                dimensions {\n                  width,\n                  height\n                }\n              }\n            }\n          }\n        }\n      },\n      rows[] {\n        ...,\n        columns[] {\n          ...,\n          content[] {\n            ...,\n            _type == "image" => {\n              ...,\n              asset-> {\n                url,\n                metadata {\n                  dimensions {\n                    width,\n                    height\n                  }\n                }\n              }\n            },\n            _type == "solutionCard" => {\n              ...,\n              image {\n                ...,\n                asset-> {\n                  url,\n                  metadata {\n                    dimensions {\n                      width,\n                      height\n                    }\n                  }\n                }\n              }\n            },\n            _type == "tabsBlock" => {\n              ...,\n              items[] {\n                ...,\n                content {\n                  ...,\n                  image {\n                    ...,\n                    asset-> {\n                      url,\n                      metadata {\n                        dimensions {\n                          width,\n                          height\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            },\n            _type == "stickyScrollBlock" => {\n              ...,\n              items[] {\n                ...,\n                image {\n                  ...,\n                  asset-> {\n                    url,\n                    metadata {\n                      dimensions {\n                        width,\n                        height\n                      }\n                    }\n                  }\n                }\n              }\n            },\n            _type == "approachTabsBlock" => {\n              ...,\n              items[] {\n                ...,\n                image {\n                  ...,\n                  asset-> {\n                    url,\n                    metadata {\n                      dimensions {\n                        width,\n                        height\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      },\n    }\n  }\n': PAGE_QUERY_RESULT;
+    '\n  *[_id == "siteSettings"][0] {\n    navigation {\n      links[] {\n        label,\n        type,\n        href,\n        links[] {\n          label,\n          href,\n          icon,\n        },\n      },\n      cta {\n        label,\n        href,\n        variant,\n        ctaType,\n      },\n    },\n    footer {\n      brandDescription,\n      socialLinks[] {\n        platform,\n        url,\n      },\n      columns[] {\n        title,\n        links[] {\n          label,\n          href,\n        },\n      },\n      legalLinks[] {\n        label,\n        href,\n      },\n      copyright,\n    },\n    seo {\n      metaTitle,\n      metaDescription,\n      ogImage {\n        asset-> {\n          url,\n        },\n      },\n      siteName,\n    },\n  }\n': SITE_SETTINGS_QUERY_RESULT;
   }
 }

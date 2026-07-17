@@ -71,3 +71,30 @@ export const FourTestimonials: Story = {
     },
   },
 };
+
+export const Carousel: Story = {
+  name: "Carousel",
+  args: {
+    value: {
+      variant: "carousel",
+      autoRotateSeconds: 15,
+      items: [
+        {
+          _key: "t1",
+          quote: "Practice Porter's performance reporting gave us a clear look at exactly where our front desk staff was missing new patient booking opportunities, and gave us actionable next steps for each employee. We saw our new patient conversion rate improve by over 23% in under a month.",
+          author: "Dr. C Samuel",
+        },
+        {
+          _key: "t2",
+          quote: "We were spending thousands on marketing to generate leads each month, then losing those patients when they called. Practice Porter helped us identify and fix our issues with the Practice Performance Report and Follow Up Center, giving us full visibility and control over our new patient experience.",
+          author: "Dr. M Singh",
+        },
+        {
+          _key: "t3",
+          quote: "Practice Porter showed us exactly where new patients were slipping through the cracks. Within three months our front desk went from booking around 40% of new patient calls to over 80%, and we didn't have to hire a single new person to do it.",
+          author: "Dr. M Singh",
+        },
+      ],
+    },
+  },
+};

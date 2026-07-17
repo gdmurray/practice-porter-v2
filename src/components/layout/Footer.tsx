@@ -48,20 +48,16 @@ export function Footer({
   const legal = (legalLinks ?? []).filter(isValidLink);
 
   return (
-    <footer className="bg-[#070F1E] pb-10 pt-20 text-white/50">
+    <footer className="bg-vanilla pb-10 pt-20 text-muted-text">
       <div className="pp-container">
-        <div className="mb-[60px] grid grid-cols-1 gap-10 border-b border-white/10 pb-[60px] md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr]">
+        <div className="mb-[60px] grid grid-cols-1 gap-10 border-b border-ink/10 pb-[60px] md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr]">
           <div>
-            <a href="/" className="mb-5 flex items-baseline gap-0.5 no-underline">
-              <span className="font-serif text-[22px] font-semibold tracking-[-0.5px] text-white">
-                Practice
+            <a href="/" className="mb-5 flex no-underline">
+              <span className="font-sans text-xl font-semibold tracking-[-0.2px] text-ink">
+                Practice <em className="not-italic text-red-terra">Porter</em>
               </span>
-              <span className="ml-1.5 font-sans text-[22px] font-light tracking-[2px] uppercase text-gold">
-                Porter
-              </span>
-              <span className="ml-1 inline-block h-1.5 w-1.5 rounded-full bg-gold align-middle" />
             </a>
-            <p className="mb-6 max-w-[280px] text-sm leading-[1.7] text-white/40">
+            <p className="mb-6 max-w-[280px] text-sm leading-[1.7] text-muted-text">
               {brandDescription ?? ""}
             </p>
             <div className="flex gap-3">
@@ -70,7 +66,7 @@ export function Footer({
                   key={social.url}
                   href={social.url}
                   aria-label={social.platform}
-                  className="flex size-10 items-center justify-center rounded-full border border-white/10 text-white/40 transition-colors hover:border-gold hover:text-gold"
+                  className="flex size-10 items-center justify-center rounded-full border border-ink/15 text-muted-text transition-colors hover:border-red-terra hover:text-red-terra"
                 >
                   {social.platform === "linkedin" && (
                     <svg viewBox="0 0 24 24" fill="currentColor" className="size-4">
@@ -88,7 +84,7 @@ export function Footer({
           </div>
           {cols.map((col) => (
             <div key={col.title}>
-              <div className="mb-6 text-xs font-bold tracking-[2px] uppercase text-white">
+              <div className="mb-6 text-xs font-bold tracking-[2px] uppercase text-red-deep">
                 {col.title}
               </div>
               <ul className="flex flex-col gap-3 list-none">
@@ -96,7 +92,7 @@ export function Footer({
                   <li key={link.href}>
                     <a
                       href={resolveGlobalHref(link.href)}
-                      className="text-sm text-white/40 no-underline transition-colors hover:text-gold"
+                      className="text-sm font-regular text-ink no-underline transition-colors hover:text-red-terra"
                     >
                       {link.label}
                     </a>
@@ -106,14 +102,14 @@ export function Footer({
             </div>
           ))}
         </div>
-        <div className="flex flex-col items-center justify-between gap-4 text-[13px] text-white/25 md:flex-row">
+        <div className="flex flex-col items-center justify-between gap-4 text-[13px] text-muted-text md:flex-row">
           <div>{copyright ?? ""}</div>
           <div className="flex gap-6">
             {legal.map((link) => (
               <a
                 key={link.href}
                 href={resolveGlobalHref(link.href)}
-                className="text-white/25 no-underline transition-colors hover:text-white/50"
+                className="text-muted-text no-underline transition-colors hover:text-red-terra"
               >
                 {link.label}
               </a>

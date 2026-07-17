@@ -54,8 +54,8 @@ export const pricingCard = defineType({
       type: "string",
       options: {
         list: [
-          { value: "light", title: "Light (Cream)" },
-          { value: "dark", title: "Dark (Navy)" },
+          { value: "light", title: "Light (Lotion)" },
+          { value: "dark", title: "Dark (Burnt Red)" },
         ],
       },
       initialValue: "light",

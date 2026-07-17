@@ -1,4 +1,19 @@
 import { defineField, defineType } from "sanity";
+import { getValueAtPath } from "@/sanity/lib/getValueAtPath";
+import { InternalLinkInput } from "@/sanity/components/InternalLinkInput";
+
+/**
+ * `context.parent` in a `Rule.custom` validator only exposes the immediate
+ * parent object (this `cta` object itself) — walk up two path segments (this
+ * field, then the `cta` field) to reach the grandparent, e.g. to special-case
+ * behavior when a `cta` is nested inside a Feature Card.
+ */
+function getGrandparent(context: { document?: unknown; path?: unknown }) {
+  return getValueAtPath(
+    context.document,
+    ((context.path as (string | number)[]) ?? []).slice(0, -2)
+  ) as { _type?: string; type?: string } | undefined;
+}
 
 export const cta = defineType({
   name: "cta",
@@ -9,13 +24,56 @@ export const cta = defineType({
       name: "label",
       title: "Label",
       type: "string",
-      validation: (Rule) => Rule.required(),
+      description:
+        "Not required when this CTA is a Feature Card's link — the card's own title is displayed as the visible link text instead.",
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const grandparent = getGrandparent(context);
+          if (grandparent?._type === "featureCard") return true;
+          return value ? true : "Label is required.";
+        }),
     }),
     defineField({
       name: "href",
       title: "URL",
       type: "string",
-      validation: (Rule) => Rule.required(),
+      components: { input: InternalLinkInput },
+      description:
+        'For internal links, pick a page from the dropdown or type "#section-id" to scroll to an anchor on the current page.',
+      hidden: ({ parent }) => parent?.ctaType === "book_meeting",
+      validation: (Rule) =>
+        Rule.custom(async (value, context) => {
+          // A `cta` nested in a Feature Card is inert unless the card's type
+          // is "link" — but Sanity still applies field `initialValue`s (e.g.
+          // `ctaType: "internal"`) to the hidden object as soon as the card
+          // is created, so it needs to be exempted here too.
+          const grandparent = getGrandparent(context);
+          if (grandparent?._type === "featureCard" && grandparent.type !== "link") {
+            return true;
+          }
+
+          const parent = context.parent as { ctaType?: string } | undefined;
+          if (parent?.ctaType === "book_meeting") return true;
+          if (!value) return "URL is required unless CTA Type is Book Meeting.";
+
+          if (parent?.ctaType !== "internal") return true;
+
+          // In-page anchors (e.g. "#pricing") aren't page slugs — skip the
+          // existence check for those.
+          const [urlPath] = value.split("#");
+          if (!urlPath) return true;
+
+          const slug = urlPath === "/" ? "home" : urlPath.replace(/^\/+/, "");
+          const client = context.getClient({ apiVersion: "2026-03-10" });
+          const matchCount = await client.fetch<number>(
+            `count(*[_type == "page" && slug.current == $slug])`,
+            { slug }
+          );
+          if (!matchCount) {
+            return `No page found at "${urlPath}". Pick a page from the dropdown or fix the URL.`;
+          }
+          return true;
+        }),
     }),
     defineField({
       name: "variant",
@@ -23,8 +81,8 @@ export const cta = defineType({
       type: "string",
       options: {
         list: [
-          { title: "Primary (gold filled)", value: "primary" },
-          { title: "Secondary (transparent / outline)", value: "secondary" },
+          { title: "Primary (burnt red filled)", value: "primary" },
+          { title: "Secondary (white / outline)", value: "secondary" },
         ],
         layout: "radio",
       },
@@ -38,7 +96,7 @@ export const cta = defineType({
         list: [
           { title: "Internal Link (url or anchor)", value: "internal"},
           { title: "External Link", value: "external"},
-          { title: "Calendly Popup", value: "calendly"},
+          { title: "Book Meeting Popup", value: "book_meeting"},
         ],
         layout: "radio"
       },

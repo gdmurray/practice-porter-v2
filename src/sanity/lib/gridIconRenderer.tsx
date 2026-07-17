@@ -238,6 +238,68 @@ const ColContentCheckList = () => (
   </Svg>
 );
 
+/** solutionCard — split card: text lines left, image frame right */
+const ColContentSolutionCard = () => (
+  <Svg>
+    <rect x={1} y={2} width={1.5} height={1.5} rx={0.5} />
+    <rect x={1} y={5} width={6} height={1.25} rx={0.6} />
+    <rect x={1} y={7.5} width={6} height={1.25} rx={0.6} />
+    <rect x={1} y={10} width={6} height={1.25} rx={0.6} />
+    <rect x={8.5} y={2} width={6.5} height={12} rx={1.25} opacity={0.35} />
+  </Svg>
+);
+
+/** tabsBlock — pill tab row + underline bar */
+const ColContentTabs = () => (
+  <Svg>
+    <rect x={1} y={2} width={6.5} height={3.5} rx={1.5} />
+    <rect x={8.5} y={2} width={6.5} height={3.5} rx={1.5} opacity={0.3} />
+    <rect x={1} y={7} width={14} height={1.25} rx={0.6} opacity={0.2} />
+    <rect x={1} y={7} width={5} height={1.25} rx={0.6} />
+    <rect x={1} y={10.5} width={14} height={4} rx={1} opacity={0.2} />
+  </Svg>
+);
+
+/** stickyScrollBlock — text lines left, tall sticky image frame right */
+const ColContentStickyScroll = () => (
+  <Svg>
+    <rect x={1} y={1.5} width={6} height={1.25} rx={0.6} />
+    <rect x={1} y={4.5} width={6} height={1.25} rx={0.6} opacity={0.5} />
+    <rect x={1} y={9} width={6} height={1.25} rx={0.6} opacity={0.5} />
+    <rect x={1} y={12} width={6} height={1.25} rx={0.6} opacity={0.2} />
+    <rect x={8.5} y={1} width={6.5} height={14} rx={1.25} opacity={0.35} />
+  </Svg>
+);
+
+/** comparisonBlock — two paired cards, one dimmed (dark) vs one solid (light) */
+const ColContentComparison = () => (
+  <Svg>
+    <rect x={1} y={2} width={6} height={12} rx={1.25} opacity={0.75} />
+    <rect x={9} y={2} width={6} height={12} rx={1.25} opacity={0.25} />
+  </Svg>
+);
+
+/** tailoredStepsBlock — two step cards joined by a connector */
+const ColContentTailoredSteps = () => (
+  <Svg>
+    <rect x={1} y={3} width={6} height={10} rx={1.25} />
+    <rect x={9} y={3} width={6} height={10} rx={1.25} opacity={0.35} />
+    <circle cx={8} cy={8} r={1.5} />
+  </Svg>
+);
+
+/** approachTabsBlock — numbered step rows left, illustration panel right */
+const ColContentApproachTabs = () => (
+  <Svg>
+    <circle cx={2.25} cy={2.5} r={1.5} />
+    <rect x={5.5} y={1.75} width={6} height={1.5} rx={0.75} />
+    <circle cx={2.25} cy={8} r={1.5} />
+    <rect x={5.5} y={7.25} width={6} height={1.5} rx={0.75} />
+    <circle cx={2.25} cy={13.5} r={1.5} opacity={0.35} />
+    <rect x={5.5} y={12.75} width={6} height={1.5} rx={0.75} opacity={0.35} />
+  </Svg>
+);
+
 const CONTENT_TYPE_ICONS: Record<string, React.ComponentType> = {
   block: ColContentText,
   image: ColContentImage,
@@ -247,11 +309,23 @@ const CONTENT_TYPE_ICONS: Record<string, React.ComponentType> = {
   numberedStepBlock: ColContentNumberedStep,
   iconFeatureBlock: ColContentIconFeature,
   checkListBlock: ColContentCheckList,
+  solutionCard: ColContentSolutionCard,
+  tabsBlock: ColContentTabs,
+  stickyScrollBlock: ColContentStickyScroll,
+  comparisonBlock: ColContentComparison,
+  tailoredStepsBlock: ColContentTailoredSteps,
+  approachTabsBlock: ColContentApproachTabs,
 };
 
 /** Priority order when a column has mixed content. */
 const CONTENT_PRIORITY = [
   "image",
+  "approachTabsBlock",
+  "tabsBlock",
+  "stickyScrollBlock",
+  "tailoredStepsBlock",
+  "comparisonBlock",
+  "solutionCard",
   "statCardsBlock",
   "ctaBlock",
   "testimonialBlock",

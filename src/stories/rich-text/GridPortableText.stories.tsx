@@ -53,9 +53,9 @@ const allStyleBlocks = [
     markDefs: [{ _key: "lnk1", _type: "link", href: "https://practiceporter.com" }],
     children: [
       span("We support "),
-      span("highlighted teal text", ["highlight"]),
+      span("highlighted red text", ["highlight"]),
       span(", "),
-      span("gold highlights", ["highlightGold"]),
+      span("terracotta highlights", ["highlightTerra"]),
       span(", "),
       span("serif emphasis", ["serifText"]),
       span(", and "),
@@ -63,7 +63,7 @@ const allStyleBlocks = [
       span("."),
     ],
   },
-  block("caption", "Data refreshes every 24 hours. Historical data available from your practice go-live date."),
+  block("stat-eyebrow", "Our client practices see on average"),
 ] as unknown as PortableTextBlock[];
 
 export const AllTextStyles: Story = {
@@ -98,12 +98,11 @@ export const WithEmbeddedBlocks: Story = {
         theme: "white",
         columns: 3,
         items: [
-          { _key: "s1", icon: "phone", value: "94%", label: "Average booking rate", valueColor: "teal" },
-          { _key: "s2", icon: "dollar-sign", value: "$142", label: "Cost per appointment", valueColor: "navy" },
-          { _key: "s3", icon: "trending-up", value: "2.4×", label: "ROI vs industry avg", valueColor: "gold" },
+          { _key: "s1", icon: "phone", value: "94%", label: "Average booking rate", valueColor: "terra" },
+          { _key: "s2", icon: "dollar-sign", value: "$142", label: "Cost per appointment", valueColor: "ink" },
+          { _key: "s3", icon: "trending-up", value: "2.4×", label: "ROI vs industry avg", valueColor: "red" },
         ],
       },
-      block("caption", "Benchmarks based on 2,000+ practices across North America."),
       {
         _type: "ctaBlock",
         _key: "cta1",
@@ -117,6 +116,68 @@ export const WithEmbeddedBlocks: Story = {
   },
 };
 
+export const WithStatBand: Story = {
+  name: "With Embedded Stat Band (themed section)",
+  decorators: [
+    (Story) => (
+      <div data-theme="red" style={{ background: "var(--section-bg)", padding: "64px 32px" }}>
+        <Story />
+      </div>
+    ),
+  ],
+  args: {
+    value: [
+      block("stat-eyebrow", "Our client practices see on average"),
+      {
+        _type: "statBandBlock",
+        _key: "band1",
+        countUp: true,
+        stats: [
+          { _key: "b1", value: "85", suffix: "%+", suffixColor: "text", label: "Average new patient conversion rate" },
+          { _key: "b2", value: "2", suffix: "x", suffixColor: "accent", label: "More new patients booked in each practice" },
+          { _key: "b3", value: "280", suffix: "k+", suffixColor: "accent", label: "Increase in production per practice per year" },
+        ],
+      },
+    ] as unknown as PortableTextBlock[],
+    centered: true,
+  },
+};
+
+export const WithRotatingText: Story = {
+  name: "With Rotating Text mark (About hero headline)",
+  decorators: [
+    (Story) => (
+      <div
+        data-theme="red"
+        style={{ background: "var(--hero-gradient)", padding: "64px 32px", textAlign: "center" }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
+  args: {
+    value: [
+      {
+        _type: "block",
+        _key: "rotw-demo",
+        style: "h1",
+        markDefs: [
+          {
+            _key: "rotw1",
+            _type: "rotatingText",
+            words: ["Calls.", "Bookings.", "Revenue.", "Growth."],
+          },
+        ],
+        children: [
+          span("Your Dental Practice's Partner in New Patient "),
+          span("Calls.", ["em", "rotw1"]),
+        ],
+      },
+    ] as unknown as PortableTextBlock[],
+    centered: true,
+  },
+};
+
 export const HeadingsOnly: Story = {
   args: {
     value: [
@@ -125,9 +186,8 @@ export const HeadingsOnly: Story = {
       block("h3", "H3 — Subsection Title Level"),
       block("eyebrow", "Eyebrow Label"),
       block("subtitle", "This is the subtitle style — used below headings to add context without being a full body paragraph."),
-      block("lead", "This is the lead style — slightly larger body text, used for opening paragraphs or key callouts."),
       block("normal", "This is normal body text. It uses the base font size with comfortable line height for readability."),
-      block("caption", "This is a caption — small, muted text used for footnotes or image captions."),
+      block("lead", "This is the lead style — smaller supporting copy, used for lead-in paragraphs inside tabbed/stepped content."),
     ] as unknown as PortableTextBlock[],
     centered: false,
   },

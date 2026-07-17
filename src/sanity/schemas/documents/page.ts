@@ -33,9 +33,12 @@ export const page = defineType({
       type: "array",
       of: [
         { type: "gridSection" },
-        { type: "trustBar" },
         { type: "faq" },
         { type: "bookMeeting" },
+        { type: "logoCarousel" },
+        { type: "legal" },
+        { type: "stepBand" },
+        { type: "splitBooking" },
       ],
     }),
   ],

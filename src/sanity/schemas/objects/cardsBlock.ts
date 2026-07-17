@@ -38,13 +38,14 @@ export const cardsBlock = defineType({
           group: "appearance",
           options: {
             list: [
-              { value: "cream", title: "Cream" },
+              { value: "lotion", title: "Lotion (warm off-white)" },
+              { value: "vanilla", title: "Vanilla Blush" },
               { value: "white", title: "White" },
               { value: "transparent", title: "Transparent" },
             ],
             layout: "radio",
           },
-          initialValue: "cream",
+          initialValue: "lotion",
         }),
         defineField({
           name: "bordered",

@@ -7,7 +7,7 @@ export const faq = defineType({
   title: "FAQ Section",
   type: "object",
   fields: [
-    themeField("cream"),
+    themeField("lotion"),
     moduleLayoutField(),
     defineField({
       name: "eyebrow",

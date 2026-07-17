@@ -43,7 +43,7 @@ Read the HTML file. Sections are delimited by HTML comments like
 ## Step 2: Identify reusable objects
 
 Check if any repeated field groups already exist in `src/sanity/schemas/objects/`.
-Existing objects: `cta`, `seo`, `heroStat`, `trustItem`, `problemStatCard`,
+Existing objects: `cta`, `seo`, `heroStat`, `problemStatCard`,
 `solutionCard`, `processStep`, `testimonial`, `scorecardFeature`,
 `scorecardMetric`, `pricingCard`, `aboutValue`, `resultsMetric`,
 `resultsExtraMetric`, `navLink`, `footerLink`, `footerColumn`, `socialLink`.

@@ -22,9 +22,9 @@ const footer = siteSettings?.footer;
 <Layout title="Page Not Found — Practice Porter" description="The page you're looking for doesn't exist.">
   <Navigation
     client:load
-    links={nav?.links}
-    cta={nav?.cta}
-    navTheme={nav?.theme ?? "cream"}
+    links={nav?.links ?? null}
+    cta={nav?.cta ?? null}
+    theme="lotion"
   />
   <main>
     <section data-theme="dark" class="pp-section" style="background: var(--section-bg); min-height: 60vh; display: flex; align-items: center;">

@@ -1,32 +1,11 @@
-"use client";
-
-import { useEffect, useRef } from "react";
 import { SectionHeader } from "./SectionHeader";
 import { getModuleLayoutAttrs, type ModuleLayoutValue } from "@/lib/moduleLayout";
-
-declare global {
-  interface Window {
-    Calendly?: {
-      initInlineWidget: (options: {
-        url: string;
-        parentElement: HTMLElement;
-        prefill?: Record<string, unknown>;
-        utm?: Record<string, unknown>;
-      }) => void;
-      /** Opens popup without creating a badge button. Use this for programmatic triggers. */
-      showPopupWidget: (url: string) => void;
-      /** Creates a persistent floating badge button + opens popup. Call once only. */
-      initPopupWidget: (options: { url: string }) => void;
-    };
-  }
-}
 
 export interface BookMeetingProps {
   theme?: string;
   eyebrow?: string;
   title?: string;
   subtitle?: string;
-  calendlyUrl?: string;
   moduleLayout?: ModuleLayoutValue | null;
 }
 
@@ -35,39 +14,10 @@ export function BookMeeting({
   eyebrow,
   title,
   subtitle,
-  calendlyUrl,
   moduleLayout,
 }: BookMeetingProps) {
   const animated = moduleLayout?.animated ?? false;
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!calendlyUrl || !containerRef.current) return;
-
-    const container = containerRef.current;
-
-    const initWidget = () => {
-      if (window.Calendly && container) {
-        // Clear any prior Calendly iframe before re-initializing
-        container.innerHTML = "";
-        window.Calendly.initInlineWidget({
-          url: calendlyUrl,
-          parentElement: container,
-          prefill: {},
-          utm: {},
-        });
-      }
-    };
-
-    // Layout.astro owns Calendly script/CSS injection — never create it here.
-    // By the time this island hydrates, Layout has already started loading it.
-    const scriptEl = document.getElementById("calendly-widget-script");
-    if (window.Calendly) {
-      initWidget();
-    } else if (scriptEl) {
-      scriptEl.addEventListener("load", initWidget, { once: true });
-    }
-  }, [calendlyUrl]);
+  const bookingUrl = import.meta.env.PUBLIC_GOOGLE_CALENDAR_BOOKING_URL as string | undefined;
 
   return (
     <section
@@ -85,17 +35,29 @@ export function BookMeeting({
             title={title ?? ""}
             subtitle={subtitle}
             alignment="center"
-            theme={theme as "dark" | "white" | "cream"}
+            theme={
+              theme as
+                | "white"
+                | "lotion"
+                | "cream"
+                | "vanilla"
+                | "red"
+                | "gradient"
+            }
             className="mb-12"
             headingId="book-meeting-heading"
             animated={animated}
           />
         )}
-        {calendlyUrl && (
-          <div
-            ref={containerRef}
+        {bookingUrl && (
+          <iframe
+            src={bookingUrl}
+            style={{ border: 0 }}
             className="mx-auto w-full"
-            style={{ minWidth: "320px", height: "700px" }}
+            width="100%"
+            height={700}
+            frameBorder={0}
+            title="Book a meeting"
           />
         )}
       </div>

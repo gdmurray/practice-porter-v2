@@ -29,7 +29,7 @@ function renderAnswer(blocks?: FaqItem["answer"]) {
   return blocks.map((block, i) => {
     const text = block.children?.map((c) => c.text).join("") ?? "";
     return text ? (
-      <p key={i} className="text-mid-gray leading-relaxed">
+      <p key={i} className="text-muted-text leading-relaxed">
         {text}
       </p>
     ) : null;
@@ -37,7 +37,7 @@ function renderAnswer(blocks?: FaqItem["answer"]) {
 }
 
 export function Faq({
-  theme = "cream",
+  theme = "lotion",
   eyebrow,
   title,
   subtitle,
@@ -62,7 +62,15 @@ export function Faq({
             title={title ?? ""}
             subtitle={subtitle}
             alignment="center"
-            theme={theme as "dark" | "white" | "cream"}
+            theme={
+              theme as
+                | "white"
+                | "lotion"
+                | "cream"
+                | "vanilla"
+                | "red"
+                | "gradient"
+            }
             className="mb-12"
             headingId="faq-heading"
             animated={animated}
@@ -72,7 +80,7 @@ export function Faq({
           <Accordion
             type="single"
             collapsible
-            className="mx-auto w-full max-w-[800px] border-t border-warm-gray"
+            className="mx-auto w-full max-w-[800px] border-t border-border-color"
             aria-label="Frequently asked questions"
             {...(animated ? { "data-anim-list": true } : {})}
           >
@@ -80,9 +88,9 @@ export function Faq({
               <AccordionItem
                 key={item._key ?? i}
                 value={`item-${i}`}
-                className="border-b border-warm-gray"
+                className="border-b border-border-color"
               >
-                <AccordionTrigger className="py-6 text-left text-base font-semibold text-midnight hover:text-teal hover:no-underline focus-visible:outline-none **:data-[slot=accordion-trigger-icon]:text-gold">
+                <AccordionTrigger className="py-6 text-left text-base font-semibold text-ink hover:text-red hover:no-underline focus-visible:outline-none **:data-[slot=accordion-trigger-icon]:text-red">
                   {item.question}
                 </AccordionTrigger>
                 <AccordionContent className="pb-6 space-y-3">

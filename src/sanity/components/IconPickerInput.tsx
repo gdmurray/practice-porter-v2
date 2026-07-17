@@ -1,101 +1,64 @@
-import React, { useState } from "react";
+import { useCallback, useId, useMemo } from "react";
 import { set, unset } from "sanity";
 import type { StringInputProps } from "sanity";
+import { Autocomplete, Card, Flex, Text } from "@sanity/ui";
 import { getIcon } from "@/lib/icons";
 import { ICON_NAMES } from "@/lib/iconNames";
 
+interface IconOption {
+  value: string;
+}
+
+const OPTIONS: IconOption[] = ICON_NAMES.map((name) => ({ value: name }));
+
 export function IconPickerInput(props: StringInputProps) {
   const { value, onChange } = props;
-  const [search, setSearch] = useState("");
+  const id = useId();
 
-  const filtered = ICON_NAMES.filter((name) =>
-    name.toLowerCase().includes(search.toLowerCase())
+  const handleChange = useCallback(
+    (nextValue: string) => {
+      onChange(nextValue ? set(nextValue) : unset());
+    },
+    [onChange]
   );
 
-  function handleSelect(name: string) {
-    if (name === value) {
-      onChange(unset());
-    } else {
-      onChange(set(name));
-    }
-  }
+  const filterOption = useCallback(
+    (query: string, option: IconOption) => option.value.toLowerCase().includes(query.toLowerCase()),
+    []
+  );
+
+  const renderOption = useCallback(
+    (option: IconOption) => {
+      const Icon = getIcon(option.value);
+      const selected = option.value === value;
+      return (
+        <Card as="button" padding={2} radius={2} tone={selected ? "primary" : undefined}>
+          <Flex align="center" gap={3}>
+            <Flex align="center" justify="center" style={{ width: 20, flex: "none" }}>
+              <Icon size={16} />
+            </Flex>
+            <Text size={1}>{option.value}</Text>
+          </Flex>
+        </Card>
+      );
+    },
+    [value]
+  );
+
+  const selectedIcon = useMemo(() => (value ? getIcon(value) : undefined), [value]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-      <input
-        type="text"
-        placeholder="Search icons…"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        style={{
-          padding: "8px 12px",
-          border: "1px solid #e2e2e2",
-          borderRadius: 6,
-          fontSize: 13,
-          outline: "none",
-          width: "100%",
-          boxSizing: "border-box",
-        }}
-      />
-
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(72px, 1fr))",
-          gap: 8,
-        }}
-      >
-        {filtered.map((name) => {
-          const Icon = getIcon(name);
-          const isSelected = value === name;
-          return (
-            <button
-              key={name}
-              type="button"
-              onClick={() => handleSelect(name)}
-              title={name}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 6,
-                padding: "10px 4px 8px",
-                borderRadius: 8,
-                border: isSelected
-                  ? "2px solid #1a5c5e"
-                  : "1px solid #e2e2e2",
-                background: isSelected ? "#e4f0f0" : "#fff",
-                cursor: "pointer",
-                transition: "all 0.12s ease",
-              }}
-            >
-              <Icon
-                size={20}
-                style={{ color: isSelected ? "#1a5c5e" : "#555" }}
-              />
-              <span
-                style={{
-                  fontSize: 10,
-                  color: isSelected ? "#1a5c5e" : "#888",
-                  fontWeight: isSelected ? 600 : 400,
-                  textAlign: "center",
-                  lineHeight: 1.2,
-                  wordBreak: "break-word",
-                }}
-              >
-                {name}
-              </span>
-            </button>
-          );
-        })}
-      </div>
-
-      {filtered.length === 0 && (
-        <p style={{ fontSize: 13, color: "#888", textAlign: "center" }}>
-          No icons match &quot;{search}&quot;
-        </p>
-      )}
-    </div>
+    <Autocomplete
+      id={id}
+      icon={selectedIcon}
+      options={OPTIONS}
+      value={value ?? ""}
+      placeholder="Search icons…"
+      openButton
+      openOnFocus
+      renderOption={renderOption}
+      filterOption={filterOption}
+      onChange={handleChange}
+    />
   );
 }

@@ -63,11 +63,44 @@ export const PAGE_QUERY = defineQuery(`
         ...,
         asset->,
       },
+      backgroundImage {
+        ...,
+        asset-> {
+          url,
+        },
+      },
+      logos[] {
+        ...,
+        logo {
+          ...,
+          asset-> {
+            url,
+          },
+        },
+      },
       primaryCta {
         ...,
       },
       secondaryCta {
         ...,
+      },
+      content[] {
+        ...,
+        _type == "avatarBlock" => {
+          ...,
+          image {
+            ...,
+            asset-> {
+              url,
+              metadata {
+                dimensions {
+                  width,
+                  height
+                }
+              }
+            }
+          }
+        }
       },
       rows[] {
         ...,
@@ -86,6 +119,78 @@ export const PAGE_QUERY = defineQuery(`
                   }
                 }
               }
+            },
+            _type == "solutionCard" => {
+              ...,
+              image {
+                ...,
+                asset-> {
+                  url,
+                  metadata {
+                    dimensions {
+                      width,
+                      height
+                    }
+                  }
+                }
+              }
+            },
+            _type == "tabsBlock" => {
+              ...,
+              items[] {
+                ...,
+                content {
+                  ...,
+                  image {
+                    ...,
+                    asset-> {
+                      url,
+                      metadata {
+                        dimensions {
+                          width,
+                          height
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            _type == "stickyScrollBlock" => {
+              ...,
+              items[] {
+                ...,
+                image {
+                  ...,
+                  asset-> {
+                    url,
+                    metadata {
+                      dimensions {
+                        width,
+                        height
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            _type == "approachTabsBlock" => {
+              ...,
+              items[] {
+                ...,
+                image {
+                  ...,
+                  asset-> {
+                    url,
+                    metadata {
+                      dimensions {
+                        width,
+                        height
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -99,7 +204,13 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
     navigation {
       links[] {
         label,
+        type,
         href,
+        links[] {
+          label,
+          href,
+          icon,
+        },
       },
       cta {
         label,
@@ -107,7 +218,6 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
         variant,
         ctaType,
       },
-      theme,
     },
     footer {
       brandDescription,

@@ -24,13 +24,13 @@ export const inlineStat = defineType({
       type: "string",
       options: {
         list: [
-          { value: "gold", title: "Gold" },
-          { value: "teal", title: "Teal" },
-          { value: "navy", title: "Navy" },
+          { value: "red", title: "Burnt Red" },
+          { value: "terra", title: "Terracotta" },
+          { value: "ink", title: "Ink (dark)" },
         ],
         layout: "radio",
       },
-      initialValue: "gold",
+      initialValue: "red",
     }),
     defineField({
       name: "label",

@@ -6,7 +6,7 @@ export interface SectionHeaderProps {
   titleHighlight?: string;
   subtitle?: string;
   alignment?: "left" | "center";
-  theme?: "dark" | "white" | "cream";
+  theme?: "white" | "lotion" | "cream" | "vanilla" | "red" | "gradient";
   className?: string;
   headingId?: string;
   /** When true, adds data-anim-header to each child so the parent
@@ -20,7 +20,7 @@ export function SectionHeader({
   titleHighlight,
   subtitle,
   alignment = "left",
-  theme = "cream",
+  theme = "lotion",
   className,
   headingId,
   animated = false,
@@ -28,7 +28,9 @@ export function SectionHeader({
   const displayTitle = titleHighlight
     ? title.replace(titleHighlight, `__HIGHLIGHT__`)
     : title;
-  const highlightClass = theme === "dark" ? "text-gold" : "text-teal";
+
+  const isDark = theme === "red" || theme === "gradient";
+  const highlightClass = isDark ? "text-vanilla" : "text-red";
   const animAttr = animated ? { "data-anim-header": true } : {};
 
   return (
@@ -37,11 +39,10 @@ export function SectionHeader({
         <div
           {...animAttr}
           className={cn(
-            "eyebrow mb-5 flex items-center gap-3",
-            alignment === "center" && "justify-center"
+            "eyebrow mb-5",
+            alignment === "center" && "text-center"
           )}
         >
-          <span className="h-px w-8 bg-gold" />
           {eyebrow}
         </div>
       )}
@@ -49,7 +50,9 @@ export function SectionHeader({
         {displayTitle.split("__HIGHLIGHT__").map((part, i) => (
           <span key={i}>
             {part}
-            {i === 0 && titleHighlight && <em className={highlightClass}>{titleHighlight}</em>}
+            {i === 0 && titleHighlight && (
+              <em className={cn("font-normal", highlightClass)}>{titleHighlight}</em>
+            )}
           </span>
         ))}
       </h2>
@@ -57,7 +60,7 @@ export function SectionHeader({
         <p
           {...animAttr}
           className={cn(
-            "section-subtitle max-w-[560px]",
+            "section-subtitle max-w-[700px]",
             alignment === "center" && "mx-auto"
           )}
         >

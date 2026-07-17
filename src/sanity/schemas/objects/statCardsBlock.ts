@@ -14,7 +14,8 @@ export const statCardsBlock = defineType({
       description: "Override the section theme for card backgrounds",
       options: {
         list: [
-          { value: "cream", title: "Cream" },
+          { value: "lotion", title: "Lotion (warm off-white)" },
+          { value: "vanilla", title: "Vanilla Blush" },
           { value: "white", title: "White" },
         ],
       },

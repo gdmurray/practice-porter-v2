@@ -8,6 +8,9 @@ import {
 
 // ─── Studio preview components ──────────────────────────────────────────────
 
+// Previews render inside the Studio's dark UI chrome, not the site's light
+// page backgrounds — "#2B1A14" (ink) would be illegible here, so heading-tier
+// previews use the same light "vanilla" stand-in as CardNumberStyle below.
 const CardTitleStyle = ({ children }: { children: React.ReactNode }) => (
   <span
     style={{
@@ -15,7 +18,7 @@ const CardTitleStyle = ({ children }: { children: React.ReactNode }) => (
       fontFamily: "Georgia, 'Times New Roman', serif",
       fontSize: "20px",
       fontWeight: 700,
-      color: "#0B1D3A",
+      color: "#FFEEE4",
     }}
   >
     {children}
@@ -30,7 +33,7 @@ const CardNumberStyle = ({ children }: { children: React.ReactNode }) => (
       fontSize: "56px",
       fontWeight: 800,
       lineHeight: 1,
-      color: "#E8DBC4",
+      color: "#FFEEE4",
     }}
   >
     {children}
@@ -44,7 +47,7 @@ const MetricValueStyle = ({ children }: { children: React.ReactNode }) => (
       fontFamily: "Georgia, 'Times New Roman', serif",
       fontSize: "22px",
       fontWeight: 700,
-      color: "#0B1D3A",
+      color: "#FFEEE4",
     }}
   >
     {children}
@@ -82,12 +85,12 @@ const StepNumberStyle = ({ children }: { children: React.ReactNode }) => (
         width: 52,
         height: 52,
         borderRadius: "50%",
-        border: "2px solid #c9a96e",
+        border: "2px solid #A32705",
         background: "#ffffff",
         fontFamily: "Georgia, 'Times New Roman', serif",
         fontSize: 18,
         fontWeight: 700,
-        color: "#c9a96e",
+        color: "#A32705",
       }}
     >
       {children}
@@ -103,7 +106,7 @@ const StepTagStyle = ({ children }: { children: React.ReactNode }) => (
       fontWeight: 700,
       letterSpacing: "2px",
       textTransform: "uppercase",
-      color: "#1a5c5e",
+      color: "#C0532C",
     }}
   >
     {children}
@@ -160,15 +163,15 @@ const SubMark = ({ children }: { children: React.ReactNode }) => (
 // ─── Mark preview components ─────────────────────────────────────────────────
 
 const HighlightMark = ({ children }: { children: React.ReactNode }) => (
-  <span style={{ color: "#1a5c5e" }}>{children}</span>
+  <span style={{ color: "#A32705" }}>{children}</span>
 );
 
-const GoldMark = ({ children }: { children: React.ReactNode }) => (
-  <span style={{ color: "#c9a96e" }}>{children}</span>
+const RedMark = ({ children }: { children: React.ReactNode }) => (
+  <span style={{ color: "#A32705" }}>{children}</span>
 );
 
-const TealMark = ({ children }: { children: React.ReactNode }) => (
-  <span style={{ color: "#1a5c5e" }}>{children}</span>
+const TerraMark = ({ children }: { children: React.ReactNode }) => (
+  <span style={{ color: "#C0532C" }}>{children}</span>
 );
 
 // ─── Exported portable text block definition ──────────────────────────────────
@@ -199,16 +202,16 @@ export const cardsPortableTextBlock = defineArrayMember({
         component: HighlightMark,
       },
       {
-        title: "Gold",
-        value: "highlightGold",
+        title: "Burnt Red",
+        value: "highlightRed",
         icon: StarFilledIcon,
-        component: GoldMark,
+        component: RedMark,
       },
       {
-        title: "Teal",
-        value: "highlightTeal",
+        title: "Terracotta",
+        value: "highlightTerra",
         icon: DropIcon,
-        component: TealMark,
+        component: TerraMark,
       },
     ],
   },

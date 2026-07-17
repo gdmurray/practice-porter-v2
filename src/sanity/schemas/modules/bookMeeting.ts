@@ -25,20 +25,12 @@ export const bookMeeting = defineType({
       type: "text",
       rows: 2,
     }),
-    defineField({
-      name: "calendlyUrl",
-      title: "Calendly URL",
-      type: "url",
-      description:
-        "Your Calendly scheduling page URL (e.g. https://calendly.com/yourname/meeting-type)",
-      validation: (Rule) => Rule.required().uri({ scheme: ["https"] }),
-    }),
   ],
   preview: {
-    select: { title: "title", url: "calendlyUrl" },
-    prepare: ({ title, url }) => ({
+    select: { title: "title" },
+    prepare: ({ title }) => ({
       title: "Book a Meeting",
-      subtitle: title ?? url ?? "",
+      subtitle: title ?? "",
     }),
   },
 });

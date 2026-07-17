@@ -101,7 +101,7 @@ Tool: patch_document_from_json
 Args:
   resource: { projectId: "u06m8vwg", dataset: "production" }
   documentId: "drafts.<id>"
-  intent: "Adding hero and trustBar modules from HTML handoff"
+  intent: "Adding hero and logoCarousel modules from HTML handoff"
   set: [{
     path: "modules",
     value: [
@@ -118,11 +118,11 @@ Args:
         ]
       },
       {
-        _type: "trustBar",
-        _key: "trust-1",
+        _type: "logoCarousel",
+        _key: "logos-1",
         theme: "white",
         items: [
-          { _type: "trustItem", _key: "ti-1", text: "HIPAA Compliant" }
+          { _type: "logoCarouselItem", _key: "lc-1", name: "Acme Dental" }
         ]
       }
     ]

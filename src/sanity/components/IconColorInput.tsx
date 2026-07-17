@@ -6,22 +6,22 @@ import { getIcon } from "@/lib/icons";
 
 const COLOR_OPTIONS = [
   {
-    value: "navy",
-    label: "Navy",
-    bg: "rgba(11,29,58,0.08)",
-    fg: "#0b1d3a",
+    value: "ink",
+    label: "Ink",
+    bg: "rgba(43,26,20,0.08)",
+    fg: "#2B1A14",
   },
   {
-    value: "teal",
-    label: "Teal",
-    bg: "#e4f0f0",
-    fg: "#1a5c5e",
+    value: "terra",
+    label: "Terracotta",
+    bg: "#FFEEE4",
+    fg: "#C0532C",
   },
   {
-    value: "gold",
-    label: "Gold",
-    bg: "rgba(201,169,110,0.12)",
-    fg: "#c9a96e",
+    value: "red",
+    label: "Burnt Red",
+    bg: "rgba(163,39,5,0.10)",
+    fg: "#A32705",
   },
 ] as const;
 

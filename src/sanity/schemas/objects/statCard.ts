@@ -40,13 +40,13 @@ export const statCard = defineType({
       type: "string",
       options: {
         list: [
-          { value: "navy", title: "Navy" },
-          { value: "red", title: "Red" },
-          { value: "gold", title: "Gold" },
-          { value: "teal", title: "Teal" },
+          { value: "ink", title: "Ink (dark)" },
+          { value: "red", title: "Burnt Red" },
+          { value: "terra", title: "Terracotta" },
+          { value: "muted", title: "Muted" },
         ],
       },
-      initialValue: "navy",
+      initialValue: "ink",
     }),
   ],
   preview: {

@@ -45,7 +45,6 @@ const siteSeo = siteSettings?.seo;
 const seo = pageSeo ?? siteSeo;
 const ogImageUrl = seo?.ogImage?.asset?.url ?? siteSeo?.ogImage?.asset?.url;
 const modules = page?.modules ?? [];
-const firstModuleTheme = (modules[0] as { theme?: string } | undefined)?.theme ?? null;
 
 const siteUrl = "https://practiceporter.com";
 const siteName = siteSeo?.siteName ?? "Practice Porter";
@@ -79,8 +78,8 @@ Astro.response.headers.set('Cache-Control', 'public, max-age=0, s-maxage=300');
     client:load
     links={nav?.links ?? null}
     cta={nav?.cta ?? null}
-    firstModuleTheme={firstModuleTheme}
-    navTheme={nav?.theme ?? "cream"}
+    theme={modules[0]?.theme ?? "lotion"}
+    currentPath={Astro.url.pathname}
   />
   <main>
     <PageModules modules={modules} client:visible />

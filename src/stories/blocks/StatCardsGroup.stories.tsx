@@ -17,8 +17,8 @@ export const TwoColumn: Story = {
       theme: "white",
       columns: 2,
       items: [
-        { _key: "s1", icon: "phone", value: "94%", label: "Average booking rate across tracked practices", valueColor: "teal" },
-        { _key: "s2", icon: "dollar-sign", value: "$142", label: "Average cost per booked appointment", valueColor: "navy" },
+        { _key: "s1", icon: "phone", value: "94%", label: "Average booking rate across tracked practices", valueColor: "terra" },
+        { _key: "s2", icon: "dollar-sign", value: "$142", label: "Average cost per booked appointment", valueColor: "ink" },
       ],
     },
   },
@@ -31,25 +31,25 @@ export const ThreeColumnWithIcons: Story = {
       theme: "white",
       columns: 3,
       items: [
-        { _key: "s1", icon: "trending-up", value: "2.4×", label: "ROI vs industry average", valueColor: "gold", compareText: "Industry avg: 1.1×" },
-        { _key: "s2", icon: "users", value: "12,400", label: "Patient calls tracked per month", valueColor: "teal" },
-        { _key: "s3", icon: "alert-circle", value: "18%", label: "Calls missed during business hours", valueColor: "navy", compareText: "Industry avg: 31%" },
+        { _key: "s1", icon: "trending-up", value: "2.4×", label: "ROI vs industry average", valueColor: "red", compareText: "Industry avg: 1.1×" },
+        { _key: "s2", icon: "users", value: "12,400", label: "Patient calls tracked per month", valueColor: "terra" },
+        { _key: "s3", icon: "alert-circle", value: "18%", label: "Calls missed during business hours", valueColor: "muted", compareText: "Industry avg: 31%" },
       ],
     },
   },
 };
 
 export const FourColumn: Story = {
-  name: "4 Column — No icons, cream background",
+  name: "4 Column — No icons, lotion background",
   args: {
     value: {
-      theme: "cream",
+      theme: "lotion",
       columns: 4,
       items: [
-        { _key: "s1", value: "94%", label: "Booking rate", valueColor: "teal" },
-        { _key: "s2", value: "$142", label: "Cost per appt", valueColor: "navy" },
-        { _key: "s3", value: "87%", label: "Show rate", valueColor: "gold" },
-        { _key: "s4", value: "4.2×", label: "Avg ROI", valueColor: "navy" },
+        { _key: "s1", value: "94%", label: "Booking rate", valueColor: "terra" },
+        { _key: "s2", value: "$142", label: "Cost per appt", valueColor: "ink" },
+        { _key: "s3", value: "87%", label: "Show rate", valueColor: "red" },
+        { _key: "s4", value: "4.2×", label: "Avg ROI", valueColor: "ink" },
       ],
     },
   },

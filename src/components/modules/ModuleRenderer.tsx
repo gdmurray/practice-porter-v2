@@ -1,8 +1,5 @@
 import { lazy, Suspense } from "react";
 
-const TrustBar = lazy(() =>
-  import("./TrustBar").then((m) => ({ default: m.TrustBar }))
-);
 const Faq = lazy(() =>
   import("./Faq").then((m) => ({ default: m.Faq }))
 );
@@ -11,6 +8,18 @@ const BookMeeting = lazy(() =>
 );
 const GridSection = lazy(() =>
   import("./GridSection").then((m) => ({ default: m.GridSection }))
+);
+const LogoCarousel = lazy(() =>
+  import("./LogoCarousel").then((m) => ({ default: m.LogoCarousel }))
+);
+const Legal = lazy(() =>
+  import("./Legal").then((m) => ({ default: m.Legal }))
+);
+const StepBand = lazy(() =>
+  import("./StepBand").then((m) => ({ default: m.StepBand }))
+);
+const SplitBooking = lazy(() =>
+  import("./SplitBooking").then((m) => ({ default: m.SplitBooking }))
 );
 
 export interface ModuleRendererProps {
@@ -27,9 +36,6 @@ export function ModuleRenderer({ module }: ModuleRendererProps) {
   let content: React.ReactNode = null;
 
   switch (_type) {
-    case "trustBar":
-      content = <TrustBar {...(props as Parameters<typeof TrustBar>[0])} />;
-      break;
     case "faq":
       content = <Faq {...(props as Parameters<typeof Faq>[0])} />;
       break;
@@ -38,6 +44,20 @@ export function ModuleRenderer({ module }: ModuleRendererProps) {
       break;
     case "gridSection":
       content = <GridSection {...(props as Parameters<typeof GridSection>[0])} />;
+      break;
+    case "logoCarousel":
+      content = <LogoCarousel {...(props as Parameters<typeof LogoCarousel>[0])} />;
+      break;
+    case "legal":
+      content = <Legal {...(props as Parameters<typeof Legal>[0])} />;
+      break;
+    case "stepBand":
+      content = <StepBand {...(props as Parameters<typeof StepBand>[0])} />;
+      break;
+    case "splitBooking":
+      content = (
+        <SplitBooking {...(props as Parameters<typeof SplitBooking>[0])} />
+      );
       break;
     default:
       return null;

@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ChevronRight } from "lucide-react";
 import { ctaProps, type CtaData } from "@/lib/cta";
 import { cn } from "@/lib/utils";
 
@@ -28,10 +27,7 @@ export function makeCtaGroup(centered: boolean, animated = false) {
             size="cta"
             asChild
           >
-            <a {...ctaProps(cta)}>
-              {cta.label}
-              <ChevronRight className="size-4" />
-            </a>
+            <a {...ctaProps(cta)}>{cta.label}</a>
           </Button>
         ))}
       </div>

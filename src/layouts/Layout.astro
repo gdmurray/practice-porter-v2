@@ -1,6 +1,6 @@
 ---
 import { VisualEditing } from "@sanity/astro/visual-editing";
-import interFontUrl from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
+import jakartaFontUrl from "@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2?url";
 import playfairFontUrl from "@fontsource-variable/playfair-display/files/playfair-display-latin-wght-normal.woff2?url";
 
 interface Props {
@@ -62,7 +62,7 @@ const jsonLdItems = jsonLd
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     ))}
     <link rel="preconnect" href="https://cdn.sanity.io" crossorigin />
-    <link rel="preload" as="font" type="font/woff2" href={interFontUrl} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={jakartaFontUrl} crossorigin />
     <link rel="preload" as="font" type="font/woff2" href={playfairFontUrl} crossorigin />
   </head>
   <body>
@@ -79,101 +79,120 @@ const jsonLdItems = jsonLd
       )
     }
     <VisualEditing enabled={visualEditingEnabled && preview} zIndex={1000} />
-    <script>
+    <script define:vars={{ bookingUrl: import.meta.env.PUBLIC_GOOGLE_CALENDAR_BOOKING_URL }}>
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener("click", (e) => {
           e.preventDefault();
-          const href = (anchor as HTMLAnchorElement).getAttribute("href");
+          const href = anchor.getAttribute("href");
           const target = href ? document.querySelector(href) : null;
           if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
         });
       });
 
-      // Calendly loader — Layout owns script/CSS injection so it happens exactly once.
-      // BookMeeting.tsx only calls initInlineWidget; it never creates the script tag.
-      const CALENDLY_SCRIPT = "calendly-widget-script";
-      const CALENDLY_CSS    = "calendly-widget-css";
+      // Google Calendar scheduling-button loader.
+      // Layout owns script/CSS injection (once per page). Any element with
+      // data-cta-type="book_meeting" triggers the popup via proxy-click on
+      // the hidden button that Google's script renders.
+      const GCAL_SCRIPT = "gcal-scheduling-script";
+      const GCAL_CSS    = "gcal-scheduling-css";
 
-      // Cache the popup overlay so we can hide/show it instead of recreating
-      // the iframe (and its loading state) on every click.
-      let _calendlyOverlay: HTMLElement | null = null;
+      // The hidden wrapper Google's button is mounted inside.
+      // Google inserts its button as a sibling *after* the target div,
+      // so we hide the whole wrapper to keep it off-screen.
+      let _gcalWrapper = null;
+      let _gcalButton = null;
+      let _pendingOpen = false;
+      let _mounted = false;
 
-      function loadCalendly(onReady?: () => void) {
-        if (!document.getElementById(CALENDLY_CSS)) {
+      function injectGcalAssets() {
+        if (!document.getElementById(GCAL_CSS)) {
           const css = document.createElement("link");
-          css.id = CALENDLY_CSS;
+          css.id = GCAL_CSS;
           css.rel = "stylesheet";
-          css.href = "https://assets.calendly.com/assets/external/widget.css";
+          css.href = "https://calendar.google.com/calendar/scheduling-button-script.css";
           document.head.appendChild(css);
         }
-        const existing = document.getElementById(CALENDLY_SCRIPT);
-        if ((window as any).Calendly) {
-          onReady?.();
+      }
+
+      function mountGcalButton(onReady) {
+        if (_mounted) { if (onReady) onReady(); return; }
+
+        injectGcalAssets();
+
+        // Hidden wrapper to contain Google's injected button element.
+        if (!_gcalWrapper) {
+          const wrapper = document.createElement("div");
+          wrapper.id = "gcal-button-wrapper";
+          wrapper.style.cssText = "position:fixed;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none;";
+          const targetDiv = document.createElement("div");
+          targetDiv.id = "gcal-button-target";
+          wrapper.appendChild(targetDiv);
+          document.body.appendChild(wrapper);
+          _gcalWrapper = wrapper;
+        }
+
+        const targetDiv = _gcalWrapper.querySelector("#gcal-button-target");
+
+        const doMount = () => {
+          if (_mounted) { if (onReady) onReady(); return; }
+          _mounted = true;
+
+          window.calendar.schedulingButton.load({
+            url: bookingUrl,
+            color: "#0B1D3A",
+            label: "Book an appointment",
+            target: targetDiv,
+          });
+
+          // Google inserts its button as a sibling of targetDiv; poll until found.
+          let attempts = 0;
+          const poll = setInterval(() => {
+            const btn = targetDiv.nextElementSibling;
+            if (btn) {
+              _gcalButton = btn;
+              clearInterval(poll);
+              if (onReady) onReady();
+              if (_pendingOpen) {
+                _pendingOpen = false;
+                btn.click();
+              }
+            } else if (++attempts > 40) {
+              clearInterval(poll);
+            }
+          }, 100);
+        };
+
+        const existing = document.getElementById(GCAL_SCRIPT);
+        if (window.calendar && window.calendar.schedulingButton) {
+          doMount();
         } else if (existing) {
-          if (onReady) existing.addEventListener("load", onReady, { once: true });
+          existing.addEventListener("load", doMount, { once: true });
         } else {
           const script = document.createElement("script");
-          script.id = CALENDLY_SCRIPT;
-          script.src = "https://assets.calendly.com/assets/external/widget.js";
+          script.id = GCAL_SCRIPT;
+          script.src = "https://calendar.google.com/calendar/scheduling-button-script.js";
           script.async = true;
-          if (onReady) script.addEventListener("load", onReady, { once: true });
+          script.addEventListener("load", doMount, { once: true });
           document.body.appendChild(script);
         }
       }
 
-      function hideCalendlyPopup() {
-        if (_calendlyOverlay) _calendlyOverlay.style.display = "none";
-        document.body.style.overflow = "";
+      // Preload/mount if any book_meeting element is on the page.
+      if (document.querySelector('[data-cta-type="book_meeting"]') || document.getElementById("book-meeting")) {
+        mountGcalButton(null);
       }
 
-      function openCalendlyPopup(url: string) {
-        // Reuse the cached overlay — no reload, no loading spinner on subsequent opens.
-        if (_calendlyOverlay) {
-          _calendlyOverlay.style.display = "";
-          document.body.style.overflow = "hidden";
-          return;
-        }
-
-        (window as any).Calendly.showPopupWidget(url);
-        document.body.style.overflow = "hidden";
-
-        // Calendly creates the overlay synchronously; grab it next frame.
-        requestAnimationFrame(() => {
-          const overlay = document.querySelector<HTMLElement>(".calendly-overlay");
-          if (!overlay) return;
-          _calendlyOverlay = overlay;
-
-          // Replace Calendly's close elements with clones that just hide the
-          // overlay instead of destroying it (cloneNode strips existing listeners).
-          const replaceWithHide = (selector: string) => {
-            const el = overlay.querySelector<HTMLElement>(selector);
-            if (!el) return;
-            const clone = el.cloneNode(true) as HTMLElement;
-            clone.addEventListener("click", hideCalendlyPopup);
-            el.parentNode?.replaceChild(clone, el);
-          };
-
-          replaceWithHide(".calendly-close-overlay");
-          replaceWithHide(".calendly-popup-close");
-        });
-      }
-
-      // Preload if page has Calendly links or the BookMeeting section.
-      if (
-        document.querySelector('a[href*="calendly.com"]') ||
-        document.getElementById("book-meeting")
-      ) {
-        loadCalendly();
-      }
-
-      // Intercept any Calendly anchor click and open as a popup.
+      // Intercept clicks on any element with data-cta-type="book_meeting".
       document.addEventListener("click", (e) => {
-        const link = (e.target as Element)?.closest("a");
-        if (!link) return;
-        const href = link.getAttribute("href");
-        if (!href?.includes("calendly.com")) return;
+        const trigger = e.target && e.target.closest('[data-cta-type="book_meeting"]');
+        if (!trigger) return;
         e.preventDefault();
-        loadCalendly(() => openCalendlyPopup(href));
+        if (_gcalButton) {
+          _gcalButton.click();
+        } else {
+          _pendingOpen = true;
+          mountGcalButton(null);
+        }
       });
     </script>
   </body>
@@ -198,10 +217,10 @@ const jsonLdItems = jsonLd
     letter-spacing: 0.08em;
     text-transform: uppercase;
     text-decoration: none;
-    color: var(--midnight, #0f172a);
-    background: var(--gold, #c9a96e);
+    color: var(--ink, #2B1A14);
+    background: var(--red, #A32705);
     border-radius: 9999px;
-    box-shadow: 0 8px 24px color-mix(in srgb, var(--midnight, #0f172a) 12%, transparent);
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--ink, #2B1A14) 12%, transparent);
   }
 
   .exit-preview:hover {

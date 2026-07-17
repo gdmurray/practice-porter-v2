@@ -23,7 +23,7 @@ const LAYOUT_FIELD_DENYLIST = new Set([
   "width", // gridColumn: column width fraction
 
   // Behavior/type enumerations
-  "ctaType", // cta: "internal" | "external" | "calendly"
+  "ctaType", // cta: "internal" | "external" | "book_meeting"
 
   // Decorative/token fields
   "valueColor", // statCard: "navy" | "red" | "gold" | "teal"

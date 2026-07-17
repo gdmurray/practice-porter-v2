@@ -17,7 +17,7 @@ alwaysApply: false
 ## Creating a new module
 
 1. Create `src/sanity/schemas/modules/<name>.ts` using `defineType` + `defineField`
-2. Add `themeField()` from `objects/theme.ts` as the first field (default: `"cream"`, `"dark"`, or `"white"`)
+2. Add `themeField()` from `objects/theme.ts` as the first field (default: `"white"`, `"lotion"`, `"cream"`, `"vanilla"`, `"red"`, or `"gradient"`)
 3. Export from `schemas/modules/index.ts`
 4. Register in `schemas/index.ts` under the Modules section
 5. Add `{ type: "<name>" }` to the `modules` array in `schemas/documents/page.ts`
@@ -31,8 +31,10 @@ Use the `themeField()` helper for consistent theme options:
 
 ```ts
 import { themeField } from "../objects/theme";
-// themeField("dark") — sets default; options are "dark", "white", "cream"
+// themeField("lotion") — sets default; options are "white", "lotion", "cream", "vanilla", "red", "gradient"
 ```
+
+`"red"` and `"gradient"` are bold/high-impact themes — reserve `"gradient"` for hero/CTA moments (max 2 per page per the brand guidelines) and use `"white"`/`"lotion"`/`"vanilla"` for the everyday section rhythm.
 
 ## Singleton documents
 

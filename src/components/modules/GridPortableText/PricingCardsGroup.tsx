@@ -36,16 +36,16 @@ export function PricingCardsGroup({
           <Card
             key={card._key ?? i}
             className={cn(
-              "rounded-[20px] p-10 transition-all duration-400 hover:-translate-y-1 hover:shadow-[0_16px_60px_rgba(11,29,58,0.1)]",
+              "rounded-[20px] p-10 transition-all duration-400 hover:-translate-y-1 hover:shadow-[0_16px_60px_rgba(43,26,20,0.10)]",
               isDark
-                ? "bg-midnight text-white [&]:border-white/10"
-                : "border-warm-gray bg-off-white text-charcoal"
+                ? "bg-red text-white [&]:border-white/10"
+                : "border-border-color bg-lotion text-charcoal"
             )}
           >
             <CardContent className="flex h-full flex-col p-0">
               {card.tag && (
                 <Badge
-                  variant={isDark ? "gold" : "teal"}
+                  variant={isDark ? "brand" : "default"}
                   className="mb-7 w-fit"
                 >
                   {card.tag}
@@ -54,8 +54,8 @@ export function PricingCardsGroup({
               <div className="mb-2">
                 <span
                   className={cn(
-                    "font-serif text-5xl font-bold leading-none",
-                    isDark ? "text-white" : "text-midnight"
+                    "font-serif text-5xl font-medium leading-none",
+                    isDark ? "text-white" : "text-ink"
                   )}
                 >
                   {card.amount}
@@ -63,7 +63,7 @@ export function PricingCardsGroup({
                 <span
                   className={cn(
                     "ml-1 text-[15px] font-normal",
-                    isDark ? "text-white/40" : "text-mid-gray"
+                    isDark ? "text-white/40" : "text-muted-text"
                   )}
                 >
                   {card.period}
@@ -73,7 +73,7 @@ export function PricingCardsGroup({
                 <p
                   className={cn(
                     "mb-8 text-[15px] leading-[1.6]",
-                    isDark ? "text-white/50" : "text-mid-gray"
+                    isDark ? "text-white/50" : "text-muted-text"
                   )}
                 >
                   {card.desc}
@@ -85,7 +85,7 @@ export function PricingCardsGroup({
                     <Check
                       className={cn(
                         "size-[18px] shrink-0",
-                        isDark ? "text-gold" : "text-teal"
+                        isDark ? "text-vanilla" : "text-red"
                       )}
                     />
                     {f}
