@@ -91,7 +91,8 @@ export function FeatureCardsGroup({
             key={card._key ?? i}
             {...linkProps}
             className={cn(
-              "group flex w-full max-w-[380px] items-center gap-3.5 rounded-2xl border border-[rgba(163,39,5,0.12)] bg-white p-5 text-left transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-0.5 hover:border-[rgba(163,39,5,0.3)] hover:shadow-[0_10px_24px_rgba(163,39,5,0.08)]",
+              "group flex w-full max-w-[380px] items-center gap-3.5 rounded-2xl border border-[rgba(163,39,5,0.12)] bg-white text-left transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-0.5 hover:border-[rgba(163,39,5,0.3)] hover:shadow-[0_10px_24px_rgba(163,39,5,0.08)]",
+              isLink ? "px-5 py-[10px]" : "p-5",
               // In the flex (2-up) layout, justify-center already centers the
               // pair as a group — mx-auto here would add its own auto-margin
               // behavior on top and space the cards apart instead.
@@ -99,7 +100,7 @@ export function FeatureCardsGroup({
               // Fixed floor tall enough for title + revealed description, so
               // the card's own height never changes on hover — only the
               // content inside it re-centers (see the content wrapper below).
-              isLink ? "min-h-[130px] cursor-pointer" : "cursor-default"
+              isLink ? "min-h-[100px] cursor-pointer" : "cursor-default"
             )}
           >
             {Icon && (
