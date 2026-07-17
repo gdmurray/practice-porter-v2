@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/accordion";
 import { SectionHeader } from "./SectionHeader";
 import { getModuleLayoutAttrs, type ModuleLayoutValue } from "@/lib/moduleLayout";
+import { trackEvent } from "@/lib/analytics";
 
 export interface FaqItem {
   _key?: string;
@@ -82,6 +83,12 @@ export function Faq({
             collapsible
             className="mx-auto w-full max-w-[800px] border-t border-border-color"
             aria-label="Frequently asked questions"
+            onValueChange={(value) => {
+              if (!value) return;
+              const index = Number(value.replace("item-", ""));
+              const question = items[index]?.question;
+              if (question) trackEvent("faq_toggle", { question });
+            }}
             {...(animated ? { "data-anim-list": true } : {})}
           >
             {items.map((item, i) => (

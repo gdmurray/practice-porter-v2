@@ -6,6 +6,7 @@ import { Accordion as AccordionPrimitive } from "radix-ui";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionItem } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
+import { trackEvent } from "@/lib/analytics";
 
 export interface SolutionCardValue {
   title?: string;
@@ -52,7 +53,11 @@ export function SolutionCardGroup({
     // toggle (it already flows through `onValueChange` below) — anything
     // else on the card falls through to toggle open/closed.
     if (target.closest("a, button")) return;
-    setOpen((o) => !o);
+    setOpen((o) => {
+      const next = !o;
+      if (next) trackEvent("solution_card_expand", { title: value.title });
+      return next;
+    });
   }
 
   // The Trigger lives inside the copy pane (directly under the details list,
@@ -65,7 +70,13 @@ export function SolutionCardGroup({
       type="single"
       collapsible
       value={open ? "details" : ""}
-      onValueChange={(v) => setOpen(v === "details")}
+      onValueChange={(v) => {
+        const nextOpen = v === "details";
+        setOpen(nextOpen);
+        if (nextOpen) {
+          trackEvent("solution_card_expand", { title: value.title });
+        }
+      }}
       onClick={bare ? handleCardClick : undefined}
       className={cn(bare && hasChecks && "cursor-pointer")}
     >

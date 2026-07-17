@@ -35,7 +35,8 @@
 		"PUBLIC_SANITY_PROJECT_ID": "u06m8vwg", 
 		"PUBLIC_SANITY_DATASET": "production",
 		"PUBLIC_SANITY_VISUAL_EDITING_ENABLED": "true",
-		"PUBLIC_GOOGLE_CALENDAR_BOOKING_URL": "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2Wks1CHxSmxqB1xxu-QrbBafp-ZIOuacvGSZ__GzszEcApZhTlcqm-8BlcgYF72NVEddwEacvw?gv=true"
+		"PUBLIC_GOOGLE_CALENDAR_BOOKING_URL": "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2Wks1CHxSmxqB1xxu-QrbBafp-ZIOuacvGSZ__GzszEcApZhTlcqm-8BlcgYF72NVEddwEacvw?gv=true",
+		"PUBLIC_CLARITY_ID": "x9xr86vmdf"
 	}
 	/**
 	 * Static Assets

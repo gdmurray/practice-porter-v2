@@ -35,6 +35,10 @@ export interface GridSectionProps {
   isHero?: boolean | null;
   circlePattern?: boolean | null;
   circlePosition?: CirclePosition | null;
+  // Theme of the module immediately before this one on the page (see
+  // PageModules.tsx). Used only to decide whether a top-corner circle
+  // pattern is allowed to bleed upward into that section.
+  prevModuleTheme?: string | null;
   rows?: GridRowData[];
   moduleLayout?: ModuleLayoutValue | null;
 }
@@ -157,6 +161,7 @@ export function GridSection({
   isHero,
   circlePattern,
   circlePosition,
+  prevModuleTheme,
   rows = [],
   moduleLayout,
 }: GridSectionProps) {
@@ -194,12 +199,43 @@ export function GridSection({
   // Brand rule: never on the gradient theme, and never layered on top of a
   // background image (the reference handoffs never combine the two).
   const showCirclePattern = Boolean(circlePattern) && theme !== "gradient" && !imageUrl;
+  const resolvedCirclePosition: CirclePosition = circlePosition ?? "topRight";
+
+  // A top-corner circle can bleed past its own section's top edge into the
+  // section above — but only when that section shares the same theme,
+  // otherwise the ring would visibly straddle two different background
+  // colors (see reference/Home.html's "ap-tl-wrap": the circle spanning two
+  // bands only reads cleanly because both share one continuous gradient).
+  // This only works for the TOP direction: because DOM-later siblings paint
+  // over earlier ones by default, an unclipped top-corner ring naturally
+  // draws on top of the tail end of the (earlier) section above it, with no
+  // z-index needed. There's no equivalent trick for bottom corners bleeding
+  // into the *next* section, since that section paints over this one.
+  const isTopCirclePosition =
+    resolvedCirclePosition === "topLeft" || resolvedCirclePosition === "topRight";
+  const circleBleedsAbove =
+    showCirclePattern &&
+    isTopCirclePosition &&
+    !!prevModuleTheme &&
+    prevModuleTheme === theme;
 
   return (
     <section
       id={sectionId ?? undefined}
       data-theme={theme}
-      className={cn("pp-section relative overflow-hidden", bg)}
+      className={cn(
+        "pp-section relative",
+        // overflow-x-clip keeps the ring (and everything else) from
+        // spilling past the viewport horizontally while leaving the
+        // vertical axis unclipped so the top-corner ring can bleed upward.
+        // Plain `overflow-hidden` clips both axes, unlike `overflow-x-clip`
+        // + default `visible` on the other axis — `clip` is exempt from the
+        // usual CSS rule that pairing `visible` with a non-visible axis
+        // silently upgrades `visible` to `auto` (which would risk an
+        // unwanted scrollbar here).
+        circleBleedsAbove ? "overflow-x-clip" : "overflow-hidden",
+        bg
+      )}
       style={sectionStyle}
       {...getModuleLayoutAttrs(moduleLayout)}
     >
@@ -280,7 +316,7 @@ export function GridSection({
           aria-hidden="true"
           className={cn(
             "circle-pattern",
-            circlePositionClass[circlePosition ?? "topRight"]
+            circlePositionClass[resolvedCirclePosition]
           )}
         />
       )}

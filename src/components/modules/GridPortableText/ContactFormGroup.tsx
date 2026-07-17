@@ -17,6 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { trackEvent } from "@/lib/analytics";
 
 const contactFormSchema = z.object({
   firstName: z.string().trim().min(1, "First name is required"),
@@ -104,6 +105,7 @@ export function ContactFormGroup({
     await new Promise((resolve) => setTimeout(resolve, 500));
     console.log("Contact form submitted", values);
     setIsSubmitted(true);
+    trackEvent("generate_lead", { interest: values.interest || undefined });
   }
 
   const fieldInputClasses =

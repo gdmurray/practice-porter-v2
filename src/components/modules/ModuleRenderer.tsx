@@ -25,9 +25,10 @@ export interface ModuleRendererProps {
     _key?: string;
     [key: string]: unknown;
   };
+  prevModuleTheme?: string;
 }
 
-export function ModuleRenderer({ module }: ModuleRendererProps) {
+export function ModuleRenderer({ module, prevModuleTheme }: ModuleRendererProps) {
   const { _type, _key: _unusedKey, ...props } = module;
 
   let content: React.ReactNode = null;
@@ -37,7 +38,12 @@ export function ModuleRenderer({ module }: ModuleRendererProps) {
       content = <Faq {...(props as Parameters<typeof Faq>[0])} />;
       break;
     case "gridSection":
-      content = <GridSection {...(props as Parameters<typeof GridSection>[0])} />;
+      content = (
+        <GridSection
+          {...(props as Parameters<typeof GridSection>[0])}
+          prevModuleTheme={prevModuleTheme}
+        />
+      );
       break;
     case "logoCarousel":
       content = <LogoCarousel {...(props as Parameters<typeof LogoCarousel>[0])} />;

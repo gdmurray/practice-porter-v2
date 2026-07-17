@@ -2,6 +2,8 @@
 import { VisualEditing } from "@sanity/astro/visual-editing";
 import jakartaFontUrl from "@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2?url";
 import playfairFontUrl from "@fontsource-variable/playfair-display/files/playfair-display-latin-wght-normal.woff2?url";
+import GoogleAnalytics from "../components/analytics/GoogleAnalytics.astro";
+import MicrosoftClarity from "../components/analytics/MicrosoftClarity.astro";
 
 interface Props {
   title?: string;
@@ -25,6 +27,11 @@ const {
 
 const visualEditingEnabled =
   import.meta.env.PUBLIC_SANITY_VISUAL_EDITING_ENABLED === "true";
+
+const isStudio = Astro.url.pathname.startsWith("/studio");
+const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID as string | undefined;
+const clarityId = import.meta.env.PUBLIC_CLARITY_ID as string | undefined;
+const loadAnalytics = !preview && !isStudio;
 
 const resolvedCanonical = canonicalUrl ?? Astro.url.href;
 const jsonLdItems = jsonLd
@@ -64,6 +71,9 @@ const jsonLdItems = jsonLd
     <link rel="preconnect" href="https://cdn.sanity.io" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href={jakartaFontUrl} crossorigin />
     <link rel="preload" as="font" type="font/woff2" href={playfairFontUrl} crossorigin />
+
+    {loadAnalytics && gaId && <GoogleAnalytics measurementId={gaId} />}
+    {loadAnalytics && clarityId && <MicrosoftClarity clarityId={clarityId} />}
   </head>
   <body>
     <slot />
@@ -193,6 +203,41 @@ const jsonLdItems = jsonLd
           _pendingOpen = true;
           mountGcalButton(null);
         }
+      });
+
+      // Analytics: delegated click tracking (separate from the GCal proxy above).
+      function classifyLinkType(link, href) {
+        if (link.getAttribute("target") === "_blank") return "external";
+        if (href.startsWith("mailto:")) return "email";
+        if (href.startsWith("tel:")) return "phone";
+        if (href.startsWith("#")) return "anchor";
+        return "internal";
+      }
+
+      function trackClickEvent(name, params) {
+        if (typeof window.gtag !== "function") return;
+        window.gtag("event", name, params);
+      }
+
+      document.addEventListener("click", (e) => {
+        const link = e.target && e.target.closest("a, [data-cta-type]");
+        if (!link) return;
+        const href = link.getAttribute("href") || "";
+        const location = link.closest("nav")
+          ? "nav"
+          : link.closest("footer")
+            ? "footer"
+            : (link.closest("section[id]") && link.closest("section[id]").id) || "other";
+        const isBookMeeting =
+          link.matches('[data-cta-type="book_meeting"]') ||
+          (bookingUrl && href.startsWith(bookingUrl));
+
+        trackClickEvent(isBookMeeting ? "book_meeting_click" : "cta_click", {
+          location,
+          link_text: (link.textContent || "").trim().slice(0, 100),
+          link_url: href,
+          link_type: classifyLinkType(link, href),
+        });
       });
     </script>
   </body>
