@@ -20,6 +20,7 @@ import {
   testimonialBlock,
   numberedStepBlock,
   iconFeatureBlock,
+  contactFormBlock,
   checkListBlock,
   featureCard,
   featureCardsBlock,
@@ -54,7 +55,6 @@ import {
 import { page, siteSettings } from "./documents/index";
 import {
   faq,
-  bookMeeting,
   gridSection,
   logoCarousel,
   legal,
@@ -87,6 +87,7 @@ export const schemaTypes = [
   testimonialBlock,
   numberedStepBlock,
   iconFeatureBlock,
+  contactFormBlock,
   checkListBlock,
   featureCard,
   featureCardsBlock,
@@ -121,7 +122,6 @@ export const schemaTypes = [
   siteSettings,
   // Modules
   faq,
-  bookMeeting,
   gridSection,
   logoCarousel,
   legal,

@@ -49,7 +49,7 @@ skip straight to implementation.
 |---|---|---|
 | **GridPortableText block** (e.g. `statCardsBlock`, `tabsBlock`) | Reusable, gets inserted into rich text alongside other content, composes with headings/paragraphs in a `gridSection` column | `gridColumn.tsx` `content.of[]` + `makeComponents.tsx` |
 | **Reusable object, insertable two ways** (e.g. `solutionCard` used standalone *and* nested inside `tabItem`) | The exact same visual unit appears both on its own and nested inside another block | Same as above, plus give the component a `bare` prop (see Step 5) |
-| **Full page module** (e.g. `stepBand`, `bookMeeting`) | A distinct, usually full-bleed or singular section that never combines with other rich-text content in the same slot | `ModuleRenderer.tsx` + `page.ts` `modules[]` |
+| **Full page module** (e.g. `stepBand`, `splitBooking`) | A distinct, usually full-bleed or singular section that never combines with other rich-text content in the same slot | `ModuleRenderer.tsx` + `page.ts` `modules[]` |
 
 Read `docs/grid-section-architecture.md` before deciding — it documents the
 exact block/module list and the reasoning for each.

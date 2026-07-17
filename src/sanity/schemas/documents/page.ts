@@ -34,7 +34,6 @@ export const page = defineType({
       of: [
         { type: "gridSection" },
         { type: "faq" },
-        { type: "bookMeeting" },
         { type: "logoCarousel" },
         { type: "legal" },
         { type: "stepBand" },

@@ -12,6 +12,7 @@ import { makeCtaGroup } from "./CtaGroup";
 import { TestimonialGroup } from "./TestimonialGroup";
 import { NumberedStepGroup } from "./NumberedStepGroup";
 import { IconFeatureGroup } from "./IconFeatureGroup";
+import { ContactFormGroup } from "./ContactFormGroup";
 import { CheckListGroup } from "./CheckListGroup";
 import { FeatureCardsGroup } from "./FeatureCardsGroup";
 import { SanityImage } from "./SanityImage";
@@ -130,6 +131,7 @@ export function makeComponents(centered: boolean, animated = false): PortableTex
       testimonialBlock: (props) => <TestimonialGroup {...props} animated={animated} />,
       numberedStepBlock: (props) => <NumberedStepGroup {...props} animated={animated} />,
       iconFeatureBlock: (props) => <IconFeatureGroup {...props} animated={animated} />,
+      contactFormBlock: (props) => <ContactFormGroup {...props} />,
       checkListBlock: (props) => <CheckListGroup {...props} animated={animated} />,
       featureCardsBlock: (props) => <FeatureCardsGroup {...props} animated={animated} />,
       pricingCardsBlock: (props) => <PricingCardsGroup {...props} animated={animated} />,

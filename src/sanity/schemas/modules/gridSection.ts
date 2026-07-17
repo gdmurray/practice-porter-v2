@@ -24,6 +24,14 @@ export const gridSection = defineType({
     themeField("lotion"),
     moduleLayoutField(),
     defineField({
+      name: "maxWidth",
+      title: "Max Content Width",
+      type: "number",
+      description:
+        "Optional max width for this section's content, in pixels. Content is horizontally centered when the container is wider. Leave blank to use the default container width.",
+      validation: (Rule) => Rule.min(200).integer(),
+    }),
+    defineField({
       name: "backgroundImage",
       title: "Background Image",
       type: "image",

@@ -96,7 +96,7 @@ The site runs at `http://localhost:4321`. The embedded Sanity Studio is at `http
 │   │   │   │   └── PricingCardsGroup.tsx
 │   │   │   ├── GridSection.tsx    # Composable grid layout shell
 │   │   │   ├── Faq.tsx            # FAQ accordion
-│   │   │   ├── BookMeeting.tsx    # Google Calendar inline booking embed
+│   │   │   ├── SplitBooking.tsx   # Two-column booking card + calendar embed
 │   │   │   ├── SectionHeader.tsx  # Standalone eyebrow + title + subtitle block
 │   │   │   └── ModuleRenderer.tsx # Maps Sanity _type -> React component
 │   │   ├── ui/                    # shadcn primitives (button, card, sheet, etc.)
@@ -121,7 +121,7 @@ The site runs at `http://localhost:4321`. The embedded Sanity Studio is at `http
 │   │   ├── queries.ts             # All GROQ queries (defineQuery)
 │   │   └── schemas/
 │   │       ├── documents/         # page.ts, siteSettings.ts
-│   │       ├── modules/           # gridSection.ts, faq.ts, bookMeeting.ts
+│   │       ├── modules/           # gridSection.ts, faq.ts, splitBooking.ts
 │   │       ├── objects/           # Reusable field groups and PT block objects
 │   │       └── index.ts           # Barrel export of all schema types
 │   └── styles/
@@ -149,7 +149,6 @@ Pages are built from a `modules[]` array of typed section documents. Each module
 |---|---|---|
 | `gridSection` | `GridSection.tsx` | Composable row/column grid with Portable Text content |
 | `faq` | `Faq.tsx` | Accordion FAQ section |
-| `bookMeeting` | `BookMeeting.tsx` | Meeting scheduler embed, centered |
 | `splitBooking` | `SplitBooking.tsx` | Two-column booking card — red rich-text panel (heading, copy, checklist, founder credit) beside the meeting scheduler embed |
 
 To add a new module, see `.cursor/rules/sanity-schemas.mdc` for the full checklist.

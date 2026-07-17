@@ -1,0 +1,4962 @@
+[
+  {
+    "_id": "23388581-ea0a-4d28-bbf3-0913c2f4ebe6",
+    "modules": [
+      {
+        "_key": "85eab8c0e63f",
+        "_type": "gridSection",
+        "gradientDirection": "none",
+        "isHero": false,
+        "moduleLayout": {
+          "_type": "moduleLayout",
+          "animated": false
+        },
+        "name": "Hero",
+        "rows": [
+          {
+            "_key": "5119d577757b",
+            "_type": "gridRow",
+            "alignment": "center",
+            "columns": [
+              {
+                "_key": "d2a6797c6b7b",
+                "_type": "gridColumn",
+                "content": [
+                  {
+                    "_key": "562e855f52a4",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "1368e19c199a",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Your Dental Practice’s Partner in \nNew Patient Calls."
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "h1"
+                  },
+                  {
+                    "_key": "cd3d8b6da5db",
+                    "_type": "ctaBlock",
+                    "items": [
+                      {
+                        "_key": "6e2aa6529db6",
+                        "_type": "cta",
+                        "ctaType": "book_meeting",
+                        "label": "Book Consultation",
+                        "variant": "secondary"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlign": "center",
+                "width": "full"
+              }
+            ]
+          }
+        ],
+        "theme": "gradient"
+      },
+      {
+        "_key": "2276a22aeeed",
+        "_type": "gridSection",
+        "gradientDirection": "none",
+        "isHero": false,
+        "moduleLayout": {
+          "_type": "moduleLayout",
+          "animated": false
+        },
+        "name": "Our Mission",
+        "rows": [
+          {
+            "_key": "b4b012394bec",
+            "_type": "gridRow",
+            "alignment": "center",
+            "columns": [
+              {
+                "_key": "c457803c9395",
+                "_type": "gridColumn",
+                "content": [
+                  {
+                    "_key": "59d2bce74e0e",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "205596eb3ab7",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Our Mission"
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "h2"
+                  },
+                  {
+                    "_key": "40e86c525f84",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "fc2606781991",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "What drives us every day"
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "subtitle"
+                  },
+                  {
+                    "_key": "e19d11ea8c1c",
+                    "_type": "featureCardsBlock",
+                    "columns": 3,
+                    "items": [
+                      {
+                        "_key": "9a8df3b74fd3",
+                        "_type": "featureCard",
+                        "cta": {
+                          "_type": "cta",
+                          "ctaType": "internal",
+                          "variant": "primary"
+                        },
+                        "description": "A patient’s first impression is everything. We help practices make every new patient call count - warm, responsive, and never missed.",
+                        "icon": "heart",
+                        "iconLocation": "top",
+                        "title": "Improve New Patient Experiences",
+                        "type": "default"
+                      },
+                      {
+                        "_key": "f04a38a6c9de",
+                        "_type": "featureCard",
+                        "cta": {
+                          "_type": "cta",
+                          "ctaType": "internal",
+                          "variant": "primary"
+                        },
+                        "description": "We exist so dentists and practice owners can get full visibility and control over their new patient experience - backed by real data.",
+                        "icon": "home",
+                        "iconLocation": "top",
+                        "title": "Empower Dental Practices",
+                        "type": "default"
+                      },
+                      {
+                        "_key": "cd1364e4f831",
+                        "_type": "featureCard",
+                        "cta": {
+                          "_type": "cta",
+                          "ctaType": "internal",
+                          "variant": "primary"
+                        },
+                        "description": "We believe the best solutions start with a human touch, supported by the best technology - not the other way around.",
+                        "icon": "users",
+                        "iconLocation": "top",
+                        "title": "Deliver Human-Powered Solutions",
+                        "type": "default"
+                      }
+                    ]
+                  },
+                  {
+                    "_key": "e187e36927f8",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "c07d0ef8b1b4",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "\n"
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "normal"
+                  }
+                ],
+                "verticalAlign": "center",
+                "width": "auto"
+              }
+            ]
+          }
+        ],
+        "theme": "white"
+      },
+      {
+        "_key": "splitBooking-1",
+        "_type": "splitBooking",
+        "content": [
+          {
+            "_key": "sb-h2",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sb-h2-span",
+                "_type": "span",
+                "marks": [],
+                "text": "Meet With Our Founder and Find Out What Your Front Desk Is Missing."
+              }
+            ],
+            "markDefs": [],
+            "style": "h2"
+          },
+          {
+            "_key": "sb-p",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sb-p-span",
+                "_type": "span",
+                "marks": [],
+                "text": "Get a personalized look at how Practice Porter can help your growing practice with its new patient bottleneck."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "sb-checklist",
+            "_type": "checkListBlock",
+            "items": [
+              {
+                "_key": "sb-c1",
+                "label": "A personalized look at your front desk performance"
+              },
+              {
+                "_key": "sb-c2",
+                "label": "A clear picture of an untapped revenue opportunity"
+              },
+              {
+                "_key": "sb-c3",
+                "label": "Tailored solution recommendations, with zero obligation"
+              }
+            ],
+            "lineSeparated": false
+          },
+          {
+            "_key": "sb-avatar",
+            "_type": "avatarBlock",
+            "initials": "S",
+            "name": "Shaan Brach",
+            "role": "CEO & Founder, Practice Porter"
+          }
+        ],
+        "moduleLayout": {
+          "_type": "moduleLayout",
+          "animated": false
+        },
+        "subtitle": "Book a free 30-minute consultation to get a clear view of your new patient opportunity with Practice Porter.",
+        "theme": "cream",
+        "title": "Get a Deeper Look With a Free Consultation"
+      },
+      {
+        "_key": "ad4f31f0ec8f",
+        "_type": "faq",
+        "items": [
+          {
+            "_key": "46d1c5018ae7",
+            "_type": "faqItem",
+            "answer": [
+              {
+                "_key": "09ae19e8c877",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "4fc18c40aae4",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "When a new patient calls your practice, the call routes to our dedicated team through a tracking number. From the patient's perspective, they're speaking with someone at your office. We learn your scheduling software, appointment types, office protocols, and brand voice so that every interaction feels seamless and in-house. We answer, we handle objections, and we book the appointment directly into your system."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              }
+            ],
+            "question": "How does Practice Porter answer calls for my dental practice?"
+          },
+          {
+            "_key": "ee0c7d7713f5",
+            "_type": "faqItem",
+            "answer": [
+              {
+                "_key": "9dfeaca32e8c",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "d4dc87836812",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Most answering services are high-volume call centers that take messages and pass them along. We don't take messages. We book patients. We schedule directly into your practice management system, follow up on missed calls, and provide you with a monthly Performance Scorecard that shows exactly how many patients were booked, your cost per acquisition, and how your team's phone performance compares to ours. We're a boutique conversion team, not a voicemail replacement."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              }
+            ],
+            "question": "How is Practice Porter different from a regular dental answering service?"
+          },
+          {
+            "_key": "19ecf233dd60",
+            "_type": "faqItem",
+            "answer": [
+              {
+                "_key": "09ae19e8-results",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "span-results",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Our client practices book new patients at roughly twice the industry average. For most practices, that translates to a 3 to 5x return on investment within the first few months. We prove it with data every month through our Performance Scorecard. Most see their new patient conversion rate climb within the first month, with the gains tracked monthly."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              }
+            ],
+            "question": "What kind of results can I expect?"
+          },
+          {
+            "_key": "f690c0e52f9e",
+            "_type": "faqItem",
+            "answer": [
+              {
+                "_key": "09ae19e8-cost",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "span-cost",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Pricing is simple and aligned with results - no setup fees and no long-term contracts. Book a free consultation and we'll walk you through exactly what it looks like for your practice."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              }
+            ],
+            "question": "How much does Practice Porter cost?"
+          },
+          {
+            "_key": "4ca135e8fa09",
+            "_type": "faqItem",
+            "answer": [
+              {
+                "_key": "e45c2fce48cf",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "5f18ef980edb",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Most practices are fully live within a week. Days one and two, we learn your practice: your scheduling system, protocols, appointment types, and brand voice. Days three and four, we set up call routing through a dedicated tracking number. Your team and your patients won't notice any disruption. From there, we're answering and booking."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              }
+            ],
+            "question": "How long does it take to get started?"
+          },
+          {
+            "_key": "451b54754c67",
+            "_type": "faqItem",
+            "answer": [
+              {
+                "_key": "858c80722b24",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "b36108bb1947",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Yes. We schedule appointments directly into your existing system. During onboarding, we learn your software, your scheduling preferences, and your appointment types so that every booking lands exactly where it should, with no extra steps or manual entry on your end."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              }
+            ],
+            "question": "Do you work with my practice management software?"
+          },
+          {
+            "_key": "4e19dd8e8acf",
+            "_type": "faqItem",
+            "answer": [
+              {
+                "_key": "4bd8caa73a26",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "9af023b5124d",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Industry data shows that 45% of calls to dental practices go unanswered, and the average practice loses over $150,000 in potential annual revenue from missed and mishandled new patient calls. Most practice owners assume their phones are being handled well, but without call tracking and conversion data, there's no way to know for sure. Our Performance Report Card shows you exactly what's happening with every call so you can see the real picture."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              }
+            ],
+            "question": "How many new patients am I losing from missed calls?"
+          },
+          {
+            "_key": "904e134fe4a2",
+            "_type": "faqItem",
+            "answer": [
+              {
+                "_key": "910277c7d376",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "2b7b1215e2ba",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "That's exactly when we're most valuable. Whether your team is with a patient, at lunch, or the office is closed, we make sure the call gets answered. We also run missed call recovery workflows, so if a call does slip through, we follow up to make sure that the patient still gets booked. New patients don't leave voicemails and wait around. Research shows you have about 24 hours before they call someone else."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              }
+            ],
+            "question": "What happens if a new patient calls after hours or when my staff is busy?"
+          },
+          {
+            "_key": "b8381011ae61",
+            "_type": "faqItem",
+            "answer": [
+              {
+                "_key": "da6d518ae968",
+                "_type": "block",
+                "children": [
+                  {
+                    "_key": "749871c04e31",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "The Report Card is a monthly analytics package that covers call volume, new patient conversion rates, cost per booked appointment, staff-level performance comparisons, missed call tracking, Google review velocity, and marketing source attribution. It shows you not just how our team is performing, but how your in-house staff handles calls as well. Think of it as a complete diagnostic of your front desk's ability to convert marketing spend into patients in chairs."
+                  }
+                ],
+                "markDefs": [],
+                "style": "normal"
+              }
+            ],
+            "question": "What does the Performance Report Card include?"
+          }
+        ],
+        "moduleLayout": {
+          "_type": "moduleLayout",
+          "animated": true
+        },
+        "theme": "white",
+        "title": "Frequently Asked Questions"
+      }
+    ],
+    "seo": {
+      "_type": "seo",
+      "metaTitle": "About Us"
+    },
+    "slug": "about",
+    "title": "About us"
+  },
+  {
+    "_id": "45566de4-0457-4bb5-8f55-4cb0db62a932",
+    "modules": [
+      {
+        "_key": "00636c33ff21",
+        "_type": "gridSection",
+        "backgroundImage": {
+          "_type": "image",
+          "asset": {
+            "_ref": "image-3954e4157743c38e0dca083e53d5005a018841f0-1248x832-jpg",
+            "_type": "reference"
+          },
+          "crop": {
+            "_type": "sanity.imageCrop",
+            "bottom": 0,
+            "left": 0,
+            "right": 0.29444351766897436,
+            "top": 0
+          },
+          "hotspot": {
+            "_type": "sanity.imageHotspot",
+            "height": 1,
+            "width": 0.7055564823310256,
+            "x": 0.3527782411655128,
+            "y": 0.5
+          }
+        },
+        "gradientDirection": "left",
+        "isHero": true,
+        "moduleLayout": {
+          "_type": "moduleLayout",
+          "animated": false
+        },
+        "name": "Hero",
+        "rows": [
+          {
+            "_key": "6c221fd3267a",
+            "_type": "gridRow",
+            "alignment": "center",
+            "columns": [
+              {
+                "_key": "daf7e72da4a9",
+                "_type": "gridColumn",
+                "content": [
+                  {
+                    "_key": "71fdb9e7e28d",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "3542a43bb83b",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "CALL ANSWERING SOLUTIONS"
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "eyebrow"
+                  },
+                  {
+                    "_key": "068c664488c5",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "f706bf198b58",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "We’ll Handle the Calls While\nYou Handle the Chairs."
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "h1"
+                  },
+                  {
+                    "_key": "942a8e29fd9c",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "5d447849cf58",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Our boutique team of agents are trained to handle & book your new patient calls with a professional and empathetic touch."
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "subtitle"
+                  },
+                  {
+                    "_key": "3e90e79c69f6",
+                    "_type": "ctaBlock",
+                    "items": [
+                      {
+                        "_key": "82a7bf3fa8f7",
+                        "_type": "cta",
+                        "ctaType": "book_meeting",
+                        "label": "Book Free Consultation",
+                        "variant": "primary"
+                      }
+                    ]
+                  },
+                  {
+                    "_key": "a36e85f2bc44",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "22d478438113",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "\n"
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "normal"
+                  }
+                ],
+                "verticalAlign": "center",
+                "width": "auto"
+              }
+            ]
+          }
+        ],
+        "theme": "white"
+      },
+      {
+        "_key": "c0f025a84b0e",
+        "_type": "stepBand",
+        "moduleLayout": {
+          "_type": "moduleLayout",
+          "animated": false
+        },
+        "stepOne": {
+          "_type": "stepBandItem",
+          "description": "Receive a free new patient consultation from our team with 30+ years of dental practice management experience.",
+          "label": "Consulting"
+        },
+        "stepTwo": {
+          "_type": "stepBandItem",
+          "description": "We recommend the right new patient growth solutions based on your practice’s needs.",
+          "label": "Solutions"
+        }
+      },
+      {
+        "_key": "3f024c8bab61",
+        "_type": "gridSection",
+        "gradientDirection": "none",
+        "isHero": false,
+        "moduleLayout": {
+          "_type": "moduleLayout",
+          "animated": false,
+          "topPadding": "med"
+        },
+        "name": "Call Answering Solutions",
+        "rows": [
+          {
+            "_key": "3cd56126f898",
+            "_type": "gridRow",
+            "alignment": "center",
+            "columns": [
+              {
+                "_key": "4d43f8176ac6",
+                "_type": "gridColumn",
+                "content": [
+                  {
+                    "_key": "a5ff6167a848",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "afee5034fe27",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Call Answering Solutions"
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "h2"
+                  },
+                  {
+                    "_key": "55bdc24925aa",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "9abd8503f77c",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "If your new patient performance isn't meeting your expectations and retraining isn't enough, Practice Porter's call answering team is ready to help."
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "subtitle"
+                  },
+                  {
+                    "_key": "6da23742de0c",
+                    "_type": "solutionCard",
+                    "checks": [
+                      "Calls answered by real humans - trained, dental-specific agents.",
+                      "Objections handled and callers converted at twice the industry rate.",
+                      "Patients scheduled in your current software - no workflow disruption.",
+                      "Booking confirmations and call summaries keep your team in the loop."
+                    ],
+                    "details": [
+                      "Our team answers and books new patient calls with a friendly and professional touch.",
+                      "New patients are booked directly in your current scheduling software."
+                    ],
+                    "expandableTitle": "The Practice Porter Solution",
+                    "image": {
+                      "_type": "image",
+                      "alt": "Smiling woman taking a new patient call at her desk",
+                      "asset": {
+                        "_ref": "image-97c8ec0510a263506f51cf27200278f05ff45441-1408x736-jpg",
+                        "_type": "reference"
+                      }
+                    },
+                    "title": "Live Call Answering Services"
+                  },
+                  {
+                    "_key": "5467c4edf9fa",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "db991a615388",
+                        "_type": "span",
+                        "marks": [],
+                        "text": ""
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "normal"
+                  }
+                ],
+                "verticalAlign": "center",
+                "width": "auto"
+              }
+            ]
+          }
+        ],
+        "theme": "white"
+      },
+      {
+        "_key": "309328ae17b1",
+        "_type": "gridSection",
+        "gradientDirection": "none",
+        "isHero": false,
+        "moduleLayout": {
+          "_type": "moduleLayout",
+          "animated": false
+        },
+        "name": "What Sets Our Call Answering Team Apart",
+        "rows": [
+          {
+            "_key": "21d50ddc4789",
+            "_type": "gridRow",
+            "alignment": "center",
+            "columns": [
+              {
+                "_key": "7e8c948046c8",
+                "_type": "gridColumn",
+                "content": [
+                  {
+                    "_key": "f39960fabcb1",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "f55c195d3db1",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "What Sets Our Call Answering Team Apart"
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "h2"
+                  },
+                  {
+                    "_key": "9621e742b80a",
+                    "_type": "stickyScrollBlock",
+                    "items": [
+                      {
+                        "_key": "9018858d4fc2",
+                        "_type": "stickyScrollStep",
+                        "content": [
+                          {
+                            "_key": "3be3abfcca14",
+                            "_type": "block",
+                            "children": [
+                              {
+                                "_key": "d11154429227",
+                                "_type": "span",
+                                "marks": [],
+                                "text": "Live Call Answering, by Real Humans"
+                              }
+                            ],
+                            "markDefs": [],
+                            "style": "stepTitle"
+                          },
+                          {
+                            "_key": "9b1aa3c4137d",
+                            "_type": "block",
+                            "children": [
+                              {
+                                "_key": "df9b83d469b2",
+                                "_type": "span",
+                                "marks": [],
+                                "text": "Our experienced team answers & books your new patient calls with care and expertise because your patients deserve more than an AI receptionist."
+                              }
+                            ],
+                            "markDefs": [],
+                            "style": "normal"
+                          },
+                          {
+                            "_key": "32b0e19f0d0e",
+                            "_type": "block",
+                            "children": [
+                              {
+                                "_key": "6ccd91336e10",
+                                "_type": "span",
+                                "marks": [],
+                                "text": "\n"
+                              }
+                            ],
+                            "markDefs": [],
+                            "style": "normal"
+                          }
+                        ],
+                        "image": {
+                          "_type": "image",
+                          "asset": {
+                            "_ref": "image-361dd6c2f7cf9b4a2de819ebf37e5cf66d1fc6cb-1535x1024-png",
+                            "_type": "reference"
+                          }
+                        }
+                      },
+                      {
+                        "_key": "bb055c646c71",
+                        "_type": "stickyScrollStep",
+                        "content": [
+                          {
+                            "_key": "018b4b66e507",
+                            "_type": "block",
+                            "children": [
+                              {
+                                "_key": "62b152535089",
+                                "_type": "span",
+                                "marks": [],
+                                "text": "Book More New Patients Without Adding Staff"
+                              }
+                            ],
+                            "markDefs": [],
+                            "style": "stepTitle"
+                          },
+                          {
+                            "_key": "8685ddd21fcf",
+                            "_type": "block",
+                            "children": [
+                              {
+                                "_key": "9f6c2887b4f8",
+                                "_type": "span",
+                                "marks": [],
+                                "text": "We handle objections, answer questions, and convert callers into appointments at twice the industry rate. New patients are booked directly into your scheduling software without extra steps."
+                              }
+                            ],
+                            "markDefs": [],
+                            "style": "normal"
+                          },
+                          {
+                            "_key": "97740059253d",
+                            "_type": "block",
+                            "children": [
+                              {
+                                "_key": "703f0e6f4852",
+                                "_type": "span",
+                                "marks": [],
+                                "text": "\n"
+                              }
+                            ],
+                            "markDefs": [],
+                            "style": "normal"
+                          }
+                        ],
+                        "image": {
+                          "_type": "image",
+                          "asset": {
+                            "_ref": "image-1d82c0fa86039787b1b8c82168986efd1b8f27cd-1248x832-jpg",
+                            "_type": "reference"
+                          }
+                        }
+                      },
+                      {
+                        "_key": "9b3b948852f6",
+                        "_type": "stickyScrollStep",
+                        "content": [
+                          {
+                            "_key": "cc5eb68bb01b",
+                            "_type": "block",
+                            "children": [
+                              {
+                                "_key": "2db96271b25f",
+                                "_type": "span",
+                                "marks": [],
+                                "text": "Miss Fewer New Patient Calls"
+                              }
+                            ],
+                            "markDefs": [],
+                            "style": "stepTitle"
+                          },
+                          {
+                            "_key": "5afb488de876",
+                            "_type": "block",
+                            "children": [
+                              {
+                                "_key": "f403d2ac0740",
+                                "_type": "span",
+                                "marks": [],
+                                "text": "Our team handles every new patient call to prevent missed bookings. For hesitant bookers, we follow up and track them via the "
+                              },
+                              {
+                                "_key": "bb0de45d588b",
+                                "_type": "span",
+                                "marks": [
+                                  "079a42e4443c"
+                                ],
+                                "text": "Follow Up Center"
+                              },
+                              {
+                                "_key": "e5ab73700127",
+                                "_type": "span",
+                                "marks": [],
+                                "text": "."
+                              }
+                            ],
+                            "markDefs": [
+                              {
+                                "_key": "079a42e4443c",
+                                "_type": "link",
+                                "href": "Practice Performance Report.html"
+                              }
+                            ],
+                            "style": "normal"
+                          },
+                          {
+                            "_key": "25176c3f33de",
+                            "_type": "block",
+                            "children": [
+                              {
+                                "_key": "1eb53deea5c6",
+                                "_type": "span",
+                                "marks": [],
+                                "text": "\n"
+                              }
+                            ],
+                            "markDefs": [],
+                            "style": "normal"
+                          }
+                        ],
+                        "image": {
+                          "_type": "image",
+                          "asset": {
+                            "_ref": "image-664f1b8786f1bd3398f03e87923fbcb8d1bf01a0-1535x1024-png",
+                            "_type": "reference"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlign": "center",
+                "width": "auto"
+              }
+            ]
+          }
+        ],
+        "theme": "lotion"
+      },
+      {
+        "_key": "3aeeb81e5f6a",
+        "_type": "gridSection",
+        "gradientDirection": "none",
+        "isHero": false,
+        "moduleLayout": {
+          "_type": "moduleLayout",
+          "animated": false,
+          "bottomPadding": "sml",
+          "topPadding": "sml"
+        },
+        "name": "Flexible Pricing, Built Around Your Practice.",
+        "rows": [
+          {
+            "_key": "5031cb8c5a56",
+            "_type": "gridRow",
+            "alignment": "center",
+            "columns": [
+              {
+                "_key": "411752351a00",
+                "_type": "gridColumn",
+                "content": [
+                  {
+                    "_key": "754977c8b73e",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "9500381c04fc",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Flexible Pricing, Built Around Your Practice."
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "h2"
+                  },
+                  {
+                    "_key": "9f242e429b02",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "bc113793f13c",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Every practice is different, so our solution packages are flexible and tailored to your practice’s needs and goals."
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "normal"
+                  },
+                  {
+                    "_key": "3fc1db4ee4db",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "1fdf97ceeed2",
+                        "_type": "span",
+                        "marks": [],
+                        "text": ""
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "normal"
+                  },
+                  {
+                    "_key": "7bb5e72f4c31",
+                    "_type": "featureCardsBlock",
+                    "columns": 3,
+                    "items": [
+                      {
+                        "_key": "ffe88215b037",
+                        "_type": "featureCard",
+                        "description": "Mix the solutions that fit your practice.",
+                        "icon": "package",
+                        "title": "Tailored Packages"
+                      },
+                      {
+                        "_key": "ac2224660083",
+                        "_type": "featureCard",
+                        "description": "No setup fees and no lock-in.",
+                        "icon": "check",
+                        "title": "No Long-Term Contracts"
+                      },
+                      {
+                        "_key": "29aea0b32e05",
+                        "_type": "featureCard",
+                        "description": "Solutions adapt as your practice evolves.",
+                        "icon": "users",
+                        "title": "A Partnership That Adapts"
+                      }
+                    ]
+                  },
+                  {
+                    "_key": "38d5680da47b",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "117c7143ff4e",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "\n"
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "normal"
+                  }
+                ],
+                "verticalAlign": "center",
+                "width": "full"
+              }
+            ]
+          }
+        ],
+        "theme": "cream"
+      },
+      {
+        "_key": "00ff331cd3bd",
+        "_type": "gridSection",
+        "gradientDirection": "none",
+        "isHero": false,
+        "moduleLayout": {
+          "_type": "moduleLayout",
+          "animated": false,
+          "bottomPadding": "med",
+          "topPadding": "sml"
+        },
+        "name": "Complete Your Front Desk Solution",
+        "rows": [
+          {
+            "_key": "8e7902c3d07a",
+            "_type": "gridRow",
+            "alignment": "center",
+            "columns": [
+              {
+                "_key": "a96e41497e26",
+                "_type": "gridColumn",
+                "content": [
+                  {
+                    "_key": "5f2f62c12d9e",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "bb45fb8cb01a",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Complete Your Front Desk Solution"
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "eyebrow"
+                  },
+                  {
+                    "_key": "4a635e011bf5",
+                    "_type": "featureCardsBlock",
+                    "columns": 2,
+                    "items": [
+                      {
+                        "_key": "7d5288d09160",
+                        "_type": "featureCard",
+                        "cta": {
+                          "_type": "cta",
+                          "ctaType": "internal",
+                          "href": "/performance-report",
+                          "variant": "primary"
+                        },
+                        "description": "See how your front desk handles calls.",
+                        "icon": "trending-up",
+                        "title": "Practice Performance Report",
+                        "type": "link"
+                      },
+                      {
+                        "_key": "92c82786fd9f",
+                        "_type": "featureCard",
+                        "cta": {
+                          "_type": "cta",
+                          "ctaType": "internal",
+                          "href": "/front-desk-training",
+                          "variant": "primary"
+                        },
+                        "description": "Coaching that turns calls into bookings.",
+                        "icon": "graduation-cap",
+                        "title": "Front Desk Training",
+                        "type": "link"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlign": "center",
+                "width": "auto"
+              }
+            ]
+          }
+        ],
+        "theme": "lotion"
+      },
+      {
+        "_key": "7198d3935693",
+        "_type": "gridSection",
+        "gradientDirection": "none",
+        "isHero": false,
+        "moduleLayout": {
+          "_type": "moduleLayout",
+          "animated": false,
+          "bottomPadding": "xs",
+          "topPadding": "xs"
+        },
+        "name": "Bottom CTA",
+        "rows": [
+          {
+            "_key": "7ac6160e0364",
+            "_type": "gridRow",
+            "alignment": "left",
+            "columns": [
+              {
+                "_key": "d7458dfa3ee9",
+                "_type": "gridColumn",
+                "content": [
+                  {
+                    "_key": "9ca9a7f51f1d",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "2616df1af7bd",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "See How Call Answering Can Impact\nYour Practice."
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "h2"
+                  },
+                  {
+                    "_key": "0e688b77317b",
+                    "_type": "ctaBlock",
+                    "items": [
+                      {
+                        "_key": "a07dec870759",
+                        "_type": "cta",
+                        "ctaType": "book_meeting",
+                        "label": "Book a Free Consultation →",
+                        "variant": "primary"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlign": "center",
+                "width": "auto"
+              }
+            ]
+          }
+        ],
+        "theme": "gradient"
+      }
+    ],
+    "seo": null,
+    "slug": "call-answering",
+    "title": "Call Answering Solutions"
+  },
+  {
+    "_id": "drafts.3a4859c0-fcc5-4406-945d-542b5655b075",
+    "modules": [
+      {
+        "_key": "2c7586d573b3",
+        "_type": "gridSection",
+        "gradientDirection": "none",
+        "isHero": false,
+        "moduleLayout": {
+          "_type": "moduleLayout",
+          "animated": false
+        },
+        "name": "Hero",
+        "rows": [
+          {
+            "_key": "bf61c294dcf8",
+            "_type": "gridRow",
+            "alignment": "center",
+            "columns": [
+              {
+                "_key": "4ddd12e7692a",
+                "_type": "gridColumn",
+                "content": [
+                  {
+                    "_key": "f9be6db4fee5",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "af8978d11916",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Get in Touch"
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "eyebrow"
+                  },
+                  {
+                    "_key": "5a7c2c630d3d",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "b04aa314ef94",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Contact Us"
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "h1"
+                  },
+                  {
+                    "_key": "ceee5f931970",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "71fda89e4798",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Have a question or want to learn more? We'd love to hear from you."
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "subtitle"
+                  },
+                  {
+                    "_key": "7e2872eb6129",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "dff4bfa260ae",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "\n"
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "normal"
+                  },
+                  {
+                    "_key": "0a55c23fc284",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "3780144d1561",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "\n"
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "normal"
+                  }
+                ],
+                "verticalAlign": "center",
+                "width": "auto"
+              }
+            ]
+          }
+        ],
+        "theme": "gradient"
+      }
+    ],
+    "seo": null,
+    "slug": "contact",
+    "title": "Contact Us"
+  },
+  {
+    "_id": "35cae587-fc46-4246-84e0-6cf57ba81a66",
+    "modules": null,
+    "seo": null,
+    "slug": "front-desk-training",
+    "title": "Front Desk Training"
+  },
+  {
+    "_id": "e5244255-1f1f-44cf-bda4-dd6a94fe7f0e",
+    "modules": [
+      {
+        "_key": "ff164d3f40c4",
+        "_type": "gridSection",
+        "backgroundImage": {
+          "_type": "image",
+          "alt": "Dental front desk professional smiling on a phone call at her desk",
+          "asset": {
+            "_ref": "image-65ab430c83aeb10526487fe75b4fed764a4a9085-3841x3392-jpg",
+            "_type": "reference"
+          },
+          "crop": {
+            "_type": "sanity.imageCrop",
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "hotspot": {
+            "_type": "sanity.imageHotspot",
+            "height": 1,
+            "width": 0.7018234259417226,
+            "x": 0.6490882870291387,
+            "y": 0.5
+          }
+        },
+        "gradientDirection": "left",
+        "isHero": true,
+        "moduleLayout": {
+          "_type": "moduleLayout",
+          "animated": false,
+          "bottomPadding": "lrg",
+          "topPadding": "lrg"
+        },
+        "name": "Hero (new)",
+        "rows": [
+          {
+            "_key": "a7a0aea55a26",
+            "_type": "gridRow",
+            "alignment": "center",
+            "columns": [
+              {
+                "_key": "3d2b5a43d990",
+                "_type": "gridColumn",
+                "content": [
+                  {
+                    "_key": "279c90a5ff7a",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "5f27cccaa2ec",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "New Patient Solutions to Grow Your Dental Practice With Confidence."
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "h1"
+                  },
+                  {
+                    "_key": "0029219235ae",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "1b356cdc8e88",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Practice Porter’s human-powered solutions book new patients at twice the industry rate, and proves it every month."
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "subtitle"
+                  },
+                  {
+                    "_key": "140a465c44c5",
+                    "_type": "ctaBlock",
+                    "items": [
+                      {
+                        "_key": "a4f841a2cf9b",
+                        "_type": "cta",
+                        "ctaType": "book_meeting",
+                        "label": "Book Free Consultation for Dentists",
+                        "variant": "primary"
+                      }
+                    ]
+                  },
+                  {
+                    "_key": "205f0a1bf505",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "6df63d8bae54",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "\n"
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "normal"
+                  }
+                ],
+                "verticalAlign": "center",
+                "width": "auto"
+              }
+            ]
+          }
+        ],
+        "sectionId": "hero",
+        "theme": "vanilla"
+      },
+      {
+        "_key": "9ceb86e36ea3",
+        "_type": "logoCarousel",
+        "label": "INTEGRATED WITH THE SYSTEMS & PROVIDERS YOUR DENTAL PRACTICE RUNS ON",
+        "logos": [
+          {
+            "_key": "3bd17c6d3eb7",
+            "_type": "logoCarouselItem",
+            "logo": {
+              "_type": "image",
+              "asset": {
+                "_ref": "image-ca356be110609ecf5c62879ddd45c1cbc6493d8d-3840x1208-webp",
+                "_type": "reference"
+              }
+            },
+            "name": "United Healthcare"
+          },
+          {
+            "_key": "ed5e6bde98eb",
+            "_type": "logoCarouselItem",
+            "logo": {
+              "_type": "image",
+              "asset": {
+                "_ref": "image-21a555e22ee8815e5c616f0635fa1d1947d989df-500x180-png",
+                "_type": "reference"
+              }
+            },
+            "name": "Opendental"
+          },
+          {
+            "_key": "7ecb1224f5c3",
+            "_type": "logoCarouselItem",
+            "logo": {
+              "_type": "image",
+              "asset": {
+                "_ref": "image-8e358adaa5ce4b64df6d20f4648d8fd6c14b4659-10240x2056-png",
+                "_type": "reference"
+              }
+            },
+            "name": "Medicaid"
+          },
+          {
+            "_key": "54ff95ab291f",
+            "_type": "logoCarouselItem",
+            "logo": {
+              "_type": "image",
+              "asset": {
+                "_ref": "image-fa04cd13b7af23b8b01ae2c5a485b80cfaed0d9a-3840x2160-png",
+                "_type": "reference"
+              }
+            },
+            "name": "Manulife"
+          },
+          {
+            "_key": "405baffde0b4",
+            "_type": "logoCarouselItem",
+            "logo": {
+              "_type": "image",
+              "asset": {
+                "_ref": "image-34729541220b7202bb6556c3d421106d0e6b4787-320x320-png",
+                "_type": "reference"
+              }
+            },
+            "name": "humana"
+          },
+          {
+            "_key": "5e4f74ab5956",
+            "_type": "logoCarouselItem",
+            "logo": {
+              "_type": "image",
+              "asset": {
+                "_ref": "image-f6e7538d077508aa2bdfb2e4e02860bda8b55aeb-625x200-png",
+                "_type": "reference"
+              }
+            },
+            "name": "eaglesoft"
+          },
+          {
+            "_key": "16eecac7ac84",
+            "_type": "logoCarouselItem",
+            "logo": {
+              "_type": "image",
+              "asset": {
+                "_ref": "image-6a4ffee02db8825c3f15fdf39c65b95e3b41faed-1200x138-png",
+                "_type": "reference"
+              }
+            },
+            "name": "Delta Dental"
+          },
+          {
+            "_key": "79fdd69a71e2",
+            "_type": "logoCarouselItem",
+            "logo": {
+              "_type": "image",
+              "asset": {
+                "_ref": "image-4b5031b2450210b465c4ac7b5dfc16a895e7e93e-500x386-png",
+                "_type": "reference"
+              }
+            },
+            "name": "Curve Dental"
+          },
+          {
+            "_key": "fd752405ecff",
+            "_type": "logoCarouselItem",
+            "logo": {
+              "_type": "image",
+              "asset": {
+                "_ref": "image-444a42043dbedf0604acb7b88d1c61fd425810c7-2500x1406-png",
+                "_type": "reference"
+              }
+            },
+            "name": "Cigna"
+          },
+          {
+            "_key": "6445bc4b63ae",
+            "_type": "logoCarouselItem",
+            "logo": {
+              "_type": "image",
+              "asset": {
+                "_ref": "image-6f232a624bb605cbbd869b63dec3dedfe7579097-286x68-png",
+                "_type": "reference"
+              }
+            },
+            "name": "Carestream"
+          },
+          {
+            "_key": "75c6a82a20d1",
+            "_type": "logoCarouselItem",
+            "logo": {
+              "_type": "image",
+              "asset": {
+                "_ref": "image-e65cc462c9b45dd8a96e9fe8a27b30cd3bd00418-1280x442-webp",
+                "_type": "reference"
+              }
+            },
+            "name": "Canada Life"
+          },
+          {
+            "_key": "28b71a5715af",
+            "_type": "logoCarouselItem",
+            "logo": {
+              "_type": "image",
+              "asset": {
+                "_ref": "image-85831d900050c24d1d9e8b03ad5b0e9b356ca57b-5000x968-png",
+                "_type": "reference"
+              }
+            },
+            "name": "BlueCross BlueShield"
+          },
+          {
+            "_key": "85a3d68e6c33",
+            "_type": "logoCarouselItem",
+            "logo": {
+              "_type": "image",
+              "asset": {
+                "_ref": "image-5493dc8acc1ed8eebaffa702d36d5821cdb1df33-3840x2160-png",
+                "_type": "reference"
+              }
+            },
+            "name": "Anthem"
+          },
+          {
+            "_key": "0c5b1d190b1d",
+            "_type": "logoCarouselItem",
+            "logo": {
+              "_type": "image",
+              "asset": {
+                "_ref": "image-3bcd29fd72c9fb1a16e5ea81e657522dd49ae724-3840x2160-png",
+                "_type": "reference"
+              }
+            },
+            "name": "Aetna"
+          }
+        ],
+        "moduleLayout": {
+          "_type": "moduleLayout",
+          "animated": false,
+          "bottomPadding": "xxs",
+          "topPadding": "xs"
+        },
+        "speed": 66,
+        "theme": "white"
+      },
+      {
+        "_key": "d1e038500d5e",
+        "_type": "gridSection",
+        "gradientDirection": "none",
+        "moduleLayout": {
+          "_type": "moduleLayout",
+          "animated": false,
+          "bottomPadding": "sml",
+          "topPadding": "xs"
+        },
+        "name": "Client Results",
+        "rows": [
+          {
+            "_key": "9502930fc8d8",
+            "_type": "gridRow",
+            "alignment": "center",
+            "columns": [
+              {
+                "_key": "1aedc84091a5",
+                "_type": "gridColumn",
+                "content": [
+                  {
+                    "_key": "51fc782fde6b",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "dbd815a92d40",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Our client practices see on average"
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "stat-eyebrow"
+                  },
+                  {
+                    "_key": "24ff4c26d4d5",
+                    "_type": "statBandBlock",
+                    "countUp": true,
+                    "stats": [
+                      {
+                        "_key": "8bdb22d15c39",
+                        "_type": "statBandItem",
+                        "label": "Average new patient conversion rate",
+                        "suffix": "%+",
+                        "suffixColor": "text",
+                        "value": "85"
+                      },
+                      {
+                        "_key": "ad032c402217",
+                        "_type": "statBandItem",
+                        "label": "More new patients booked in each practice",
+                        "suffix": "x",
+                        "suffixColor": "text",
+                        "value": "2"
+                      },
+                      {
+                        "_key": "801003446366",
+                        "_type": "statBandItem",
+                        "label": "Increase in production per practice per year",
+                        "suffix": "k+",
+                        "suffixColor": "text",
+                        "value": "$280"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlign": "center",
+                "width": "full"
+              }
+            ]
+          }
+        ],
+        "theme": "gradient"
+      },
+      {
+        "_key": "75448e379ed5",
+        "_type": "gridSection",
+        "gradientDirection": "none",
+        "moduleLayout": {
+          "_type": "moduleLayout",
+          "animated": false
+        },
+        "name": "Real New Patient Growth",
+        "rows": [
+          {
+            "_key": "770bcb2d69b3",
+            "_type": "gridRow",
+            "alignment": "center",
+            "columns": [
+              {
+                "_key": "9ec5dc111ce1",
+                "_type": "gridColumn",
+                "content": [
+                  {
+                    "_key": "b15fb2d0859b",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "bc517c09c1fe",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Real New Patient Growth, Powered by Real People."
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "h2"
+                  },
+                  {
+                    "_key": "a130b44fd9f7",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "65512170d5d4",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Our tailored solutions empower your front desk to give new patients the experience they deserve - helping you consistently achieve real new patient growth."
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "subtitle"
+                  }
+                ],
+                "verticalAlign": "center",
+                "width": "full"
+              }
+            ]
+          },
+          {
+            "_key": "row-approach-tabs",
+            "_type": "gridRow",
+            "alignment": "left",
+            "columns": [
+              {
+                "_key": "col-approach-tabs",
+                "_type": "gridColumn",
+                "content": [
+                  {
+                    "_key": "eyebrow-approach",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "span-eyebrow-approach",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Our Three-Step Approach"
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "eyebrow"
+                  },
+                  {
+                    "_key": "approach-tabs-block-1",
+                    "_type": "approachTabsBlock",
+                    "autoRotateSeconds": 12,
+                    "items": [
+                      {
+                        "_key": "approach-record",
+                        "_type": "approachTab",
+                        "body": "Record every patient call and gain insight into your front desk's performance in a monthly report.",
+                        "cta": {
+                          "_type": "cta",
+                          "ctaType": "internal",
+                          "href": "/performance-report",
+                          "label": "See Solutions",
+                          "variant": "primary"
+                        },
+                        "image": {
+                          "_type": "image",
+                          "asset": {
+                            "_ref": "image-f2e38984e54545e1da16b950efa16f2fa41f5b67-1024x1024-png",
+                            "_type": "reference"
+                          }
+                        },
+                        "kicker": "Insight on what's happening",
+                        "label": "Record",
+                        "link": {
+                          "_type": "cta",
+                          "ctaType": "internal",
+                          "href": "/performance-report",
+                          "label": "Practice Performance Report",
+                          "variant": "primary"
+                        },
+                        "panelTitle": "Practice Performance Report"
+                      },
+                      {
+                        "_key": "approach-retrain",
+                        "_type": "approachTab",
+                        "body": "Empower your staff to provide the 5-star service your patients deserve with customised training sessions for your practice.",
+                        "cta": {
+                          "_type": "cta",
+                          "ctaType": "internal",
+                          "href": "/front-desk-training",
+                          "label": "See Solutions",
+                          "variant": "primary"
+                        },
+                        "image": {
+                          "_type": "image",
+                          "asset": {
+                            "_ref": "image-22afc3b8c4420b69a97811527d744c2d7c824800-998x1000-png",
+                            "_type": "reference"
+                          }
+                        },
+                        "kicker": "Improve front desk performance",
+                        "label": "Retrain",
+                        "link": {
+                          "_type": "cta",
+                          "ctaType": "internal",
+                          "href": "/front-desk-training",
+                          "label": "Front Desk Training",
+                          "variant": "primary"
+                        },
+                        "panelTitle": "Front Desk Training"
+                      },
+                      {
+                        "_key": "approach-replace",
+                        "_type": "approachTab",
+                        "body": "Our boutique team is trained to handle your new patient calls and book appointments directly in your scheduling software.",
+                        "cta": {
+                          "_type": "cta",
+                          "ctaType": "internal",
+                          "href": "/call-answering",
+                          "label": "See Solutions",
+                          "variant": "primary"
+                        },
+                        "image": {
+                          "_type": "image",
+                          "asset": {
+                            "_ref": "image-78cf3f94a4140057e92ce4a45158d7d4e54cdf6a-1024x1024-png",
+                            "_type": "reference"
+                          }
+                        },
+                        "kicker": "Turn more calls into bookings",
+                        "label": "Replace",
+                        "link": {
+                          "_type": "cta",
+                          "ctaType": "internal",
+                          "href": "/call-answering",
+                          "label": "Call Answering Solutions",
+                          "variant": "primary"
+                        },
+                        "panelTitle": "Call Answering Solutions"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlign": "top",
+                "width": "full"
+              }
+            ]
+          }
+        ],
+        "theme": "lotion"
+      },
+      {
+        "_key": "gs-tailored-solution",
+        "_type": "gridSection",
+        "gradientDirection": "none",
+        "moduleLayout": {
+          "_type": "moduleLayout",
+          "animated": false
+        },
+        "name": "Tailored Solution",
+        "rows": [
+          {
+            "_key": "row-tailored-header",
+            "_type": "gridRow",
+            "alignment": "center",
+            "columns": [
+              {
+                "_key": "col-tailored-header",
+                "_type": "gridColumn",
+                "content": [
+                  {
+                    "_key": "h2-tailored",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "span-h2-tailored",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "A Tailored Solution for Every Practice"
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "h2"
+                  },
+                  {
+                    "_key": "sub-tailored",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "span-sub-tailored",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Every dental practice is unique – that's why we start with understanding your practice, then provide the solutions that will be most effective."
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "subtitle"
+                  }
+                ],
+                "verticalAlign": "center",
+                "width": "full"
+              }
+            ]
+          },
+          {
+            "_key": "row-tailored-steps",
+            "_type": "gridRow",
+            "alignment": "left",
+            "columns": [
+              {
+                "_key": "col-tailored-steps",
+                "_type": "gridColumn",
+                "content": [
+                  {
+                    "_key": "tailored-steps-block-1",
+                    "_type": "tailoredStepsBlock",
+                    "stepOne": {
+                      "_type": "tailoredStep",
+                      "badge": "1",
+                      "body": "Before offering recommendations, we meet with you to assess your patient volume, front desk operations, areas needing improvement, and your goals.",
+                      "cta": {
+                        "_type": "cta",
+                        "ctaType": "book_meeting",
+                        "href": "/about#book",
+                        "label": "Book Free Consultation",
+                        "variant": "primary"
+                      },
+                      "eyebrow": "Consultation",
+                      "title": "Personalized New Patient Consultation"
+                    },
+                    "stepTwo": {
+                      "_type": "tailoredStep",
+                      "badge": "2",
+                      "body": "We recommend the best solutions to improve your new patient experience, tailored to your practice.",
+                      "eyebrow": "Solutions",
+                      "links": [
+                        {
+                          "_key": "sol-link-ppr",
+                          "_type": "tailoredSolutionLink",
+                          "cta": {
+                            "_type": "cta",
+                            "ctaType": "internal",
+                            "href": "/performance-report",
+                            "label": "Practice Performance Report",
+                            "variant": "primary"
+                          },
+                          "icon": "bar-chart"
+                        },
+                        {
+                          "_key": "sol-link-cas",
+                          "_type": "tailoredSolutionLink",
+                          "cta": {
+                            "_type": "cta",
+                            "ctaType": "internal",
+                            "href": "/call-answering",
+                            "label": "Call Answering Solutions",
+                            "variant": "primary"
+                          },
+                          "icon": "phone"
+                        },
+                        {
+                          "_key": "sol-link-fdt",
+                          "_type": "tailoredSolutionLink",
+                          "cta": {
+                            "_type": "cta",
+                            "ctaType": "internal",
+                            "href": "/front-desk-training",
+                            "label": "Front Desk Training",
+                            "variant": "primary"
+                          },
+                          "icon": "graduation-cap"
+                        }
+                      ],
+                      "title": "The Right Solutions for Your Practice"
+                    }
+                  }
+                ],
+                "verticalAlign": "top",
+                "width": "full"
+              }
+            ]
+          }
+        ],
+        "theme": "lotion"
+      },
+      {
+        "_key": "gs-comparison",
+        "_type": "gridSection",
+        "gradientDirection": "none",
+        "moduleLayout": {
+          "_type": "moduleLayout",
+          "animated": false
+        },
+        "name": "Comparison",
+        "rows": [
+          {
+            "_key": "row-comparison-header",
+            "_type": "gridRow",
+            "alignment": "center",
+            "columns": [
+              {
+                "_key": "col-comparison-header",
+                "_type": "gridColumn",
+                "content": [
+                  {
+                    "_key": "h2-comparison",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "span-h2-comparison",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Most Practices Book Two in Five Calls. Our Practices Book Over Four."
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "h2"
+                  }
+                ],
+                "verticalAlign": "center",
+                "width": "full"
+              }
+            ]
+          },
+          {
+            "_key": "row-comparison-block",
+            "_type": "gridRow",
+            "alignment": "center",
+            "columns": [
+              {
+                "_key": "col-comparison-block",
+                "_type": "gridColumn",
+                "content": [
+                  {
+                    "_key": "comparison-block-1",
+                    "_type": "comparisonBlock",
+                    "banner": {
+                      "cta": {
+                        "_type": "cta",
+                        "ctaType": "book_meeting",
+                        "href": "/about#book",
+                        "label": "Book Free Consultation",
+                        "variant": "primary"
+                      },
+                      "headline": "That gap costs practices over",
+                      "headlineEmphasis": "$280,000 every year.",
+                      "subtext": "A free 30-minute consultation shows you exactly what it's costing your practice."
+                    },
+                    "leftCard": {
+                      "_type": "comparisonCard",
+                      "caption": "new patient calls booked as appointments",
+                      "filledCount": 2,
+                      "label": "Industry Average",
+                      "value": "2 / 5"
+                    },
+                    "rightCard": {
+                      "_type": "comparisonCard",
+                      "caption": "new patient calls booked as appointments",
+                      "filledCount": 4,
+                      "label": "Practice Porter Clients",
+                      "overLabel": "OVER",
+                      "value": "4 / 5"
+                    }
+                  }
+                ],
+                "verticalAlign": "top",
+                "width": "full"
+              }
+            ]
+          }
+        ],
+        "theme": "red"
+      },
+      {
+        "_key": "gs-testimonials",
+        "_type": "gridSection",
+        "gradientDirection": "none",
+        "moduleLayout": {
+          "_type": "moduleLayout",
+          "animated": false
+        },
+        "name": "Testimonials",
+        "rows": [
+          {
+            "_key": "row-testimonials",
+            "_type": "gridRow",
+            "alignment": "left",
+            "columns": [
+              {
+                "_key": "col-testimonials-copy",
+                "_type": "gridColumn",
+                "content": [
+                  {
+                    "_key": "h2-testimonials",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "span-h2-testimonials",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "See Why Other Dentists Choose Practice Porter."
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "h2"
+                  },
+                  {
+                    "_key": "sub-testimonials",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "span-sub-testimonials",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Dental practices in US & Canada benefit from Practice Porter's human-powered approach."
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "subtitle"
+                  }
+                ],
+                "verticalAlign": "center",
+                "width": "half"
+              },
+              {
+                "_key": "col-testimonials-carousel",
+                "_type": "gridColumn",
+                "content": [
+                  {
+                    "_key": "testimonial-block-1",
+                    "_type": "testimonialBlock",
+                    "autoRotateSeconds": 15,
+                    "items": [
+                      {
+                        "_key": "t-samuel",
+                        "_type": "testimonial",
+                        "author": "Dr. C Samuel",
+                        "quote": "Practice Porter's performance reporting gave us a clear look at exactly where our front desk staff was missing new patient booking opportunities, and gave us actionable next steps for each employee. We saw our new patient conversion rate by over 23% in under a month."
+                      },
+                      {
+                        "_key": "t-singh-1",
+                        "_type": "testimonial",
+                        "author": "Dr. M Singh",
+                        "quote": "We were spending thousands on marketing to generate leads each month, then losing those patients when they called. Practice Porter helped us identify and fix our issues with the Practice Performance Report and Follow Up Center, giving us full visibility and control over our new patient experience."
+                      },
+                      {
+                        "_key": "t-singh-2",
+                        "_type": "testimonial",
+                        "author": "Dr. M Singh",
+                        "quote": "Practice Porter showed us exactly where new patients were slipping through the cracks. Within three months our front desk went from booking around 40% of new patient calls to over 80%, and we didn't have to hire a single new person to do it."
+                      }
+                    ],
+                    "variant": "carousel"
+                  }
+                ],
+                "verticalAlign": "center",
+                "width": "half"
+              }
+            ]
+          }
+        ],
+        "theme": "lotion"
+      }
+    ],
+    "seo": null,
+    "slug": "home",
+    "title": "Home"
+  },
+  {
+    "_id": "cf23b87d-a487-4486-a201-8f5bea4e23af",
+    "modules": [
+      {
+        "_key": "3c6e4ebb4da2",
+        "_type": "gridSection",
+        "backgroundImage": {
+          "_type": "image",
+          "asset": {
+            "_ref": "image-991e1085a381c813600f8bdea9d35e953ffd0172-1248x832-jpg",
+            "_type": "reference"
+          },
+          "crop": {
+            "_type": "sanity.imageCrop",
+            "bottom": 0,
+            "left": 0.0037881947340617506,
+            "right": 0.433737870826035,
+            "top": 0
+          },
+          "hotspot": {
+            "_type": "sanity.imageHotspot",
+            "height": 1,
+            "width": 0.273945561208886,
+            "x": 0.409827063697278,
+            "y": 0.5
+          }
+        },
+        "gradientDirection": "left",
+        "isHero": true,
+        "moduleLayout": {
+          "_type": "moduleLayout",
+          "animated": false
+        },
+        "name": "Hero",
+        "rows": [
+          {
+            "_key": "2e3de1d32d19",
+            "_type": "gridRow",
+            "alignment": "center",
+            "columns": [
+              {
+                "_key": "95e4c211f542",
+                "_type": "gridColumn",
+                "content": [
+                  {
+                    "_key": "b05089d3ace2",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "631904e3bc05",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "PRACTICE PERFORMANCE REPORT"
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "eyebrow"
+                  },
+                  {
+                    "_key": "f6b4519e5c2d",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "fa555fe3b587",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Stop Guessing How Your\nFront Desk Is Performing."
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "h1"
+                  },
+                  {
+                    "_key": "dec62202d88b",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "a3c374f9ab22",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "We help dental practices find and fix the root of their new patient bottleneck - with solutions tailored for your front desk."
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "subtitle"
+                  },
+                  {
+                    "_key": "8700302d5a42",
+                    "_type": "ctaBlock",
+                    "alignment": "center",
+                    "items": [
+                      {
+                        "_key": "2d0cd2de0de8",
+                        "_type": "cta",
+                        "ctaType": "book_meeting",
+                        "label": "Book Free Consultation",
+                        "variant": "primary"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlign": "center",
+                "width": "full"
+              }
+            ]
+          }
+        ],
+        "theme": "white"
+      },
+      {
+        "_key": "5f7e4821c0e3",
+        "_type": "stepBand",
+        "moduleLayout": {
+          "_type": "moduleLayout",
+          "animated": false
+        },
+        "stepOne": {
+          "_type": "stepBandItem",
+          "description": "Receive a free new patient consultation from our team with 30+ years of dental practice management experience.",
+          "label": "Consulting"
+        },
+        "stepTwo": {
+          "_type": "stepBandItem",
+          "description": "We recommend the right new patient growth solutions based on your practice’s needs.",
+          "label": "Solutions"
+        }
+      },
+      {
+        "_key": "0caf9c15a59f",
+        "_type": "gridSection",
+        "gradientDirection": "none",
+        "isHero": false,
+        "moduleLayout": {
+          "_type": "moduleLayout",
+          "animated": false
+        },
+        "name": "Practice Performance Report",
+        "rows": [
+          {
+            "_key": "820678b6beec",
+            "_type": "gridRow",
+            "alignment": "center",
+            "columns": [
+              {
+                "_key": "6c72614a1469",
+                "_type": "gridColumn",
+                "content": [
+                  {
+                    "_key": "20452a314a9e",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "68f2ea23a394",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Practice Performance Report"
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "h2"
+                  },
+                  {
+                    "_key": "29181ad09e6c",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "bb3c86aae322",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Meet with our team to find the best mix of new patient growth solutions for your practice:"
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "normal"
+                  },
+                  {
+                    "_key": "e46c1bd572a6",
+                    "_type": "tabsBlock",
+                    "autoRotateSeconds": 20,
+                    "items": [
+                      {
+                        "_key": "d9a8d961a388",
+                        "_type": "tabItem",
+                        "content": {
+                          "_type": "solutionCard",
+                          "checks": [
+                            "Every new patient call is recorded and securely stored for review.",
+                            "Calls are transcribed and analyzed to surface what is working and what is not.",
+                            "Spot missed opportunities and coaching moments across your front desk.",
+                            "Use real call examples to guide training and improve booking rates."
+                          ],
+                          "details": [
+                            "Record patient calls to gain clear insights into front desk performance.",
+                            "Each call is transcribed and analyzed to reveal what works and what doesn't."
+                          ],
+                          "expandableTitle": "The Practice Porter Solution",
+                          "image": {
+                            "_type": "image",
+                            "alt": "Front desk professional reviewing call performance on a laptop",
+                            "asset": {
+                              "_ref": "image-8402654340918b09b1b6aa535e2f5d782a8d04d3-1248x832-png",
+                              "_type": "reference"
+                            }
+                          },
+                          "title": "Call Recording & Analysis"
+                        },
+                        "icon": "mic",
+                        "title": "Call Recording"
+                      },
+                      {
+                        "_key": "084574103bb6",
+                        "_type": "tabItem",
+                        "content": {
+                          "_type": "solutionCard",
+                          "checks": [
+                            "A clear monthly report on your practice’s new patient performance.",
+                            "Individualized insights and benchmarks for each front desk team member.",
+                            "A monthly consultation with our team to review results and next steps.",
+                            "Track progress over time and tie it directly to new patient growth."
+                          ],
+                          "details": [
+                            "Monthly report on new patient performance with team data.",
+                            "Meet monthly with our team to review performance and growth opportunities."
+                          ],
+                          "expandableTitle": "The Practice Porter Solution",
+                          "image": {
+                            "_type": "image",
+                            "alt": "Reviewing a practice performance report on a tablet",
+                            "asset": {
+                              "_ref": "image-c784dda603dd9748337278b6830505a7983a4e4c-1535x1024-png",
+                              "_type": "reference"
+                            }
+                          },
+                          "title": "Practice Performance Report"
+                        },
+                        "icon": "trending-up",
+                        "title": "Performance Reporting"
+                      },
+                      {
+                        "_key": "eeba152e65d3",
+                        "_type": "tabItem",
+                        "content": {
+                          "_type": "solutionCard",
+                          "checks": [
+                            "Identify missed calls and patients who did not book on the first call.",
+                            "Assign team members to follow up quickly before patients move on.",
+                            "Track every follow-up so no new patient slips through the cracks.",
+                            "Convert more hesitant callers into booked appointments."
+                          ],
+                          "details": [
+                            "Convert more new patients by following up with missed callers or hesitant bookers.",
+                            "Track missed calls and assign staff for follow-up."
+                          ],
+                          "expandableTitle": "The Practice Porter Solution",
+                          "image": {
+                            "_type": "image",
+                            "alt": "Reviewing follow-up tasks on a laptop",
+                            "asset": {
+                              "_ref": "image-b7205e0dac46950a1bfaa8abcb82078d46d8967a-1448x1086-png",
+                              "_type": "reference"
+                            }
+                          },
+                          "title": "Follow Up Center"
+                        },
+                        "icon": "phone",
+                        "title": "Follow Up Center"
+                      },
+                      {
+                        "_key": "ae86e52a4964",
+                        "_type": "tabItem",
+                        "content": {
+                          "_type": "solutionCard",
+                          "checks": [
+                            "Send Google Reviews requests to patients after appointments.",
+                            "Monitor new reviews and which staff member drove that review.",
+                            "Benchmark your rating and review volume against local competitors.",
+                            "Build the online reputation that wins new patients before they call."
+                          ],
+                          "details": [
+                            "Send Google Review requests to patients after an appointment.",
+                            "Monitor your Google Reviews and compare your numbers to competitors."
+                          ],
+                          "expandableTitle": "The Practice Porter Solution",
+                          "image": {
+                            "_type": "image",
+                            "alt": "Patient leaving a five-star Google review",
+                            "asset": {
+                              "_ref": "image-dcb51d87c8de872296e87008c2261ffa666ede90-1248x832-jpg",
+                              "_type": "reference"
+                            }
+                          },
+                          "title": "Google Review Center"
+                        },
+                        "icon": "star",
+                        "title": "Google Review Center"
+                      }
+                    ]
+                  },
+                  {
+                    "_key": "d5bb614dfe1c",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "cf02474c2a19",
+                        "_type": "span",
+                        "marks": [],
+                        "text": ""
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "normal"
+                  }
+                ],
+                "verticalAlign": "center",
+                "width": "full"
+              }
+            ]
+          }
+        ],
+        "theme": "white"
+      },
+      {
+        "_key": "3a6951c52cc8",
+        "_type": "gridSection",
+        "gradientDirection": "none",
+        "isHero": false,
+        "moduleLayout": {
+          "_type": "moduleLayout",
+          "animated": false,
+          "bottomPadding": "med",
+          "topPadding": "sml"
+        },
+        "name": "Flexible Pricing, Built Around Your Practice.",
+        "rows": [
+          {
+            "_key": "a6da2c1857a3",
+            "_type": "gridRow",
+            "alignment": "center",
+            "columns": [
+              {
+                "_key": "6bd32a92e1b2",
+                "_type": "gridColumn",
+                "content": [
+                  {
+                    "_key": "dce7d5a03f4e",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "c2657749aa87",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Flexible Pricing, Built Around Your Practice."
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "h2"
+                  },
+                  {
+                    "_key": "8b2f4c272c4b",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "5b4aa6cf9747",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Every practice is different, so our solution packages are flexible and tailored to your practice’s needs and goals."
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "normal"
+                  },
+                  {
+                    "_key": "88a820790a9d",
+                    "_type": "featureCardsBlock",
+                    "columns": 3,
+                    "items": [
+                      {
+                        "_key": "a380c79ae7c2",
+                        "_type": "featureCard",
+                        "description": "Mix the solutions that fit your practice.",
+                        "icon": "package",
+                        "title": "Tailored Packages"
+                      },
+                      {
+                        "_key": "3bfb889b4ffa",
+                        "_type": "featureCard",
+                        "description": "No setup fees and no lock-in.",
+                        "icon": "check",
+                        "title": "No Long-Term Contracts"
+                      },
+                      {
+                        "_key": "91ccae32428f",
+                        "_type": "featureCard",
+                        "description": "Solutions adapt as your practice evolves.",
+                        "icon": "users",
+                        "title": "A Partnership That Adapts"
+                      }
+                    ]
+                  },
+                  {
+                    "_key": "970c433efe43",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "1652bf4f5d16",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "\n\n"
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "normal"
+                  }
+                ],
+                "verticalAlign": "center",
+                "width": "full"
+              }
+            ]
+          }
+        ],
+        "theme": "vanilla"
+      },
+      {
+        "_key": "0d8a16d6f38f",
+        "_type": "gridSection",
+        "gradientDirection": "none",
+        "isHero": false,
+        "moduleLayout": {
+          "_type": "moduleLayout",
+          "animated": false,
+          "bottomPadding": "med",
+          "topPadding": "sml"
+        },
+        "name": "Complete Your Front Desk Solution",
+        "rows": [
+          {
+            "_key": "eca58d1282c2",
+            "_type": "gridRow",
+            "alignment": "center",
+            "columns": [
+              {
+                "_key": "ddbea83ec6d5",
+                "_type": "gridColumn",
+                "content": [
+                  {
+                    "_key": "8958ed4a2c67",
+                    "_type": "block",
+                    "children": [
+                      {
+                        "_key": "a47fdffcd49b",
+                        "_type": "span",
+                        "marks": [],
+                        "text": "Complete Your Front Desk Solution"
+                      }
+                    ],
+                    "markDefs": [],
+                    "style": "eyebrow"
+                  },
+                  {
+                    "_key": "9f2dc0107081",
+                    "_type": "featureCardsBlock",
+                    "columns": 2,
+                    "items": [
+                      {
+                        "_key": "b18972691510",
+                        "_type": "featureCard",
+                        "cta": {
+                          "_type": "cta",
+                          "ctaType": "internal",
+                          "href": "/performance-report",
+                          "variant": "primary"
+                        },
+                        "description": "See how your front desk handles calls.",
+                        "icon": "trending-up",
+                        "title": "Practice Performance Report",
+                        "type": "link"
+                      },
+                      {
+                        "_key": "2bc0097a39a9",
+                        "_type": "featureCard",
+                        "cta": {
+                          "_type": "cta",
+                          "ctaType": "internal",
+                          "href": "/front-desk-training",
+                          "variant": "primary"
+                        },
+                        "description": "Coaching that turns calls into bookings.",
+                        "icon": "graduation-cap",
+                        "title": "Front Desk Training",
+                        "type": "link"
+                      }
+                    ]
+                  }
+                ],
+                "verticalAlign": "center",
+                "width": "auto"
+              }
+            ]
+          }
+        ],
+        "theme": "lotion"
+      }
+    ],
+    "seo": {
+      "_type": "seo",
+      "metaDescription": "Complete Visibility into your front desk - Practice Performance Report",
+      "metaTitle": "Practice Performance Report"
+    },
+    "slug": "performance-report",
+    "title": "Practice Performance Report"
+  },
+  {
+    "_id": "12cc0a63-535d-4e56-8306-d3451687135a",
+    "modules": [
+      {
+        "_key": "legal-privacy",
+        "_type": "legal",
+        "content": [
+          {
+            "_key": "p01",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp01a",
+                "_type": "span",
+                "marks": [],
+                "text": "Introduction and organizational info"
+              }
+            ],
+            "markDefs": [],
+            "style": "h2"
+          },
+          {
+            "_key": "p02",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp02a",
+                "_type": "span",
+                "marks": [],
+                "text": "We, at Practice Porter Inc., are dedicated to serving our customers and contacts to the best of our abilities. Part of our commitment involves the responsible management of personal information collected through our website "
+              },
+              {
+                "_key": "sp02b",
+                "_type": "span",
+                "marks": [
+                  "lnkp02"
+                ],
+                "text": "www.practiceporter.ca"
+              },
+              {
+                "_key": "sp02c",
+                "_type": "span",
+                "marks": [],
+                "text": ", and any related interactions. Our primary goals in processing this information include:"
+              }
+            ],
+            "markDefs": [
+              {
+                "_key": "lnkp02",
+                "_type": "link",
+                "href": "https://www.practiceporter.ca"
+              }
+            ],
+            "style": "normal"
+          },
+          {
+            "_key": "p03",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp03a",
+                "_type": "span",
+                "marks": [],
+                "text": "Enhancing the user experience on our platform by understanding customer needs and preferences."
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p04",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp04a",
+                "_type": "span",
+                "marks": [],
+                "text": "Providing timely support and responding to inquiries or service requests."
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p05",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp05a",
+                "_type": "span",
+                "marks": [],
+                "text": "Improving our products and services to meet the evolving demands of our users."
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p06",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp06a",
+                "_type": "span",
+                "marks": [],
+                "text": "Conducting necessary business operations, such as billing and account management."
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p07",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp07a",
+                "_type": "span",
+                "marks": [],
+                "text": "It is our policy to process personal information with the utmost respect for privacy and security. We adhere to all relevant regulations and guidelines to ensure that the data we handle is protected against unauthorized access, disclosure, alteration, and destruction."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p08",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp08a",
+                "_type": "span",
+                "marks": [],
+                "text": "We do not have a designated Data Protection Officer (DPO) but remain fully committed to addressing your privacy concerns. Should you have any questions, please contact us at "
+              },
+              {
+                "_key": "sp08b",
+                "_type": "span",
+                "marks": [
+                  "lnkp08"
+                ],
+                "text": "info@practiceporter.ca"
+              },
+              {
+                "_key": "sp08c",
+                "_type": "span",
+                "marks": [],
+                "text": " or +1-CA 6479732778."
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [
+              {
+                "_key": "lnkp08",
+                "_type": "link",
+                "href": "mailto:info@practiceporter.ca"
+              }
+            ],
+            "style": "normal"
+          },
+          {
+            "_key": "p09",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp09a",
+                "_type": "span",
+                "marks": [],
+                "text": "Your privacy is our priority. We are committed to processing your personal information transparently and with your safety in mind. This commitment extends to our collaboration with third-party services that may process personal information on our behalf. Rest assured, all activities are conducted in strict compliance with applicable privacy laws."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p10",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp10a",
+                "_type": "span",
+                "marks": [],
+                "text": "Scope and application"
+              }
+            ],
+            "markDefs": [],
+            "style": "h2"
+          },
+          {
+            "_key": "p11",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp11a",
+                "_type": "span",
+                "marks": [],
+                "text": "Our privacy policy is designed to protect the personal information of all our stakeholders, including website visitors, registered users, and customers. Whether you are browsing our website "
+              },
+              {
+                "_key": "sp11b",
+                "_type": "span",
+                "marks": [
+                  "lnkp11"
+                ],
+                "text": "www.practiceporter.ca"
+              },
+              {
+                "_key": "sp11c",
+                "_type": "span",
+                "marks": [],
+                "text": ", using our services as a registered user, or engaging with us as a valued customer, we ensure that your personal data is processed with the highest standards of privacy and security. This policy outlines our practices and your rights related to personal information."
+              }
+            ],
+            "markDefs": [
+              {
+                "_key": "lnkp11",
+                "_type": "link",
+                "href": "https://www.practiceporter.ca"
+              }
+            ],
+            "style": "normal"
+          },
+          {
+            "_key": "p12",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp12a",
+                "_type": "span",
+                "marks": [],
+                "text": "Data storage and protection"
+              }
+            ],
+            "markDefs": [],
+            "style": "h2"
+          },
+          {
+            "_key": "p13",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp13a",
+                "_type": "span",
+                "marks": [],
+                "text": "Data storage"
+              }
+            ],
+            "markDefs": [],
+            "style": "h3"
+          },
+          {
+            "_key": "p14",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp14a",
+                "_type": "span",
+                "marks": [],
+                "text": "Personal information is stored in secure servers. For services that require international data transfer, we ensure that such transfers comply with all applicable laws and maintain data protection standards equivalent to those in our primary location."
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p15",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp15a",
+                "_type": "span",
+                "marks": [],
+                "text": "Data hosting partners: We partner with reputable data hosting providers committed to using state-of-the-art security measures. These partners are selected based on their adherence to stringent data protection standards."
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p16",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp16a",
+                "_type": "span",
+                "marks": [],
+                "text": "Data processing agreements"
+              }
+            ],
+            "markDefs": [],
+            "style": "h3"
+          },
+          {
+            "_key": "p17",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp17a",
+                "_type": "span",
+                "marks": [],
+                "text": "When we share your data with third-party service providers, we do so under the protection of Data Processing Agreements (DPAs) that ensure your information is managed in accordance with GDPR and other relevant data protection laws. These agreements mandate that third parties implement adequate technical and organizational measures to ensure the security of your data."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p18",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp18a",
+                "_type": "span",
+                "marks": [],
+                "text": "Transparency and control"
+              }
+            ],
+            "markDefs": [],
+            "style": "h3"
+          },
+          {
+            "_key": "p19",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp19a",
+                "_type": "span",
+                "marks": [],
+                "text": "We believe in transparency and providing you with control over your personal information. You will always be informed about any significant changes to our sharing practices, and where applicable, you will have the option to consent to such changes."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p20",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp20a",
+                "_type": "span",
+                "marks": [],
+                "text": "Your trust is important to us, and we strive to ensure that your personal information is disclosed only in accordance with this policy. For any queries, please reach out to us at "
+              },
+              {
+                "_key": "sp20b",
+                "_type": "span",
+                "marks": [
+                  "lnkp20"
+                ],
+                "text": "info@practiceporter.ca"
+              },
+              {
+                "_key": "sp20c",
+                "_type": "span",
+                "marks": [],
+                "text": " or +1-CA 6479732778."
+              }
+            ],
+            "markDefs": [
+              {
+                "_key": "lnkp20",
+                "_type": "link",
+                "href": "mailto:info@practiceporter.ca"
+              }
+            ],
+            "style": "normal"
+          },
+          {
+            "_key": "p21",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp21a",
+                "_type": "span",
+                "marks": [],
+                "text": "User rights and choices"
+              }
+            ],
+            "markDefs": [],
+            "style": "h2"
+          },
+          {
+            "_key": "p22",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp22a",
+                "_type": "span",
+                "marks": [],
+                "text": "At Practice Porter Inc., we recognize and respect your rights regarding your personal information, in accordance with the General Data Protection Regulation (GDPR) and other applicable data protection laws. We are committed to ensuring you can exercise your rights effectively."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p23",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp23a",
+                "_type": "span",
+                "marks": [],
+                "text": "Your rights"
+              }
+            ],
+            "markDefs": [],
+            "style": "h3"
+          },
+          {
+            "_key": "p24",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp24a",
+                "_type": "span",
+                "marks": [
+                  "strong"
+                ],
+                "text": "Right of access"
+              },
+              {
+                "_key": "sp24b",
+                "_type": "span",
+                "marks": [],
+                "text": " (Art. 15 GDPR): You have the right to request access to the personal information we hold about you and to obtain information about how we process it."
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p25",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp25a",
+                "_type": "span",
+                "marks": [
+                  "strong"
+                ],
+                "text": "Right to rectification"
+              },
+              {
+                "_key": "sp25b",
+                "_type": "span",
+                "marks": [],
+                "text": " (Art. 16 GDPR): If you believe that any personal information we hold about you is incorrect or incomplete, you have the right to request its correction or completion."
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p26",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp26a",
+                "_type": "span",
+                "marks": [
+                  "strong"
+                ],
+                "text": "Right to erasure (‘right to be forgotten’)"
+              },
+              {
+                "_key": "sp26b",
+                "_type": "span",
+                "marks": [],
+                "text": " (Art. 17 GDPR): You have the right to request the deletion of your personal information when it is no longer necessary for the purposes for which it was collected, among other circumstances."
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p27",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp27a",
+                "_type": "span",
+                "marks": [
+                  "strong"
+                ],
+                "text": "Right to restriction of processing"
+              },
+              {
+                "_key": "sp27b",
+                "_type": "span",
+                "marks": [],
+                "text": " (Art. 18 GDPR): You have the right to request that we restrict the processing of your personal information under certain conditions."
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p28",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp28a",
+                "_type": "span",
+                "marks": [
+                  "strong"
+                ],
+                "text": "Right to data portability"
+              },
+              {
+                "_key": "sp28b",
+                "_type": "span",
+                "marks": [],
+                "text": " (Art. 20 GDPR): You have the right to receive your personal information in a structured, commonly used, and machine-readable format."
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p29",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp29a",
+                "_type": "span",
+                "marks": [
+                  "strong"
+                ],
+                "text": "Right to object"
+              },
+              {
+                "_key": "sp29b",
+                "_type": "span",
+                "marks": [],
+                "text": " (Art. 21 GDPR): You have the right to object to the processing of your personal information, under certain conditions, including processing for direct marketing."
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p30",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp30a",
+                "_type": "span",
+                "marks": [
+                  "strong"
+                ],
+                "text": "Right to withdraw consent"
+              },
+              {
+                "_key": "sp30b",
+                "_type": "span",
+                "marks": [],
+                "text": " (Art. 7(3) GDPR): Where the processing of your personal information is based on your consent, you have the right to withdraw that consent at any time."
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p31",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp31a",
+                "_type": "span",
+                "marks": [
+                  "strong"
+                ],
+                "text": "Right to lodge a complaint"
+              },
+              {
+                "_key": "sp31b",
+                "_type": "span",
+                "marks": [],
+                "text": " (Art. 77 GDPR): You have the right to lodge a complaint with a supervisory authority if you believe our processing of your personal information violates applicable data protection laws."
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p32",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp32a",
+                "_type": "span",
+                "marks": [],
+                "text": "Exercising your rights"
+              }
+            ],
+            "markDefs": [],
+            "style": "h3"
+          },
+          {
+            "_key": "p33",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp33a",
+                "_type": "span",
+                "marks": [],
+                "text": "To exercise any of these rights, please contact us at "
+              },
+              {
+                "_key": "sp33b",
+                "_type": "span",
+                "marks": [
+                  "lnkp33"
+                ],
+                "text": "info@practiceporter.ca"
+              },
+              {
+                "_key": "sp33c",
+                "_type": "span",
+                "marks": [],
+                "text": " or +1-CA 6479732778. We will respond to your request in accordance with applicable data protection laws and within the timeframes stipulated by those laws."
+              }
+            ],
+            "markDefs": [
+              {
+                "_key": "lnkp33",
+                "_type": "link",
+                "href": "mailto:info@practiceporter.ca"
+              }
+            ],
+            "style": "normal"
+          },
+          {
+            "_key": "p34",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp34a",
+                "_type": "span",
+                "marks": [],
+                "text": "Cookies and tracking technologies"
+              }
+            ],
+            "markDefs": [],
+            "style": "h2"
+          },
+          {
+            "_key": "p35",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp35a",
+                "_type": "span",
+                "marks": [],
+                "text": "At Practice Porter Inc., we value your privacy and are committed to being transparent about our use of cookies and other tracking technologies on our website. These technologies play a crucial role in ensuring the smooth operation of our digital platforms, enhancing your user experience, and providing insights that help us improve."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p36",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp36a",
+                "_type": "span",
+                "marks": [],
+                "text": "Understanding cookies and tracking technologies"
+              }
+            ],
+            "markDefs": [],
+            "style": "h3"
+          },
+          {
+            "_key": "p37",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp37a",
+                "_type": "span",
+                "marks": [],
+                "text": "Cookies are small data files placed on your device that enable us to remember your preferences and collect information about your website usage. Tracking technologies, such as web beacons and pixel tags, help us understand how you interact with our site and which pages you visit."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p38",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp38a",
+                "_type": "span",
+                "marks": [],
+                "text": "How we use these technologies"
+              }
+            ],
+            "markDefs": [],
+            "style": "h3"
+          },
+          {
+            "_key": "p39",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp39a",
+                "_type": "span",
+                "marks": [],
+                "text": "Essential cookies: Necessary for the website’s functionality, such as authentication and security. They do not require consent."
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p40",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp40a",
+                "_type": "span",
+                "marks": [],
+                "text": "Performance and analytics cookies: These collect information about how visitors use our website, which pages are visited most frequently, and if error messages are received from web pages."
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p41",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp41a",
+                "_type": "span",
+                "marks": [],
+                "text": "Functional cookies: Enable the website to provide enhanced functionality and personalization, like remembering your preferences."
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p42",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp42a",
+                "_type": "span",
+                "marks": [],
+                "text": "Advertising and targeting cookies: Used to deliver advertisements more relevant to you and your interests, and to help measure the effectiveness of advertising campaigns."
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p43",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp43a",
+                "_type": "span",
+                "marks": [],
+                "text": "Changes to our cookie use"
+              }
+            ],
+            "markDefs": [],
+            "style": "h3"
+          },
+          {
+            "_key": "p44",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp44a",
+                "_type": "span",
+                "marks": [],
+                "text": "We may update our use of cookies and tracking technologies to improve our services or comply with legal requirements. We will notify you of any significant changes and seek your consent where necessary."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p45",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp45a",
+                "_type": "span",
+                "marks": [],
+                "text": "Should you have any questions or concerns about our use of cookies and tracking technologies, please do not hesitate to contact us at "
+              },
+              {
+                "_key": "sp45b",
+                "_type": "span",
+                "marks": [
+                  "lnkp45"
+                ],
+                "text": "info@practiceporter.ca"
+              },
+              {
+                "_key": "sp45c",
+                "_type": "span",
+                "marks": [],
+                "text": " or +1-CA 6479732778."
+              }
+            ],
+            "markDefs": [
+              {
+                "_key": "lnkp45",
+                "_type": "link",
+                "href": "mailto:info@practiceporter.ca"
+              }
+            ],
+            "style": "normal"
+          },
+          {
+            "_key": "p46",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp46a",
+                "_type": "span",
+                "marks": [],
+                "text": "Compliance with United States privacy laws"
+              }
+            ],
+            "markDefs": [],
+            "style": "h2"
+          },
+          {
+            "_key": "p47",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp47a",
+                "_type": "span",
+                "marks": [],
+                "text": "To appeal a decision we may make regarding your request, please contact us within 60 days of receiving our response by email at "
+              },
+              {
+                "_key": "sp47b",
+                "_type": "span",
+                "marks": [
+                  "lnkp47"
+                ],
+                "text": "info@practiceporter.ca"
+              },
+              {
+                "_key": "sp47c",
+                "_type": "span",
+                "marks": [],
+                "text": " or by phone at 6479732778."
+              }
+            ],
+            "markDefs": [
+              {
+                "_key": "lnkp47",
+                "_type": "link",
+                "href": "mailto:info@practiceporter.ca"
+              }
+            ],
+            "style": "normal"
+          },
+          {
+            "_key": "p48",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp48a",
+                "_type": "span",
+                "marks": [],
+                "text": "For residents of the United States of America the following provisions apply:"
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p49",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp49a",
+                "_type": "span",
+                "marks": [],
+                "text": "A. Individual rights"
+              }
+            ],
+            "markDefs": [],
+            "style": "h3"
+          },
+          {
+            "_key": "p50",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp50a",
+                "_type": "span",
+                "marks": [],
+                "text": "The United States privacy laws provide residents of the United States specific rights regarding their personal information, additional to what has been described before."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p51",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp51a",
+                "_type": "span",
+                "marks": [],
+                "text": "B. Right to Know"
+              }
+            ],
+            "markDefs": [],
+            "style": "h3"
+          },
+          {
+            "_key": "p52",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp52a",
+                "_type": "span",
+                "marks": [],
+                "text": "You may request that we disclose to you what personal information we have collected, used, shared, or sold about you, and why we collected, used, shared, or sold that information. Specifically, you may request the disclosure of:"
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p53",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp53a",
+                "_type": "span",
+                "marks": [],
+                "text": "The categories of personal information collected"
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p54",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp54a",
+                "_type": "span",
+                "marks": [],
+                "text": "Specific pieces of personal information collected"
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p55",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp55a",
+                "_type": "span",
+                "marks": [],
+                "text": "The categories of sources from which we collected personal information"
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p56",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp56a",
+                "_type": "span",
+                "marks": [],
+                "text": "The purposes for which personal information is used"
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p57",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp57a",
+                "_type": "span",
+                "marks": [],
+                "text": "The categories of third parties with whom personal information is shared"
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p58",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp58a",
+                "_type": "span",
+                "marks": [],
+                "text": "The categories of information that are sold or disclosed to third parties"
+              }
+            ],
+            "level": 1,
+            "listItem": "bullet",
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p59",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp59a",
+                "_type": "span",
+                "marks": [],
+                "text": "C. Right to Delete"
+              }
+            ],
+            "markDefs": [],
+            "style": "h3"
+          },
+          {
+            "_key": "p60",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp60a",
+                "_type": "span",
+                "marks": [],
+                "text": "You may request that we delete personal information we have collected about you."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p61",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp61a",
+                "_type": "span",
+                "marks": [],
+                "text": "D. Right to Correct"
+              }
+            ],
+            "markDefs": [],
+            "style": "h3"
+          },
+          {
+            "_key": "p62",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp62a",
+                "_type": "span",
+                "marks": [],
+                "text": "You may ask us to correct inaccurate information that we have about you."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p63",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp63a",
+                "_type": "span",
+                "marks": [],
+                "text": "E. Right to Limit"
+              }
+            ],
+            "markDefs": [],
+            "style": "h3"
+          },
+          {
+            "_key": "p64",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp64a",
+                "_type": "span",
+                "marks": [],
+                "text": "You can request us to only use your sensitive personal information for limited purposes, such as providing you with the services you requested."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p65",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp65a",
+                "_type": "span",
+                "marks": [],
+                "text": "F. Right to Opt-Out"
+              }
+            ],
+            "markDefs": [],
+            "style": "h3"
+          },
+          {
+            "_key": "p66",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp66a",
+                "_type": "span",
+                "marks": [],
+                "text": "You may request that we stop processing your personal information (“opt-out”). You can make use of your right to opt-out of the sale or sharing of personal information by submitting your request through the link on our website."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p67",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp67a",
+                "_type": "span",
+                "marks": [],
+                "text": "G. Right to Non-Discrimination"
+              }
+            ],
+            "markDefs": [],
+            "style": "h3"
+          },
+          {
+            "_key": "p68",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp68a",
+                "_type": "span",
+                "marks": [],
+                "text": "You have the right to be protected from discrimination for exercising your rights."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "p69",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp69a",
+                "_type": "span",
+                "marks": [],
+                "text": "H. Submitting requests"
+              }
+            ],
+            "markDefs": [],
+            "style": "h3"
+          },
+          {
+            "_key": "p70",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp70a",
+                "_type": "span",
+                "marks": [],
+                "text": "You may submit your request by sending an email to "
+              },
+              {
+                "_key": "sp70b",
+                "_type": "span",
+                "marks": [
+                  "lnkp70"
+                ],
+                "text": "info@practiceporter.ca"
+              },
+              {
+                "_key": "sp70c",
+                "_type": "span",
+                "marks": [],
+                "text": " or by phone at +1-CA 6479732778. We will compare the information you submit to us with the information we have in our records to verify your request."
+              }
+            ],
+            "markDefs": [
+              {
+                "_key": "lnkp70",
+                "_type": "link",
+                "href": "mailto:info@practiceporter.ca"
+              }
+            ],
+            "style": "normal"
+          },
+          {
+            "_key": "p71",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp71a",
+                "_type": "span",
+                "marks": [],
+                "text": "J. Sensitive data and/or biometric data"
+              }
+            ],
+            "markDefs": [],
+            "style": "h3"
+          },
+          {
+            "_key": "p72",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "sp72a",
+                "_type": "span",
+                "marks": [],
+                "text": "We only process sensitive personal data with your prior consent and only for specific purposes that are clearly disclosed at the time of collection. You may withdraw your consent at any time by email to "
+              },
+              {
+                "_key": "sp72b",
+                "_type": "span",
+                "marks": [
+                  "lnkp72"
+                ],
+                "text": "info@practiceporter.ca"
+              },
+              {
+                "_key": "sp72c",
+                "_type": "span",
+                "marks": [],
+                "text": "."
+              }
+            ],
+            "markDefs": [
+              {
+                "_key": "lnkp72",
+                "_type": "link",
+                "href": "mailto:info@practiceporter.ca"
+              }
+            ],
+            "style": "normal"
+          }
+        ],
+        "dateSource": "effective",
+        "effectiveDate": "2026-06-26",
+        "theme": "white",
+        "title": "Privacy Policy"
+      }
+    ],
+    "seo": {
+      "_type": "seo",
+      "metaDescription": "Learn how Practice Porter collects, uses, and protects your personal information.",
+      "metaTitle": "Privacy Policy | Practice Porter"
+    },
+    "slug": "privacy-policy",
+    "title": "Privacy Policy"
+  },
+  {
+    "_id": "81514f37-2012-4715-a36e-ceab424c32aa",
+    "modules": [
+      {
+        "_key": "legal-terms",
+        "_type": "legal",
+        "content": [
+          {
+            "_key": "b01",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s01a",
+                "_type": "span",
+                "marks": [],
+                "text": "Please read these terms and conditions carefully before using Our Service."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b02",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s02a",
+                "_type": "span",
+                "marks": [],
+                "text": "Interpretation and Definitions"
+              }
+            ],
+            "markDefs": [],
+            "style": "h2"
+          },
+          {
+            "_key": "b03",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s03a",
+                "_type": "span",
+                "marks": [],
+                "text": "Interpretation"
+              }
+            ],
+            "markDefs": [],
+            "style": "h3"
+          },
+          {
+            "_key": "b04",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s04a",
+                "_type": "span",
+                "marks": [],
+                "text": "The words whose initial letters are capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b05",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s05a",
+                "_type": "span",
+                "marks": [],
+                "text": "Definitions"
+              }
+            ],
+            "markDefs": [],
+            "style": "h3"
+          },
+          {
+            "_key": "b06",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s06a",
+                "_type": "span",
+                "marks": [],
+                "text": "For the purposes of these Terms and Conditions:"
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b07",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s07a",
+                "_type": "span",
+                "marks": [
+                  "strong"
+                ],
+                "text": "Affiliate"
+              },
+              {
+                "_key": "s07b",
+                "_type": "span",
+                "marks": [],
+                "text": " means an entity that controls, is controlled by, or is under common control with a party, where “control” means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b08",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s08a",
+                "_type": "span",
+                "marks": [
+                  "strong"
+                ],
+                "text": "Country"
+              },
+              {
+                "_key": "s08b",
+                "_type": "span",
+                "marks": [],
+                "text": " refers to: Ontario, Canada"
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b09",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s09a",
+                "_type": "span",
+                "marks": [
+                  "strong"
+                ],
+                "text": "Company"
+              },
+              {
+                "_key": "s09b",
+                "_type": "span",
+                "marks": [],
+                "text": " (referred to as either “the Company”, “We”, “Us” or “Our” in these Terms and Conditions) refers to Practice Porter Inc.."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b10",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s10a",
+                "_type": "span",
+                "marks": [
+                  "strong"
+                ],
+                "text": "Device"
+              },
+              {
+                "_key": "s10b",
+                "_type": "span",
+                "marks": [],
+                "text": " means any device that can access the Service such as a computer, a cell phone or a digital tablet."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b11",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s11a",
+                "_type": "span",
+                "marks": [
+                  "strong"
+                ],
+                "text": "Service"
+              },
+              {
+                "_key": "s11b",
+                "_type": "span",
+                "marks": [],
+                "text": " refers to the Website."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b12",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s12a",
+                "_type": "span",
+                "marks": [
+                  "strong"
+                ],
+                "text": "Terms and Conditions"
+              },
+              {
+                "_key": "s12b",
+                "_type": "span",
+                "marks": [],
+                "text": " (also referred to as “Terms”) means these Terms and Conditions that govern Your access to and use of the Service and form the entire agreement between You and the Company regarding the Service."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b13",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s13a",
+                "_type": "span",
+                "marks": [
+                  "strong"
+                ],
+                "text": "Third-Party Social Media Service"
+              },
+              {
+                "_key": "s13b",
+                "_type": "span",
+                "marks": [],
+                "text": " means any services or content provided by a third party that is displayed, included, or linked to through the Service."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b14",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s14a",
+                "_type": "span",
+                "marks": [
+                  "strong"
+                ],
+                "text": "Website"
+              },
+              {
+                "_key": "s14b",
+                "_type": "span",
+                "marks": [],
+                "text": " refers to Practice Porter, accessible from "
+              },
+              {
+                "_key": "s14c",
+                "_type": "span",
+                "marks": [
+                  "lnk14"
+                ],
+                "text": "www.practiceporter.ca"
+              }
+            ],
+            "markDefs": [
+              {
+                "_key": "lnk14",
+                "_type": "link",
+                "href": "https://www.practiceporter.ca"
+              }
+            ],
+            "style": "normal"
+          },
+          {
+            "_key": "b15",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s15a",
+                "_type": "span",
+                "marks": [
+                  "strong"
+                ],
+                "text": "You"
+              },
+              {
+                "_key": "s15b",
+                "_type": "span",
+                "marks": [],
+                "text": " means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b16",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s16a",
+                "_type": "span",
+                "marks": [],
+                "text": "Acknowledgment"
+              }
+            ],
+            "markDefs": [],
+            "style": "h2"
+          },
+          {
+            "_key": "b17",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s17a",
+                "_type": "span",
+                "marks": [],
+                "text": "These are the Terms and Conditions governing the use of this Service and the agreement between You and the Company. These Terms and Conditions set out the rights and obligations of all users regarding the use of the Service."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b18",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s18a",
+                "_type": "span",
+                "marks": [],
+                "text": "Your access to and use of the Service is conditioned on Your acceptance of and compliance with these Terms and Conditions. These Terms and Conditions apply to all visitors, users and others who access or use the Service."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b19",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s19a",
+                "_type": "span",
+                "marks": [],
+                "text": "By accessing or using the Service You agree to be bound by these Terms and Conditions. If You disagree with any part of these Terms and Conditions then You may not access the Service."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b20",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s20a",
+                "_type": "span",
+                "marks": [],
+                "text": "You represent that you are over the age of 18. The Company does not permit those under 18 to use the Service."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b21",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s21a",
+                "_type": "span",
+                "marks": [],
+                "text": "Your access to and use of the Service is also subject to Our Privacy Policy, which describes how We collect, use, and disclose personal information. Please read Our Privacy Policy carefully before using Our Service."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b22",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s22a",
+                "_type": "span",
+                "marks": [],
+                "text": "Links to Other Websites"
+              }
+            ],
+            "markDefs": [],
+            "style": "h2"
+          },
+          {
+            "_key": "b23",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s23a",
+                "_type": "span",
+                "marks": [],
+                "text": "Our Service may contain links to third-party websites or services that are not owned or controlled by the Company."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b24",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s24a",
+                "_type": "span",
+                "marks": [],
+                "text": "The Company has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third-party websites or services. You further acknowledge and agree that the Company shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with the use of or reliance on any such content, goods or services available on or through any such websites or services."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b25",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s25a",
+                "_type": "span",
+                "marks": [],
+                "text": "We strongly advise You to read the terms and conditions and privacy policies of any third-party websites or services that You visit."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b26",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s26a",
+                "_type": "span",
+                "marks": [],
+                "text": "Links from a Third-Party Social Media Service"
+              }
+            ],
+            "markDefs": [],
+            "style": "h3"
+          },
+          {
+            "_key": "b27",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s27a",
+                "_type": "span",
+                "marks": [],
+                "text": "The Service may display, include, make available, or link to content or services provided by a Third-Party Social Media Service. A Third-Party Social Media Service is not owned or controlled by the Company, and the Company does not endorse or assume responsibility for any Third-Party Social Media Service."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b28",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s28a",
+                "_type": "span",
+                "marks": [],
+                "text": "You acknowledge and agree that the Company shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with Your access to or use of any Third-Party Social Media Service, including any content, goods, or services made available through them. Your use of any Third-Party Social Media Service is governed by that service’s terms and privacy policies."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b29",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s29a",
+                "_type": "span",
+                "marks": [],
+                "text": "Termination"
+              }
+            ],
+            "markDefs": [],
+            "style": "h2"
+          },
+          {
+            "_key": "b30",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s30a",
+                "_type": "span",
+                "marks": [],
+                "text": "We may terminate or suspend Your access immediately, without prior notice or liability, for any reason whatsoever, including without limitation if You breach these Terms and Conditions."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b31",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s31a",
+                "_type": "span",
+                "marks": [],
+                "text": "Upon termination, Your right to use the Service will cease immediately."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b32",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s32a",
+                "_type": "span",
+                "marks": [],
+                "text": "Limitation of Liability"
+              }
+            ],
+            "markDefs": [],
+            "style": "h2"
+          },
+          {
+            "_key": "b33",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s33a",
+                "_type": "span",
+                "marks": [],
+                "text": "Notwithstanding any damages that You might incur, the entire liability of the Company and any of its suppliers under any provision of these Terms and Your exclusive remedy for all of the foregoing shall be limited to the amount actually paid by You through the Service or 100 USD if You haven’t purchased anything through the Service."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b34",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s34a",
+                "_type": "span",
+                "marks": [],
+                "text": "To the maximum extent permitted by applicable law, in no event shall the Company or its suppliers be liable for any special, incidental, indirect, or consequential damages whatsoever (including, but not limited to, damages for loss of profits, loss of data or other information, for business interruption, for personal injury, loss of privacy arising out of or in any way related to the use of or inability to use the Service, third-party software and/or third-party hardware used with the Service, or otherwise in connection with any provision of these Terms), even if the Company or any supplier has been advised of the possibility of such damages and even if the remedy fails of its essential purpose."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b35",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s35a",
+                "_type": "span",
+                "marks": [],
+                "text": "Some states do not allow the exclusion of implied warranties or limitation of liability for incidental or consequential damages, which means that some of the above limitations may not apply. In these states, each party’s liability will be limited to the greatest extent permitted by law."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b36",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s36a",
+                "_type": "span",
+                "marks": [],
+                "text": "“AS IS” and “AS AVAILABLE” Disclaimer"
+              }
+            ],
+            "markDefs": [],
+            "style": "h2"
+          },
+          {
+            "_key": "b37",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s37a",
+                "_type": "span",
+                "marks": [],
+                "text": "The Service is provided to You “AS IS” and “AS AVAILABLE” and with all faults and defects without warranty of any kind. To the maximum extent permitted under applicable law, the Company expressly disclaims all warranties, whether express, implied, statutory or otherwise, with respect to the Service."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b38",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s38a",
+                "_type": "span",
+                "marks": [],
+                "text": "Without limiting the foregoing, neither the Company nor any of the company’s providers make any representation or warranty of any kind, express or implied: (i) as to the operation or availability of the Service; (ii) that the Service will be uninterrupted or error-free; (iii) as to the accuracy or reliability of any information provided through the Service; or (iv) that the Service or e-mails sent from or on behalf of the Company are free of viruses or other harmful components."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b39",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s39a",
+                "_type": "span",
+                "marks": [],
+                "text": "Some jurisdictions do not allow the exclusion of certain types of warranties or limitations on applicable statutory rights of a consumer, so some or all of the above exclusions and limitations may not apply to You. But in such a case the exclusions and limitations set forth in this section shall be applied to the greatest extent enforceable under applicable law."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b40",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s40a",
+                "_type": "span",
+                "marks": [],
+                "text": "Governing Law"
+              }
+            ],
+            "markDefs": [],
+            "style": "h2"
+          },
+          {
+            "_key": "b41",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s41a",
+                "_type": "span",
+                "marks": [],
+                "text": "The laws of the Country, excluding its conflicts of law rules, shall govern these Terms and Your use of the Service. Your use of the Application may also be subject to other local, state, national, or international laws."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b42",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s42a",
+                "_type": "span",
+                "marks": [],
+                "text": "Disputes Resolution"
+              }
+            ],
+            "markDefs": [],
+            "style": "h2"
+          },
+          {
+            "_key": "b43",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s43a",
+                "_type": "span",
+                "marks": [],
+                "text": "If You have any concern or dispute about the Service, You agree to first try to resolve the dispute informally by contacting the Company."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b44",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s44a",
+                "_type": "span",
+                "marks": [],
+                "text": "For European Union (EU) Users"
+              }
+            ],
+            "markDefs": [],
+            "style": "h2"
+          },
+          {
+            "_key": "b45",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s45a",
+                "_type": "span",
+                "marks": [],
+                "text": "If You are a European Union consumer, you will benefit from any mandatory provisions of the law of the country in which You are resident."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b46",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s46a",
+                "_type": "span",
+                "marks": [],
+                "text": "United States Legal Compliance"
+              }
+            ],
+            "markDefs": [],
+            "style": "h2"
+          },
+          {
+            "_key": "b47",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s47a",
+                "_type": "span",
+                "marks": [],
+                "text": "You represent and warrant that (i) You are not located in a country that is subject to the United States government embargo, or that has been designated as a “terrorist supporting” country, and (ii) You are not listed on any United States government list of prohibited or restricted parties."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b48",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s48a",
+                "_type": "span",
+                "marks": [],
+                "text": "Severability and Waiver"
+              }
+            ],
+            "markDefs": [],
+            "style": "h2"
+          },
+          {
+            "_key": "b49",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s49a",
+                "_type": "span",
+                "marks": [],
+                "text": "Severability"
+              }
+            ],
+            "markDefs": [],
+            "style": "h3"
+          },
+          {
+            "_key": "b50",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s50a",
+                "_type": "span",
+                "marks": [],
+                "text": "If any provision of these Terms is held to be unenforceable or invalid, such provision will be changed and interpreted to accomplish the objectives of such provision to the greatest extent possible under applicable law and the remaining provisions will continue in full force and effect."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b51",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s51a",
+                "_type": "span",
+                "marks": [],
+                "text": "Waiver"
+              }
+            ],
+            "markDefs": [],
+            "style": "h3"
+          },
+          {
+            "_key": "b52",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s52a",
+                "_type": "span",
+                "marks": [],
+                "text": "Except as provided herein, the failure to exercise a right or to require performance of an obligation under these Terms shall not affect a party’s ability to exercise such right or require such performance at any time thereafter nor shall the waiver of a breach constitute a waiver of any subsequent breach."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b53",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s53a",
+                "_type": "span",
+                "marks": [],
+                "text": "Translation Interpretation"
+              }
+            ],
+            "markDefs": [],
+            "style": "h2"
+          },
+          {
+            "_key": "b54",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s54a",
+                "_type": "span",
+                "marks": [],
+                "text": "These Terms and Conditions may have been translated if We have made them available to You on our Service. You agree that the original English text shall prevail in the case of a dispute."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b55",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s55a",
+                "_type": "span",
+                "marks": [],
+                "text": "Changes to These Terms and Conditions"
+              }
+            ],
+            "markDefs": [],
+            "style": "h2"
+          },
+          {
+            "_key": "b56",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s56a",
+                "_type": "span",
+                "marks": [],
+                "text": "We reserve the right, at Our sole discretion, to modify or replace these Terms at any time. If a revision is material We will make reasonable efforts to provide at least 30 days’ notice prior to any new terms taking effect. What constitutes a material change will be determined at Our sole discretion."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b57",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s57a",
+                "_type": "span",
+                "marks": [],
+                "text": "By continuing to access or use Our Service after those revisions become effective, You agree to be bound by the revised terms. If You do not agree to the new terms, in whole or in part, please stop using the Service."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b58",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s58a",
+                "_type": "span",
+                "marks": [],
+                "text": "Contact Us"
+              }
+            ],
+            "markDefs": [],
+            "style": "h2"
+          },
+          {
+            "_key": "b59",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s59a",
+                "_type": "span",
+                "marks": [],
+                "text": "If you have any questions about these Terms and Conditions, You can contact us:"
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "b60",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "s60a",
+                "_type": "span",
+                "marks": [],
+                "text": "By email: "
+              },
+              {
+                "_key": "s60b",
+                "_type": "span",
+                "marks": [
+                  "lnk60"
+                ],
+                "text": "info@practiceporter.ca"
+              }
+            ],
+            "markDefs": [
+              {
+                "_key": "lnk60",
+                "_type": "link",
+                "href": "mailto:info@practiceporter.ca"
+              }
+            ],
+            "style": "normal"
+          }
+        ],
+        "dateSource": "updated",
+        "effectiveDate": "2026-06-26",
+        "theme": "white",
+        "title": "Terms and Conditions"
+      }
+    ],
+    "seo": {
+      "_type": "seo",
+      "metaDescription": "Review the Terms and Conditions governing the use of Practice Porter's services.",
+      "metaTitle": "Terms and Conditions | Practice Porter"
+    },
+    "slug": "terms-of-use",
+    "title": "Terms and Conditions"
+  }
+]

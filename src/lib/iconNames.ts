@@ -15,6 +15,7 @@ export const ICON_NAMES = [
   "graduation-cap",
   "heart",
   "home",
+  "mail",
   "mic",
   "package",
   "phone",

@@ -187,7 +187,7 @@ export function Navigation({ links, cta, theme, currentPath }: Props) {
                     <NavigationMenuItem key={item.label}>
                       <NavigationMenuTrigger
                         className={cn(
-                          "h-auto w-auto cursor-pointer rounded-none bg-transparent p-0 text-[13px] font-semibold tracking-[0.5px] hover:bg-transparent focus:bg-transparent data-popup-open:bg-transparent data-popup-open:hover:bg-transparent data-open:bg-transparent data-open:hover:bg-transparent data-open:focus:bg-transparent",
+                          "-translate-y-px h-auto w-auto cursor-pointer rounded-none bg-transparent p-0 text-[13px] font-medium leading-none tracking-[0.5px] hover:bg-transparent focus:bg-transparent data-popup-open:bg-transparent data-popup-open:hover:bg-transparent data-open:bg-transparent data-open:hover:bg-transparent data-open:focus:bg-transparent",
                           linkTextClass
                         )}
                       >
@@ -230,8 +230,7 @@ export function Navigation({ links, cta, theme, currentPath }: Props) {
                         href={resolveGlobalHref(item.href)}
                         aria-current={isCurrent ? "page" : undefined}
                         className={cn(
-                          "rounded-none bg-transparent p-0 text-[13px] tracking-[0.5px] no-underline transition-colors hover:bg-transparent focus:bg-transparent active:bg-transparent data-[active=true]:bg-transparent data-[active=true]:hover:bg-transparent data-[active=true]:focus:bg-transparent",
-                          isCurrent ? "font-semibold" : "font-medium",
+                          "inline-flex items-center rounded-none bg-transparent p-0 text-[13px] font-medium leading-none tracking-[0.5px] no-underline transition-colors hover:bg-transparent focus:bg-transparent active:bg-transparent data-[active=true]:bg-transparent data-[active=true]:hover:bg-transparent data-[active=true]:focus:bg-transparent",
                           linkTextClass
                         )}
                       >

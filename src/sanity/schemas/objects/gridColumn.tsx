@@ -69,6 +69,7 @@ export const gridColumn = defineType({
         { type: "testimonialBlock" },
         { type: "numberedStepBlock" },
         { type: "iconFeatureBlock" },
+        { type: "contactFormBlock" },
         { type: "checkListBlock" },
         { type: "featureCardsBlock" },
         { type: "solutionCard" },

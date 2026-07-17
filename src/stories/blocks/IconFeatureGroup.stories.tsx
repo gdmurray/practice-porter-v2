@@ -77,3 +77,26 @@ export const ShortList: Story = {
     },
   },
 };
+
+export const DetailVariant: Story = {
+  name: "Detail — contact info rows",
+  args: {
+    value: {
+      variant: "detail",
+      items: [
+        {
+          _key: "d1",
+          iconName: "mail",
+          title: "Email",
+          description: "info@practiceporter.ca",
+        },
+        {
+          _key: "d2",
+          iconName: "clock",
+          title: "Response Time",
+          description: "We respond within 1 business day",
+        },
+      ],
+    },
+  },
+};

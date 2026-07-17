@@ -150,37 +150,27 @@ export function ApproachTabsGroup({
   }, [autoRotate, durationMs, items.length, isDesktop]);
 
   // Mobile: advance to the next step once the current step's card + panel
-  // scrolls past the top of the viewport, and step back if the user scrolls
-  // back up into the previous step. Only the currently-relevant pair of
-  // steps is observed at any time; the effect re-runs (and re-observes) as
+  // scrolls past the top of the viewport. Deliberately one-directional —
+  // scrolling back up never reactivates a previous step, since snapping
+  // content open/closed while scrolling up felt jarring. Only the current
+  // step is observed at a time; the effect re-runs (and re-observes) as
   // `activeIndex` changes.
   useEffect(() => {
     if (isDesktop || items.length <= 1) return;
 
     const currentEl = stepRefs.current[activeIndex];
-    const prevEl = activeIndex > 0 ? stepRefs.current[activeIndex - 1] : null;
-    const targets = [currentEl, prevEl].filter((el): el is HTMLDivElement => Boolean(el));
-    if (targets.length === 0) return;
+    if (!currentEl) return;
 
     const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          const idx = stepRefs.current.indexOf(entry.target as HTMLDivElement);
-          if (idx === activeIndex && !entry.isIntersecting && entry.boundingClientRect.bottom <= 0) {
-            setActiveIndex((i) => Math.min(i + 1, items.length - 1));
-          } else if (
-            idx === activeIndex - 1 &&
-            entry.isIntersecting &&
-            entry.boundingClientRect.bottom > 0
-          ) {
-            setActiveIndex((i) => Math.max(i - 1, 0));
-          }
+      ([entry]) => {
+        if (!entry.isIntersecting && entry.boundingClientRect.bottom <= 0) {
+          setActiveIndex((i) => Math.min(i + 1, items.length - 1));
         }
       },
       { threshold: 0 }
     );
 
-    targets.forEach((el) => observer.observe(el));
+    observer.observe(currentEl);
     return () => observer.disconnect();
   }, [isDesktop, activeIndex, items.length]);
 

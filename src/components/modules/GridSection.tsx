@@ -29,6 +29,7 @@ export interface GridSectionProps {
   name?: string;
   sectionId?: string;
   theme?: string;
+  maxWidth?: number | null;
   backgroundImage?: BackgroundImageData | null;
   gradientDirection?: "none" | "left" | "right" | null;
   isHero?: boolean | null;
@@ -150,6 +151,7 @@ function resolveGridTemplate(columns: GridColumnData[]): string {
 export function GridSection({
   sectionId,
   theme = "lotion",
+  maxWidth,
   backgroundImage,
   gradientDirection,
   isHero,
@@ -160,6 +162,8 @@ export function GridSection({
 }: GridSectionProps) {
   const bg = themeBgMap[theme] ?? themeBgMap.lotion;
   const animated = moduleLayout?.animated ?? false;
+  const contentMaxWidth =
+    typeof maxWidth === "number" && maxWidth > 0 ? maxWidth : undefined;
 
   const sectionStyle = {
     ...(theme === "gradient" ? { background: "var(--hero-gradient)" } : {}),
@@ -280,7 +284,10 @@ export function GridSection({
           )}
         />
       )}
-      <div className="pp-container relative z-10 space-y-14">
+      <div
+        className="pp-container relative z-10 space-y-14"
+        style={contentMaxWidth ? { maxWidth: contentMaxWidth } : undefined}
+      >
         {rows.map((row, ri) => {
           const columns = row.columns ?? [];
           const isCentered = row.alignment === "center";

@@ -71,7 +71,8 @@ Inserted via the "Insert" menu in the Sanity Studio editor:
 | `ctaBlock` | CTA button group | `items[]` → `cta`, `alignment` |
 | `testimonialBlock` | Testimonial quotes — grid (all shown) or single-card carousel | `items[]` → `testimonial`, `variant` (grid/carousel), `autoRotateSeconds` (carousel only) |
 | `numberedStepBlock` | Numbered list (burnt-red numbers, borders) | `items[]` → `numberedStep` |
-| `iconFeatureBlock` | Icon + title + description list | `items[]` → `iconFeature` |
+| `iconFeatureBlock` | Icon + title + description list | `variant` (`feature` / `detail`), `items[]` → `iconFeature` |
+| `contactFormBlock` | Contact form card (fields, submit, success state) | `formTitle`, `formSubtitle`, `interestOptions[]`, `privacyPolicyHref`, `successTitle`, `successMessage` |
 | `checkListBlock` | Checkmark list with borders | `items[]` → `{ label }` |
 | `featureCardsBlock` | Grid of bordered icon+title+description cards | `columns` (2/3/4), `items[]` → `featureCard` (each can be `default` or `link` type — see below) |
 | `solutionCard` | Image + copy card with an optional "See More" checklist disclosure | `title`, `image`, `details[]`, `expandableTitle`, `checks[]` |
@@ -100,8 +101,12 @@ Submodule blocks contain arrays of these atomic types:
 
 **`iconFeature`** — used in `iconFeatureBlock`:
 - `iconName` — lucide icon name
-- `title` — feature heading
-- `description` — feature body text
+- `title` — feature heading (or uppercase label when `variant` is `detail`)
+- `description` — feature body text (or value line when `variant` is `detail`)
+
+`iconFeatureBlock.variant`:
+- `feature` (default) — rounded-square icon, bold title, muted description
+- `detail` — circle icon, red uppercase label, ink value (e.g. contact email / response time rows)
 
 **`featureCard`** — used in `featureCardsBlock`:
 - `type` — `default` (static) | `link` (clickable — see below)
@@ -187,9 +192,8 @@ context (it's still required for `ctaBlock.items[]`, `navigationSettings.cta`, e
 `src/components/modules/SplitBooking.tsx`) is a **full page module**, not a
 `gridColumn` block object — the reference section (`reference/About Us.html`'s
 `.book-card`) is a singular full-bleed card, never combined with other rich
-text in a shared column. It sits alongside `bookMeeting` rather than
-replacing it: `bookMeeting` is the simple centered-iframe variant, while
-`splitBooking` is the two-column "founder card + scheduler" variant.
+text in a shared column. It is the booking surface for the site (the older
+centered-iframe `bookMeeting` module was removed).
 
 Its left (always brand-red) panel is Portable Text, but uses its own
 deliberately narrow editor — `splitBookingPortableTextEditor.tsx`
@@ -203,9 +207,8 @@ nor `avatarBlock` is registered on the main `gridColumn` insert menu — they're
 scoped to this module for now.
 
 The right panel is always the Google Calendar scheduler embed, reading
-`PUBLIC_GOOGLE_CALENDAR_BOOKING_URL` from the environment (same variable
-`bookMeeting` uses) — never a schema field, so the URL is never duplicated or
-hand-typed in Studio.
+`PUBLIC_GOOGLE_CALENDAR_BOOKING_URL` from the environment — never a schema
+field, so the URL is never duplicated or hand-typed in Studio.
 
 `CheckListGroup` (`src/components/modules/GridPortableText/CheckListGroup.tsx`)
 takes an optional `tone?: "default" | "onBrand"` prop for this case — cream
@@ -246,6 +249,25 @@ This mirrors the narrow, side-anchored photo treatment in `reference/Practice Pe
 ---
 
 ## How the V3 Sections Map to This Grid
+
+### Contact Page
+
+```
+gridSection (theme: gradient, isHero, circlePattern)
+  Row 1 (alignment: center, 1 col full)
+    [eyebrow] Get in Touch
+    [h1] Contact Us
+    [subtitle] …
+
+gridSection (theme: lotion, sectionId: "form")
+  Row 1 (alignment: left, 2 cols)
+    Col 1 (oneThird, top):
+      [h2] Let's Start a Conversation
+      [lead] …
+      [iconFeatureBlock variant: detail]  ← Email / Response Time
+    Col 2 (twoThirds, top):
+      [contactFormBlock]
+```
 
 ### Problem Section
 ```
@@ -343,7 +365,8 @@ Approach and Tailored are two separate `gridSection`s (not one section split int
 | `src/sanity/schemas/objects/ctaBlock.ts` | PT block: CTA button group |
 | `src/sanity/schemas/objects/testimonialBlock.ts` | PT block: testimonial quotes |
 | `src/sanity/schemas/objects/numberedStepBlock.ts` | PT block: numbered steps |
-| `src/sanity/schemas/objects/iconFeatureBlock.ts` | PT block: icon features |
+| `src/sanity/schemas/objects/iconFeatureBlock.ts` | PT block: icon features (`feature` / `detail` variants) |
+| `src/sanity/schemas/objects/contactFormBlock.ts` | PT block: contact form card |
 | `src/sanity/schemas/objects/checkListBlock.ts` | PT block: checkmark list |
 | `src/sanity/schemas/objects/featureCard.ts` | Atomic feature card item — `type` (default/link), `cta` |
 | `src/sanity/lib/getValueAtPath.ts` | Validation helper: resolves a value at an arbitrary document path (for grandparent-aware `Rule.custom` checks) |
@@ -373,6 +396,7 @@ Approach and Tailored are two separate `gridSection`s (not one section split int
 | `src/components/modules/GridPortableText/ComparisonGroup.tsx` | Renders `comparisonBlock` — dark/light `leftCard`/`rightCard` with a 5-icon fill (`PersonGrid`), "vs." label, and an optional CTA banner |
 | `src/components/modules/GridPortableText/TailoredStepsGroup.tsx` | Renders `tailoredStepsBlock` — two step cards (`stepOne`/`stepTwo`), each rendering either a single CTA or a `links[]` list of icon deep-links, with a centered arrow connector on desktop |
 | `src/components/modules/GridPortableText/ApproachTabsGroup.tsx` | Renders `approachTabsBlock` — vertical numbered step list with per-step progress bar (shown under the active step only) + a swapping illustration panel. Timer/pause/`IntersectionObserver`-arm mechanics mirror `TabsGroup.tsx` |
+| `src/components/modules/GridPortableText/ContactFormGroup.tsx` | Renders `contactFormBlock` — white form card with validation, interest select, and success state |
 
 ### Routing
 - `src/components/modules/ModuleRenderer.tsx` — `gridSection` case added

@@ -8,6 +8,19 @@ export const iconFeatureBlock = defineType({
   icon: ComponentIcon,
   fields: [
     defineField({
+      name: "variant",
+      title: "Variant",
+      type: "string",
+      options: {
+        list: [
+          { value: "feature", title: "Feature (square icon, bold title)" },
+          { value: "detail", title: "Detail (circle icon, uppercase label)" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "feature",
+    }),
+    defineField({
       name: "items",
       title: "Features",
       type: "array",
@@ -16,10 +29,11 @@ export const iconFeatureBlock = defineType({
     }),
   ],
   preview: {
-    select: { items: "items" },
-    prepare: ({ items }) => ({
-      title: "Icon Features",
-      subtitle: `${items?.length ?? 0} features`,
+    select: { items: "items", variant: "variant" },
+    prepare: ({ items, variant }) => ({
+      title: variant === "detail" ? "Icon Details" : "Icon Features",
+      subtitle: `${items?.length ?? 0} items`,
     }),
   },
 });
+

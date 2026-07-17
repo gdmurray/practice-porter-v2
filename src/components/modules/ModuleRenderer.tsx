@@ -3,9 +3,6 @@ import { lazy, Suspense } from "react";
 const Faq = lazy(() =>
   import("./Faq").then((m) => ({ default: m.Faq }))
 );
-const BookMeeting = lazy(() =>
-  import("./BookMeeting").then((m) => ({ default: m.BookMeeting }))
-);
 const GridSection = lazy(() =>
   import("./GridSection").then((m) => ({ default: m.GridSection }))
 );
@@ -38,9 +35,6 @@ export function ModuleRenderer({ module }: ModuleRendererProps) {
   switch (_type) {
     case "faq":
       content = <Faq {...(props as Parameters<typeof Faq>[0])} />;
-      break;
-    case "bookMeeting":
-      content = <BookMeeting {...(props as Parameters<typeof BookMeeting>[0])} />;
       break;
     case "gridSection":
       content = <GridSection {...(props as Parameters<typeof GridSection>[0])} />;

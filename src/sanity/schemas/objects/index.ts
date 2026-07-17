@@ -29,6 +29,7 @@ export { ctaBlock } from "./ctaBlock";
 export { testimonialBlock } from "./testimonialBlock";
 export { numberedStepBlock } from "./numberedStepBlock";
 export { iconFeatureBlock } from "./iconFeatureBlock";
+export { contactFormBlock } from "./contactFormBlock";
 export { checkListBlock } from "./checkListBlock";
 export { featureCard } from "./featureCard";
 export { featureCardsBlock } from "./featureCardsBlock";

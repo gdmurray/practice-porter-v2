@@ -300,6 +300,17 @@ const ColContentApproachTabs = () => (
   </Svg>
 );
 
+/** contactFormBlock — bordered form card with stacked input rows */
+const ColContentContactForm = () => (
+  <Svg>
+    <rect x={1} y={1} width={14} height={14} rx={1.5} opacity={0.2} />
+    <rect x={3} y={3} width={10} height={1.25} rx={0.5} />
+    <rect x={3} y={5.5} width={10} height={1.25} rx={0.5} opacity={0.55} />
+    <rect x={3} y={8} width={10} height={1.25} rx={0.5} opacity={0.55} />
+    <rect x={3} y={11} width={10} height={2.5} rx={0.75} />
+  </Svg>
+);
+
 const CONTENT_TYPE_ICONS: Record<string, React.ComponentType> = {
   block: ColContentText,
   image: ColContentImage,
@@ -308,6 +319,7 @@ const CONTENT_TYPE_ICONS: Record<string, React.ComponentType> = {
   testimonialBlock: ColContentTestimonial,
   numberedStepBlock: ColContentNumberedStep,
   iconFeatureBlock: ColContentIconFeature,
+  contactFormBlock: ColContentContactForm,
   checkListBlock: ColContentCheckList,
   solutionCard: ColContentSolutionCard,
   tabsBlock: ColContentTabs,
@@ -331,6 +343,7 @@ const CONTENT_PRIORITY = [
   "testimonialBlock",
   "numberedStepBlock",
   "iconFeatureBlock",
+  "contactFormBlock",
   "checkListBlock",
   "block",
 ];

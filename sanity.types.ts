@@ -123,6 +123,7 @@ export type GridSection = {
   sectionId?: string;
   theme?: "white" | "lotion" | "cream" | "vanilla" | "red" | "gradient";
   moduleLayout?: ModuleLayout;
+  maxWidth?: number;
   backgroundImage?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -140,15 +141,6 @@ export type GridSection = {
       _key: string;
     } & GridRow
   >;
-};
-
-export type BookMeeting = {
-  _type: "bookMeeting";
-  theme?: "white" | "lotion" | "cream" | "vanilla" | "red" | "gradient";
-  moduleLayout?: ModuleLayout;
-  eyebrow?: string;
-  title?: string;
-  subtitle?: string;
 };
 
 export type Faq = {
@@ -238,9 +230,6 @@ export type Page = {
     | ({
         _key: string;
       } & Faq)
-    | ({
-        _key: string;
-      } & BookMeeting)
     | ({
         _key: string;
       } & LogoCarousel)
@@ -540,6 +529,9 @@ export type GridColumn = {
       } & IconFeatureBlock)
     | ({
         _key: string;
+      } & ContactFormBlock)
+    | ({
+        _key: string;
       } & CheckListBlock)
     | ({
         _key: string;
@@ -703,8 +695,24 @@ export type CheckListBlock = {
   }>;
 };
 
+export type ContactFormBlock = {
+  _type: "contactFormBlock";
+  formTitle?: string;
+  formSubtitle?: string;
+  interestOptions?: Array<{
+    label?: string;
+    value?: string;
+    _type: "contactInterestOption";
+    _key: string;
+  }>;
+  privacyPolicyHref?: string;
+  successTitle?: string;
+  successMessage?: string;
+};
+
 export type IconFeatureBlock = {
   _type: "iconFeatureBlock";
+  variant?: "feature" | "detail";
   items?: Array<
     {
       _key: string;
@@ -815,6 +823,7 @@ export type StatCard = {
     | "graduation-cap"
     | "heart"
     | "home"
+    | "mail"
     | "mic"
     | "package"
     | "phone"
@@ -1038,7 +1047,6 @@ export type AllSanitySchemaTypes =
   | LogoCarousel
   | SanityImageAssetReference
   | GridSection
-  | BookMeeting
   | Faq
   | SiteSettings
   | Seo
@@ -1078,6 +1086,7 @@ export type AllSanitySchemaTypes =
   | FeatureCardsBlock
   | FeatureCard
   | CheckListBlock
+  | ContactFormBlock
   | IconFeatureBlock
   | NumberedStepBlock
   | TestimonialBlock
@@ -1143,32 +1152,6 @@ export type PAGE_QUERY_RESULT = {
   } | null;
   modules: Array<
     | {
-        _type: "bookMeeting";
-        _key: string;
-        theme?: "cream" | "gradient" | "lotion" | "red" | "vanilla" | "white";
-        moduleLayout?: ModuleLayout;
-        eyebrow?: string;
-        title?: string;
-        subtitle?: string;
-        stats: null;
-        statCards: null;
-        cards: null;
-        steps: null;
-        metrics: null;
-        extraMetrics: null;
-        testimonials: null;
-        previewMetrics: null;
-        features: null;
-        values: null;
-        image: null;
-        backgroundImage: null;
-        logos: null;
-        primaryCta: null;
-        secondaryCta: null;
-        content: null;
-        rows: null;
-      }
-    | {
         _type: "faq";
         _key: string;
         theme?: "cream" | "gradient" | "lotion" | "red" | "vanilla" | "white";
@@ -1206,6 +1189,7 @@ export type PAGE_QUERY_RESULT = {
         sectionId?: string;
         theme?: "cream" | "gradient" | "lotion" | "red" | "vanilla" | "white";
         moduleLayout?: ModuleLayout;
+        maxWidth?: number;
         backgroundImage: {
           asset: {
             url: string | null;
@@ -1327,6 +1311,21 @@ export type PAGE_QUERY_RESULT = {
                 }
               | {
                   _key: string;
+                  _type: "contactFormBlock";
+                  formTitle?: string;
+                  formSubtitle?: string;
+                  interestOptions?: Array<{
+                    label?: string;
+                    value?: string;
+                    _type: "contactInterestOption";
+                    _key: string;
+                  }>;
+                  privacyPolicyHref?: string;
+                  successTitle?: string;
+                  successMessage?: string;
+                }
+              | {
+                  _key: string;
                   _type: "ctaBlock";
                   items?: Array<
                     {
@@ -1348,6 +1347,7 @@ export type PAGE_QUERY_RESULT = {
               | {
                   _key: string;
                   _type: "iconFeatureBlock";
+                  variant?: "detail" | "feature";
                   items?: Array<
                     {
                       _key: string;

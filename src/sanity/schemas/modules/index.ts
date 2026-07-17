@@ -1,5 +1,4 @@
 export { faq } from "./faq";
-export { bookMeeting } from "./bookMeeting";
 export { gridSection } from "./gridSection";
 export { logoCarousel } from "./logoCarousel";
 export { legal } from "./legal";
