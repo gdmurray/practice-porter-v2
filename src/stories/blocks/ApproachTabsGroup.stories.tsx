@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ApproachTabsGroup } from "@/components/modules/GridPortableText/ApproachTabsGroup";
+import { ApproachTabsGroup, type ApproachTabValue } from "@/components/modules/GridPortableText/ApproachTabsGroup";
 
 const meta: Meta<typeof ApproachTabsGroup> = {
   title: "Rich Text Blocks / ApproachTabsGroup",
@@ -25,12 +25,7 @@ const placeholderImage = {
   alt: "Dentist reviewing a performance report on a tablet",
 };
 
-export const ThreeStepApproach: Story = {
-  name: "Three-Step Approach",
-  args: {
-    value: {
-      autoRotateSeconds: 12,
-      items: [
+const threeStepItems: ApproachTabValue[] = [
         {
           _key: "record",
           label: "Record",
@@ -61,7 +56,14 @@ export const ThreeStepApproach: Story = {
           image: placeholderImage,
           cta: { label: "See Solutions", href: "/call-answering-solutions", ctaType: "internal" },
         },
-      ],
+];
+
+export const ThreeStepApproach: Story = {
+  name: "Three-Step Approach",
+  args: {
+    value: {
+      autoRotateSeconds: 12,
+      items: threeStepItems,
     },
   },
 };
@@ -71,7 +73,7 @@ export const NoAutoRotate: Story = {
   args: {
     value: {
       autoRotateSeconds: 0,
-      items: ThreeStepApproach.args!.value.items,
+      items: threeStepItems,
     },
   },
 };
