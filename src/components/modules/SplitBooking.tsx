@@ -69,7 +69,7 @@ export function SplitBooking({
             ) : null}
           </div>
 
-          <div className="flex items-center justify-center bg-white p-9">
+          <div className="flex items-center justify-center bg-white p-2">
             {bookingUrl ? (
               <iframe
                 src={bookingUrl}

@@ -31,6 +31,8 @@ export function Legal({
   content,
 }: LegalProps) {
   const dateLabel = dateSource === "effective" ? "Effective Date" : "Last updated";
+  const animated = moduleLayout?.animated ?? false;
+  const animAttr = animated ? { "data-anim-header": true } : {};
 
   return (
     <section
@@ -41,7 +43,10 @@ export function Legal({
     >
       <div className="pp-container-narrow">
         {title && (
-          <h1 className="mb-6 font-serif text-[clamp(36px,4vw,52px)] font-normal leading-[1.1] tracking-[-0.3px] text-ink">
+          <h1
+            {...animAttr}
+            className="mb-6 font-serif text-[clamp(36px,4vw,52px)] font-normal leading-[1.1] tracking-[-0.3px] text-ink"
+          >
             {title}
           </h1>
         )}
@@ -51,7 +56,9 @@ export function Legal({
           </p>
         )}
         <div className="mb-11 h-0.5 w-12 rounded-full bg-red" />
-        <LegalRenderer value={content} />
+        <div {...animAttr}>
+          <LegalRenderer value={content} />
+        </div>
       </div>
     </section>
   );

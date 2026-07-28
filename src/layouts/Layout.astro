@@ -76,6 +76,29 @@ const jsonLdItems = jsonLd
     {loadAnalytics && clarityId && <MicrosoftClarity clarityId={clarityId} />}
   </head>
   <body>
+    <script is:inline>
+      // Arms [data-hero-anim] elements' page-load entrance (see global.css's
+      // heroRise keyframes). MUST run synchronously here, before <slot/>'s
+      // SSR'd hero markup is parsed/painted — a React effect (even client:load)
+      // only runs after hydration, by which time the browser has already
+      // painted the hero fully visible, causing a flash before it snaps to
+      // opacity:0 and re-animates in. This blocking inline script (Astro's
+      // is:inline skips bundling/hoisting, preserving position + timing)
+      // guarantees the class — and its opacity:0 rule — is active before
+      // first paint.
+      (function () {
+        if (
+          window.matchMedia &&
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ) {
+          return;
+        }
+        document.body.classList.add("hero-armed");
+        setTimeout(function () {
+          document.body.classList.remove("hero-armed");
+        }, 1600);
+      })();
+    </script>
     <slot />
     {
       visualEditingEnabled && preview && (

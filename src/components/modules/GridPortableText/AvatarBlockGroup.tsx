@@ -12,13 +12,22 @@ export interface AvatarBlockValue {
   } | null;
 }
 
-export function AvatarBlockGroup({ value }: { value: AvatarBlockValue }) {
+export function AvatarBlockGroup({
+  value,
+  animated = false,
+}: {
+  value: AvatarBlockValue;
+  animated?: boolean;
+}) {
   if (!value.name) return null;
 
   const imageUrl = value.image?.asset?.url;
 
   return (
-    <div className="flex items-center gap-3.5 border-t border-white/20 pt-6">
+    <div
+      className="flex items-center gap-3.5 border-t border-white/20 pt-6"
+      {...(animated ? { "data-anim-header": true } : {})}
+    >
       <Avatar className="size-[54px] bg-cream">
         {imageUrl && (
           <AvatarImage src={imageUrl} alt={value.image?.alt ?? value.name} />

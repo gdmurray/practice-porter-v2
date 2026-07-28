@@ -11,7 +11,7 @@ import { AvatarBlockGroup } from "../GridPortableText/AvatarBlockGroup";
  * never theme-driven.
  */
 export function makeSplitBookingComponents(animated = false): PortableTextComponents {
-  const h = animated ? { "data-anim-list": true } : {};
+  const h = animated ? { "data-anim-header": true } : {};
 
   return {
     block: {
@@ -51,7 +51,7 @@ export function makeSplitBookingComponents(animated = false): PortableTextCompon
       checkListBlock: (props) => (
         <CheckListGroup {...props} tone="onBrand" animated={animated} />
       ),
-      avatarBlock: (props) => <AvatarBlockGroup {...props} />,
+      avatarBlock: (props) => <AvatarBlockGroup {...props} animated={animated} />,
     },
   };
 }

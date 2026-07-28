@@ -44,6 +44,7 @@ export function LogoCarousel({
 }: LogoCarouselProps) {
   const validLogos = logos.filter((item) => item.logo?.asset?.url);
   if (!validLogos.length) return null;
+  const animated = moduleLayout?.animated ?? false;
 
   return (
     <section
@@ -57,6 +58,7 @@ export function LogoCarousel({
           <p
             className="mb-4 text-left text-[11px] font-light uppercase tracking-[0.15em]"
             style={{ color: "var(--section-muted)" }}
+            {...(animated ? { "data-anim-header": true } : {})}
           >
             {label}
           </p>

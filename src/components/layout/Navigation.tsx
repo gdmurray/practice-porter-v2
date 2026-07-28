@@ -17,6 +17,7 @@ import {
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getIcon } from "@/lib/icons";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import type { SITE_SETTINGS_QUERY_RESULT } from "sanity.types";
 
 type NavigationProps = NonNullable<
@@ -119,12 +120,16 @@ type Props = NavigationProps & { currentPath?: string; theme?: SectionTheme | st
 
 const DEFAULT_CTA = { label: "Book a Consultation", href: "#cta", variant: "primary", ctaType: "internal" } as const;
 
+/** Matches Tailwind `md:` — desktop nav and mobile sheet toggle use this breakpoint. */
+const DESKTOP_MEDIA_QUERY = "(min-width: 768px)";
+
 export function Navigation({ links, cta, theme, currentPath }: Props) {
   const resolvedCta = cta ?? DEFAULT_CTA;
   const validItems = useMemo(() => getValidNavItems(links), [links]);
   const flatMobileItems = useMemo(() => getFlatMobileItems(validItems), [validItems]);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const isDesktop = useMediaQuery(DESKTOP_MEDIA_QUERY);
 
   const isLight = !isDarkTheme(theme);
   // currentPath is rendered server-side from Astro.url.pathname, so this is
@@ -140,6 +145,10 @@ export function Navigation({ links, cta, theme, currentPath }: Props) {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (isDesktop) setMobileOpen(false);
+  }, [isDesktop]);
 
   const linkTextClass = isLight
     ? "text-ink hover:text-red"
@@ -286,7 +295,6 @@ export function Navigation({ links, cta, theme, currentPath }: Props) {
             onInteractOutside={(e) => e.preventDefault()}
           >
             {flatMobileItems.map((item) => {
-              const Icon = item.icon ? getIcon(item.icon) : null;
               const isCurrent = isPathActive(item.href, currentPath);
               return (
                 <a
@@ -295,7 +303,7 @@ export function Navigation({ links, cta, theme, currentPath }: Props) {
                   onClick={() => setMobileOpen(false)}
                   aria-current={isCurrent ? "page" : undefined}
                   className={cn(
-                    "flex items-center gap-2.5 whitespace-nowrap font-serif text-[20px] font-medium no-underline transition-colors duration-200",
+                    "whitespace-nowrap font-serif text-[20px] font-medium no-underline transition-colors duration-200",
                     isLight
                       ? cn(
                           "hover:text-red",
@@ -307,8 +315,7 @@ export function Navigation({ links, cta, theme, currentPath }: Props) {
                         )
                   )}
                 >
-                  {Icon && <Icon className="size-5 shrink-0 opacity-70" />}
-                  <span>{item.label}</span>
+                  {item.label}
                 </a>
               );
             })}

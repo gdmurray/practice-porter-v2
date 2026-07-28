@@ -378,6 +378,7 @@ export function GridSection({
                         value={col.content}
                         centered={isCentered && colCount === 1}
                         animated={animated}
+                        heroAnimated={Boolean(isHero)}
                       />
                     )}
                   </div>

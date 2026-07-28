@@ -2,6 +2,9 @@
 
 import { useEffect } from "react";
 
+const REVEAL_SELECTOR = ".reveal, .reveal-left, .reveal-right";
+const ANIM_SELECTOR = `${REVEAL_SELECTOR}, [data-anim-header], [data-anim-list]`;
+
 export function RevealObserver() {
   useEffect(() => {
     const sharedCallback: IntersectionObserverCallback = (entries) => {
@@ -41,22 +44,48 @@ export function RevealObserver() {
       threshold: 0.15,
     });
 
-    document.querySelectorAll(".reveal, .reveal-left, .reveal-right").forEach((el) => {
-      revealObserver.observe(el);
-    });
+    const observed = new Set<Element>();
 
-    document.querySelectorAll("[data-anim-header]").forEach((el) => {
-      headerObserver.observe(el);
-    });
+    const observerFor = (el: Element): IntersectionObserver | null => {
+      if (el.matches(REVEAL_SELECTOR)) return revealObserver;
+      if (el.matches("[data-anim-header]")) return headerObserver;
+      if (el.matches("[data-anim-list]")) return listObserver;
+      return null;
+    };
 
-    document.querySelectorAll("[data-anim-list]").forEach((el) => {
-      listObserver.observe(el);
+    const observeIfNew = (el: Element) => {
+      if (observed.has(el)) return;
+      const observer = observerFor(el);
+      if (!observer) return;
+      observed.add(el);
+      observer.observe(el);
+    };
+
+    // Scans an element (and its descendants) for animatable targets. Needed
+    // both for the initial pass and for nodes inserted later by React.lazy()
+    // module chunks, which resolve after this component's first render and
+    // would otherwise sit at opacity:0 forever, never observed.
+    const scan = (root: Element) => {
+      observeIfNew(root);
+      root.querySelectorAll(ANIM_SELECTOR).forEach(observeIfNew);
+    };
+
+    scan(document.body);
+
+    const mutationObserver = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        mutation.addedNodes.forEach((node) => {
+          if (node instanceof Element) scan(node);
+        });
+      }
     });
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
 
     return () => {
       revealObserver.disconnect();
       headerObserver.disconnect();
       listObserver.disconnect();
+      mutationObserver.disconnect();
     };
   }, []);
 

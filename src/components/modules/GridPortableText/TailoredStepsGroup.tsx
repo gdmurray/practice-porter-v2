@@ -21,13 +21,22 @@ export interface TailoredStepValue {
   links?: TailoredSolutionLinkValue[];
 }
 
-function StepCard({ step, tone }: { step?: TailoredStepValue; tone: "warm" | "accent" }) {
+function StepCard({
+  step,
+  tone,
+  animAttr,
+}: {
+  step?: TailoredStepValue;
+  tone: "warm" | "accent";
+  animAttr?: Record<string, boolean>;
+}) {
   if (!step) return null;
 
   const isAccent = tone === "accent";
 
   return (
     <div
+      {...animAttr}
       className={cn(
         "relative z-1 flex h-full flex-col overflow-hidden rounded-[20px] border p-9 shadow-[0_22px_60px_rgba(43,26,20,0.07)] transition-[transform,box-shadow] duration-300 md:p-[46px_46px_42px]",
         tone === "warm" &&
@@ -146,13 +155,18 @@ export function TailoredStepsGroup({
 }) {
   if (!value.stepOne && !value.stepTwo) return null;
 
+  // data-anim-header goes on each card individually rather than
+  // data-anim-list on this shared grid — the decorative arrow badge below
+  // is a third sibling here, and the list-stagger CSS's `transform: none`
+  // on visible children would strip its own centering
+  // `-translate-x-1/2 -translate-y-1/2` (unlayered custom CSS beats
+  // Tailwind's layered utility regardless of specificity).
+  const animAttr = animated ? { "data-anim-header": true } : undefined;
+
   return (
-    <div
-      className="relative grid grid-cols-1 gap-[52px] md:grid-cols-2"
-      {...(animated ? { "data-anim-list": true } : {})}
-    >
-      <StepCard step={value.stepOne} tone="warm" />
-      <StepCard step={value.stepTwo} tone="accent" />
+    <div className="relative grid grid-cols-1 gap-[52px] md:grid-cols-2">
+      <StepCard step={value.stepOne} tone="warm" animAttr={animAttr} />
+      <StepCard step={value.stepTwo} tone="accent" animAttr={animAttr} />
       <div className="pointer-events-none absolute left-1/2 top-1/2 z-10 hidden size-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-white bg-white text-red-terra shadow-[0_6px_18px_rgba(126,30,2,0.32)] md:flex">
         <ArrowRight className="size-7" />
       </div>

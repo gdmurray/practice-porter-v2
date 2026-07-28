@@ -72,10 +72,16 @@ function MarkFlip() {
 
 export function StepBand({ stepOne, stepTwo, moduleLayout }: StepBandProps) {
   if (!stepOne && !stepTwo) return null;
+  const animated = moduleLayout?.animated ?? false;
+  // Each item fades in independently as it scrolls into view (data-anim-header,
+  // not data-anim-list) — the center mark stays untouched since it relies on
+  // its own `transform: translate(-50%, -50%)` for centering, which a
+  // shared nth-child stagger rule would clobber.
+  const animAttr = animated ? { "data-anim-header": true } : {};
 
   return (
     <section className="step-band" {...getModuleLayoutAttrs(moduleLayout)}>
-      <div className="step-band__item step-band__item--one">
+      <div className="step-band__item step-band__item--one" {...animAttr}>
         <div className="step-band__num">1</div>
         <div className="step-band__body">
           {stepOne?.label && (
@@ -89,7 +95,7 @@ export function StepBand({ stepOne, stepTwo, moduleLayout }: StepBandProps) {
         </div>
       </div>
 
-      <div className="step-band__item step-band__item--two">
+      <div className="step-band__item step-band__item--two" {...animAttr}>
         <div className="step-band__num">2</div>
         <div className="step-band__body">
           {stepTwo?.label && (

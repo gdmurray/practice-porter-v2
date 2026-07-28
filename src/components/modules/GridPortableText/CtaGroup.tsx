@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ctaProps, type CtaData } from "@/lib/cta";
 import { cn } from "@/lib/utils";
 
-export function makeCtaGroup(centered: boolean, animated = false) {
+export function makeCtaGroup(centered: boolean, animated = false, heroAnimated = false) {
   return function CtaGroup({
     value,
   }: {
@@ -19,6 +19,7 @@ export function makeCtaGroup(centered: boolean, animated = false) {
           isCentered && "justify-center"
         )}
         {...(animated ? { "data-anim-header": true } : {})}
+        {...(heroAnimated ? { "data-hero-anim": "cta" } : {})}
       >
         {value.items?.map((cta, i) => (
           <Button

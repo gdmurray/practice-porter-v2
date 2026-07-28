@@ -9,6 +9,9 @@ interface GridPortableTextProps {
   className?: string;
   centered?: boolean;
   animated?: boolean;
+  /** Hero-only page-load entrance (title/subtitle/CTA), independent of
+   *  scroll-triggered `animated` — see makeComponents.tsx. */
+  heroAnimated?: boolean;
 }
 
 export function GridPortableText({
@@ -16,9 +19,10 @@ export function GridPortableText({
   className,
   centered = false,
   animated = false,
+  heroAnimated = false,
 }: GridPortableTextProps) {
   if (!value?.length) return null;
-  const components = makeComponents(centered, animated);
+  const components = makeComponents(centered, animated, heroAnimated);
   return (
     <div className={cn("space-y-4", className)}>
       <PortableText value={value} components={components} />

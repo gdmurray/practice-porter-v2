@@ -24,8 +24,16 @@ import { TailoredStepsGroup } from "./TailoredStepsGroup";
 import { ApproachTabsGroup } from "./ApproachTabsGroup";
 import { RotatingText } from "./RotatingText";
 
-export function makeComponents(centered: boolean, animated = false): PortableTextComponents {
+export function makeComponents(
+  centered: boolean,
+  animated = false,
+  heroAnimated = false
+): PortableTextComponents {
   const h = animated ? { "data-anim-header": true } : {};
+  // Hero content animates once on page load (see global.css's heroRise +
+  // Layout.astro's inline arming script), never via scroll-reveal —
+  // separate attribute so the two systems can't collide on the same element.
+  const heroAttr = (step: string) => (heroAnimated ? { "data-hero-anim": step } : {});
 
   return {
     block: {
@@ -35,6 +43,7 @@ export function makeComponents(centered: boolean, animated = false): PortableTex
       h1: ({ children }) => (
         <h1
           {...h}
+          {...heroAttr("title")}
           className="mb-4 font-serif text-[clamp(32px,4.2vw,48px)] font-normal leading-[1.18] tracking-normal"
           style={{ color: "var(--section-text)" }}
         >
@@ -53,12 +62,16 @@ export function makeComponents(centered: boolean, animated = false): PortableTex
         </h3>
       ),
       eyebrow: ({ children }) => (
-        <div {...h} className={cn("eyebrow mb-4", centered && "text-center")}>
+        <div {...h} {...heroAttr("eyebrow")} className={cn("eyebrow mb-4", centered && "text-center")}>
           {children}
         </div>
       ),
       subtitle: ({ children }) => (
-        <p {...h} className={cn("section-subtitle mb-6 max-w-[700px] font-light", centered && "mx-auto")}>
+        <p
+          {...h}
+          {...heroAttr("subtitle")}
+          className={cn("section-subtitle mb-6 max-w-[700px] font-light", centered && "mx-auto")}
+        >
           {children}
         </p>
       ),
@@ -127,11 +140,11 @@ export function makeComponents(centered: boolean, animated = false): PortableTex
       statCardsBlock: (props) => <StatCardsGroup {...props} animated={animated} />,
       statBandBlock: (props) => <StatBandGroup {...props} animated={animated} />,
       cardsBlock: (props) => <CardsGroup {...props} animated={animated} />,
-      ctaBlock: makeCtaGroup(centered, animated),
+      ctaBlock: makeCtaGroup(centered, animated, heroAnimated),
       testimonialBlock: (props) => <TestimonialGroup {...props} animated={animated} />,
       numberedStepBlock: (props) => <NumberedStepGroup {...props} animated={animated} />,
       iconFeatureBlock: (props) => <IconFeatureGroup {...props} animated={animated} />,
-      contactFormBlock: (props) => <ContactFormGroup {...props} />,
+      contactFormBlock: (props) => <ContactFormGroup {...props} animated={animated} />,
       checkListBlock: (props) => <CheckListGroup {...props} animated={animated} />,
       featureCardsBlock: (props) => <FeatureCardsGroup {...props} animated={animated} />,
       pricingCardsBlock: (props) => <PricingCardsGroup {...props} animated={animated} />,

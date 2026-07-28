@@ -913,35 +913,47 @@
    as it scrolls into view — long sections animate progressively, not all at once.
    
    [data-anim-header] — individual header elements (eyebrow, title, subtitle)
-   [data-anim-list]   — list container; its direct children stagger via nth-child */
+   [data-anim-list]   — list container; its direct children stagger via nth-child
 
-[data-anim-header] {
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-}
-[data-anim-header].visible {
-  opacity: 1;
-  transform: none;
-}
+   Wrapped in @layer components (same layer as the legacy .reveal rules
+   above) rather than left unlayered: cascade layers take priority over
+   specificity across layer boundaries, so unlayered rules here would
+   permanently beat Tailwind's `hover:` utilities layer on the same cards
+   (e.g. FeatureCardsGroup/PricingCardsGroup's hover:-translate-y-*) once
+   `.visible` is added — killing hover-lift for good, since IntersectionObserver
+   never removes `.visible`. Living in `components` (below Tailwind's
+   `utilities` layer) means a hover utility can still win on :hover, since
+   these cards have no *resting* transform utility of their own to compete
+   with at rest. */
+@layer components {
+  [data-anim-header] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  [data-anim-header].visible {
+    opacity: 1;
+    transform: none;
+  }
 
-[data-anim-list] > * {
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  [data-anim-list] > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  [data-anim-list].visible > *:nth-child(1)   { opacity: 1; transform: none; transition-delay: 0.05s; }
+  [data-anim-list].visible > *:nth-child(2)   { opacity: 1; transform: none; transition-delay: 0.15s; }
+  [data-anim-list].visible > *:nth-child(3)   { opacity: 1; transform: none; transition-delay: 0.25s; }
+  [data-anim-list].visible > *:nth-child(4)   { opacity: 1; transform: none; transition-delay: 0.35s; }
+  [data-anim-list].visible > *:nth-child(5)   { opacity: 1; transform: none; transition-delay: 0.42s; }
+  [data-anim-list].visible > *:nth-child(6)   { opacity: 1; transform: none; transition-delay: 0.49s; }
+  [data-anim-list].visible > *:nth-child(7)   { opacity: 1; transform: none; transition-delay: 0.55s; }
+  [data-anim-list].visible > *:nth-child(n+8) { opacity: 1; transform: none; transition-delay: 0.6s; }
 }
-[data-anim-list].visible > *:nth-child(1)   { opacity: 1; transform: none; transition-delay: 0.05s; }
-[data-anim-list].visible > *:nth-child(2)   { opacity: 1; transform: none; transition-delay: 0.15s; }
-[data-anim-list].visible > *:nth-child(3)   { opacity: 1; transform: none; transition-delay: 0.25s; }
-[data-anim-list].visible > *:nth-child(4)   { opacity: 1; transform: none; transition-delay: 0.35s; }
-[data-anim-list].visible > *:nth-child(5)   { opacity: 1; transform: none; transition-delay: 0.42s; }
-[data-anim-list].visible > *:nth-child(6)   { opacity: 1; transform: none; transition-delay: 0.49s; }
-[data-anim-list].visible > *:nth-child(7)   { opacity: 1; transform: none; transition-delay: 0.55s; }
-[data-anim-list].visible > *:nth-child(n+8) { opacity: 1; transform: none; transition-delay: 0.6s; }
 
 /* Respect reduced-motion preferences */
 @media (prefers-reduced-motion: reduce) {
@@ -949,6 +961,36 @@
   [data-anim-list] > * {
     transition-duration: 0.001ms !important;
     transition-delay: 0ms !important;
+  }
+}
+
+/* ===== HERO PAGE-LOAD ENTRANCE ===== */
+/* Separate from scroll-reveal above: hero content is visible by default
+   (no opacity:0 unless armed) and animates once on load, matching
+   reference/Home.html's heroRise sequence. A synchronous inline script in
+   Layout.astro (before <slot/>) arms body.hero-armed and removes it ~1.6s
+   later — must be a blocking inline script, not a React effect, so the
+   class (and its opacity:0 rule) is active before the hero markup is ever
+   painted; otherwise the content flashes visible before snapping in. */
+@media (prefers-reduced-motion: no-preference) {
+  body.hero-armed [data-hero-anim] {
+    opacity: 0;
+    animation: heroRise 0.7s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  }
+  body.hero-armed [data-hero-anim="eyebrow"] { animation-delay: 0s; }
+  body.hero-armed [data-hero-anim="title"] { animation-delay: 0.12s; }
+  body.hero-armed [data-hero-anim="subtitle"] { animation-delay: 0.3s; }
+  body.hero-armed [data-hero-anim="cta"] { animation-delay: 0.48s; }
+}
+
+@keyframes heroRise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
 
