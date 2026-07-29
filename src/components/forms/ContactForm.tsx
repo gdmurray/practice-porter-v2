@@ -72,7 +72,13 @@ export function ContactForm({
   }
 
   const fieldInputClasses =
-    "h-11 rounded-lg border-border-color bg-lotion px-4 text-[14.5px] focus-visible:border-red focus-visible:ring-red/15";
+    "h-11 rounded-lg border-border-color bg-lotion px-4 text-[14.5px] text-ink placeholder:text-ink/45 focus-visible:border-red focus-visible:ring-red/15";
+
+  const selectContentClasses =
+    "rounded-lg border border-border-color bg-white p-1 shadow-[0_8px_24px_rgba(43,26,20,0.1)] ring-0";
+
+  const selectItemClasses =
+    "cursor-pointer rounded-md py-2.5 pr-8 pl-3 text-[14.5px] text-ink focus:bg-vanilla focus:text-ink";
 
   return (
     <div className="rounded-2xl border border-border-color bg-white p-8 shadow-[0_16px_48px_rgba(43,26,20,0.08)] sm:p-11">
@@ -207,13 +213,27 @@ export function ContactForm({
                   >
                     I&rsquo;m interested in&hellip;
                   </FieldLabel>
-                  <Select value={field.value} onValueChange={field.onChange}>
-                    <SelectTrigger id={field.name} className={cn("w-full", fieldInputClasses)}>
+                  <Select value={field.value || undefined} onValueChange={field.onChange}>
+                    <SelectTrigger
+                      id={field.name}
+                      className={cn(
+                        "w-full shadow-none data-placeholder:text-ink/45 [&_svg]:text-ink/45",
+                        fieldInputClasses,
+                      )}
+                    >
                       <SelectValue placeholder="Select a solution" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent
+                      position="popper"
+                      sideOffset={4}
+                      className={selectContentClasses}
+                    >
                       {resolvedInterestOptions.map((option) => (
-                        <SelectItem key={option._key ?? option.value} value={option.value}>
+                        <SelectItem
+                          key={option._key ?? option.value}
+                          value={option.value}
+                          className={selectItemClasses}
+                        >
                           {option.label}
                         </SelectItem>
                       ))}
