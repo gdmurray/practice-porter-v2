@@ -20,6 +20,12 @@ import {
 } from "../lib/jsonld";
 
 const resolvedSlug = Astro.params.slug ?? "home";
+
+// Storybook lives in public/design-system/ — only the directory root hits this catch-all.
+if (resolvedSlug === "design-system") {
+  return Astro.redirect("/design-system/index.html", 302);
+}
+
 const preview =
   Astro.url.searchParams.has("preview") ||
   Astro.url.searchParams.has("sanity-preview-perspective");
@@ -45,6 +51,9 @@ const siteSeo = siteSettings?.seo;
 const seo = pageSeo ?? siteSeo;
 const ogImageUrl = seo?.ogImage?.asset?.url ?? siteSeo?.ogImage?.asset?.url;
 const modules = page?.modules ?? [];
+const firstModule = modules[0];
+const navTheme =
+  firstModule && "theme" in firstModule ? (firstModule.theme ?? "lotion") : "lotion";
 
 const siteUrl = "https://practiceporter.com";
 const siteName = siteSeo?.siteName ?? "Practice Porter";
@@ -78,7 +87,7 @@ Astro.response.headers.set('Cache-Control', 'public, max-age=0, s-maxage=300');
     client:load
     links={nav?.links ?? null}
     cta={nav?.cta ?? null}
-    theme={modules[0]?.theme ?? "lotion"}
+    theme={navTheme}
     currentPath={Astro.url.pathname}
   />
   <main>

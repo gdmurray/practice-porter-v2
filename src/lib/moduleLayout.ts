@@ -1,3 +1,5 @@
+import { stegaClean } from "@sanity/client/stega";
+
 /**
  * Converts a moduleLayout Sanity object into HTML data attributes for a
  * module's <section> element.
@@ -19,11 +21,20 @@ export function getModuleLayoutAttrs(moduleLayout?: ModuleLayoutValue | null): R
 
   const attrs: Record<string, string | boolean | undefined> = {};
 
-  if (moduleLayout.topPadding) {
-    attrs["data-module-pt"] = moduleLayout.topPadding;
+  // Every module on the site renders through here, so these two values are
+  // cleaned defensively even though `topPadding`/`bottomPadding` are also in
+  // `stegaFilter.ts`'s denylist — a forgotten/reverted denylist entry would
+  // otherwise silently break padding on every module in Visual Editing
+  // preview (the exact class of bug this guards against, see gridSection's
+  // gradientDirection/circlePosition).
+  const topPadding = stegaClean(moduleLayout.topPadding);
+  const bottomPadding = stegaClean(moduleLayout.bottomPadding);
+
+  if (topPadding) {
+    attrs["data-module-pt"] = topPadding;
   }
-  if (moduleLayout.bottomPadding) {
-    attrs["data-module-pb"] = moduleLayout.bottomPadding;
+  if (bottomPadding) {
+    attrs["data-module-pb"] = bottomPadding;
   }
   if (moduleLayout.animated) {
     attrs["data-module-animated"] = true;

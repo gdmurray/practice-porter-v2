@@ -28,7 +28,7 @@ infra exists), switch to the `sanity-content-population` skill instead.
 - [ ] Step 0: Pick the component shape (module vs PT block vs reusable object)
 - [ ] Step 1: Collect the source — read + cross-reference the HTML
 - [ ] Step 2: Decide hardcoded vs flexible (ask when it's a real scope call)
-- [ ] Step 3: Design the schema
+- [ ] Step 3: Design the schema (incl. stega/Visual Editing check for new lookup-style fields)
 - [ ] Step 4: Register schema + wire into the renderer
 - [ ] Step 5: Build the component (implementation notes below)
 - [ ] Step 6: Build the Storybook story
@@ -167,6 +167,38 @@ overrides) and, unless deliberately skipped (Step 2), `themeField()` first.
 For nested images (any `image` field not at the PT-block top level, e.g.
 `solutionCard.image` or `tabItem.content.image`), remember Step 4's GROQ
 projection — GROQ's `...` never auto-resolves `asset->` at any depth.
+
+### Stega/Visual Editing check for new string fields
+
+For every new `string` field with `options.list` (or any string field whose
+value will be used for logic rather than displayed as prose) — anywhere the
+renderer will do `someMap[value]`, `value === "literal"`, or build a CSS
+class/selector from it — check whether Sanity's Visual Editing "stega"
+encoding (invisible zero-width Unicode appended to string values in preview
+mode) would break that lookup:
+
+1. Read the denylist comment at the top of `src/lib/stegaFilter.ts` — it
+   documents everything `@sanity/client`'s own default filter already skips
+   (`theme`, `variant`, `type`, `icon`, `href`/`url`, etc.). If your new
+   field's name is already covered, you're done.
+2. If not, add the field name to `LAYOUT_FIELD_DENYLIST` in the same PR,
+   with a one-line comment naming the schema + the exact lookup it protects
+   (follow the existing entries' format). Prefer scoping by
+   `sourceDocument._type` instead of a bare name if the field name is common
+   enough that it risks colliding with an unrelated prose field elsewhere
+   (see the `style`/`listItem` entries in that file for the pattern).
+3. For a field used in a particularly high-blast-radius lookup (e.g. read by
+   every module, not just this one), also add a defensive `stegaClean()`
+   call (from `@sanity/client/stega`) at the point of use in the component,
+   so a future forgotten denylist entry degrades to "no encoding" instead of
+   a broken layout — see `GridSection.tsx`'s `gradientDirection`/
+   `circlePosition` or `moduleLayout.ts`'s `getModuleLayoutAttrs` for the
+   pattern.
+
+This is a real, recurring bug class in this codebase — `gridSection`'s
+`gradientDirection`/`circlePosition` broke the hero gradient overlay in
+Visual Editing preview precisely because this check was skipped when those
+fields were added. Don't skip it for new fields either.
 
 ## Step 4: Register schema + wire into the renderer
 

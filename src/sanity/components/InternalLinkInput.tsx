@@ -2,34 +2,42 @@ import { useCallback, useEffect, useId, useMemo, useState } from "react";
 import { set, unset, useClient, useFormValue } from "sanity";
 import type { StringInputProps } from "sanity";
 import { Autocomplete, Card, Flex, Text } from "@sanity/ui";
+import { PAGE_LIST_QUERY, SANITY_API_VERSION } from "@/sanity/lib/internalHref";
 
 interface PageOption {
   value: string;
   title: string;
 }
 
-const API_VERSION = "2026-03-10";
+export interface InternalLinkInputConfig {
+  /** When set, autocomplete only shows when a sibling field matches `value`. */
+  gateOnSibling?: {
+    field: string;
+    value: string;
+  };
+}
 
-const PAGE_LIST_QUERY = `*[_type == "page" && defined(slug.current)]{
-  "slug": slug.current,
-  title
-} | order(slug asc)`;
-
-export function InternalLinkInput(props: StringInputProps) {
-  const { value, onChange, path, renderDefault } = props;
+function InternalLinkInputBase(
+  props: StringInputProps & { config?: InternalLinkInputConfig }
+) {
+  const { value, onChange, path, renderDefault, config } = props;
   const id = useId();
-  const client = useClient({ apiVersion: API_VERSION });
+  const client = useClient({ apiVersion: SANITY_API_VERSION });
 
-  // `href` and `ctaType` are sibling fields on the same `cta` object.
-  const ctaType = useFormValue([...path.slice(0, -1), "ctaType"]) as
-    | string
-    | undefined;
-  const isInternal = ctaType === "internal";
+  const { gateOnSibling } = config ?? {};
+  const siblingValue = useFormValue(
+    gateOnSibling
+      ? [...path.slice(0, -1), gateOnSibling.field]
+      : ["__internalLinkInputUnused"]
+  ) as string | undefined;
+  const showAutocomplete =
+    !gateOnSibling || siblingValue === gateOnSibling.value;
 
   const [pages, setPages] = useState<PageOption[]>([]);
 
   useEffect(() => {
-    if (!isInternal) return;
+    if (!showAutocomplete) return;
+
     let cancelled = false;
     client
       .fetch<{ slug: string; title: string | null }[]>(PAGE_LIST_QUERY)
@@ -45,10 +53,11 @@ export function InternalLinkInput(props: StringInputProps) {
       .catch(() => {
         if (!cancelled) setPages([]);
       });
+
     return () => {
       cancelled = true;
     };
-  }, [client, isInternal]);
+  }, [client, showAutocomplete]);
 
   const options = useMemo(
     () =>
@@ -95,8 +104,7 @@ export function InternalLinkInput(props: StringInputProps) {
     [value]
   );
 
-  // External links / Book Meeting / anything else keep the plain string input.
-  if (!isInternal) return renderDefault(props);
+  if (!showAutocomplete) return renderDefault(props);
 
   return (
     <Autocomplete
@@ -112,3 +120,17 @@ export function InternalLinkInput(props: StringInputProps) {
     />
   );
 }
+
+export function createInternalLinkInput(config: InternalLinkInputConfig = {}) {
+  return function BoundInternalLinkInput(props: StringInputProps) {
+    return <InternalLinkInputBase {...props} config={config} />;
+  };
+}
+
+/** Page-slug autocomplete for nav/footer links and other always-internal href fields. */
+export const InternalLinkInput = createInternalLinkInput();
+
+/** CTA href input — autocomplete only when `ctaType` is `internal`. */
+export const CtaInternalLinkInput = createInternalLinkInput({
+  gateOnSibling: { field: "ctaType", value: "internal" },
+});

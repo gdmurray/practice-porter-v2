@@ -1,7 +1,9 @@
 import { defineConfig } from "sanity";
 import { presentationTool } from "sanity/presentation";
 import { structureTool } from "sanity/structure";
+import { structureHomeLandingPlugin } from "sanity-plugin-blank-space";
 import { schemaTypes } from "./src/sanity/schemas";
+import { EditorGuide } from "@/sanity/components/EditorGuide";
 import { resolve } from "./src/sanity/lib/resolve";
 import { designSystemTool } from "@/sanity/design-system-tool";
 
@@ -27,6 +29,11 @@ export default defineConfig({
             ...S.documentTypeListItems().filter((item) => item.getId() !== "siteSettings"),
           ]),
     }),
+    structureHomeLandingPlugin({
+      component: EditorGuide,
+      title: "Editor guide",
+      paneId: "home",
+    }),
     presentationTool({
       previewUrl: `${previewUrl}?preview=true`,
       resolve,
@@ -35,6 +42,12 @@ export default defineConfig({
   tools: [designSystemTool()],
   tasks: {
     enabled: true
+  },
+  releases: {
+    enabled: false,
+  },
+  scheduledDrafts: {
+    enabled: false,
   },
   schema: {
     types: schemaTypes,

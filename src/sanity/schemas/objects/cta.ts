@@ -1,6 +1,7 @@
 import { defineField, defineType } from "sanity";
+import { CtaInternalLinkInput } from "@/sanity/components/InternalLinkInput";
 import { getValueAtPath } from "@/sanity/lib/getValueAtPath";
-import { InternalLinkInput } from "@/sanity/components/InternalLinkInput";
+import { validatePageHrefExists } from "@/sanity/lib/internalHref";
 
 /**
  * `context.parent` in a `Rule.custom` validator only exposes the immediate
@@ -37,7 +38,7 @@ export const cta = defineType({
       name: "href",
       title: "URL",
       type: "string",
-      components: { input: InternalLinkInput },
+      components: { input: CtaInternalLinkInput },
       description:
         'For internal links, pick a page from the dropdown or type "#section-id" to scroll to an anchor on the current page.',
       hidden: ({ parent }) => parent?.ctaType === "book_meeting",
@@ -58,21 +59,7 @@ export const cta = defineType({
 
           if (parent?.ctaType !== "internal") return true;
 
-          // In-page anchors (e.g. "#pricing") aren't page slugs — skip the
-          // existence check for those.
-          const [urlPath] = value.split("#");
-          if (!urlPath) return true;
-
-          const slug = urlPath === "/" ? "home" : urlPath.replace(/^\/+/, "");
-          const client = context.getClient({ apiVersion: "2026-03-10" });
-          const matchCount = await client.fetch<number>(
-            `count(*[_type == "page" && slug.current == $slug])`,
-            { slug }
-          );
-          if (!matchCount) {
-            return `No page found at "${urlPath}". Pick a page from the dropdown or fix the URL.`;
-          }
-          return true;
+          return validatePageHrefExists(value, context.getClient.bind(context));
         }),
     }),
     defineField({

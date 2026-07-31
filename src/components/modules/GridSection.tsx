@@ -1,5 +1,6 @@
 "use client";
 
+import { stegaClean } from "@sanity/client/stega";
 import { cn } from "@/lib/utils";
 import { getModuleLayoutAttrs, type ModuleLayoutValue } from "@/lib/moduleLayout";
 import { sanityImageUrl, type SanityImageValue } from "@/lib/sanityImage";
@@ -170,6 +171,14 @@ export function GridSection({
   const contentMaxWidth =
     typeof maxWidth === "number" && maxWidth > 0 ? maxWidth : undefined;
 
+  // Both are also in `stegaFilter.ts`'s denylist, but cleaned again here as
+  // a defensive fallback — these keys drive every Record lookup below, and
+  // a forgotten/reverted denylist entry would otherwise silently break the
+  // gradient overlay and circle placement in Visual Editing preview (the
+  // exact bug this component was patched for).
+  const cleanGradientDirection = stegaClean(gradientDirection);
+  const cleanCirclePosition = stegaClean(circlePosition);
+
   const sectionStyle = {
     ...(theme === "gradient" ? { background: "var(--hero-gradient)" } : {}),
     ...(isHero ? { maxHeight: "80vh" } : {}),
@@ -179,10 +188,10 @@ export function GridSection({
   // cropped by CSS `object-cover` at whatever size the section ends up, so
   // we only need the CDN to bake in the editor's Studio crop rect here.
   const imageUrl = sanityImageUrl(backgroundImage);
-  const overlayMask = gradientDirection ? gradientMaskMap[gradientDirection] : undefined;
-  const heroOverlayMask = gradientDirection ? heroGradientMaskMap[gradientDirection] : undefined;
-  const heroOverlayMaskMobile = gradientDirection
-    ? heroGradientMaskMobileMap[gradientDirection]
+  const overlayMask = cleanGradientDirection ? gradientMaskMap[cleanGradientDirection] : undefined;
+  const heroOverlayMask = cleanGradientDirection ? heroGradientMaskMap[cleanGradientDirection] : undefined;
+  const heroOverlayMaskMobile = cleanGradientDirection
+    ? heroGradientMaskMobileMap[cleanGradientDirection]
     : undefined;
 
   // In hero mode the image is a height-filling panel anchored to one edge —
@@ -194,12 +203,12 @@ export function GridSection({
   // opposite the gradient. If the panel's aspect ratio still doesn't
   // perfectly match, excess is cropped from the bottom (top-aligned) and
   // from the far side (away from the anchor).
-  const heroHorizontalSide = heroOppositeSideMap[gradientDirection ?? "none"] ?? "right";
+  const heroHorizontalSide = heroOppositeSideMap[cleanGradientDirection ?? "none"] ?? "right";
 
   // Brand rule: never on the gradient theme, and never layered on top of a
   // background image (the reference handoffs never combine the two).
   const showCirclePattern = Boolean(circlePattern) && theme !== "gradient" && !imageUrl;
-  const resolvedCirclePosition: CirclePosition = circlePosition ?? "topRight";
+  const resolvedCirclePosition: CirclePosition = cleanCirclePosition ?? "topRight";
 
   // A top-corner circle can bleed past its own section's top edge into the
   // section above — but only when that section shares the same theme,

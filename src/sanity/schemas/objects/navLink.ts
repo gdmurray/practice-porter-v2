@@ -1,4 +1,6 @@
 import { defineField, defineType } from "sanity";
+import { InternalLinkInput } from "@/sanity/components/InternalLinkInput";
+import { validatePageHrefExists } from "@/sanity/lib/internalHref";
 
 export const navLink = defineType({
   name: "navLink",
@@ -28,14 +30,16 @@ export const navLink = defineType({
       name: "href",
       title: "URL",
       type: "string",
+      components: { input: InternalLinkInput },
+      description:
+        "Pick a page from the dropdown, or type an external URL (https://…) or in-page anchor (#section-id).",
       hidden: ({ parent }) => parent?.type === "menu",
       validation: (Rule) =>
-        Rule.custom((value, context) => {
+        Rule.custom(async (value, context) => {
           const parent = context.parent as { type?: string } | undefined;
-          if (parent?.type !== "menu" && !value) {
-            return "URL is required for a link";
-          }
-          return true;
+          if (parent?.type === "menu") return true;
+          if (!value) return "URL is required for a link";
+          return validatePageHrefExists(value, context.getClient.bind(context));
         }),
     }),
     defineField({
