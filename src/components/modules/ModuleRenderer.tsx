@@ -1,23 +1,9 @@
-import { lazy, Suspense } from "react";
-
-const Faq = lazy(() =>
-  import("./Faq").then((m) => ({ default: m.Faq }))
-);
-const GridSection = lazy(() =>
-  import("./GridSection").then((m) => ({ default: m.GridSection }))
-);
-const LogoCarousel = lazy(() =>
-  import("./LogoCarousel").then((m) => ({ default: m.LogoCarousel }))
-);
-const Legal = lazy(() =>
-  import("./Legal").then((m) => ({ default: m.Legal }))
-);
-const StepBand = lazy(() =>
-  import("./StepBand").then((m) => ({ default: m.StepBand }))
-);
-const SplitBooking = lazy(() =>
-  import("./SplitBooking").then((m) => ({ default: m.SplitBooking }))
-);
+import { Faq } from "./Faq";
+import { GridSection } from "./GridSection";
+import { LogoCarousel } from "./LogoCarousel";
+import { Legal } from "./Legal";
+import { StepBand } from "./StepBand";
+import { SplitBooking } from "./SplitBooking";
 
 export interface ModuleRendererProps {
   module: {
@@ -28,40 +14,42 @@ export interface ModuleRendererProps {
   prevModuleTheme?: string;
 }
 
+// Static imports (not React.lazy/Suspense) are intentional: PageModules
+// hydrates as one `client:visible` island that's visible immediately (the
+// hero sits at the top of the page), so per-module code-splitting never
+// actually deferred any real network work here — every module's chunk was
+// already being fetched right away regardless. Worse, React.lazy's
+// per-boundary "selective hydration" meant each module hydrated at a
+// slightly different time as its own chunk resolved, racing against
+// RevealObserver's DOM-mutating `classList.add("visible")`: if the DOM was
+// mutated before a given module's boundary finished hydrating, React would
+// see a mismatch against its SSR snapshot for that node and log a hydration
+// warning (harmless in isolation, but genuinely risky if it ever ran
+// alongside a legitimate React re-render, which would drop the "visible"
+// class and quietly kill that element's reveal animation). Plain static
+// imports hydrate everything in one synchronous pass, matching SSR exactly.
 export function ModuleRenderer({ module, prevModuleTheme }: ModuleRendererProps) {
   const { _type, _key: _unusedKey, ...props } = module;
 
-  let content: React.ReactNode = null;
-
   switch (_type) {
     case "faq":
-      content = <Faq {...(props as Parameters<typeof Faq>[0])} />;
-      break;
+      return <Faq {...(props as Parameters<typeof Faq>[0])} />;
     case "gridSection":
-      content = (
+      return (
         <GridSection
           {...(props as Parameters<typeof GridSection>[0])}
           prevModuleTheme={prevModuleTheme}
         />
       );
-      break;
     case "logoCarousel":
-      content = <LogoCarousel {...(props as Parameters<typeof LogoCarousel>[0])} />;
-      break;
+      return <LogoCarousel {...(props as Parameters<typeof LogoCarousel>[0])} />;
     case "legal":
-      content = <Legal {...(props as Parameters<typeof Legal>[0])} />;
-      break;
+      return <Legal {...(props as Parameters<typeof Legal>[0])} />;
     case "stepBand":
-      content = <StepBand {...(props as Parameters<typeof StepBand>[0])} />;
-      break;
+      return <StepBand {...(props as Parameters<typeof StepBand>[0])} />;
     case "splitBooking":
-      content = (
-        <SplitBooking {...(props as Parameters<typeof SplitBooking>[0])} />
-      );
-      break;
+      return <SplitBooking {...(props as Parameters<typeof SplitBooking>[0])} />;
     default:
       return null;
   }
-
-  return <Suspense fallback={null}>{content}</Suspense>;
 }

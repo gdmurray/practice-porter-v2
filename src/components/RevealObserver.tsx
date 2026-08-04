@@ -62,9 +62,9 @@ export function RevealObserver() {
     };
 
     // Scans an element (and its descendants) for animatable targets. Needed
-    // both for the initial pass and for nodes inserted later by React.lazy()
-    // module chunks, which resolve after this component's first render and
-    // would otherwise sit at opacity:0 forever, never observed.
+    // both for the initial pass and for nodes inserted later — e.g. Visual
+    // Editing's live content swaps in Studio preview — which would
+    // otherwise sit at opacity:0 forever, never observed.
     const scan = (root: Element) => {
       observeIfNew(root);
       root.querySelectorAll(ANIM_SELECTOR).forEach(observeIfNew);

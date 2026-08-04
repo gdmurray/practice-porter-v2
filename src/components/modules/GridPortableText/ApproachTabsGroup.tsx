@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ctaProps, type CtaData } from "@/lib/cta";
 import { cn } from "@/lib/utils";
+import { sanityImageUrl, type SanityImageValue } from "@/lib/sanityImage";
 
 export interface ApproachTabValue {
   _key?: string;
@@ -13,19 +14,15 @@ export interface ApproachTabValue {
   link?: CtaData;
   kicker?: string;
   panelTitle?: string;
-  image?: {
-    asset?: {
-      url?: string;
-      metadata?: { dimensions?: { width?: number; height?: number } };
-    };
-    alt?: string;
-  };
+  image?: SanityImageValue | null;
   cta?: CtaData;
 }
 
 function ApproachPanel({ item, className }: { item?: ApproachTabValue; className?: string }) {
   if (!item) return null;
-  const imageUrl = item.image?.asset?.url;
+  // Rendered at a fixed 190px CSS width — request roughly 2x that for
+  // retina displays instead of the raw (often 1000px+) source asset.
+  const imageUrl = sanityImageUrl(item.image, { width: 380 });
   const dims = item.image?.asset?.metadata?.dimensions;
 
   return (

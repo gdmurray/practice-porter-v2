@@ -7,16 +7,11 @@ import { Button } from "@/components/ui/button";
 import { Accordion, AccordionItem } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
+import { sanityImageUrl, type SanityImageValue } from "@/lib/sanityImage";
 
 export interface SolutionCardValue {
   title?: string;
-  image?: {
-    asset?: {
-      url?: string;
-      metadata?: { dimensions?: { width?: number; height?: number } };
-    };
-    alt?: string;
-  };
+  image?: SanityImageValue | null;
   details?: string[];
   expandableTitle?: string;
   checks?: string[];
@@ -37,7 +32,9 @@ export function SolutionCardGroup({
   animated?: boolean;
   bare?: boolean;
 }) {
-  const imageUrl = value.image?.asset?.url;
+  // Fills half of a max-1280px container with object-cover — capped well
+  // under the raw source size instead of shipping it byte-for-byte.
+  const imageUrl = sanityImageUrl(value.image, { width: 1000 });
   const dims = value.image?.asset?.metadata?.dimensions;
   const hasChecks = (value.checks?.length ?? 0) > 0;
 

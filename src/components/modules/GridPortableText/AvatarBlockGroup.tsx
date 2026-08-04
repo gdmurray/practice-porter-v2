@@ -1,15 +1,13 @@
 "use client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { sanityImageUrl, type SanityImageValue } from "@/lib/sanityImage";
 
 export interface AvatarBlockValue {
   name?: string;
   role?: string;
   initials?: string;
-  image?: {
-    asset?: { url?: string } | null;
-    alt?: string;
-  } | null;
+  image?: SanityImageValue | null;
 }
 
 export function AvatarBlockGroup({
@@ -21,7 +19,9 @@ export function AvatarBlockGroup({
 }) {
   if (!value.name) return null;
 
-  const imageUrl = value.image?.asset?.url;
+  // Rendered at a fixed 54px circle — request roughly 2x that for retina
+  // instead of the raw source asset.
+  const imageUrl = sanityImageUrl(value.image, { width: 120, height: 120 });
 
   return (
     <div

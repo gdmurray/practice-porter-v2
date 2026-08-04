@@ -7,6 +7,7 @@ import cloudflare from '@astrojs/cloudflare';
 
 import sanity from '@sanity/astro';
 import react from '@astrojs/react';
+import partytown from '@astrojs/partytown';
 import tailwindcss from "@tailwindcss/vite";
 import { visualizer } from "rollup-plugin-visualizer";
 import { FontaineTransform } from "fontaine";
@@ -24,7 +25,7 @@ export default defineConfig({
       enabled: true
     },
 
-    imageService: "cloudflare"
+    imageService: "cloudflare",
   }),
 
   integrations: [sanity({
@@ -38,7 +39,17 @@ export default defineConfig({
     // load-query.ts is the actual gatekeeper — it only enables stega when
     // both PUBLIC_SANITY_VISUAL_EDITING_ENABLED and the preview flag are true.
     stega: { studioUrl: "/studio" },
-  }), react()],
+  }), react(), partytown({
+    // Only GA4 (gtag.js) runs through Partytown — Microsoft Clarity's
+    // continuous DOM-mutation observation is a known-fragile combination
+    // with Partytown (cross-origin XHR needs a proxy, and community reports
+    // show silent recording failures), so it stays on the main thread.
+    // Both `dataLayer.push` (the snippet itself) and `gtag` (called directly
+    // by Layout.astro's main-thread click-tracking script) need forwarding —
+    // otherwise `window.gtag` simply doesn't exist outside the worker and
+    // every `trackClickEvent` call would silently no-op.
+    config: { forward: ["dataLayer.push", "gtag"] },
+  })],
   vite: {
     build: {
       // Studio chunks are intentionally large (Sanity Studio at /studio only).

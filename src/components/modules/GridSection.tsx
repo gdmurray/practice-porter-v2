@@ -20,10 +20,6 @@ interface GridRowData {
   columns?: GridColumnData[];
 }
 
-interface BackgroundImageData extends SanityImageValue {
-  alt?: string;
-}
-
 type CirclePosition = "topLeft" | "topRight" | "bottomLeft" | "bottomRight";
 
 export interface GridSectionProps {
@@ -31,7 +27,7 @@ export interface GridSectionProps {
   sectionId?: string;
   theme?: string;
   maxWidth?: number | null;
-  backgroundImage?: BackgroundImageData | null;
+  backgroundImage?: SanityImageValue | null;
   gradientDirection?: "none" | "left" | "right" | null;
   isHero?: boolean | null;
   circlePattern?: boolean | null;
@@ -184,10 +180,18 @@ export function GridSection({
     ...(isHero ? { maxHeight: "80vh" } : {}),
   };
 
-  // No explicit width/height: this renders full-bleed and gets further
-  // cropped by CSS `object-cover` at whatever size the section ends up, so
-  // we only need the CDN to bake in the editor's Studio crop rect here.
-  const imageUrl = sanityImageUrl(backgroundImage);
+  // Capped (not exact) width: this still renders full-bleed and gets
+  // further cropped by CSS `object-cover` at whatever size the section ends
+  // up, so we can't know the precise render size ahead of time — but the
+  // raw Sanity source can be several thousand px wide, and downloading +
+  // decoding that full resolution is a real cost (especially for the hero
+  // image, which is almost always the LCP element). Capping to a size that
+  // comfortably covers real viewports at 2x DPR avoids that waste without
+  // visibly softening the image. Hero panels only ever take half the
+  // viewport width, so they get a smaller cap than full-bleed sections.
+  const imageUrl = sanityImageUrl(backgroundImage, {
+    width: isHero ? 1400 : 1920,
+  });
   const overlayMask = cleanGradientDirection ? gradientMaskMap[cleanGradientDirection] : undefined;
   const heroOverlayMask = cleanGradientDirection ? heroGradientMaskMap[cleanGradientDirection] : undefined;
   const heroOverlayMaskMobile = cleanGradientDirection
@@ -323,6 +327,7 @@ export function GridSection({
           src="/circle-bg.png"
           alt=""
           aria-hidden="true"
+          loading="lazy"
           className={cn(
             "circle-pattern",
             circlePositionClass[resolvedCirclePosition]

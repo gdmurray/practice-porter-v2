@@ -9,10 +9,21 @@ const dataset = import.meta.env?.PUBLIC_SANITY_DATASET ?? "production";
 
 const builder = createImageUrlBuilder({ projectId, dataset });
 
+// Canonical shape for any Sanity image field, regardless of which module's
+// GROQ projection produced it. Every field is optional so this stays valid
+// whether a query fetched just `asset.url` (full-bleed backgrounds) or the
+// full set (rich-text images needing intrinsic width/height + alt text) —
+// components should reference this directly instead of hand-rolling a local
+// intersection/extension type per file.
 export interface SanityImageValue {
-  asset?: { _id?: string | null; url?: string | null } | null;
+  asset?: {
+    _id?: string | null;
+    url?: string | null;
+    metadata?: { dimensions?: { width?: number; height?: number } | null } | null;
+  } | null;
   crop?: { top?: number; bottom?: number; left?: number; right?: number } | null;
   hotspot?: { x?: number; y?: number; height?: number; width?: number } | null;
+  alt?: string | null;
 }
 
 /**

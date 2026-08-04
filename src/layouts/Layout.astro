@@ -210,9 +210,17 @@ const jsonLdItems = jsonLd
         }
       }
 
-      // Preload/mount if any book_meeting element is on the page.
+      // Preload the Google Calendar widget if any book_meeting element is on
+      // the page — but only once the browser is idle. This CTA sits in the
+      // hero/nav on every page, so mounting it unconditionally at page load
+      // would fetch a third-party script + stylesheet right in the middle of
+      // the critical rendering window, competing with the LCP image for
+      // bandwidth/CPU for a button nobody clicks in the first second anyway.
+      // The click handler below still mounts on-demand as a fallback for any
+      // click that beats the idle callback.
       if (document.querySelector('[data-cta-type="book_meeting"]') || document.getElementById("book-meeting")) {
-        mountGcalButton(null);
+        const schedulePreload = window.requestIdleCallback || ((cb) => setTimeout(cb, 2000));
+        schedulePreload(() => mountGcalButton(null));
       }
 
       // Intercept clicks on any element with data-cta-type="book_meeting".
@@ -238,8 +246,9 @@ const jsonLdItems = jsonLd
       }
 
       function trackClickEvent(name, params) {
-        if (typeof window.gtag !== "function") return;
-        window.gtag("event", name, params);
+        if (typeof window.gtag === "function") window.gtag("event", name, params);
+        // Clarity's API events only take a name (no params).
+        if (typeof window.clarity === "function") window.clarity("event", name);
       }
 
       document.addEventListener("click", (e) => {

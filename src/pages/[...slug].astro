@@ -21,9 +21,15 @@ import {
 
 const resolvedSlug = Astro.params.slug ?? "home";
 
-// Storybook lives in public/design-system/ — only the directory root hits this catch-all.
+// Storybook lives in public/design-system/ — only the extensionless directory
+// root (no trailing slash) hits this catch-all; /design-system/* is excluded
+// from the SSR Worker (see scripts/fix-design-system-routes.mjs) and served
+// as static assets. Redirect straight to the trailing-slash directory URL,
+// not /index.html — Cloudflare Pages' static server 308-redirects
+// index.html requests back to the directory URL, which would otherwise
+// create a redirect loop.
 if (resolvedSlug === "design-system") {
-  return Astro.redirect("/design-system/index.html", 302);
+  return Astro.redirect("/design-system/", 302);
 }
 
 const preview =

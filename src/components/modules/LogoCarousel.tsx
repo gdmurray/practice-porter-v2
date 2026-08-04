@@ -1,11 +1,12 @@
 "use client";
 
 import { getModuleLayoutAttrs, type ModuleLayoutValue } from "@/lib/moduleLayout";
+import { sanityImageUrl, type SanityImageValue } from "@/lib/sanityImage";
 
 export interface LogoCarouselItem {
   _key?: string;
   name?: string;
-  logo?: { asset?: { url?: string } };
+  logo?: SanityImageValue | null;
 }
 
 export interface LogoCarouselProps {
@@ -20,7 +21,11 @@ function LogoSet({ logos, ariaHidden }: { logos: LogoCarouselItem[]; ariaHidden?
   return (
     <div className="logo-set" aria-hidden={ariaHidden}>
       {logos.map((item, i) => {
-        const url = item.logo?.asset?.url;
+        // These marquee logos never render taller than ~40px, but partner
+        // brands upload wildly oversized source files (some 800KB+ at
+        // 10000px+ wide) — cap the CDN request instead of shipping the raw
+        // asset byte-for-byte.
+        const url = sanityImageUrl(item.logo, { width: 300 });
         if (!url) return null;
         return (
           <img
