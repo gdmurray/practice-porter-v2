@@ -1,0 +1,63 @@
+---
+// Renders each page module as its own independent Astro island
+// (`client:visible` per instance) instead of bundling every module type
+// into one shared React tree. Two wins over the old PageModules.tsx +
+// ModuleRenderer.tsx approach:
+//
+// 1. Per-page bundle size: a page whose content never uses e.g. `faq` or
+//    `splitBooking` simply never references those islands' scripts in its
+//    HTML output — Astro's per-island bundling means unused module types
+//    cost zero bytes, not just "deferred" bytes.
+// 2. No hydration race: each island hydrates independently through Astro's
+//    own island lifecycle rather than a single React tree with internal
+//    Suspense boundaries, so RevealObserver's DOM-mutating
+//    `classList.add("visible")` can't run ahead of a still-hydrating
+//    module (the bug that static-importing everything into one
+//    ModuleRenderer switch previously fixed, at the cost of shipping every
+//    module type to every page).
+import { Faq } from "./modules/Faq";
+import { GridSection } from "./modules/GridSection";
+import { LogoCarousel } from "./modules/LogoCarousel";
+import { Legal } from "./modules/Legal";
+import { StepBand } from "./modules/StepBand";
+import { SplitBooking } from "./modules/SplitBooking";
+
+interface Props {
+  modules: { _type: string; _key?: string; theme?: string; [key: string]: unknown }[];
+}
+
+const { modules } = Astro.props;
+---
+
+{modules.map((module, index) => {
+  const { _type, _key: _unusedKey, ...props } = module;
+  // Every module schema starts with a `theme` field, so this generically
+  // detects an adjacent same-themed section regardless of module type —
+  // needed so a gridSection's circle pattern knows whether it's safe to
+  // bleed into the section above.
+  const prevTheme = modules[index - 1]?.theme;
+  const prevModuleTheme = typeof prevTheme === "string" ? prevTheme : undefined;
+
+  switch (_type) {
+    case "faq":
+      return <Faq {...(props as Parameters<typeof Faq>[0])} client:visible />;
+    case "gridSection":
+      return (
+        <GridSection
+          {...(props as Parameters<typeof GridSection>[0])}
+          prevModuleTheme={prevModuleTheme}
+          client:visible
+        />
+      );
+    case "logoCarousel":
+      return <LogoCarousel {...(props as Parameters<typeof LogoCarousel>[0])} client:visible />;
+    case "legal":
+      return <Legal {...(props as Parameters<typeof Legal>[0])} client:visible />;
+    case "stepBand":
+      return <StepBand {...(props as Parameters<typeof StepBand>[0])} client:visible />;
+    case "splitBooking":
+      return <SplitBooking {...(props as Parameters<typeof SplitBooking>[0])} client:visible />;
+    default:
+      return null;
+  }
+})}

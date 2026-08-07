@@ -33,8 +33,8 @@ export interface GridSectionProps {
   circlePattern?: boolean | null;
   circlePosition?: CirclePosition | null;
   // Theme of the module immediately before this one on the page (see
-  // PageModules.tsx). Used only to decide whether a top-corner circle
-  // pattern is allowed to bleed upward into that section.
+  // PageModulesRenderer.astro). Used only to decide whether a top-corner
+  // circle pattern is allowed to bleed upward into that section.
   prevModuleTheme?: string | null;
   rows?: GridRowData[];
   moduleLayout?: ModuleLayoutValue | null;

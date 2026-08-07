@@ -12,7 +12,7 @@ import {
 } from "../sanity/queries";
 import { Navigation } from "../components/layout/Navigation";
 import { Footer } from "../components/layout/Footer";
-import { PageModules } from "../components/PageModules";
+import PageModulesRenderer from "../components/PageModulesRenderer.astro";
 import {
   buildFaqJsonLd,
   buildWebSiteJsonLd,
@@ -97,7 +97,7 @@ Astro.response.headers.set('Cache-Control', 'public, max-age=0, s-maxage=300');
     currentPath={Astro.url.pathname}
   />
   <main>
-    <PageModules modules={modules} client:visible />
+    <PageModulesRenderer modules={modules} />
   </main>
   <Footer
     brandDescription={footer?.brandDescription}

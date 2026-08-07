@@ -9,7 +9,6 @@ const SITE = "https://practiceporter.com";
 const slugsQuery = defineQuery(
   `*[_type == "page" && defined(slug.current)] | order(_updatedAt desc) {
     "slug": slug.current,
-    title,
     "lastmod": _updatedAt
   }`
 );
@@ -17,11 +16,10 @@ const slugsQuery = defineQuery(
 export const GET: APIRoute = async () => {
   const slugs = await sanityClient.fetch(slugsQuery);
 
-  const urls = slugs.map(({ slug, title, lastmod }) => {
+  const urls = slugs.map(({ slug, lastmod }) => {
     const loc = slug === "home" ? SITE : `${SITE}/${slug}`;
     const lastmodDate = lastmod ? `\n    <lastmod>${lastmod.slice(0, 10)}</lastmod>` : "";
-    const titleTag = title ? `\n    <title>${title}</title>` : "";
-    return `  <url>\n    <loc>${loc}</loc>${lastmodDate}${titleTag}\n  </url>`;
+    return `  <url>\n    <loc>${loc}</loc>${lastmodDate}\n  </url>`;
   });
 
   const xml = [

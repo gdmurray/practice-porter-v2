@@ -12,7 +12,7 @@ import {
 } from "../sanity/queries";
 import { Navigation } from "../components/layout/Navigation";
 import { Footer } from "../components/layout/Footer";
-import { PageModules } from "../components/PageModules";
+import PageModulesRenderer from "../components/PageModulesRenderer.astro";
 import {
   buildFaqJsonLd,
   buildWebSiteJsonLd,
@@ -81,7 +81,7 @@ Astro.response.headers.set('Cache-Control', 'public, max-age=0, s-maxage=300');
   />
   <main>
     {page && modules.length > 0 ? (
-      <PageModules modules={modules} client:visible />
+      <PageModulesRenderer modules={modules} />
     ) : (
       <div class="pp-container pp-section text-center">
         <h1 class="section-title mb-4">Welcome to Practice Porter</h1>

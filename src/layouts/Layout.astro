@@ -4,6 +4,7 @@ import jakartaFontUrl from "@fontsource-variable/plus-jakarta-sans/files/plus-ja
 import playfairFontUrl from "@fontsource-variable/playfair-display/files/playfair-display-latin-wght-normal.woff2?url";
 import GoogleAnalytics from "../components/analytics/GoogleAnalytics.astro";
 import MicrosoftClarity from "../components/analytics/MicrosoftClarity.astro";
+import { RevealObserver } from "../components/RevealObserver";
 
 interface Props {
   title?: string;
@@ -99,6 +100,7 @@ const jsonLdItems = jsonLd
         }, 1600);
       })();
     </script>
+    <RevealObserver client:load />
     <slot />
     {
       visualEditingEnabled && preview && (
