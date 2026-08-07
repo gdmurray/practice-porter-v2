@@ -18,6 +18,8 @@ import {
   buildWebSiteJsonLd,
   buildOrganizationJsonLd,
 } from "../lib/jsonld";
+import { prefersMarkdown } from "../lib/accept";
+import { markdownResponse, pageToMarkdown } from "../lib/page-to-markdown";
 
 const resolvedSlug = Astro.params.slug ?? "home";
 
@@ -48,6 +50,14 @@ const { data: siteSettings } = await loadQuery<SITE_SETTINGS_QUERY_RESULT>({
 
 if (!page) {
   return Astro.redirect("/404", 302);
+}
+
+const wantsMarkdown =
+  Astro.locals.prefersMarkdown ||
+  prefersMarkdown(Astro.request.headers.get("accept"));
+
+if (wantsMarkdown) {
+  return markdownResponse(pageToMarkdown(page));
 }
 
 const nav = siteSettings?.navigation;

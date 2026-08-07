@@ -18,6 +18,8 @@ import {
   buildWebSiteJsonLd,
   buildOrganizationJsonLd,
 } from "../lib/jsonld";
+import { prefersMarkdown } from "../lib/accept";
+import { markdownResponse, pageToMarkdown } from "../lib/page-to-markdown";
 
 const preview =
   Astro.url.searchParams.has("preview") ||
@@ -32,6 +34,14 @@ const { data: siteSettings } = await loadQuery<SITE_SETTINGS_QUERY_RESULT>({
   query: SITE_SETTINGS_QUERY,
   preview,
 });
+
+const wantsMarkdown =
+  Astro.locals.prefersMarkdown ||
+  prefersMarkdown(Astro.request.headers.get("accept"));
+
+if (wantsMarkdown && page) {
+  return markdownResponse(pageToMarkdown(page));
+}
 
 const nav = siteSettings?.navigation;
 const footer = siteSettings?.footer;

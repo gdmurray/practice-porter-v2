@@ -1116,6 +1116,39 @@ export type AllSanitySchemaTypes =
 
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
+// Source: src/pages/llms.txt.ts
+// Variable: llmsQuery
+// Query: {  "settings": *[_id == "siteSettings"][0] {    seo { siteName, metaDescription },    footer { brandDescription }  },  "pages": *[_type == "page" && defined(slug.current)] | order(title asc) {    title,    "slug": slug.current,    "description": seo.metaDescription  }}
+export type LlmsQueryResult = {
+  settings:
+    | {
+        seo: null;
+        footer: null;
+      }
+    | {
+        seo: {
+          siteName: string | null;
+          metaDescription: string | null;
+        } | null;
+        footer: null;
+      }
+    | {
+        seo: {
+          siteName: string | null;
+          metaDescription: string | null;
+        } | null;
+        footer: {
+          brandDescription: string | null;
+        } | null;
+      }
+    | null;
+  pages: Array<{
+    title: string | null;
+    slug: string | null;
+    description: string | null;
+  }>;
+};
+
 // Source: src/pages/sitemap.xml.ts
 // Variable: slugsQuery
 // Query: *[_type == "page" && defined(slug.current)] | order(_updatedAt desc) {    "slug": slug.current,    "lastmod": _updatedAt  }
@@ -1817,6 +1850,7 @@ export type SITE_SETTINGS_QUERY_RESULT =
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
+    '{\n  "settings": *[_id == "siteSettings"][0] {\n    seo { siteName, metaDescription },\n    footer { brandDescription }\n  },\n  "pages": *[_type == "page" && defined(slug.current)] | order(title asc) {\n    title,\n    "slug": slug.current,\n    "description": seo.metaDescription\n  }\n}': LlmsQueryResult;
     '*[_type == "page" && defined(slug.current)] | order(_updatedAt desc) {\n    "slug": slug.current,\n    "lastmod": _updatedAt\n  }': SlugsQueryResult;
     '\n  *[_type == "page" && defined(slug.current) && slug.current != "home"] {\n    "slug": slug.current\n  }\n': ALL_PAGE_SLUGS_QUERY_RESULT;
     '\n  *[_type == "page" && slug.current == $slug][0] {\n    _id,\n    title,\n    slug,\n    seo {\n      metaTitle,\n      metaDescription,\n      ogImage {\n        asset-> {\n          url,\n        },\n      },\n      canonicalUrl,\n      siteName,\n    },\n    modules[] {\n      _type,\n      _key,\n      ...,\n      stats[] {\n        ...,\n      },\n      statCards[] {\n        ...,\n      },\n      cards[] {\n        ...,\n      },\n      steps[] {\n        ...,\n      },\n      metrics[] {\n        ...,\n      },\n      extraMetrics[] {\n        ...,\n      },\n      testimonials[] {\n        ...,\n      },\n      previewMetrics[] {\n        ...,\n      },\n      features[] {\n        ...,\n      },\n      values[] {\n        ...,\n      },\n      image {\n        ...,\n        asset->,\n      },\n      backgroundImage {\n        ...,\n        asset-> {\n          url,\n        },\n      },\n      logos[] {\n        ...,\n        logo {\n          ...,\n          asset-> {\n            url,\n          },\n        },\n      },\n      primaryCta {\n        ...,\n      },\n      secondaryCta {\n        ...,\n      },\n      content[] {\n        ...,\n        _type == "avatarBlock" => {\n          ...,\n          image {\n            ...,\n            asset-> {\n              url,\n              metadata {\n                dimensions {\n                  width,\n                  height\n                }\n              }\n            }\n          }\n        }\n      },\n      rows[] {\n        ...,\n        columns[] {\n          ...,\n          content[] {\n            ...,\n            _type == "image" => {\n              ...,\n              asset-> {\n                url,\n                metadata {\n                  dimensions {\n                    width,\n                    height\n                  }\n                }\n              }\n            },\n            _type == "solutionCard" => {\n              ...,\n              image {\n                ...,\n                asset-> {\n                  url,\n                  metadata {\n                    dimensions {\n                      width,\n                      height\n                    }\n                  }\n                }\n              }\n            },\n            _type == "tabsBlock" => {\n              ...,\n              items[] {\n                ...,\n                content {\n                  ...,\n                  image {\n                    ...,\n                    asset-> {\n                      url,\n                      metadata {\n                        dimensions {\n                          width,\n                          height\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            },\n            _type == "stickyScrollBlock" => {\n              ...,\n              items[] {\n                ...,\n                image {\n                  ...,\n                  asset-> {\n                    url,\n                    metadata {\n                      dimensions {\n                        width,\n                        height\n                      }\n                    }\n                  }\n                }\n              }\n            },\n            _type == "approachTabsBlock" => {\n              ...,\n              items[] {\n                ...,\n                image {\n                  ...,\n                  asset-> {\n                    url,\n                    metadata {\n                      dimensions {\n                        width,\n                        height\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      },\n    }\n  }\n': PAGE_QUERY_RESULT;
